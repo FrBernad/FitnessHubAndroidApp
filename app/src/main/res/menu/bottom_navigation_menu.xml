@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_home_24"
+            android:orderInCategory="1"
+            app:showAsAction="ifRoom|withText"
+            android:title="@string/navHome" />
+
+    <item
+            android:id="@+id/routinesFragment"
+            android:icon="@drawable/ic_explore_24"
+            android:orderInCategory="2"
+            app:showAsAction="ifRoom|withText"
+            android:title="@string/navDiscover" />
+
+    <item
+            android:id="@+id/myActivityFragment"
+            android:icon="@drawable/ic_my_activity_24"
+            android:orderInCategory="3"
+            app:showAsAction="always|withText"
+            android:title="@string/navMyActivity" />
+
+    <item
+            android:id="@+id/meFragment"
+            android:icon="@drawable/ic_me_24"
+            android:orderInCategory="4"
+            app:showAsAction="always|withText"
+            android:title="@string/navMe" />
 
 </menu>

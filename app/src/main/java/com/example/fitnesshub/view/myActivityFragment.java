@@ -1,17 +1,19 @@
 package com.example.fitnesshub.view;
 
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.fitnesshub.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link myActivityFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class myActivityFragment extends Fragment {
 
@@ -23,6 +25,10 @@ public class myActivityFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public myActivityFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -40,10 +46,6 @@ public class myActivityFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public myActivityFragment() {
-        // Required empty public constructor
     }
 
     @Override

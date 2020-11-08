@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FitnessHub</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="navHome">Home</string>
+    <string name="navDiscover">Discover</string>
+    <string name="navMyActivity">My Activity</string>
+    <string name="navMe">Me</string>
 </resources>
