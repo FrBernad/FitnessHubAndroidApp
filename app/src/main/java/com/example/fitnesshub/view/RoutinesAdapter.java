@@ -11,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
-import com.example.fitnesshub.model.RoutineCardInfo;
+import com.example.fitnesshub.model.RoutineOverviewInfo;
 
 import java.util.List;
 
 public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> {
 
-    private List<RoutineCardInfo> routinesList;
+    private List<RoutineOverviewInfo> routinesList;
 
-    public RoutinesAdapter(List<RoutineCardInfo> routinesList) {
+    public RoutinesAdapter(List<RoutineOverviewInfo> routinesList) {
         this.routinesList = routinesList;
     }
 
-    public void updateRoutinesList(List<RoutineCardInfo> newRoutinesList){
+    public void updateRoutinesList(List<RoutineOverviewInfo> newRoutinesList){
         routinesList.clear();
         routinesList.addAll(newRoutinesList);
         notifyDataSetChanged();

@@ -1,11 +1,11 @@
 package com.example.fitnesshub.model;
 
-public class RoutineCardInfo {
+public class RoutineOverviewInfo {
 
     private String title, author, imageUrl;
     private Integer reps, time, rating;
 
-    public RoutineCardInfo(String title, String author, String imageUrl, Integer reps, Integer time, Integer rating) {
+    public RoutineOverviewInfo(String title, String author, String imageUrl, Integer reps, Integer time, Integer rating) {
         this.title = title;
         this.author = author;
         this.imageUrl = imageUrl;

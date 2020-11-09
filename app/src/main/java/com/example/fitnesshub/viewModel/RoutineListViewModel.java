@@ -6,14 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.fitnesshub.model.RoutineCardInfo;
+import com.example.fitnesshub.model.RoutineOverviewInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoutineListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<RoutineCardInfo>> routineCards = new MutableLiveData<>();
+    private MutableLiveData<List<RoutineOverviewInfo>> routineCards = new MutableLiveData<>();
     private MutableLiveData<Boolean> routineCardLoadError = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
@@ -22,12 +22,12 @@ public class RoutineListViewModel extends AndroidViewModel {
     }
 
     public void refresh() {
-        RoutineCardInfo rci1 = new RoutineCardInfo("Ejer 1","John","",null,10,3);
-        RoutineCardInfo rci2 = new RoutineCardInfo("Ejer 2","Juan","",null,10,2);
-        RoutineCardInfo rci3 = new RoutineCardInfo("Ejer 3","Philipe","",null,10,5);
-        RoutineCardInfo rci4 = new RoutineCardInfo("Ejer 4","Andrea","",null,10,1);
+        RoutineOverviewInfo rci1 = new RoutineOverviewInfo("Ejer 1","John","",null,10,3);
+        RoutineOverviewInfo rci2 = new RoutineOverviewInfo("Ejer 2","Juan","",null,10,2);
+        RoutineOverviewInfo rci3 = new RoutineOverviewInfo("Ejer 3","Philipe","",null,10,5);
+        RoutineOverviewInfo rci4 = new RoutineOverviewInfo("Ejer 4","Andrea","",null,10,1);
 
-        ArrayList<RoutineCardInfo> routines = new ArrayList<>();
+        ArrayList<RoutineOverviewInfo> routines = new ArrayList<>();
         routines.add(rci1);
         routines.add(rci2);
         routines.add(rci3);
@@ -48,7 +48,7 @@ public class RoutineListViewModel extends AndroidViewModel {
         loading.setValue(false);
     }
 
-    public MutableLiveData<List<RoutineCardInfo>> getRoutineCards() {
+    public MutableLiveData<List<RoutineOverviewInfo>> getRoutineCards() {
         return routineCards;
     }
 
