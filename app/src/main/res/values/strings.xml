@@ -5,6 +5,14 @@
     <string name="navDiscover">Discover</string>
     <string name="navMyActivity">My Activity</string>
     <string name="navMe">Me</string>
+    <string name="phoneField">Phone</string>
+    <string name="nameField">Full name</string>
+    <string name="BirthdateField">Birthday date</string>
+    <string name="Field">Phone</string>
+    <string name="ProfileImage">Profile image</string>
+    <string name="FavoriteRoutines">FAVORITE ROUTINES</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
