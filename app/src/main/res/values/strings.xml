@@ -11,7 +11,6 @@
     <string name="Field">Phone</string>
     <string name="ProfileImage">Profile image</string>
     <string name="FavoriteRoutines">FAVORITE ROUTINES</string>
-    <string name="Roman">Juan Roman Riquelme</string>
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>
@@ -21,8 +20,21 @@
     <string name="WarmupTitle">WARM UP</string>
     <string name="MainExercisesTitle">MAIN EXERCISES</string>
     <string name="CooldownTitle">COOLDOWN</string>
+    <string name="EditButton">EditButton</string>
 
+
+    <!--EXAMPLES -->.
 
     <string name="DescriptionExample">Get your joints moving and your muscles burning with this strenght building routine. This routine will target your core, arms and legs. Short and straight to the point, you can do it with no equipment at all.</string>
-    <string name="EditButton">EditButton</string>
+    <string name="Roman">Juan Roman Riquelme</string>
+    <string name="RoutineName">MUSCLE AND STRENGHT</string>
+    <string name="AuthorRoutineName">By John</string>
+    <string name="DurationRoutine">15 min</string>
+    <string name="playButton">Play button</string>
+    <string name="exerciseName">Abs</string>
+    <string name="exerciseReps">20</string>
+    <string name="reorderbutton">Reorder button</string>
+    <string name="RoutineImage">Routine Image</string>
+
+
 </resources>
