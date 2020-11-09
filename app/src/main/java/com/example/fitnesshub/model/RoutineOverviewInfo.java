@@ -10,7 +10,7 @@ public class RoutineOverviewInfo {
     private String detail;
 
     @SerializedName("dateCreated")
-    private Integer creationDate;
+    private String creationDate;
 
     @SerializedName("averageRating")
     private Integer rating;
@@ -24,7 +24,7 @@ public class RoutineOverviewInfo {
 
     private String image;
 
-    public RoutineOverviewInfo(String title, String detail, Integer creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category) {
+    public RoutineOverviewInfo(String title, String detail, String creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category) {
         this.title = title;
         this.detail = detail;
         this.creationDate = creationDate;
@@ -43,7 +43,7 @@ public class RoutineOverviewInfo {
         return detail;
     }
 
-    public Integer getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
@@ -95,12 +95,12 @@ public class RoutineOverviewInfo {
         private String username;
         private String gender;
         private String avatarUrl;
-        private Integer dateCreated;
+        private String dateCreated;
         private Integer id;
-        private Integer dateLastActive;
+        private String dateLastActive;
 
 
-        public RoutineCreator(String username, String gender, String avatarUrl, Integer dateCreated, Integer id, Integer dateLastActive) {
+        public RoutineCreator(String username, String gender, String avatarUrl, String dateCreated, Integer id, String dateLastActive) {
             this.username = username;
             this.gender = gender;
             this.avatarUrl = avatarUrl;
@@ -121,7 +121,7 @@ public class RoutineOverviewInfo {
             return avatarUrl;
         }
 
-        public Integer getDateCreated() {
+        public String getDateCreated() {
             return dateCreated;
         }
 
@@ -129,7 +129,7 @@ public class RoutineOverviewInfo {
             return id;
         }
 
-        public Integer getDateLastActive() {
+        public String getDateLastActive() {
             return dateLastActive;
         }
     }

@@ -34,19 +34,19 @@ public class RoutineListViewModel extends AndroidViewModel {
     }
 
     public void refresh() {
-        RoutineOverviewInfo rci1 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
-        RoutineOverviewInfo rci2 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
-        RoutineOverviewInfo rci3 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
-
-        ArrayList<RoutineOverviewInfo> routines = new ArrayList<>();
-        routines.add(rci1);
-        routines.add(rci2);
-        routines.add(rci3);
-
-        routineCards.setValue(routines);
-        routineCardLoadError.setValue(false);
-        loading.setValue(false);
-//        fetchFromRemote();
+//        RoutineOverviewInfo rci1 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
+//        RoutineOverviewInfo rci2 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
+//        RoutineOverviewInfo rci3 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
+//
+//        ArrayList<RoutineOverviewInfo> routines = new ArrayList<>();
+//        routines.add(rci1);
+//        routines.add(rci2);
+//        routines.add(rci3);
+//
+//        routineCards.setValue(routines);
+//        routineCardLoadError.setValue(false);
+//        loading.setValue(false);
+        fetchFromRemote();
     }
 
     private void fetchFromRemote() {
@@ -61,10 +61,10 @@ public class RoutineListViewModel extends AndroidViewModel {
                 routinesService.getRoutinesEntries(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<List<RoutineEntries>>() {
+                        .subscribeWith(new DisposableSingleObserver<RoutineEntries<RoutineOverviewInfo>>() {
                             @Override
-                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<RoutineEntries> routineEntries) {
-                                routineCards.setValue(routineEntries.get(0).getEntries());
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineEntries<RoutineOverviewInfo> routineEntries) {
+                                routineCards.setValue(routineEntries.getEntries());
                                 routineCardLoadError.setValue(false);
                                 loading.setValue(false);
                             }
@@ -74,6 +74,7 @@ public class RoutineListViewModel extends AndroidViewModel {
                                 routineCardLoadError.setValue(true);
                                 loading.setValue(false);
                                 e.printStackTrace();
+                                System.out.println("error");
                             }
                         })
         );

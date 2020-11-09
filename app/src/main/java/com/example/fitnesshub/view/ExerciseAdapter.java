@@ -39,16 +39,13 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         TextView quantity = holder.itemView.findViewById(R.id.quantityExercise);
         title.setText(ex.getExerciseName());
         quantity.setText(ex.getQuantity());
-
     }
-
 
     // total number of rows
     @Override
     public int getItemCount() {
         return exerciseList.size();
     }
-
 
     // stores and recycles views as they are scrolled off screen
     public static class ExerciseViewHolder extends RecyclerView.ViewHolder{
@@ -59,8 +56,4 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
             this.itemView = itemView;
         }
     }
-
-
-
-
 }
