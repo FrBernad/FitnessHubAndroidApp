@@ -36,20 +36,22 @@
                 android:id="@+id/action_routinesFragment_to_myActivityFragment"
                 app:destination="@id/myActivityFragment" />
     </fragment>
+
     <fragment
             android:id="@+id/meFragment"
             android:name="com.example.fitnesshub.view.MeFragment"
             android:label="fragment_me"
-            tools:layout="@layout/fragment_me" >
+            tools:layout="@layout/fragment_me">
         <action
                 android:id="@+id/action_meFragment_to_myActivityFragment"
                 app:destination="@id/myActivityFragment" />
     </fragment>
+
     <fragment
             android:id="@+id/myActivityFragment"
             android:name="com.example.fitnesshub.view.MyActivityFragment"
             android:label="fragment_my_activity"
-            tools:layout="@layout/fragment_my_activity" >
+            tools:layout="@layout/fragment_my_activity">
         <action
                 android:id="@+id/action_myActivityFragment_to_meFragment"
                 app:destination="@id/meFragment" />

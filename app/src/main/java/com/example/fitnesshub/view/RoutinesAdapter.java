@@ -8,15 +8,19 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.RoutineCardBinding;
 import com.example.fitnesshub.model.RoutineOverviewInfo;
 
 
 import java.util.List;
 
-public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> {
+public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener{
 
     private List<RoutineOverviewInfo> routinesList;
 
@@ -24,8 +28,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
         this.routinesList = routinesList;
     }
 
-    public void updateRoutinesList(List<RoutineOverviewInfo> newRoutinesList){
-
+    public void updateRoutinesList(List<RoutineOverviewInfo> newRoutinesList) {
         routinesList.clear();
         routinesList.addAll(newRoutinesList);
         notifyDataSetChanged();
@@ -34,22 +37,15 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
     @NonNull
     @Override
     public RoutineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.routine_card,parent,false);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        RoutineCardBinding view = DataBindingUtil.inflate(inflater, R.layout.routine_card, parent, false);
         return new RoutineViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
-        ImageView img = holder.itemView.findViewById(R.id.routineImg);
-        TextView title =  holder.itemView.findViewById(R.id.routineTitle);
-        TextView author =  holder.itemView.findViewById(R.id.routineAuthor);
-        RatingBar rating =  holder.itemView.findViewById(R.id.routineRatingBar);
-//      TextView fav =  holder.itemView.findViewById(R.id.routineFav);
-
-        title.setText(routinesList.get(position).getTitle());
-        author.setText(routinesList.get(position).getAuthor());
-        rating.setNumStars(routinesList.get(position).getRating());
-//      fav.set(routinesList.get(position).getAuthor());
+        holder.itemView.setRoutineEntry(routinesList.get(position));
+        holder.itemView.setClickListener(this);
     }
 
     @Override
@@ -57,11 +53,17 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
         return routinesList.size();
     }
 
-    static class RoutineViewHolder extends RecyclerView.ViewHolder{
-        public View itemView;
+    @Override
+    public void onRoutineClick(View view) {
+        NavDirections action = RoutinesFragmentDirections.actionRoutinesFragmentToMeFragment();
+        Navigation.findNavController(view).navigate(action);
+    }
 
-        public RoutineViewHolder(@NonNull View itemView) {
-            super(itemView);
+    static class RoutineViewHolder extends RecyclerView.ViewHolder {
+        public RoutineCardBinding itemView;
+
+        public RoutineViewHolder(@NonNull RoutineCardBinding itemView) {
+            super(itemView.getRoot());
             this.itemView = itemView;
         }
     }
