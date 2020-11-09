@@ -16,4 +16,13 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string name="DescriptionTitle">DESCRIPTION</string>
+    <string name="ExercisesTitle">EXERCISES</string>
+    <string name="WarmupTitle">WARM UP</string>
+    <string name="MainExercisesTitle">MAIN EXERCISES</string>
+    <string name="CooldownTitle">COOLDOWN</string>
+
+
+    <string name="DescriptionExample">Get your joints moving and your muscles burning with this strenght building routine. This routine will target your core, arms and legs. Short and straight to the point, you can do it with no equipment at all.</string>
+    <string name="EditButton">EditButton</string>
 </resources>
