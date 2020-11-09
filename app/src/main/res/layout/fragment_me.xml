@@ -17,19 +17,21 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/roman" />
+            app:srcCompat="@drawable/roman"
+            android:contentDescription="@string/ProfileImage" />
 
         <TextView
-            android:id="@+id/full_name"
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/profile_image"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:includeFontPadding="false"
             android:text="Juan Roman Riquelme"
+            android:textColor="@color/darkGrey"
             android:textSize="20sp" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -42,53 +44,70 @@
             android:id="@+id/info_icon"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_info_24" />
+            android:src="@drawable/ic_info_24"
+            android:contentDescription="@string/ProfileImage"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/info_icon"
             android:layout_marginBottom="10dp"
-            android:hint="Full Name">
+            android:hint="@string/nameField"
+            app:boxBackgroundColor="#FFFFFF"
+            app:hintTextColor="@color/grey"
+            app:startIconDrawable="@drawable/ic_me_24"
+            app:startIconTint="@color/grey">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_me_24"
                 android:drawablePadding="10dp"
-                android:text="Juan Roman Riquelme" />
+                android:text="Juan Roman Riquelme"
+                android:textColor="@color/darkGrey" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Phone">
+            android:hint="@string/phoneField"
+            app:hintTextColor="@color/grey"
+            app:startIconDrawable="@drawable/ic_phone_24"
+            app:startIconTint="@color/grey">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
+                android:id="@+id/phone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:autofillHints="@string/phoneField"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_phone_24"
-                android:drawablePadding="10dp"
-                android:text="1133334444" />
+                android:ems="10"
+                android:inputType="phone"
+                android:textColor="@color/darkGrey"
+                tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Birthday Date">
+            android:hint="@string/BirthdateField"
+            app:hintTextColor="@color/grey"
+            app:startIconDrawable="@drawable/ic_birthday_24"
+            app:startIconTint="@color/grey">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
+                android:id="@+id/editTextDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints="@string/BirthdateField"
                 android:background="@android:color/transparent"
-                android:drawableLeft="@drawable/ic_birthday_24"
-                android:drawablePadding="10dp"
-                android:text="24-07-1998" />
+                android:ems="10"
+                android:inputType="date"
+                android:textColor="@color/darkGrey"
+                tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -97,7 +116,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#212529"
+        android:background="@color/darkGrey"
         android:padding="20dp">
 
         <TextView
@@ -105,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="FAVORITE ROUTINES"
+            android:text="@string/FavoriteRoutines"
             android:textColor="#F8F9FA"
             android:textSize="20sp" />
     </RelativeLayout>
