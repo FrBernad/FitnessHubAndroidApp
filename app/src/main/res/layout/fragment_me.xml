@@ -132,13 +132,6 @@
             android:textColor="#F8F9FA"
             android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:id="@+id/favoriteRoutinesLayout"
-            />
     </LinearLayout>
 
 
