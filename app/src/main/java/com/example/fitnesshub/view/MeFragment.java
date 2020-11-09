@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -112,6 +113,21 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
                 mDisplayDate.setText(date);
             }
         };
+
+        LinearLayout llMain = view.findViewById(R.id.favoriteRoutinesLayout);
+        TextView textView = new TextView(getActivity());
+        textView.setText("I am added dynamically to the view");
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        textView.setLayoutParams(params);
+        TextView textView2 = new TextView(getActivity());
+        textView2.setText("I am added dynamically to the view");
+        textView2.setLayoutParams(params);
+
+        llMain.addView(textView);
+        llMain.addView(textView2);
 
         return view;
     }
