@@ -5,6 +5,7 @@
     <string name="navDiscover">Discover</string>
     <string name="navMyActivity">My Activity</string>
     <string name="navMe">Me</string>
+<<<<<<< Updated upstream
     <string name="phoneField">Phone</string>
     <string name="nameField">Full name</string>
     <string name="BirthdateField">Birthday date</string>
@@ -15,4 +16,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+=======
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+>>>>>>> Stashed changes
 </resources>
