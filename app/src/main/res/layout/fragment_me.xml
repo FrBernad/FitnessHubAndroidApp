@@ -45,7 +45,8 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_info_24"
-            android:contentDescription="@string/ProfileImage"/>
+            android:contentDescription="@string/ProfileImage"
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -63,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:drawablePadding="10dp"
-                android:text="Juan Roman Riquelme"
+                android:text="@string/Roman"
                 android:textColor="@color/darkGrey" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,28 +88,19 @@
                 android:textColor="@color/darkGrey"
                 tools:ignore="LabelFor" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <Spinner
+            android:id="@+id/genderSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:hint="@string/BirthdateField"
-            app:hintTextColor="@color/grey"
-            app:startIconDrawable="@drawable/ic_birthday_24"
-            app:startIconTint="@color/grey">
+            android:layout_marginBottom="10dp">
+        </Spinner>
 
-            <EditText
-                android:id="@+id/editTextDate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:autofillHints="@string/BirthdateField"
-                android:background="@android:color/transparent"
-                android:ems="10"
-                android:inputType="date"
-                android:textColor="@color/darkGrey"
-                tools:ignore="LabelFor" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/BirthdateField"
+            android:id="@+id/tvDate"
+            android:layout_marginBottom="10dp" />
 
 
     </LinearLayout>

@@ -6,8 +6,14 @@
     <string name="navMe">Me</string>
     <string name="phoneField">Phone</string>
     <string name="nameField">Full name</string>
+    <string name="genderField">Gender</string>
     <string name="BirthdateField">Birthday date</string>
     <string name="Field">Phone</string>
     <string name="ProfileImage">Profile image</string>
     <string name="FavoriteRoutines">FAVORITE ROUTINES</string>
+    <string name="Roman">Juan Roman Riquelme</string>
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
 </resources>
