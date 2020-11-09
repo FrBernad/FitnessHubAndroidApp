@@ -11,13 +11,13 @@ import com.example.fitnesshub.model.RoutineCardInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutineCardListViewModel extends AndroidViewModel {
+public class RoutineListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<RoutineCardInfo>> routineCards = new MutableLiveData<>();
     private MutableLiveData<Boolean> routineCardLoadError = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
-    public RoutineCardListViewModel(@NonNull Application application) {
+    public RoutineListViewModel(@NonNull Application application) {
         super(application);
     }
 
