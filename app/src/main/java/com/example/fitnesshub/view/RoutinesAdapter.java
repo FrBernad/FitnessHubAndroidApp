@@ -11,17 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
-<<<<<<< Updated upstream
 import com.example.fitnesshub.model.RoutineOverviewInfo;
-=======
-import com.example.fitnesshub.model.RoutineCardInfo;
->>>>>>> Stashed changes
+
 
 import java.util.List;
 
 public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> {
 
-<<<<<<< Updated upstream
     private List<RoutineOverviewInfo> routinesList;
 
     public RoutinesAdapter(List<RoutineOverviewInfo> routinesList) {
@@ -29,15 +25,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
     }
 
     public void updateRoutinesList(List<RoutineOverviewInfo> newRoutinesList){
-=======
-    private List<RoutineCardInfo> routinesList;
 
-    public RoutinesAdapter(List<RoutineCardInfo> routinesList) {
-        this.routinesList = routinesList;
-    }
-
-    public void updateRoutinesList(List<RoutineCardInfo> newRoutinesList){
->>>>>>> Stashed changes
         routinesList.clear();
         routinesList.addAll(newRoutinesList);
         notifyDataSetChanged();
