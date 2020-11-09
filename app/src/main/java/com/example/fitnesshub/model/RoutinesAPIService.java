@@ -4,6 +4,7 @@ package com.example.fitnesshub.model;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
