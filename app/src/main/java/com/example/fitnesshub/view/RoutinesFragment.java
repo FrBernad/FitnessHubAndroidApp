@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 public class RoutinesFragment extends Fragment {
 
     private RoutineListViewModel viewModel;
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
+    private final RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
 
     @BindView(R.id.routineCardsList)
     RecyclerView routineCardsList;
