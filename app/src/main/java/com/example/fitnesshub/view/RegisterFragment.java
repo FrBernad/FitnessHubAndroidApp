@@ -9,59 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.FragmentLoginBinding;
+import com.example.fitnesshub.databinding.FragmentRegisterBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link register#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class register extends Fragment {
+public class RegisterFragment extends Fragment {
 
-    //For validation
     TextInputLayout email, username, password;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public register() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment register.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static register newInstance(String param1, String param2) {
-        register fragment = new register();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        email = getView().findViewById(R.id.register_email);
-        username = getView().findViewById(R.id.register_username);
-        password = getView().findViewById(R.id.register_password);
+        FragmentRegisterBinding binding = FragmentRegisterBinding.inflate(getLayoutInflater());
+        email = binding.registerEmail;
+        password = binding.registerPassword;
+        username = binding.registerUsername;
+//        email = getView().findViewById(R.id.register_email);
+//        username = getView().findViewById(R.id.register_username);
+//        password = getView().findViewById(R.id.register_password);
 
     }
 
