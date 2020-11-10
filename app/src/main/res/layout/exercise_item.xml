@@ -4,55 +4,59 @@
     <data>
 
         <variable
-                name="exerciseData"
-                type="com.example.fitnesshub.model.ExerciseData" />
+            name="exerciseData"
+            type="com.example.fitnesshub.model.ExerciseData" />
 
         <variable
-                name="clickListener"
-                type="com.example.fitnesshub.view.RoutineEntryClickListener" />
+            name="clickListener"
+            type="com.example.fitnesshub.view.RoutineEntryClickListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/whiteBright">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteBright">
 
         <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="0.1dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                app:srcCompat="@drawable/ic_reorder_24"
-                android:contentDescription="@string/reorderbutton" />
+            android:id="@+id/imageButton"
+            android:layout_width="0.1dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/reorderbutton"
+            app:srcCompat="@drawable/ic_reorder_24" />
 
         <TextView
-                android:id="@+id/exerciseName"
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:text="@{exerciseData.name}"
-                android:textSize="18sp" />
+            android:id="@+id/exerciseName"
+            style="@style/Items"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="@{exerciseData.name}"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
         <TextView
-                android:id="@+id/repsExercise"
-                android:layout_width="5dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="@{String.valueOf(exerciseData.reps)}"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+            android:id="@+id/repsExercise"
+            style="@style/Items"
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="@{String.valueOf(exerciseData.reps)}"
+            android:textAlignment="center"
+
+            android:textSize="18sp" />
 
         <TextView
-                android:id="@+id/timeExercise"
-                android:layout_width="5dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:text="@{String.valueOf(exerciseData.time)}"
-                android:textAlignment="center"
-                android:textSize="18sp" />
+            android:id="@+id/timeExercise"
+            android:layout_width="5dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            style="@style/Items"
+            android:text="@{String.valueOf(exerciseData.time)}"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
