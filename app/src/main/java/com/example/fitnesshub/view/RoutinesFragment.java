@@ -20,6 +20,8 @@ import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
 import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -42,7 +44,7 @@ public class RoutinesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
 
         routineCardsList = binding.routineCardsList;

@@ -20,7 +20,7 @@ import com.example.fitnesshub.model.RoutineOverviewInfo;
 
 import java.util.List;
 
-public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener{
+public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener {
 
     private List<RoutineOverviewInfo> routinesList;
 
@@ -44,7 +44,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
 
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
-        holder.itemView.setRoutineEntry(routinesList.get(position));
+        holder.itemView.setRoutineData(routinesList.get(position));
         holder.itemView.setClickListener(this);
     }
 
@@ -55,7 +55,9 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
 
     @Override
     public void onRoutineClick(View view) {
-        NavDirections action = RoutinesFragmentDirections.actionRoutinesFragmentToMeFragment();
+        int routineId = Integer.parseInt(((TextView) view.findViewById(R.id.routineId)).getText().toString());
+        RoutinesFragmentDirections.ActionRoutinesFragmentToRoutineFragment action = RoutinesFragmentDirections.actionRoutinesFragmentToRoutineFragment();
+        action.setRoutineId(routineId);
         Navigation.findNavController(view).navigate(action);
     }
 

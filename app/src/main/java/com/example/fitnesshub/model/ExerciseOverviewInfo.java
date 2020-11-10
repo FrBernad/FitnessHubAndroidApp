@@ -1,26 +1,56 @@
 package com.example.fitnesshub.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ExerciseOverviewInfo {
 
-    private String exerciseName;
-    private Integer reps, time;
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-    public ExerciseOverviewInfo(String exerciseName, Integer reps){
-        this.exerciseName = exerciseName;
+    @Expose
+    @SerializedName("name")
+    private String name;
+
+    @Expose
+    @SerializedName("detail")
+    private String detail;
+
+    @Expose
+    @SerializedName("duration")
+    private Integer time;
+
+    @Expose
+    @SerializedName("repetitions")
+    private Integer reps;
+
+    public ExerciseOverviewInfo(Integer id, String name, String detail, Integer time, Integer reps) {
+        this.id = id;
+        this.name = name;
+        this.detail = detail;
+        this.time = time;
         this.reps = reps;
-        this.time =reps;
     }
 
-    public String getExerciseName() {
-        return exerciseName;
+    public Integer getId() {
+        return id;
     }
 
+    public String getName() {
+        return name;
+    }
 
-    public Integer getQuantity() {
-        return reps;
+    public String getDetail() {
+        return detail;
     }
 
     public Integer getTime() {
         return time;
     }
+
+    public Integer getReps() {
+        return reps;
+    }
 }
+

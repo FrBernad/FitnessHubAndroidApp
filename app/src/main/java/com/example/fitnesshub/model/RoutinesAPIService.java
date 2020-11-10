@@ -1,7 +1,6 @@
 package com.example.fitnesshub.model;
 
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
@@ -32,7 +31,13 @@ public class RoutinesAPIService extends ApiService implements RoutinesAPI {
     }
 
     @Override
-    public Single<RoutineEntries<RoutineOverviewInfo>> getRoutinesEntries(Map<String, String> options, String token) {
-        return api.getRoutinesEntries(options, token);
+    public Single<PagedList<RoutineOverviewInfo>> getRoutines(Map<String, String> options, String token) {
+        return api.getRoutines(options, token);
     }
+
+    @Override
+    public Single<PagedList<ExerciseOverviewInfo>> getExercises(Integer routineId, Integer cycleId, Map<String, String> options, String token) {
+        return api.getExercises(routineId, cycleId, options, token);
+    }
+
 }

@@ -4,8 +4,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
-                name="routineEntry"
+                name="routineData"
                 type="com.example.fitnesshub.model.RoutineOverviewInfo" />
 
         <variable
@@ -31,13 +32,24 @@
                 app:layout_constraintVertical_bias="0.48" />
 
         <TextView
+                android:id="@+id/routineId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@{String.valueOf(routineData.id)}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="parent" />
+
+        <TextView
                 android:id="@+id/routineTitle"
                 style="@style/routineCardTitle"
                 android:layout_width="202dp"
                 android:layout_height="23dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
-                android:text="@{routineEntry.title}"
+                android:text="@{routineData.title}"
                 app:layout_constraintStart_toEndOf="@+id/routineImg"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +60,7 @@
                 android:layout_height="21dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="14dp"
-                android:text="@{routineEntry.author.username}"
+                android:text="@{routineData.author.username}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/routineImg"
                 app:layout_constraintTop_toBottomOf="@+id/routineTitle"
