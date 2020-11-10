@@ -1,52 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".view.RoutinesFragment">
+        tools:context=".view.RoutinesFragment"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/routinesRefreshLayout">
+            android:id="@+id/scroll_view">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="4dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/routineCardsList"
-                    android:layout_width="0dp"
+                    android:id="@+id/recyclerView"
+                    android:layout_weight="1"
                     android:layout_height="0dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:layout_marginBottom="1dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                    android:id="@+id/routineListError"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="An error occured while loading data."
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    style="@style/TextBody"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_width="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/routine_card" />
 
             <ProgressBar
-                    android:id="@+id/routineListLoadingView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</layout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
