@@ -21,6 +21,10 @@
     <string name="MainExercisesTitle">MAIN EXERCISES</string>
     <string name="CooldownTitle">COOLDOWN</string>
     <string name="EditButton">EditButton</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">REGISTER</string>
 
 
     <!--EXAMPLES -->.
@@ -36,6 +40,8 @@
     <string name="reorderbutton">Reorder button</string>
     <string name="RoutineImage">Routine Image</string>
     <string name="loadingLogo">Loading Logo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
