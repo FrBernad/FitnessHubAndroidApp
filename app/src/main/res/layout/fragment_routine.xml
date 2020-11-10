@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/whiteBackground"
     android:orientation="vertical"
-    tools:context=".view.Routine">
+    tools:context=".view.RoutineFragment">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

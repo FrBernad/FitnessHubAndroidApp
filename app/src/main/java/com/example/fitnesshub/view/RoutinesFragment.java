@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
 import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
 import java.util.ArrayList;
@@ -27,27 +28,30 @@ import butterknife.ButterKnife;
 public class RoutinesFragment extends Fragment {
 
     private RoutineListViewModel viewModel;
+
     private final RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
 
-    @BindView(R.id.routineCardsList)
-    RecyclerView routineCardsList;
+    private FragmentRoutinesBinding binding;
 
-    @BindView(R.id.routineListError)
-    TextView routineListError;
-
-    @BindView(R.id.routineListLoadingView)
-    ProgressBar routineListLoadingView;
-
-    @BindView(R.id.routinesRefreshLayout)
-    SwipeRefreshLayout routinesRefreshLayout;
+    private RecyclerView routineCardsList;
+    private TextView routineListError;
+    private ProgressBar routineListLoadingView;
+    private SwipeRefreshLayout routinesRefreshLayout;
 
     public RoutinesFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_routines, container, false);
-        ButterKnife.bind(this, view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
+
+        routineCardsList = binding.routineCardsList;
+        routineListError = binding.routineListError;
+        routineListLoadingView = binding.routineListLoadingView;
+        routinesRefreshLayout = binding.routinesRefreshLayout;
+
+        View view = binding.getRoot();
+
         return view;
     }
 

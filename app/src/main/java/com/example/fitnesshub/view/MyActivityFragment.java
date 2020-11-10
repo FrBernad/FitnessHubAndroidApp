@@ -12,14 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fitnesshub.R;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.ExerciseOverviewInfo;
 import com.example.fitnesshub.viewModel.ExerciseViewModel;
 
 import java.util.ArrayList;
-
-import butterknife.ButterKnife;
 
 public class MyActivityFragment extends Fragment {
 
@@ -32,9 +33,10 @@ public class MyActivityFragment extends Fragment {
     private ExerciseAdapter mainAdapter;
     private ExerciseAdapter cooldownAdapter;
 
+    private FragmentRoutineBinding binding;
+
     public MyActivityFragment() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,19 +45,14 @@ public class MyActivityFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_routine, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentRoutineBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
         return view;
     }
 
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // set up the RecyclerView
-        FragmentRoutineBinding binding = FragmentRoutineBinding.inflate(getLayoutInflater());
-        warmupModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
-        mainModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
-        cooldownModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
 
         RecyclerView recyclerViewWarmUp = binding.warmUpExercises;
         RecyclerView recyclerViewMain = binding.mainExercises;
@@ -66,10 +63,21 @@ public class MyActivityFragment extends Fragment {
         recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
+        warmUp.add(new ExerciseOverviewInfo("Abs", 4));
+        warmUp.add(new ExerciseOverviewInfo("Abs", 4));
+        warmUp.add(new ExerciseOverviewInfo("Abs", 4));
 
-        warmUpAdapter = new ExerciseAdapter(new ArrayList<>());
-        mainAdapter = new ExerciseAdapter(new ArrayList<>());
-        cooldownAdapter = new ExerciseAdapter(new ArrayList<>());
+        main.add(new ExerciseOverviewInfo("Abs", 4));
+        main.add(new ExerciseOverviewInfo("Abs", 4));
+        main.add(new ExerciseOverviewInfo("Abs", 4));
+
+        cooldown.add(new ExerciseOverviewInfo("Abs", 4));
+        cooldown.add(new ExerciseOverviewInfo("Abs", 4));
+        cooldown.add(new ExerciseOverviewInfo("Abs", 4));
+
+        warmUpAdapter = new ExerciseAdapter(warmUp);
+        mainAdapter = new ExerciseAdapter(main);
+        cooldownAdapter = new ExerciseAdapter(cooldown);
 
         recyclerViewWarmUp.setAdapter(warmUpAdapter);
         recyclerViewMain.setAdapter(mainAdapter);
