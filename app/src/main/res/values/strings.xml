@@ -36,7 +36,7 @@
     <string name="reorderbutton">Reorder button</string>
     <string name="RoutineImage">Routine Image</string>
     <string name="loadingLogo">Loading Logo</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
@@ -45,6 +45,9 @@
     <string name="Userame" />
     <string name="sign_in">Sign in</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="register" />
+    <string name="conditions" />
+    <string name="password" />
 
 
 </resources>

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/LoginBackGround"
     android:textAlignment="textStart"
-    tools:context=".view.LoginFragment">
+    android:isScrollContainer="true"
+    tools:context=".view.LoginFragment"
+    android:background="@color/darkGrey">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/radius"
             android:layout_width="350dp"
             android:layout_height="98dp"
             android:layout_marginTop="52dp"
             android:background="@drawable/fithub_rounded"
-            android:contentDescription="TODO"
             android:src="@drawable/long_brand_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
@@ -27,12 +27,12 @@
 
         <Button
             android:id="@+id/SignIn"
-            android:layout_width="139dp"
-            android:layout_height="50dp"
+            android:layout_width="262dp"
+            android:layout_height="45dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="72dp"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/button_rounded"
+            android:backgroundTint="@color/darkGrey"
             android:backgroundTintMode="src_atop"
             android:text="@string/sign_in"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,13 +76,16 @@
             style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
             android:layout_width="199dp"
             android:layout_height="36dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/button_rounded"
             android:text="@string/forgot_password"
-            android:textColor="#FFFFFF"
-            tools:layout_editor_absoluteX="151dp"
-            tools:layout_editor_absoluteY="407dp" />
+            android:textColor="@color/whiteOpaque"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.768"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTUser" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</ScrollView>
