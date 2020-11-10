@@ -45,8 +45,6 @@ public class MyActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_routine, container, false);
         ButterKnife.bind(this, view);
-        // Inflate the layout for this fragment
-
         return view;
     }
 

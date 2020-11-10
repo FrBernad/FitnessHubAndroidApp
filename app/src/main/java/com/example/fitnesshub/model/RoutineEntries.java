@@ -1,27 +1,35 @@
 package com.example.fitnesshub.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RoutineEntries {
+public class RoutineEntries<T> {
 
+    @Expose
     private Integer totalCount;
-
+    @SerializedName("orderBy")
+    @Expose
     private String orderBy;
-
+    @SerializedName("direction")
+    @Expose
     private String direction;
-
     @SerializedName("results")
-    private ArrayList<RoutineOverviewInfo> entries;
-
+    @Expose
+    private List<T> entries;
+    @SerializedName("size")
+    @Expose
     private Integer size;
-
+    @SerializedName("page")
+    @Expose
     private Integer page;
-
+    @SerializedName("isLastPage")
+    @Expose
     private Boolean isLastPage;
 
-    public RoutineEntries(Integer totalCount, String orderBy, String direction, ArrayList<RoutineOverviewInfo> entries, Integer size, Integer page, Boolean isLastPage) {
+    public RoutineEntries(Integer totalCount, String orderBy, String direction, ArrayList<T> entries, Integer size, Integer page, Boolean isLastPage) {
         this.totalCount = totalCount;
         this.orderBy = orderBy;
         this.direction = direction;
@@ -43,7 +51,7 @@ public class RoutineEntries {
         return direction;
     }
 
-    public ArrayList<RoutineOverviewInfo> getEntries() {
+    public List<T> getEntries() {
         return entries;
     }
 
