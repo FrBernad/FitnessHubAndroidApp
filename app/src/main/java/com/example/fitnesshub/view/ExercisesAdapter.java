@@ -10,20 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.ExerciseItemBinding;
-import com.example.fitnesshub.model.ExerciseOverviewInfo;
+import com.example.fitnesshub.model.ExerciseData;
 
 import java.util.List;
 
 public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.ExerciseViewHolder> {
 
-    private List<ExerciseOverviewInfo> exerciseList;
+    private List<ExerciseData> exerciseList;
     ExerciseItemBinding binding;
 
-    public ExercisesAdapter(List<ExerciseOverviewInfo> exerciseList) {
+    public ExercisesAdapter(List<ExerciseData> exerciseList) {
         this.exerciseList = exerciseList;
     }
 
-    public void updateExercises(List<ExerciseOverviewInfo> newExercisesList) {
+    public void updateExercises(List<ExerciseData> newExercisesList) {
         exerciseList.clear();
         exerciseList.addAll(newExercisesList);
         notifyDataSetChanged();
@@ -39,7 +39,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
-        ExerciseOverviewInfo exercise = exerciseList.get(position);
+        ExerciseData exercise = exerciseList.get(position);
         holder.itemView.setExerciseData(exercise);
         binding.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
         binding.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);

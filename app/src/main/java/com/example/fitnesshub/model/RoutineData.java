@@ -3,7 +3,7 @@ package com.example.fitnesshub.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RoutineOverviewInfo {
+public class RoutineData {
 
     @Expose
     @SerializedName("id")
@@ -39,7 +39,7 @@ public class RoutineOverviewInfo {
 
     private String image;
 
-    public RoutineOverviewInfo(Integer id, String title, String detail, String creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category, String image) {
+    public RoutineData(Integer id, String title, String detail, String creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category, String image) {
         this.id = id;
         this.title = title;
         this.detail = detail;

@@ -31,13 +31,18 @@ public class RoutinesAPIService extends ApiService implements RoutinesAPI {
     }
 
     @Override
-    public Single<PagedList<RoutineOverviewInfo>> getRoutines(Map<String, String> options, String token) {
+    public Single<PagedList<RoutineData>> getRoutines(Map<String, String> options, String token) {
         return api.getRoutines(options, token);
     }
 
     @Override
-    public Single<PagedList<ExerciseOverviewInfo>> getExercises(Integer routineId, Integer cycleId, Map<String, String> options, String token) {
+    public Single<PagedList<ExerciseData>> getExercises(Integer routineId, Integer cycleId, Map<String, String> options, String token) {
         return api.getExercises(routineId, cycleId, options, token);
+    }
+
+    @Override
+    public Single<PagedList<RoutineCycleData>> getRoutineCycles(Integer routineId, Map<String, String> options, String token) {
+        return api.getRoutineCycles(routineId,options,token);
     }
 
 }

@@ -3,32 +3,29 @@ package com.example.fitnesshub.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
-import com.example.fitnesshub.model.RoutineOverviewInfo;
+import com.example.fitnesshub.model.RoutineData;
 
 
 import java.util.List;
 
 public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener {
 
-    private List<RoutineOverviewInfo> routinesList;
+    private List<RoutineData> routinesList;
 
-    public RoutinesAdapter(List<RoutineOverviewInfo> routinesList) {
+    public RoutinesAdapter(List<RoutineData> routinesList) {
         this.routinesList = routinesList;
     }
 
-    public void updateRoutinesList(List<RoutineOverviewInfo> newRoutinesList) {
+    public void updateRoutinesList(List<RoutineData> newRoutinesList) {
         routinesList.clear();
         routinesList.addAll(newRoutinesList);
         notifyDataSetChanged();

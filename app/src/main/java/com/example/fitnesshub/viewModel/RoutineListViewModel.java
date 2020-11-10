@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.fitnesshub.model.PagedList;
-import com.example.fitnesshub.model.RoutineOverviewInfo;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RoutineListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<RoutineOverviewInfo>> routineCards = new MutableLiveData<>();
+    private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
     private MutableLiveData<Boolean> routineCardLoadError = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
@@ -48,9 +48,9 @@ public class RoutineListViewModel extends AndroidViewModel {
                 routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineOverviewInfo>>() {
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
                             @Override
-                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineOverviewInfo> routinesEntries) {
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
                                 routineCards.setValue(routinesEntries.getEntries());
                                 routineCardLoadError.setValue(false);
                                 loading.setValue(false);
@@ -72,7 +72,7 @@ public class RoutineListViewModel extends AndroidViewModel {
         disposable.clear();
     }
 
-    public MutableLiveData<List<RoutineOverviewInfo>> getRoutineCards() {
+    public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
     }
 

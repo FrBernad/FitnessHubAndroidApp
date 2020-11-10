@@ -7,7 +7,7 @@
 
         <variable
                 name="routineData"
-                type="com.example.fitnesshub.model.RoutineOverviewInfo" />
+                type="com.example.fitnesshub.model.RoutineData" />
 
         <variable
                 name="clickListener"

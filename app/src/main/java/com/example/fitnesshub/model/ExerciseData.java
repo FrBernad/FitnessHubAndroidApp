@@ -3,7 +3,7 @@ package com.example.fitnesshub.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ExeciseData {
+public class ExerciseData {
 
     @Expose
     @SerializedName("id")
@@ -25,7 +25,7 @@ public class ExeciseData {
     @SerializedName("repetitions")
     private Integer reps;
 
-    public ExeciseData(Integer id, String name, String detail, Integer time, Integer reps) {
+    public ExerciseData(Integer id, String name, String detail, Integer time, Integer reps) {
         this.id = id;
         this.name = name;
         this.detail = detail;

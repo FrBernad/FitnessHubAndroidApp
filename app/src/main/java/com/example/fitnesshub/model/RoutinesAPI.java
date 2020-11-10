@@ -11,15 +11,22 @@ import retrofit2.http.QueryMap;
 public interface RoutinesAPI {
 
     @GET("routines")
-    Single<PagedList<RoutineOverviewInfo>> getRoutines(
+    Single<PagedList<RoutineData>> getRoutines(
             @QueryMap Map<String, String> options,
             @Header("Authorization") String token
     );
 
     @GET("routines/{routineId}/cycles/{cycleId}/exercises")
-    Single<PagedList<ExerciseOverviewInfo>> getExercises(
+    Single<PagedList<ExerciseData>> getExercises(
             @Path("routineId") Integer routineId,
             @Path("cycleId") Integer cycleId,
+            @QueryMap Map<String, String> options,
+            @Header("Authorization") String token
+    );
+
+    @GET("routines/{routineId}/cycles")
+    Single<PagedList<RoutineCycleData>> getRoutineCycles(
+            @Path("routineId") Integer routineId,
             @QueryMap Map<String, String> options,
             @Header("Authorization") String token
     );
