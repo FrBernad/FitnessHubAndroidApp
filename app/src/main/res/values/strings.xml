@@ -26,6 +26,8 @@
     <string name="email">Email</string>
     <string name="register">register</string>
     <string name="conditions">By clicking “Register”, you agree to our Terms of Service and Privacy Statement.</string>
+    <string name="welcome_first_heading">Train yourself and others</string>
+    <string name="welcome_second_heading">High-quality workout routines anywhere, anytime</string>
 
 
     <!--EXAMPLES -->.
