@@ -16,6 +16,13 @@ public interface RoutinesAPI {
             @Header("Authorization") String token
     );
 
+    @GET("routines/{routineId}/cycles")
+    Single<PagedList<RoutineCycleData>> getRoutineCycles(
+            @Path("routineId") Integer routineId,
+            @QueryMap Map<String, String> options,
+            @Header("Authorization") String token
+    );
+
     @GET("routines/{routineId}/cycles/{cycleId}/exercises")
     Single<PagedList<ExerciseData>> getExercises(
             @Path("routineId") Integer routineId,
@@ -24,9 +31,8 @@ public interface RoutinesAPI {
             @Header("Authorization") String token
     );
 
-    @GET("routines/{routineId}/cycles")
-    Single<PagedList<RoutineCycleData>> getRoutineCycles(
-            @Path("routineId") Integer routineId,
+     @GET("user/current/routines/favourites")
+    Single<PagedList<RoutineData>> getFavouriteRoutines(
             @QueryMap Map<String, String> options,
             @Header("Authorization") String token
     );

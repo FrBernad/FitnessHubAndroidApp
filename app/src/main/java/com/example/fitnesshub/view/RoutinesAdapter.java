@@ -18,17 +18,10 @@ import com.example.fitnesshub.model.RoutineData;
 import java.util.List;
 
 public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener {
-
     private List<RoutineData> routinesList;
 
     public RoutinesAdapter(List<RoutineData> routinesList) {
         this.routinesList = routinesList;
-    }
-
-    public void updateRoutinesList(List<RoutineData> newRoutinesList) {
-        routinesList.clear();
-        routinesList.addAll(newRoutinesList);
-        notifyDataSetChanged();
     }
 
     @NonNull
@@ -58,6 +51,24 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
         Navigation.findNavController(view).navigate(action);
     }
 
+    public void updateRoutines(List<RoutineData> routineCards) {
+        System.out.println("updte "+routineCards);
+        routinesList.addAll(routineCards);
+        System.out.println("new "+routinesList);
+
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     static class RoutineViewHolder extends RecyclerView.ViewHolder {
         public RoutineCardBinding itemView;
 
@@ -66,5 +77,4 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
             this.itemView = itemView;
         }
     }
-
 }

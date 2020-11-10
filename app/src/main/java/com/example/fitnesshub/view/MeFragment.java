@@ -29,7 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.FragmentMeBinding;
 import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
+import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
 import java.lang.reflect.Array;
@@ -38,16 +40,13 @@ import java.util.Calendar;
 
 public class MeFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
-    private RoutineListViewModel viewModel;
+    private FavouritesRoutinesViewModel viewModel;
     private Spinner spinner;
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private final FavoriteAdapter favoriteAdapter = new FavoriteAdapter(new ArrayList<>());
-    private FragmentRoutinesBinding binding;
+    private FragmentMeBinding binding;
     private RecyclerView favoriteCardsList;
-    private TextView routineListError;
-    private ProgressBar routineListLoadingView;
-    private SwipeRefreshLayout routinesRefreshLayout;
 
     public MeFragment() {
     }
@@ -55,7 +54,7 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_me, container, false);
         spinner = view.findViewById(R.id.genderSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.genders,android.R.layout.simple_spinner_item);
@@ -63,18 +62,15 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         mDisplayDate = (TextView) view.findViewById(R.id.tvDate);
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dialog = new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener,year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+        mDisplayDate.setOnClickListener(view1 -> {
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            DatePickerDialog dialog = new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener,year, month, day);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
 
-            }
         });
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -85,13 +81,10 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
             }
         };
 
-        binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
+        binding = FragmentMeBinding.inflate(getLayoutInflater());
 
-//        favoriteCardsList = binding.favoriteCardsList;
-        routineListError = binding.routineListError;
-        routineListLoadingView = binding.routineListLoadingView;
-        routinesRefreshLayout = binding.routinesRefreshLayout;
-        
+        favoriteCardsList = binding.favRecycler;
+
         return view;
     }
 
@@ -109,8 +102,7 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(RoutineListViewModel.class);
-        viewModel.refresh();
+        viewModel = new ViewModelProvider(this).get(FavouritesRoutinesViewModel.class);
 
         favoriteCardsList.setLayoutManager(new LinearLayoutManager(getContext()));
         favoriteCardsList.setAdapter(favoriteAdapter);
@@ -120,29 +112,12 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
 
 
     private void observeRoutinesViewModel() {
-        viewModel.getRoutineCards().observe(getViewLifecycleOwner(), routineCards -> {
-            if (routineCards != null) {
+        viewModel.getFavouriteRoutines().observe(getViewLifecycleOwner(), favourites -> {
+            if (favourites != null) {
                 favoriteCardsList.setVisibility(View.VISIBLE);
-//                favoriteAdapter.updateRoutinesList(routineCards);
+                favoriteAdapter.updateFavoriteList(favourites);
             }
         });
-
-        viewModel.getRoutineCardLoadError().observe(getViewLifecycleOwner(), error -> {
-            if (error != null) {
-                routineListError.setVisibility(error ? View.VISIBLE : View.GONE);
-            }
-        });
-
-        viewModel.getLoading().observe(getViewLifecycleOwner(), loading -> {
-            if (loading != null) {
-                routineListLoadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
-                if (loading) {
-                    favoriteCardsList.setVisibility(View.GONE);
-                    routineListError.setVisibility(View.GONE);
-                }
-            }
-        });
-
     }
 
 

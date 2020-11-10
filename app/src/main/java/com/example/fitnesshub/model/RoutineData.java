@@ -87,6 +87,11 @@ public class RoutineData {
         return image;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
+
     public static class RoutineCategory {
         private Integer id;
         private String name;

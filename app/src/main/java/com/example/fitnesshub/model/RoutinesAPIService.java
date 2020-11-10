@@ -25,7 +25,7 @@ public class RoutinesAPIService extends ApiService implements RoutinesAPI {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-                .client(httpClient)
+//                .client(httpClient)
                 .build()
                 .create(RoutinesAPI.class);
     }
@@ -33,6 +33,11 @@ public class RoutinesAPIService extends ApiService implements RoutinesAPI {
     @Override
     public Single<PagedList<RoutineData>> getRoutines(Map<String, String> options, String token) {
         return api.getRoutines(options, token);
+    }
+
+    @Override
+    public Single<PagedList<RoutineData>> getFavouriteRoutines(Map<String, String> options, String token) {
+        return api.getFavouriteRoutines(options, token);
     }
 
     @Override

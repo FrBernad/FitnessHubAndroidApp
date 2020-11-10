@@ -1,6 +1,8 @@
 package com.example.fitnesshub.viewModel;
 
 import android.app.Application;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -9,7 +11,9 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
+import com.example.fitnesshub.view.RoutinesAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,28 +26,37 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class RoutineListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
-    private MutableLiveData<Boolean> routineCardLoadError = new MutableLiveData<>();
-    private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
     private RoutinesAPIService routinesService = new RoutinesAPIService();
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    private int currentPage = 0;
+    private int totalPages = 0;
+    private int itemsPerRequest = 5;
+    private boolean isLastPage = false;
 
     public RoutineListViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public void refresh() {
-        fetchFromRemote();
+    public boolean updateData(ProgressBar progressBar, RoutinesAdapter routinesAdapter) {
+        if (!isLastPage) {
+            fetchFromRemote(progressBar, routinesAdapter);
+            return false;
+        }
+        return true;
     }
 
-    private void fetchFromRemote() {
+
+    private void fetchFromRemote(ProgressBar progressBar, RoutinesAdapter routinesAdapter) {
         Map<String, String> options = new HashMap<>();
-        options.put("page", "0");
+        options.put("page", String.valueOf(currentPage));
         options.put("orderBy", "averageRating");
         options.put("direction", "desc");
-        options.put("size", "100");
+        options.put("size", String.valueOf(itemsPerRequest));
 
-        loading.setValue(true);
+        progressBar.setVisibility(View.VISIBLE);
+
         disposable.add(
                 routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
                         .subscribeOn(Schedulers.newThread())
@@ -51,20 +64,23 @@ public class RoutineListViewModel extends AndroidViewModel {
                         .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
                             @Override
                             public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
+                                isLastPage = routinesEntries.getLastPage();
+                                currentPage++;
                                 routineCards.setValue(routinesEntries.getEntries());
-                                routineCardLoadError.setValue(false);
-                                loading.setValue(false);
+                                totalPages = (int) Math.ceil(routinesEntries.getTotalCount() / (double) itemsPerRequest);
+                                progressBar.setVisibility(View.GONE);
+                                routinesAdapter.updateRoutines(routineCards.getValue());
                             }
 
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                                routineCardLoadError.setValue(true);
-                                loading.setValue(false);
                                 e.printStackTrace();
+                                progressBar.setVisibility(View.GONE);
                             }
                         })
         );
     }
+
 
     @Override
     protected void onCleared() {
@@ -74,13 +90,5 @@ public class RoutineListViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
-    }
-
-    public MutableLiveData<Boolean> getRoutineCardLoadError() {
-        return routineCardLoadError;
-    }
-
-    public MutableLiveData<Boolean> getLoading() {
-        return loading;
     }
 }
