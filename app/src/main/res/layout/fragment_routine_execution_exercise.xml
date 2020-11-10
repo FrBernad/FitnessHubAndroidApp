@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/whiteOpaque"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    tools:context=".view.RoutineExecutionExercise">
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
