@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,11 +20,13 @@ import android.widget.TextView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,14 +35,15 @@ public class RoutinesFragment extends Fragment {
 
     private RoutineListViewModel viewModel;
 
-    private final RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
+    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
 
     private FragmentRoutinesBinding binding;
 
-    private RecyclerView routineCardsList;
-    private TextView routineListError;
-    private ProgressBar routineListLoadingView;
-    private SwipeRefreshLayout routinesRefreshLayout;
+    private NestedScrollView nestedScrollView;
+    private RecyclerView recylcerView;
+    private ProgressBar progressBar;
+
+    boolean noMoreEntries = false;
 
     public RoutinesFragment() {
     }
@@ -47,10 +52,9 @@ public class RoutinesFragment extends Fragment {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
 
-        routineCardsList = binding.routineCardsList;
-        routineListError = binding.routineListError;
-        routineListLoadingView = binding.routineListLoadingView;
-        routinesRefreshLayout = binding.routinesRefreshLayout;
+        nestedScrollView = binding.scrollView;
+        recylcerView = binding.recyclerView;
+        progressBar = binding.progressBar;
 
         View view = binding.getRoot();
 
@@ -62,37 +66,19 @@ public class RoutinesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(RoutineListViewModel.class);
-        viewModel.refresh();
 
-        routineCardsList.setLayoutManager(new LinearLayoutManager(getContext()));
-        routineCardsList.setAdapter(routinesAdapter);
+        noMoreEntries = viewModel.updateData(progressBar, routinesAdapter);
 
-        observeRoutinesViewModel();
+        recylcerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recylcerView.setAdapter(routinesAdapter);
+
+
+        nestedScrollView.setOnScrollChangeListener(
+                (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                    if (!noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                        noMoreEntries = viewModel.updateData(progressBar, routinesAdapter);
+                    }
+                });
     }
 
-    private void observeRoutinesViewModel() {
-        viewModel.getRoutineCards().observe(getViewLifecycleOwner(), routineCards -> {
-            if (routineCards != null) {
-                routineCardsList.setVisibility(View.VISIBLE);
-                routinesAdapter.updateRoutinesList(routineCards);
-            }
-        });
-
-        viewModel.getRoutineCardLoadError().observe(getViewLifecycleOwner(), error -> {
-            if (error != null) {
-                routineListError.setVisibility(error ? View.VISIBLE : View.GONE);
-            }
-        });
-
-        viewModel.getLoading().observe(getViewLifecycleOwner(), loading -> {
-            if (loading != null) {
-                routineListLoadingView.setVisibility(loading ? View.VISIBLE : View.GONE);
-                if (loading) {
-                    routineCardsList.setVisibility(View.GONE);
-                    routineListError.setVisibility(View.GONE);
-                }
-            }
-        });
-
-    }
 }
