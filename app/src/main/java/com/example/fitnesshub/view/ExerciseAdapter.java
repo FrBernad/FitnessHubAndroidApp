@@ -21,9 +21,9 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         this.exerciseList = exerciseList;
     }
 
-    public void updateExercises(List<ExerciseOverviewInfo> newRoutinesList) {
+    public void updateExercises(List<ExerciseOverviewInfo> newExercisesList) {
         exerciseList.clear();
-        exerciseList.addAll(newRoutinesList);
+        exerciseList.addAll(newExercisesList);
         notifyDataSetChanged();
     }
 

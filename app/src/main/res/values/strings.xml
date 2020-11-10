@@ -35,6 +35,7 @@
     <string name="exerciseReps">20</string>
     <string name="reorderbutton">Reorder button</string>
     <string name="RoutineImage">Routine Image</string>
+    <string name="loadingLogo">Loading Logo</string>
 
 
 </resources>

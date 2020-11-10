@@ -132,6 +132,12 @@
             android:text="@string/FavoriteRoutines"
             android:textColor="#F8F9FA"
             android:textSize="20sp" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favoriteCardsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 
