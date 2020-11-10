@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.fitnesshub.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +15,9 @@ import com.example.fitnesshub.R;
  *
  */
 public class LoginFragment extends Fragment {
+
+    //For validation
+    TextInputLayout username, password;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +57,8 @@ public class LoginFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        username = getView().findViewById(R.id.login_username);
+        password = getView().findViewById(R.id.login_password);
     }
 
     @Override
@@ -61,4 +67,51 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
+
+    //Validation functions
+    private boolean validateUsername() {
+        String val = username.getEditText().getText().toString().trim();
+        String checkspaces = "\\A\\w{1,20}\\z"; //Check whitespaces
+
+        if (val.isEmpty()) {
+            username.setError("Field can not be empty");
+            return false;
+        } else if (val.length() > 20) {
+            username.setError("Username is too large!");
+            return false;
+        } else if (!val.matches(checkspaces)) {
+            username.setError("No white spaces are allowed!");
+            return false;
+        } else {
+            username.setError(null);
+            username.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validatePassword() {
+        String val = password.getEditText().getText().toString().trim();
+        String checkPassword = "^" +
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";;
+
+        if (val.isEmpty()) {
+            password.setError("Field can not be empty");
+            return false;
+        } else if (!val.matches(checkPassword)) {
+            password.setError("Password should contain at least 4 characters!");
+            return false;
+        } else {
+            password.setError(null);
+            password.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    //Cuando se llame al metodo NEXT fragment hay que hacer esto
+//    if(!validateUsername() | !validatePassword()) {
+//        return;
+//    }
 }

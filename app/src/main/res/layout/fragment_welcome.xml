@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/welcome_container"
     android:background="@color/white"
     tools:context=".view.welcome"
     android:padding="30dp">
@@ -45,9 +46,10 @@
             android:layout_marginTop="60dp">
 
          <Button
+             android:id="@+id/welcomeLoginButton"
              android:layout_width="0dp"
              android:layout_height="wrap_content"
-             android:text="Login"
+             android:text="@string/login"
              android:backgroundTint="@color/grey"
              android:elevation="5dp"
              android:paddingVertical="15dp"
@@ -56,6 +58,7 @@
              />
 
             <Button
+                android:id="@+id/welcomeRegisterButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey"
@@ -63,7 +66,7 @@
                 android:paddingVertical="15dp"
                 android:text="@string/register"
                 android:layout_weight="1"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginStart="10dp"/>
 
         </LinearLayout>
 

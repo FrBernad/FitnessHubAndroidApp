@@ -3,10 +3,13 @@ package com.example.fitnesshub.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.fitnesshub.R;
 
@@ -15,7 +18,7 @@ import com.example.fitnesshub.R;
  * Use the {@link welcome#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class welcome extends Fragment {
+public class welcome extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +64,39 @@ public class welcome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
+
+        Button loginBtn = (Button) rootView.findViewById(R.id.welcomeLoginButton);
+        Button registerBtn = (Button) rootView.findViewById(R.id.welcomeRegisterButton);
+
+        loginBtn.setOnClickListener(this);
+        registerBtn.setOnClickListener(this);
+
+        return rootView;
     }
+
+    @Override
+    public void onClick(View view) {
+        Fragment fragment = null;
+        switch (view.getId()) {
+            case R.id.welcomeLoginButton:
+                fragment = new LoginFragment();
+                replaceFragment(fragment);
+                break;
+
+            case R.id.welcomeRegisterButton:
+                fragment = new register();
+                replaceFragment(fragment);
+                break;
+        }
+    }
+
+    public void replaceFragment(Fragment someFragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.welcome_container, someFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }
