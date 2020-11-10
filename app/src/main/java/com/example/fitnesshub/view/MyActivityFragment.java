@@ -12,10 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.ExerciseOverviewInfo;
 import com.example.fitnesshub.viewModel.ExerciseViewModel;
@@ -24,14 +20,15 @@ import java.util.ArrayList;
 
 public class MyActivityFragment extends Fragment {
 
+    private ExerciseViewModel viewModel;
 
-    private ExerciseViewModel warmupModel;
-    private ExerciseViewModel mainModel;
-    private ExerciseViewModel cooldownModel;
+    private ExerciseAdapter warmUpAdapter = new ExerciseAdapter(new ArrayList<>());
+    private ExerciseAdapter mainAdapter = new ExerciseAdapter(new ArrayList<>());
+    private ExerciseAdapter cooldownAdapter = new ExerciseAdapter(new ArrayList<>());
 
-    private ExerciseAdapter warmUpAdapter;
-    private ExerciseAdapter mainAdapter;
-    private ExerciseAdapter cooldownAdapter;
+    private RecyclerView recyclerViewWarmUp;
+    private RecyclerView recyclerViewMain;
+    private RecyclerView recyclerViewCooldown;
 
     private FragmentRoutineBinding binding;
 
@@ -46,48 +43,52 @@ public class MyActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRoutineBinding.inflate(getLayoutInflater());
+
+        recyclerViewWarmUp = binding.warmUpExercises;
+        recyclerViewMain = binding.mainExercises;
+        recyclerViewCooldown = binding.cooldownExercises;
+
         View view = binding.getRoot();
+
         return view;
     }
-
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView recyclerViewWarmUp = binding.warmUpExercises;
-        RecyclerView recyclerViewMain = binding.mainExercises;
-        RecyclerView recyclerViewCooldown = binding.cooldownExercises;
+        viewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
+        viewModel.refresh();
 
-        recyclerViewWarmUp.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewMain.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-        warmUp.add(new ExerciseOverviewInfo("Abs", 4));
-        warmUp.add(new ExerciseOverviewInfo("Abs", 4));
-        warmUp.add(new ExerciseOverviewInfo("Abs", 4));
-
-        main.add(new ExerciseOverviewInfo("Abs", 4));
-        main.add(new ExerciseOverviewInfo("Abs", 4));
-        main.add(new ExerciseOverviewInfo("Abs", 4));
-
-        cooldown.add(new ExerciseOverviewInfo("Abs", 4));
-        cooldown.add(new ExerciseOverviewInfo("Abs", 4));
-        cooldown.add(new ExerciseOverviewInfo("Abs", 4));
-
-        warmUpAdapter = new ExerciseAdapter(warmUp);
-        mainAdapter = new ExerciseAdapter(main);
-        cooldownAdapter = new ExerciseAdapter(cooldown);
-
+        recyclerViewWarmUp.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewWarmUp.setAdapter(warmUpAdapter);
+
+        recyclerViewMain.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewMain.setAdapter(mainAdapter);
+
+        recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewCooldown.setAdapter(cooldownAdapter);
+
         observeExerciseViewModel();
     }
 
     private void observeExerciseViewModel() {
+        viewModel.getWarmupExercises().observe(getViewLifecycleOwner(), warmupExercises -> {
+            if (warmupExercises != null) {
+                warmUpAdapter.updateExercises(warmupExercises);
+            }
+        });
 
-        warmupModel.get
+        viewModel.getMainExercises().observe(getViewLifecycleOwner(), mainExercises -> {
+            if (mainExercises != null) {
+                mainAdapter.updateExercises(mainExercises);
+            }
+        });
+
+        viewModel.getCooldownExercises().observe(getViewLifecycleOwner(), cooldownExercises -> {
+            if (cooldownExercises != null) {
+                cooldownAdapter.updateExercises(cooldownExercises);
+            }
+        });
     }
 
 }
