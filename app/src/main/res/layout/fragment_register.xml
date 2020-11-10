@@ -38,6 +38,7 @@
             android:layout_marginTop="30dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -52,9 +53,7 @@
                 app:boxStrokeWidthFocused="2dp"
                 app:boxStrokeColor="@color/grey"
                 >
-
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textEmailAddress"
@@ -62,6 +61,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -77,13 +77,13 @@
                 app:boxStrokeColor="@color/grey">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -100,7 +100,6 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPassword"
