@@ -1,30 +1,46 @@
 package com.example.fitnesshub.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RoutineOverviewInfo {
+public class RoutineData {
 
+    @Expose
+    @SerializedName("id")
+    private Integer id;
+
+    @Expose
     @SerializedName("name")
     private String title;
 
+    @Expose
+    @SerializedName("detail")
     private String detail;
 
+    @Expose
     @SerializedName("dateCreated")
     private String creationDate;
 
+    @Expose
     @SerializedName("averageRating")
     private Integer rating;
 
+    @Expose
+    @SerializedName("diffilcuty")
     private String diffilcuty;
 
+    @Expose
     @SerializedName("creator")
     private RoutineCreator author;
 
+    @Expose
+    @SerializedName("category")
     private RoutineCategory category;
 
     private String image;
 
-    public RoutineOverviewInfo(String title, String detail, String creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category) {
+    public RoutineData(Integer id, String title, String detail, String creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category, String image) {
+        this.id = id;
         this.title = title;
         this.detail = detail;
         this.creationDate = creationDate;
@@ -32,7 +48,11 @@ public class RoutineOverviewInfo {
         this.diffilcuty = diffilcuty;
         this.author = author;
         this.category = category;
-        this.image = null;
+        this.image = image;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getTitle() {

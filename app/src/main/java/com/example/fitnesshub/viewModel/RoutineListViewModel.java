@@ -6,11 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.fitnesshub.model.RoutineEntries;
-import com.example.fitnesshub.model.RoutineOverviewInfo;
+import com.example.fitnesshub.model.PagedList;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class RoutineListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<RoutineOverviewInfo>> routineCards = new MutableLiveData<>();
+    private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
     private MutableLiveData<Boolean> routineCardLoadError = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
@@ -34,18 +33,6 @@ public class RoutineListViewModel extends AndroidViewModel {
     }
 
     public void refresh() {
-//        RoutineOverviewInfo rci1 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
-//        RoutineOverviewInfo rci2 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
-//        RoutineOverviewInfo rci3 = new RoutineOverviewInfo("Ejer 1", "John", null, null, "rookie", new RoutineOverviewInfo.RoutineCreator("male",null,null,null,null,null),new RoutineOverviewInfo.RoutineCategory(null,null,null));
-//
-//        ArrayList<RoutineOverviewInfo> routines = new ArrayList<>();
-//        routines.add(rci1);
-//        routines.add(rci2);
-//        routines.add(rci3);
-//
-//        routineCards.setValue(routines);
-//        routineCardLoadError.setValue(false);
-//        loading.setValue(false);
         fetchFromRemote();
     }
 
@@ -58,13 +45,13 @@ public class RoutineListViewModel extends AndroidViewModel {
 
         loading.setValue(true);
         disposable.add(
-                routinesService.getRoutinesEntries(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
+                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<RoutineEntries<RoutineOverviewInfo>>() {
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
                             @Override
-                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineEntries<RoutineOverviewInfo> routineEntries) {
-                                routineCards.setValue(routineEntries.getEntries());
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
+                                routineCards.setValue(routinesEntries.getEntries());
                                 routineCardLoadError.setValue(false);
                                 loading.setValue(false);
                             }
@@ -74,7 +61,6 @@ public class RoutineListViewModel extends AndroidViewModel {
                                 routineCardLoadError.setValue(true);
                                 loading.setValue(false);
                                 e.printStackTrace();
-                                System.out.println("error");
                             }
                         })
         );
@@ -86,7 +72,7 @@ public class RoutineListViewModel extends AndroidViewModel {
         disposable.clear();
     }
 
-    public MutableLiveData<List<RoutineOverviewInfo>> getRoutineCards() {
+    public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
     }
 

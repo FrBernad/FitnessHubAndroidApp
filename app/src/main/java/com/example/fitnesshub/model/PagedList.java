@@ -6,30 +6,36 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutineEntries<T> {
+public class PagedList<T> {
+    @Expose
+    @SerializedName("totalCount")
+    private Integer totalCount;
 
     @Expose
-    private Integer totalCount;
     @SerializedName("orderBy")
-    @Expose
     private String orderBy;
+
+    @Expose
     @SerializedName("direction")
-    @Expose
     private String direction;
+
+    @Expose
     @SerializedName("results")
-    @Expose
     private List<T> entries;
+
+    @Expose
     @SerializedName("size")
-    @Expose
     private Integer size;
+
+    @Expose
     @SerializedName("page")
-    @Expose
     private Integer page;
-    @SerializedName("isLastPage")
+
     @Expose
+    @SerializedName("isLastPage")
     private Boolean isLastPage;
 
-    public RoutineEntries(Integer totalCount, String orderBy, String direction, ArrayList<T> entries, Integer size, Integer page, Boolean isLastPage) {
+    public PagedList(Integer totalCount, String orderBy, String direction, ArrayList<T> entries, Integer size, Integer page, Boolean isLastPage) {
         this.totalCount = totalCount;
         this.orderBy = orderBy;
         this.direction = direction;

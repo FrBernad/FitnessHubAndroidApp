@@ -36,6 +36,8 @@
             android:layout_below="@id/profile_image"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
+            style="@style/Titles"
+
             android:includeFontPadding="false"
             android:text="@string/Roman"
             android:textColor="@color/darkGrey"
@@ -67,6 +69,7 @@
                 android:background="@android:color/transparent"
                 android:drawablePadding="10dp"
                 android:text="@string/Roman"
+                style="@style/TextBody"
                 android:textColor="@color/darkGrey" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,6 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autofillHints="@string/phoneField"
+                style="@style/TextBody"
                 android:background="@android:color/transparent"
                 android:ems="10"
                 android:inputType="phone"
@@ -116,22 +120,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:hint="@string/BirthdateField"
+                style="@style/TextBody"
                 android:padding="10dp"
                 app:drawableLeftCompat="@drawable/ic_birthday_24"
                 android:drawablePadding="10dp"
                 />
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/FavoriteRoutines"
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#212529"
-            android:padding="10dp"
-            android:text="@string/FavoriteRoutines"
-            android:textColor="#F8F9FA"
-            android:textSize="20sp" />
+            android:layout_marginTop="0dp"
+            android:background="@color/darkGrey"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/FavoriteRoutines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                style="@style/Titles"
+                android:text="@string/FavoriteRoutines"
+                android:textColor="@color/whiteBright"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+
         
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favoriteCardsList"

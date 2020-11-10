@@ -87,7 +87,7 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
 
         binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
 
-        favoriteCardsList = binding.favoriteCardsList;
+//        favoriteCardsList = binding.favoriteCardsList;
         routineListError = binding.routineListError;
         routineListLoadingView = binding.routineListLoadingView;
         routinesRefreshLayout = binding.routinesRefreshLayout;
@@ -123,7 +123,7 @@ public class MeFragment extends Fragment implements AdapterView.OnItemSelectedLi
         viewModel.getRoutineCards().observe(getViewLifecycleOwner(), routineCards -> {
             if (routineCards != null) {
                 favoriteCardsList.setVisibility(View.VISIBLE);
-                favoriteAdapter.updateRoutinesList(routineCards);
+//                favoriteAdapter.updateRoutinesList(routineCards);
             }
         });
 

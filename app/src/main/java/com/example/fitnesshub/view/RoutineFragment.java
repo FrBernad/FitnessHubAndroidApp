@@ -2,15 +2,42 @@ package com.example.fitnesshub.view;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.FragmentRoutineBinding;
+import com.example.fitnesshub.viewModel.ExercisesViewModel;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 public class RoutineFragment extends Fragment {
+
+    private ExercisesViewModel viewModel;
+
+    private ExercisesAdapter warmUpAdapter = new ExercisesAdapter(new ArrayList<>());
+    private ExercisesAdapter mainAdapter = new ExercisesAdapter(new ArrayList<>());
+    private ExercisesAdapter cooldownAdapter = new ExercisesAdapter(new ArrayList<>());
+
+    private RecyclerView recyclerViewWarmUp;
+    private RecyclerView recyclerViewMain;
+    private RecyclerView recyclerViewCooldown;
+
+    private FragmentRoutineBinding binding;
+
+    private int routineId;
+
+    public RoutineFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,9 +45,57 @@ public class RoutineFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_routine, container, false);
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentRoutineBinding.inflate(getLayoutInflater());
+
+        recyclerViewWarmUp = binding.warmUpExercises;
+        recyclerViewMain = binding.mainExercises;
+        recyclerViewCooldown = binding.cooldownExercises;
+
+        View view = binding.getRoot();
+
+        return view;
     }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (getArguments() != null) {
+            routineId = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineId();
+        }
+
+        viewModel = new ViewModelProvider(this).get(ExercisesViewModel.class);
+        viewModel.refresh(routineId);
+
+        recyclerViewWarmUp.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewWarmUp.setAdapter(warmUpAdapter);
+
+        recyclerViewMain.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewMain.setAdapter(mainAdapter);
+
+        recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewCooldown.setAdapter(cooldownAdapter);
+
+        observeExerciseViewModel();
+    }
+
+    private void observeExerciseViewModel() {
+        viewModel.getWarmupExercises().observe(getViewLifecycleOwner(), warmupExercises -> {
+            if (warmupExercises != null) {
+                warmUpAdapter.updateExercises(warmupExercises);
+            }
+        });
+
+        viewModel.getMainExercises().observe(getViewLifecycleOwner(), mainExercises -> {
+            if (mainExercises != null) {
+                mainAdapter.updateExercises(mainExercises);
+            }
+        });
+
+        viewModel.getCooldownExercises().observe(getViewLifecycleOwner(), cooldownExercises -> {
+            if (cooldownExercises != null) {
+                cooldownAdapter.updateExercises(cooldownExercises);
+            }
+        });
+    }
+
 }

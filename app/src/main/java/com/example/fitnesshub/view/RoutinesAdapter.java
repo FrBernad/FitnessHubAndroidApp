@@ -3,32 +3,29 @@ package com.example.fitnesshub.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
-import com.example.fitnesshub.model.RoutineOverviewInfo;
+import com.example.fitnesshub.model.RoutineData;
 
 
 import java.util.List;
 
-public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener{
+public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener {
 
-    private List<RoutineOverviewInfo> routinesList;
+    private List<RoutineData> routinesList;
 
-    public RoutinesAdapter(List<RoutineOverviewInfo> routinesList) {
+    public RoutinesAdapter(List<RoutineData> routinesList) {
         this.routinesList = routinesList;
     }
 
-    public void updateRoutinesList(List<RoutineOverviewInfo> newRoutinesList) {
+    public void updateRoutinesList(List<RoutineData> newRoutinesList) {
         routinesList.clear();
         routinesList.addAll(newRoutinesList);
         notifyDataSetChanged();
@@ -44,7 +41,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
 
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
-        holder.itemView.setRoutineEntry(routinesList.get(position));
+        holder.itemView.setRoutineData(routinesList.get(position));
         holder.itemView.setClickListener(this);
     }
 
@@ -55,7 +52,9 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
 
     @Override
     public void onRoutineClick(View view) {
-        NavDirections action = RoutinesFragmentDirections.actionRoutinesFragmentToMeFragment();
+        int routineId = Integer.parseInt(((TextView) view.findViewById(R.id.routineId)).getText().toString());
+        RoutinesFragmentDirections.ActionRoutinesFragmentToRoutineFragment action = RoutinesFragmentDirections.actionRoutinesFragmentToRoutineFragment();
+        action.setRoutineId(routineId);
         Navigation.findNavController(view).navigate(action);
     }
 

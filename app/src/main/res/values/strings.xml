@@ -21,6 +21,11 @@
     <string name="MainExercisesTitle">MAIN EXERCISES</string>
     <string name="CooldownTitle">COOLDOWN</string>
     <string name="EditButton">EditButton</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">register</string>
+    <string name="conditions">By clicking “Register”, you agree to our Terms of Service and Privacy Statement.</string>
 
 
     <!--EXAMPLES -->.
