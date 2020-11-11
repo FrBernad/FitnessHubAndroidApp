@@ -85,6 +85,8 @@
     <string name="sign_in">Sign in</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="About_us">About us</string>
+    <string name="my_routines">MY ROUTINES</string>
+    <string name="history">HISTORY</string>
 
 
 </resources>

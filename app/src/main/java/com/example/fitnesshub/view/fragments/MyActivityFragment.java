@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentMyActivityBinding;
+import com.google.android.material.tabs.TabLayout;
 
 public class MyActivityFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
@@ -21,38 +22,70 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
     private Spinner sortSpinner;
     private Spinner orderSpinner;
 
-    public MyActivityFragment() {
-    }
-
+    private TabLayout tabs;
+    private TabLayout.OnTabSelectedListener listener;
+    private View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = FragmentMyActivityBinding.inflate(getLayoutInflater());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_my_activity, container, false);
+        tabs = view.findViewById(R.id.myActivityTabs);
 
-        View view = binding.getRoot();
-
-
+        createListener();
+        tabs.addOnTabSelectedListener(listener);
         sortSpinner = view.findViewById(R.id.sortActivitySpinner);
         ArrayAdapter<CharSequence> sortActivityAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.sort,android.R.layout.simple_spinner_item);
         sortActivityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortActivityAdapter);
         sortSpinner.setOnItemSelectedListener(this);
-
-
         orderSpinner = view.findViewById(R.id.orderActivitySpinner);
         ArrayAdapter<CharSequence> orderActivityAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.order,android.R.layout.simple_spinner_item);
         orderActivityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         orderSpinner.setAdapter(orderActivityAdapter);
         orderSpinner.setOnItemSelectedListener(this);
 
+
         return view;
+    }
+
+    private void createListener() {
+        listener = new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        //Navigation.findNavController(view).navigate(R.id.action_historyFragment_to_myRoutinesFragment);
+                        break;
+
+                    case 1:
+                        //Navigation.findNavController(view).navigate(R.id.action_myRoutinesFragment_to_historyFragment);
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        };
+    }
+
+    // perform setOnTabSelectedListener event on TabLayout
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        tabs.removeOnTabSelectedListener(listener);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-
     }
 
     @Override

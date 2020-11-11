@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_activity_navigation"
+    app:startDestination="@id/myRoutinesFragment">
+
+    <fragment
+        android:id="@+id/myRoutinesFragment"
+        android:name="com.example.fitnesshub.view.fragments.MyRoutinesFragment"
+        android:label="fragment_my_routines"
+        tools:layout="@layout/fragment_my_routines" >
+        <action
+            android:id="@+id/action_myRoutinesFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.fitnesshub.view.fragments.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_myRoutinesFragment"
+            app:destination="@id/myRoutinesFragment" />
+    </fragment>
+</navigation>
