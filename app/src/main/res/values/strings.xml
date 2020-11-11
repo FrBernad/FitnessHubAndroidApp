@@ -28,6 +28,7 @@
     <string name="welcome_first_heading">Train yourself and others</string>
     <string name="welcome_second_heading">High-quality workout routines anywhere, anytime</string>
 
+    <string name="rookie">Rookie</string>
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediate</string>
     <string name="advanced">Advanced</string>
@@ -43,7 +44,16 @@
         <item>Creation date</item>
         <item>Rating</item>
         <item>Category</item>
+        <item>Difficulty</item>
     </string-array>
+
+    <string-array name="order">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
+
+    <string name="sort_title">SORT BY</string>
+    <string name="order_title">ORDER BY</string>
 
 
     <!--EXAMPLES -->.

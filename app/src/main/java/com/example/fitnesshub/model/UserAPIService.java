@@ -22,7 +22,7 @@ public class UserAPIService extends APIService implements UserAPI {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-//                .client(httpClient)
+                .client(httpClient)
                 .build()
                 .create(UserAPI.class);
     }
@@ -30,5 +30,25 @@ public class UserAPIService extends APIService implements UserAPI {
     @Override
     public Single<AuthToken> login(UserCredentials credentials) {
         return api.login(credentials);
+    }
+
+    @Override
+    public Single<UserInfo> getCurrentUser(UserCredentials credentials) {
+        return api.getCurrentUser(credentials);
+    }
+
+    @Override
+    public Single<UserInfo> register(UserInfo userInfo) {
+        return api.register(userInfo);
+    }
+
+    @Override
+    public void verifyEmail(EmailVerification credentials) {
+        api.verifyEmail(credentials);
+    }
+
+    @Override
+    public void resendVerification(String email) {
+        api.resendVerification(email);
     }
 }

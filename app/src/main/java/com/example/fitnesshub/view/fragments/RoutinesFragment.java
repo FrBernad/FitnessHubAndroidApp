@@ -44,7 +44,8 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
     private RecyclerView recylcerView;
     private ProgressBar progressBar;
 
-    private Spinner spinner;
+    private Spinner sortSpinner;
+    private Spinner orderSpinner;
 
     boolean noMoreEntries = false;
 
@@ -56,19 +57,20 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         binding = FragmentRoutinesBinding.inflate(getLayoutInflater());
 
         View view = binding.getRoot();
-        textViewFilter = (TextView) view.findViewById(R.id.filter_textview);
 
-        textViewFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFilterDialog();
-            }
-        });
-        spinner = view.findViewById(R.id.sortSpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),R.array.sort,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+
+        sortSpinner = view.findViewById(R.id.sortDiscoverSpinner);
+        ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.sort,android.R.layout.simple_spinner_item);
+        sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(sortDiscoverAdapter);
+        sortSpinner.setOnItemSelectedListener(this);
+
+
+        orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
+        ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.order,android.R.layout.simple_spinner_item);
+        orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        orderSpinner.setAdapter(orderDiscoverAdapter);
+        orderSpinner.setOnItemSelectedListener(this);
 
         nestedScrollView = binding.scrollView;
         recylcerView = binding.recyclerView;
@@ -108,10 +110,6 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 
     }
 
-    public void openFilterDialog() {
-        FilterDialog filterDialog = new FilterDialog();
-        filterDialog.show(getParentFragmentManager(), "example dialog");
-    }
 
 
 }
