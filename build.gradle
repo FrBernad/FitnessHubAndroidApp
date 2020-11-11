@@ -18,6 +18,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        //Image slide show
+        maven { url 'https://jitpack.io' }
     }
 }
 
