@@ -3,11 +3,15 @@ package com.example.fitnesshub.viewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.fitnesshub.model.APIService;
 import com.example.fitnesshub.model.AuthToken;
 import com.example.fitnesshub.model.VerificationData;
 import com.example.fitnesshub.model.UserAPIService;
 import com.example.fitnesshub.model.UserCredentials;
 import com.example.fitnesshub.model.UserInfo;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
@@ -24,6 +28,14 @@ public class UserViewModel extends ViewModel {
     private UserAPIService userService = new UserAPIService();
     private CompositeDisposable disposable = new CompositeDisposable();
 
+    public MutableLiveData<UserInfo> getUserInfo() {
+        return userInfo;
+    }
+
+    public MutableLiveData<Boolean> getVerified() {
+        return verified;
+    }
+
     public MutableLiveData<UserInfo> getUserData() {
         return userInfo;
     }
@@ -32,8 +44,8 @@ public class UserViewModel extends ViewModel {
         return token;
     }
 
-    public void verifyUser(VerificationData data) {
-        disposable.add(userService.verifyEmail(data)
+    public void verifyUser(String code) {
+        disposable.add(userService.verifyEmail(new VerificationData(userInfo.getValue().getEmail(),code))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
@@ -52,7 +64,9 @@ public class UserViewModel extends ViewModel {
     }
 
     public void resendVerification(String email) {
-        disposable.add(userService.resendVerification(email)
+        Map<String, String> data = new HashMap<>();
+        data.put("email", email);
+        disposable.add(userService.resendVerification(data)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
@@ -69,7 +83,6 @@ public class UserViewModel extends ViewModel {
     }
 
     public void tryLogin(String username, String password) {
-
         UserCredentials credentials = new UserCredentials(username, password);
 
         disposable.add(userService.login(credentials)
@@ -79,7 +92,8 @@ public class UserViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull AuthToken authToken) {
                         token.setValue(authToken);
-                        disposable.add(userService.getCurrentUser(credentials)
+                        APIService.setAuthToken(authToken.getToken());
+                        disposable.add(userService.getCurrentUser()
                                 .subscribeOn(Schedulers.newThread())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribeWith(new DisposableSingleObserver<UserInfo>() {
@@ -90,6 +104,7 @@ public class UserViewModel extends ViewModel {
 
                                     @Override
                                     public void onError(@NonNull Throwable e) {
+                                        System.out.println("error!!!!!\n\n\n\n");
                                         e.printStackTrace();
                                     }
                                 })
@@ -105,7 +120,6 @@ public class UserViewModel extends ViewModel {
     }
 
     public void tryRegister(UserInfo data) {
-
         disposable.add((userService.register(data))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

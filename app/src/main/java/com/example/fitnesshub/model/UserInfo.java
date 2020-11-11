@@ -48,6 +48,11 @@ public class UserInfo {
         this.avatarUrl = avatarUrl;
     }
 
+    @Override
+    public String toString() {
+        return "userame: "+username;
+    }
+
     public String getUsername() {
         return username;
     }

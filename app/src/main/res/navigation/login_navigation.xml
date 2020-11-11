@@ -43,5 +43,9 @@
             android:id="@+id/verifyUserFragment"
             android:name="com.example.fitnesshub.view.fragments.VerifyUserFragment"
             android:label="fragment_verify_user"
-            tools:layout="@layout/fragment_verify_user" />
+            tools:layout="@layout/fragment_verify_user" >
+        <action
+                android:id="@+id/action_verifyUserFragment_to_welcome"
+                app:destination="@id/welcome" />
+    </fragment>
 </navigation>

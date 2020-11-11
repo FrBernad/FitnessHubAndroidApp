@@ -5,6 +5,10 @@ public abstract class APIService {
     private static String authToken = null;
 
     public static String getAuthToken() {
-        return "bearer "+authToken;
+        return authToken;
+    }
+
+    public static void setAuthToken(String authToken) {
+        APIService.authToken = authToken;
     }
 }
