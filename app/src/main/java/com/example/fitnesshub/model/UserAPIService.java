@@ -1,5 +1,8 @@
 package com.example.fitnesshub.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -17,6 +20,7 @@ public class UserAPIService extends APIService implements UserAPI {
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(new AuthInterceptor())
                 .build();
 
         api = new Retrofit.Builder()
@@ -34,8 +38,8 @@ public class UserAPIService extends APIService implements UserAPI {
     }
 
     @Override
-    public Single<UserInfo> getCurrentUser(UserCredentials credentials) {
-        return api.getCurrentUser(credentials);
+    public Single<UserInfo> getCurrentUser() {
+        return api.getCurrentUser();
     }
 
     @Override
@@ -49,7 +53,7 @@ public class UserAPIService extends APIService implements UserAPI {
     }
 
     @Override
-    public Single<Response<Void>> resendVerification(String email) {
-        return api.resendVerification(email);
+    public Single<Response<Void>> resendVerification(Map<String,String> data) {
+        return api.resendVerification(data);
     }
 }
