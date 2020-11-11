@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FitnessHub</string>
+    <string name="navHome">Inicio</string>
+    <string name="navDiscover">Descubre</string>
+    <string name="navMyActivity">Mi actividad</string>
+    <string name="navMe">Mi perfil</string>
+    <string name="phoneField">Celular</string>
+    <string name="nameField">Nombre completo</string>
+    <string name="genderField">Genero</string>
+    <string name="BirthdateField">Fecha de nacimiento</string>
+    <string name="Field">Celular</string>
+    <string name="ProfileImage">Imagen de perfil</string>
+    <string name="FavoriteRoutines">RUTINAS FAVORITAS</string>
+    <string-array name="genders">
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+    <string name="DescriptionTitle">DESCRIPCION</string>
+    <string name="ExercisesTitle">EJERCICIOS</string>
+    <string name="WarmupTitle">CALENTAMIENTO</string>
+    <string name="MainExercisesTitle">PRINCIPALES</string>
+    <string name="CooldownTitle">ENFRIAMIENTO</string>
+    <string name="EditButton">Boton de editar</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="register">Registrar</string>
+    <string name="conditions">Presionando "Registar", acepta los terminos y condiciones de uso.</string>
+    <string name="welcome_first_heading">Da lo mejor en tu entrenamiento</string>
+    <string name="welcome_second_heading">Rutinas de alta calidad donde quieras y cuando quieras</string>
+
+    <string name="rookie">Novato</string>
+    <string name="beginner">Principiante</string>
+    <string name="intermediate">Intermedio</string>
+    <string name="advanced">Avanzado</string>
+    <string name="action_favorite_outlined">Favorite vacio</string>
+    <string name="action_favorite_filled">Favorite relleno</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_overflow">Overflow</string>
+    <string name="action_rate">Puntuar</string>
+    <string name="text_verification_email">Direccion de correo electronico</string>
+
+    <string name="filter">Filtrar</string>
+    <string name="text_verification_code">Código de verificación</string>
+    <string name="verify_first">Chequea tu email e ingresa el codigo de verificación</string>
+    <string name="verify_second">¿No has recibido el codigo de verificacion? Deja tu email aquí debajo </string>
+    <string name="verify_button">Verificar</string>
+    <string name="resend_button">Reenviar</string>
+
+
+    <string-array name="sort">
+        <item>Fecha de creación</item>
+        <item>Popularidad</item>
+        <item>Categoría</item>
+        <item>Difficultad</item>
+    </string-array>
+
+    <string-array name="order">
+        <item>Ascendente</item>
+        <item>Descendiente</item>
+    </string-array>
+
+    <string name="sort_title">ORDENAR POR</string>
+    <string name="order_title">ORDERNAR POR</string>
+
+
+    <!--EXAMPLES -->.
+
+    <string name="DescriptionExample">DESCRIPCION DE RUTINA</string>
+    <string name="Roman">Juan Roman Riquelme</string>
+    <string name="RoutineName">MUSCLE AND STRENGHT</string>
+    <string name="AuthorRoutineName">By John</string>
+    <string name="DurationRoutine">15 min</string>
+    <string name="playButton">Play button</string>
+    <string name="exerciseName">Abs</string>
+    <string name="exerciseReps">20</string>
+    <string name="reorderbutton">Reorder button</string>
+    <string name="RoutineImage">Routine Image</string>
+    <string name="loadingLogo">Loading Logo</string>
+
+
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="userame">Nombre de usuario</string>
+    <string name="sign_in">Ingresar</string>
+    <string name="forgot_password">¿Olvidaste la contraseña?</string>
+    <string name="About_us">Sobre nosotros</string>
+    <string name="my_routines">MIS RUTINAS</string>
+    <string name="history">HISTORIAL</string>
+</resources>
