@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.FragmentMyActivityBinding;
 
 public class MyActivityFragment extends Fragment {
 
