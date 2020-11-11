@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 

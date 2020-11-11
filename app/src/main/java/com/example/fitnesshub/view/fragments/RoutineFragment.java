@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
+import com.example.fitnesshub.view.adapters.ExercisesAdapter;
+import com.example.fitnesshub.view.fragments.RoutineFragmentArgs;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import org.jetbrains.annotations.NotNull;

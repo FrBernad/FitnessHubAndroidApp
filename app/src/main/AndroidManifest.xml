@@ -12,14 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FitnessHub"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.fitnesshub.view.InitialActivity">
+        <activity android:name="com.example.fitnesshub.view.activities.InitialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LoginFragment$LoginActivity" />
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.fragments.LoginFragment$LoginActivity" />
+        <activity android:name=".view.activities.MainActivity" />
 
 
     </application>

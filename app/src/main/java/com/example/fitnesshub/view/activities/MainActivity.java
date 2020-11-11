@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.fragment.NavHostFragment;

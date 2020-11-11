@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.view.fragments.RoutineEntryClickListener;
+import com.example.fitnesshub.view.fragments.RoutinesFragmentDirections;
 
 
 import java.util.List;

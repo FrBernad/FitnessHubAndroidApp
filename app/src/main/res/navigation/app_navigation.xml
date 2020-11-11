@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/homeFragment"
-            android:name="com.example.fitnesshub.view.HomeFragment"
+            android:name="com.example.fitnesshub.view.fragments.HomeFragment"
             android:label="fragment_home"
             tools:layout="@layout/fragment_home">
         <action
@@ -23,7 +23,7 @@
 
     <fragment
             android:id="@+id/routinesFragment"
-            android:name="com.example.fitnesshub.view.RoutinesFragment"
+            android:name="com.example.fitnesshub.view.fragments.RoutinesFragment"
             android:label="fragment_routines"
             tools:layout="@layout/fragment_routines">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
             android:id="@+id/routineFragment"
-            android:name="com.example.fitnesshub.view.RoutineFragment"
+            android:name="com.example.fitnesshub.view.fragments.RoutineFragment"
             android:label="fragment_routine"
             tools:layout="@layout/fragment_routine">
         <action
@@ -56,7 +56,7 @@
 
     <fragment
             android:id="@+id/meFragment"
-            android:name="com.example.fitnesshub.view.MeFragment"
+            android:name="com.example.fitnesshub.view.fragments.MeFragment"
             android:label="fragment_me"
             tools:layout="@layout/fragment_me">
         <action
@@ -66,7 +66,7 @@
 
     <fragment
             android:id="@+id/myActivityFragment"
-            android:name="com.example.fitnesshub.view.MyActivityFragment"
+            android:name="com.example.fitnesshub.view.fragments.MyActivityFragment"
             android:label="fragment_my_activity"
             tools:layout="@layout/fragment_my_activity">
         <action

@@ -1,7 +1,6 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,29 +11,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentMeBinding;
-import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
+import com.example.fitnesshub.view.adapters.FavoriteAdapter;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
-import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 

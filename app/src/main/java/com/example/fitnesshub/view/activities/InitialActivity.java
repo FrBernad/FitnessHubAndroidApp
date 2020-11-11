@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.view.fragments.LoginFragment;
 
 public class InitialActivity extends AppCompatActivity {
 

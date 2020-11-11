@@ -1,35 +1,27 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
-import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.view.adapters.RoutinesAdapter;
 import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class RoutinesFragment extends Fragment {
 

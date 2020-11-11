@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     android:background="@color/whiteBackground"
     android:orientation="vertical"
-    tools:context=".view.MeFragment">
+    tools:context=".view.fragments.MeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".view.MeFragment">
+        tools:context=".view.fragments.MeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

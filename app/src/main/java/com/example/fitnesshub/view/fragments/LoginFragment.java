@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentLoginBinding;
-import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginFragment extends Fragment {

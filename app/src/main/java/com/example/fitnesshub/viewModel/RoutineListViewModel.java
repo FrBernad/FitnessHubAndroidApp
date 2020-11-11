@@ -11,9 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
-import com.example.fitnesshub.view.RoutinesAdapter;
+import com.example.fitnesshub.view.adapters.RoutinesAdapter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
