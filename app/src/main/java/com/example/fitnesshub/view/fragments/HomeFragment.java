@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
-
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class HomeFragment extends Fragment {
 
@@ -29,9 +29,9 @@ public class HomeFragment extends Fragment {
         FragmentHomeBinding binding = FragmentHomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        ImageSlider imageSlider = (ImageSlider) view.findViewById(R.id.home_slider);
+        ImageSlider imageSlider = view.findViewById(R.id.home_slider);
 
-        List<SlideModel> slideModels = new ArrayList<SlideModel>();
+        List<SlideModel> slideModels = new ArrayList<>();
 
         slideModels.add(new SlideModel("https://images.unsplash.com/photo-1594381898411-846e7d193883?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1234&q=80", "Best routines of the week!"));
         slideModels.add(new SlideModel("https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80", "Check your favorites"));

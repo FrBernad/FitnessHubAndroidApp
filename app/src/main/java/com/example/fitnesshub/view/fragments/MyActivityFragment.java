@@ -9,7 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentMyActivityBinding;
@@ -20,10 +23,10 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
 
     private TabLayout tabs;
     private TabLayout.OnTabSelectedListener listener;
-
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_activity, container, false);
+        view = inflater.inflate(R.layout.fragment_my_activity, container, false);
         tabs = view.findViewById(R.id.myActivityTabs);
 
         createListener();
@@ -49,11 +52,13 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-
+                        System.out.println(Navigation.findNavController(view));
+//                        Navigation.findNavController(view).navigate(R.id.action_historyFragment_to_myRoutinesFragment);
                         break;
-
                     case 1:
+                        System.out.println(Navigation.findNavController(view));
 
+                        //                        Navigation.findNavController(view).navigate(R.id.action_myRoutinesFragment_to_historyFragment);
                         break;
                 }
             }
