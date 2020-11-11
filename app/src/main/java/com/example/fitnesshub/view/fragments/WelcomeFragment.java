@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.example.fitnesshub.R;
 
-public class WelcomeFragment extends Fragment{
+public class WelcomeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

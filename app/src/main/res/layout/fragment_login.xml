@@ -13,18 +13,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/RegisterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/login"
-            android:textColor="#212529"
-            android:textSize="40sp"
             android:textAllCaps="true"
-            android:layout_marginTop="20dp"/>
+            android:textColor="@color/darkGrey"
+            android:textSize="40sp" />
 
         <View
             android:layout_width="match_parent"
@@ -34,54 +33,51 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/login_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:hint="@string/username"
-                app:startIconDrawable="@drawable/ic_me_24"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
                 android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="@color/grey"
-                app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="@color/grey">
+                app:hintTextColor="@color/grey"
+                app:startIconDrawable="@drawable/ic_me_24"
+                app:startIconTint="@color/grey">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="match_parent" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/login_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:hint="@string/password"
-                app:startIconDrawable="@drawable/ic_password_24"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:startIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
                 android:textColorHint="@color/grey"
-                app:boxStrokeWidthFocused="2dp"
                 app:boxStrokeColor="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
+                app:hintTextColor="@color/grey"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/grey"
-                >
+                app:startIconDrawable="@drawable/ic_password_24"
+                app:startIconTint="@color/grey">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -90,22 +86,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
+                android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="15dp"
-                android:id="@+id/loginBtn"
-                android:text="@string/login"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/grey"
                 android:elevation="5dp"
-                android:layout_centerHorizontal="true"
-                />
+                android:paddingVertical="15dp"
+                android:text="@string/login"
+                android:textAllCaps="true"
+                android:textColor="@color/white" />
 
         </RelativeLayout>
     </LinearLayout>
-
 
 
 </ScrollView>

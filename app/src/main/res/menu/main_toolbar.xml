@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/app_bar_favorite_outlined"
+        android:icon="@drawable/ic_favorite_outlined_24"
+        android:title="@string/action_favorite_outlined" />
+
+
+    <item
+        android:id="@+id/app_bar_favorite_filled"
+        android:icon="@drawable/ic_favorite_filled_24"
+        android:title="@string/action_favorite_filled" />
+
+
+    <item
+        android:id="@+id/app_bar_share"
+        android:icon="@drawable/ic_share_24"
+        android:title="@string/action_share" />
+
+
+    <item
+        android:id="@+id/app_bar_rate"
+        android:icon="@drawable/ic_star_24"
+        android:title="@string/action_rate" />
+
+
+</menu>

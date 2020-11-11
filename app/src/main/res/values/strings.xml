@@ -31,6 +31,11 @@
     <string name="beginner">Beginner</string>
     <string name="intermediate">Intermediate</string>
     <string name="advanced">Advanced</string>
+    <string name="action_favorite_outlined">Favorite Outlined</string>
+    <string name="action_favorite_filled">Favorite Filled</string>
+    <string name="action_share">Share</string>
+    <string name="action_overflow">Overflow</string>
+    <string name="action_rate">Rate</string>
 
     <string name="filter">Filter</string>
 
