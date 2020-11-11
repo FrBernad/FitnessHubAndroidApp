@@ -21,6 +21,6 @@ public class InitialActivity extends AppCompatActivity {
             Intent intent = new Intent(InitialActivity.this, LoginActivity.class);
             startActivity(intent);
             finish(); //elimino la actividad del stack
-        },5000);
+        },3000);
     }
 }

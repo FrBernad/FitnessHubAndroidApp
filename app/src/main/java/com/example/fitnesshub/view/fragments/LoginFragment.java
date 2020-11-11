@@ -1,33 +1,73 @@
 package com.example.fitnesshub.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentLoginBinding;
+import com.example.fitnesshub.view.activities.MainActivity;
+import com.example.fitnesshub.viewModel.RoutineListViewModel;
+import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.nio.file.Path;
 
 public class LoginFragment extends Fragment {
 
     //For validation
-    TextInputLayout username, password;
+    private TextInputLayout username, password;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FragmentLoginBinding binding = FragmentLoginBinding.inflate(getLayoutInflater());
-        username = binding.loginUsername;
-        password = binding.loginPassword;
-    }
+    private UserViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, container, false);
+
+        FragmentLoginBinding binding = FragmentLoginBinding.inflate(getLayoutInflater());
+        username = binding.loginUsername;
+        password = binding.loginPassword;
+
+        View view = binding.getRoot();
+        Button loginBtn = view.findViewById(R.id.loginBtn);
+        loginBtn.setOnClickListener(v -> tryLogin());
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+    }
+
+    private void tryLogin() {
+//        if (!validateUsername() | !validatePassword()) {
+//            return;
+//        }
+
+        viewModel.tryLogin(username.getEditText().getText().toString(), password.getEditText().getText().toString());
+
+        viewModel.getToken().observe(getViewLifecycleOwner(), authToken -> {
+            if (authToken != null) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
     }
 
     //Validation functions
@@ -57,7 +97,8 @@ public class LoginFragment extends Fragment {
                 "(?=.*[a-zA-Z])" +      //any letter
                 "(?=S+$)" +           //no white spaces
                 ".{4,}" +               //at least 4 characters
-                "$";;
+                "$";
+        ;
 
         if (val.isEmpty()) {
             password.setError("Field can not be empty");
@@ -71,11 +112,5 @@ public class LoginFragment extends Fragment {
             return true;
         }
     }
-
-    //Cuando se llame al metodo NEXT fragment hay que hacer esto
-//    if(!validateUsername() | !validatePassword()) {
-//        return;
-//    }
-
 
 }

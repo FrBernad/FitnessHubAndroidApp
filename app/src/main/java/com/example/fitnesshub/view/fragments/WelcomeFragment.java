@@ -27,8 +27,8 @@ public class WelcomeFragment extends Fragment{
 
         View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
 
-        Button loginBtn = (Button) rootView.findViewById(R.id.welcomeLoginButton);
-        Button registerBtn = (Button) rootView.findViewById(R.id.welcomeRegisterButton);
+        Button loginBtn = rootView.findViewById(R.id.welcomeLoginButton);
+        Button registerBtn = rootView.findViewById(R.id.welcomeRegisterButton);
 
         loginBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_welcome_to_loginFragment));
         registerBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_welcome_to_registerFragment));

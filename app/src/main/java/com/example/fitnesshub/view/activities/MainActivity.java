@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigation();
     }
 
+
     public void setUpBottomNavigation() {
         bottomNavigationView = findViewById(R.id.bottomNav);
 

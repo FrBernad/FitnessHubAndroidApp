@@ -1,33 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:context=".view.fragments.RoutinesFragment"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragments.RoutinesFragment">
 
-    <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/scroll_view">
+            android:layout_weight="1"
+            >
 
-        <LinearLayout
+            <Spinner
+                android:id="@+id/sortSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="4dp">
+                android:spinnerMode="dialog"
+                android:padding="20dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/filter_textview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:textAlignment="center"
+            android:padding="10dp"
+            android:text="@string/filter"
+            android:textSize="30sp">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="4dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:layout_width="match_parent"
-                    android:nestedScrollingEnabled="false"
-                    tools:listitem="@layout/routine_card" />
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/routine_card" />
 
             <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

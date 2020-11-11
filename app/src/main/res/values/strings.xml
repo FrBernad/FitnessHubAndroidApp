@@ -28,6 +28,18 @@
     <string name="welcome_first_heading">Train yourself and others</string>
     <string name="welcome_second_heading">High-quality workout routines anywhere, anytime</string>
 
+    <string name="beginner">Beginner</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="advanced">Advanced</string>
+
+    <string name="filter">Filter</string>
+
+    <string-array name="sort">
+        <item>Creation date</item>
+        <item>Rating</item>
+        <item>Category</item>
+    </string-array>
+
 
     <!--EXAMPLES -->.
 
