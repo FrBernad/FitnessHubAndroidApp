@@ -18,7 +18,7 @@ public class InitialActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_initial);
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(InitialActivity.this, LoginFragment.LoginActivity.class);
+            Intent intent = new Intent(InitialActivity.this, LoginActivity.class);
             startActivity(intent);
             finish(); //elimino la actividad del stack
         },5000);

@@ -16,7 +16,6 @@ public class RegisterFragment extends Fragment {
 
     TextInputLayout email, username, password;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +26,6 @@ public class RegisterFragment extends Fragment {
 //        email = getView().findViewById(R.id.register_email);
 //        username = getView().findViewById(R.id.register_username);
 //        password = getView().findViewById(R.id.register_password);
-
     }
 
     @Override
