@@ -37,8 +37,18 @@
     <string name="action_share">Share</string>
     <string name="action_overflow">Overflow</string>
     <string name="action_rate">Rate</string>
+    <string name="text_verification_email">Email address</string>
 
     <string name="filter">Filter</string>
+    <string name="text_verification_code">Verification code</string>
+    <string name="verify_first">Check your email and enter the verification code</string>
+    <string name="verify_second">Haven't received the verification code yet? Leave your email down below </string>
+    <string name="verify_button">Verify</string>
+    <string name="resend_button">Resend</string>
+
+
+
+
 
     <string-array name="sort">
         <item>Creation date</item>
