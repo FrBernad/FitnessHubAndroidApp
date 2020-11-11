@@ -73,8 +73,8 @@ public class RoutineListViewModel extends AndroidViewModel {
 
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                                e.printStackTrace();
                                 progressBar.setVisibility(View.GONE);
+                                e.printStackTrace();
                             }
                         })
         );

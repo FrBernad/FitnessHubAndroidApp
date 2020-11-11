@@ -10,7 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RoutinesAPIService extends ApiService implements RoutinesAPI {
+public class RoutinesAPIService extends APIService implements RoutinesAPI {
 
     private RoutinesAPI api;
 
