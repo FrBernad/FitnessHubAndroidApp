@@ -49,11 +49,11 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
                     case 0:
-                        Navigation.findNavController(getView()).navigate(R.id.action_historyFragment_to_myRoutinesFragment);
+
                         break;
 
                     case 1:
-                        Navigation.findNavController(getView()).navigate(R.id.action_myRoutinesFragment_to_historyFragment);
+
                         break;
                 }
             }
