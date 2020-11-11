@@ -1,6 +1,8 @@
 package com.example.fitnesshub.model;
 
 import io.reactivex.rxjava3.core.Single;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
@@ -16,10 +18,10 @@ public interface UserAPI {
     Single<UserInfo> register(@Body UserInfo userInfo);
 
     @POST("user/verify_email")
-    void verifyEmail(@Body EmailVerification credentials);
+    Single<Response<Void>> verifyEmail(@Body VerificationData credentials);
 
     @POST("user/resend_verification")
-    void resendVerification(@Body String email);
+    Single<Response<Void>> resendVerification(@Body String email);
 
 
 }

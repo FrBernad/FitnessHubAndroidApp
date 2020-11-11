@@ -3,7 +3,7 @@ package com.example.fitnesshub.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EmailVerification {
+public class VerificationData {
 
     @Expose
     @SerializedName("email")
@@ -13,7 +13,7 @@ public class EmailVerification {
     @SerializedName("code")
     private String code;
 
-    public EmailVerification(String email, String code) {
+    public VerificationData(String email, String code) {
         this.email = email;
         this.code = code;
     }

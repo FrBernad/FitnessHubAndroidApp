@@ -3,6 +3,7 @@ package com.example.fitnesshub.model;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -43,12 +44,12 @@ public class UserAPIService extends APIService implements UserAPI {
     }
 
     @Override
-    public void verifyEmail(EmailVerification credentials) {
-        api.verifyEmail(credentials);
+    public Single<Response<Void>> verifyEmail(VerificationData credentials) {
+        return api.verifyEmail(credentials);
     }
 
     @Override
-    public void resendVerification(String email) {
-        api.resendVerification(email);
+    public Single<Response<Void>> resendVerification(String email) {
+        return api.resendVerification(email);
     }
 }

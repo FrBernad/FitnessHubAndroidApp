@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +23,9 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class RegisterFragment extends Fragment {
 
-    TextInputLayout email, username, password;
+    private TextInputLayout email, username, password;
 
-    FragmentRegisterBinding binding;
+    private FragmentRegisterBinding binding;
 
     private UserViewModel viewModel;
 
@@ -54,9 +55,6 @@ public class RegisterFragment extends Fragment {
     }
 
     private void tryRegister() {
-
-        System.out.println("trying");
-
         UserInfo userInfo = new UserInfo(username.getEditText().getText().toString()
                 , password.getEditText().getText().toString()
                 , ""
@@ -71,14 +69,10 @@ public class RegisterFragment extends Fragment {
 
         viewModel.getUserData().observe(getViewLifecycleOwner(), userData -> {
             if (userData != null) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
+                Navigation.findNavController(getView()).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerifyUserFragment());
             }
         });
     }
-
-    //Validation functions
 
     private boolean validateEmail() {
         String val = email.getEditText().getText().toString().trim();
