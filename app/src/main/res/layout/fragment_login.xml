@@ -29,13 +29,15 @@
                 android:id="@+id/RegisterText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="88dp"
                 android:text="@string/login"
                 android:textAllCaps="true"
                 android:textColor="@color/darkGrey"
                 android:textSize="40sp"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/view2"
@@ -52,7 +54,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="50dp"
                 android:hint="@string/username"
                 android:textColorHint="@color/grey"
                 app:boxStrokeColor="@color/grey"
@@ -105,6 +107,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
                 android:backgroundTint="@color/grey"
                 android:elevation="5dp"
                 android:paddingVertical="15dp"
