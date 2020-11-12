@@ -1,109 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/frameLayout"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.fragments.MyActivityFragment">
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
-        tools:context=".view.fragments.MyActivityFragment">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
-    <com.google.android.material.tabs.TabLayout
-            android:id="@+id/myActivityTabs"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/darkGrey"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="4dp"
-            app:tabSelectedTextColor="@color/whiteBright"
-            app:tabTextColor="@color/whiteOpaque"/>
+            android:layout_height="match_parent">
 
-    <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/myActivityTabs"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/darkGrey"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorHeight="4dp"
+                app:tabSelectedTextColor="@color/whiteBright"
+                app:tabTextColor="@color/whiteOpaque"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/myActivityTabs">
 
-            <Spinner
-                    android:id="@+id/sortActivitySpinner"
-                    android:layout_width="match_parent"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:padding="20dp"
-                    android:prompt="@string/sort_title"
-                    android:spinnerMode="dialog" />
+                    android:layout_weight="1">
 
-        </androidx.cardview.widget.CardView>
+                    <Spinner
+                        android:id="@+id/sortActivitySpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="20dp"
+                        android:prompt="@string/sort_title"
+                        android:spinnerMode="dialog" />
 
-        <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
+                </androidx.cardview.widget.CardView>
 
-            <Spinner
-                    android:id="@+id/orderActivitySpinner"
-                    android:layout_width="match_parent"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:padding="20dp"
-                    android:prompt="@string/order_title"
-                    android:spinnerMode="dialog" />
+                    android:layout_weight="1">
 
-        </androidx.cardview.widget.CardView>
+                    <Spinner
+                        android:id="@+id/orderActivitySpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="20dp"
+                        android:prompt="@string/order_title"
+                        android:spinnerMode="dialog" />
+
+                </androidx.cardview.widget.CardView>
 
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        <com.google.android.material.chip.Chip
-                android:id="@+id/activity_rookie_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/rookie"
-                app:checkedIconVisible="false" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-        <com.google.android.material.chip.Chip
-                android:id="@+id/activity_beginner_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/beginner"
-                app:checkedIconVisible="false" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/activity_rookie_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rookie"
+                    app:checkedIconVisible="false" />
 
-        <com.google.android.material.chip.Chip
-                android:id="@+id/activity_intermediate_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/intermediate"
-                app:checkedIconVisible="false" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/activity_beginner_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/beginner"
+                    app:checkedIconVisible="false" />
 
-        <com.google.android.material.chip.Chip
-                android:id="@+id/activity_advanced_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/advanced"
-                app:checkedIconVisible="false" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/activity_intermediate_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/intermediate"
+                    app:checkedIconVisible="false" />
 
-    </com.google.android.material.chip.ChipGroup>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/activity_advanced_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/advanced"
+                    app:checkedIconVisible="false" />
 
-    <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent" />
+            </com.google.android.material.chip.ChipGroup>
 
-</LinearLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
