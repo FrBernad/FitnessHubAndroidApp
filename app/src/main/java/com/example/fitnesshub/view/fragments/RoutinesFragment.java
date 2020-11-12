@@ -91,10 +91,16 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
 
         viewModel = new ViewModelProvider(this).get(RoutineListViewModel.class);
 
-        viewModel.updateData(routinesAdapter);
+        viewModel.updateData();
 
         recylcerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recylcerView.setAdapter(routinesAdapter);
+
+        viewModel.getRoutineCards().observe(getViewLifecycleOwner(), routines -> {
+            if(routines!=null){
+                routinesAdapter.updateRoutines(routines);
+            }
+        });
 
         viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading != null) {
@@ -117,7 +123,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                     if (!searching && !noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
                         searching = true;
-                        viewModel.updateData(routinesAdapter);
+                        viewModel.updateData();
                     }
                 });
     }

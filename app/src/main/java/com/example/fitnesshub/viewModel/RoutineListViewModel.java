@@ -1,8 +1,6 @@
 package com.example.fitnesshub.viewModel;
 
 import android.app.Application;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -11,7 +9,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
-import com.example.fitnesshub.view.adapters.RoutinesAdapter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,14 +37,14 @@ public class RoutineListViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void updateData(RoutinesAdapter routinesAdapter) {
+    public void updateData() {
         if (!isLastPage) {
-            fetchFromRemote(routinesAdapter);
+            fetchFromRemote();
         }
     }
 
 
-    private void fetchFromRemote(RoutinesAdapter routinesAdapter) {
+    private void fetchFromRemote() {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(currentPage));
         options.put("orderBy", "averageRating");
@@ -58,7 +55,7 @@ public class RoutineListViewModel extends AndroidViewModel {
         loading.setValue(true);
 
         disposable.add(
-                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTYwNTIxMDQwNDI3NCwiZXhwIjoxNjA1MjEyOTk2Mjc0fQ.oUkIXCNqX1d4YLaoAGSmrDVD1Hmw_5n_pFQcJhtbaRg")
+                routinesService.getRoutines(options)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
@@ -70,9 +67,7 @@ public class RoutineListViewModel extends AndroidViewModel {
                                 routineCards.setValue(routinesEntries.getEntries());
                                 totalPages = (int) Math.ceil(routinesEntries.getTotalCount() / (double) itemsPerRequest);
                                 loading.setValue(false);
-                                routinesAdapter.updateRoutines(routineCards.getValue());
                             }
-
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                                 loading.setValue(false);

@@ -3,6 +3,7 @@ package com.example.fitnesshub.view.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -11,6 +12,7 @@ import android.view.Menu;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.ActivityMainBinding;
+import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setUpBottomNavigation();
         setSupportActionBar(findViewById(R.id.main_toolbar));
+        new ViewModelProvider(this).get(UserViewModel.class).setUserData();
     }
 
 

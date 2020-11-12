@@ -32,6 +32,10 @@ public class UserAPIService extends APIService implements UserAPI {
                 .create(UserAPI.class);
     }
 
+    public UserAPI getApi() {
+        return api;
+    }
+
     @Override
     public Single<AuthToken> login(UserCredentials credentials) {
         return api.login(credentials);

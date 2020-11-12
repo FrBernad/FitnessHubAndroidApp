@@ -19,35 +19,36 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(new AuthInterceptor())
                 .build();
 
         api = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-//                .client(httpClient)
+                .client(httpClient)
                 .build()
                 .create(RoutinesAPI.class);
     }
 
     @Override
-    public Single<PagedList<RoutineData>> getRoutines(Map<String, String> options, String token) {
-        return api.getRoutines(options, token);
+    public Single<PagedList<RoutineData>> getRoutines(Map<String, String> options) {
+        return api.getRoutines(options);
     }
 
     @Override
-    public Single<PagedList<RoutineData>> getFavouriteRoutines(Map<String, String> options, String token) {
-        return api.getFavouriteRoutines(options, token);
+    public Single<PagedList<RoutineData>> getFavouriteRoutines(Map<String, String> options) {
+        return api.getFavouriteRoutines(options);
     }
 
     @Override
-    public Single<PagedList<ExerciseData>> getExercises(Integer routineId, Integer cycleId, Map<String, String> options, String token) {
-        return api.getExercises(routineId, cycleId, options, token);
+    public Single<PagedList<ExerciseData>> getExercises(Integer routineId, Integer cycleId, Map<String, String> options) {
+        return api.getExercises(routineId, cycleId, options);
     }
 
     @Override
-    public Single<PagedList<RoutineCycleData>> getRoutineCycles(Integer routineId, Map<String, String> options, String token) {
-        return api.getRoutineCycles(routineId,options,token);
+    public Single<PagedList<RoutineCycleData>> getRoutineCycles(Integer routineId, Map<String, String> options) {
+        return api.getRoutineCycles(routineId, options);
     }
 
 }

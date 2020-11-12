@@ -77,7 +77,7 @@ public class RegisterFragment extends Fragment {
                 , password.getEditText().getText().toString()
                 , ""
                 , "other"
-                , 0
+                , ""
                 , email.getEditText().getText().toString()
                 , ""
                 , ""
