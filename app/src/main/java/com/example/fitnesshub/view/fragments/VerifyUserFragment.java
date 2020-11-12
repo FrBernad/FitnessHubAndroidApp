@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.fitnesshub.databinding.FragmentVerifyUserBinding;
 import com.example.fitnesshub.viewModel.UserViewModel;
@@ -24,6 +25,8 @@ public class VerifyUserFragment extends Fragment {
     private TextInputLayout email, code;
     private Button resendBtn, verifyBtn;
     private FragmentVerifyUserBinding binding;
+
+    private FrameLayout progressBarHolder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +40,8 @@ public class VerifyUserFragment extends Fragment {
         resendBtn = binding.resendBtn;
         verifyBtn = binding.verifyBtn;
 
+        progressBarHolder = binding.progressBarHolder;
+
         View view = binding.getRoot();
 
         verifyBtn.setOnClickListener(v -> tryVerify());
@@ -49,9 +54,22 @@ public class VerifyUserFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
+
+        viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    progressBarHolder.setVisibility(View.VISIBLE);
+                } else {
+                    progressBarHolder.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void resendVerification() {
+        if (!validateEmail()) {
+            return;
+        }
         viewModel.resendVerification(email.getEditText().getText().toString());
     }
 
@@ -63,5 +81,23 @@ public class VerifyUserFragment extends Fragment {
             }
         });
     }
+
+    private boolean validateEmail() {
+        String val = email.getEditText().getText().toString().trim();
+        String checkEmail = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+";
+
+        if (val.isEmpty()) {
+            email.setError("Field can not be empty");
+            return false;
+        } else if (!val.matches(checkEmail)) {
+            email.setError("Invalid Email!");
+            return false;
+        } else {
+            email.setError(null);
+            email.setErrorEnabled(false);
+            return true;
+        }
+    }
+
 
 }

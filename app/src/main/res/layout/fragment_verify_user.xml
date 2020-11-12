@@ -1,110 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.fragments.VerifyUserFragment"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-    <ImageView
-            android:src="@drawable/long_brand_black"
-            android:layout_width="379dp"
-            android:layout_height="133dp"
-            android:id="@+id/imageView4"
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".view.fragments.VerifyUserFragment"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:id="@+id/linearLayout4"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="parent">
+
+        <ImageView
+                android:src="@drawable/long_brand_black"
+                android:layout_width="379dp"
+                android:layout_height="133dp"
+                android:id="@+id/imageView4"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verify_first"
+                android:textSize="30sp"
+                android:layout_gravity="center"
+                android:textColor="@color/grey"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/verification_code"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_verification_code"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconTint="@color/grey"
+                app:hintTextColor="@color/grey"
+                android:textColorHint="@color/grey"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/grey"
+                android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="15dp"
+                android:id="@+id/verifyBtn"
+                android:layout_gravity="center"
+                android:text="@string/verify_button"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/grey"
+                android:elevation="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verify_second"
+                android:textSize="18sp"
+                android:textColor="@color/grey"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textStyle="italic"
+                android:layout_marginTop="10dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/verification_resend_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_verification_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconTint="@color/grey"
+                app:hintTextColor="@color/grey"
+                android:layout_gravity="center"
+                android:textColorHint="@color/grey"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
+                app:boxStrokeColor="@color/grey"
+                android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="15dp"
+                android:id="@+id/resend_btn"
+
+
+                android:text="@string/resend_button"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/grey"
+                android:elevation="5dp"
+                android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+            android:id="@+id/progressBarHolder"
+            android:animateLayoutChanges="true"
+            android:alpha="0.4"
+            android:background="#000000"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="0dp"
+            android:padding="0dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/verify_first"
-        android:textSize="30sp"
-        android:textColor="@color/grey"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:layout_marginTop="50dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/verification_code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_verification_code"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconTint="@color/grey"
-        app:hintTextColor="@color/grey"
-        android:textColorHint="@color/grey"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/grey"
-        app:boxStrokeWidthFocused="2dp"
-        app:boxStrokeColor="@color/grey"
-        android:layout_marginTop="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:id="@+id/verifyBtn"
-        android:text="@string/verify_button"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/grey"
-        android:elevation="5dp"
-        android:layout_marginTop="10dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/verify_second"
-        android:textSize="18sp"
-        android:textColor="@color/grey"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textStyle="italic"
-        android:layout_marginTop="10dp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/verification_resend_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_verification_email"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconTint="@color/grey"
-        app:hintTextColor="@color/grey"
-        android:textColorHint="@color/grey"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/grey"
-        app:boxStrokeWidthFocused="2dp"
-        app:boxStrokeColor="@color/grey"
-        android:layout_marginTop="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="15dp"
-        android:id="@+id/resend_btn"
-        android:text="@string/resend_button"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/grey"
-        android:elevation="5dp"
-        android:layout_marginTop="10dp"
-        />
-
-</LinearLayout>
+        <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_gravity="center" />
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

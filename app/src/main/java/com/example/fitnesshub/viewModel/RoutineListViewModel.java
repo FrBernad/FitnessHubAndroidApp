@@ -25,6 +25,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class RoutineListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
+    private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
+    private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
     private RoutinesAPIService routinesService = new RoutinesAPIService();
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -38,42 +40,42 @@ public class RoutineListViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public boolean updateData(ProgressBar progressBar, RoutinesAdapter routinesAdapter) {
+    public void updateData(RoutinesAdapter routinesAdapter) {
         if (!isLastPage) {
-            fetchFromRemote(progressBar, routinesAdapter);
-            return false;
+            fetchFromRemote(routinesAdapter);
         }
-        return true;
     }
 
 
-    private void fetchFromRemote(ProgressBar progressBar, RoutinesAdapter routinesAdapter) {
+    private void fetchFromRemote(RoutinesAdapter routinesAdapter) {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(currentPage));
         options.put("orderBy", "averageRating");
         options.put("direction", "desc");
         options.put("size", String.valueOf(itemsPerRequest));
 
-        progressBar.setVisibility(View.VISIBLE);
+
+        loading.setValue(true);
 
         disposable.add(
-                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTYwNTE4ODY5MzA5MSwiZXhwIjoxNjA1MTkxMjg1MDkxfQ.m1ic8Y3HkaPz9CYPGSKMp605ypmc5tBP3EjJt35ejVo")
+                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNTE5NDM0NzIwNSwiZXhwIjoxNjA1MTk2OTM5MjA1fQ.MDxHS8S-FceRlvwwzFLbDh0uaM2lp7OM8uHx7TNtvWk")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
                             @Override
                             public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
                                 isLastPage = routinesEntries.getLastPage();
+                                noMoreEntries.setValue(isLastPage);
                                 currentPage++;
                                 routineCards.setValue(routinesEntries.getEntries());
                                 totalPages = (int) Math.ceil(routinesEntries.getTotalCount() / (double) itemsPerRequest);
-                                progressBar.setVisibility(View.GONE);
+                                loading.setValue(false);
                                 routinesAdapter.updateRoutines(routineCards.getValue());
                             }
 
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                                progressBar.setVisibility(View.GONE);
+                                loading.setValue(false);
                                 e.printStackTrace();
                             }
                         })
@@ -89,5 +91,13 @@ public class RoutineListViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
+    }
+
+    public MutableLiveData<Boolean> getNoMoreEntries() {
+        return noMoreEntries;
+    }
+
+    public MutableLiveData<Boolean> getLoading() {
+        return loading;
     }
 }

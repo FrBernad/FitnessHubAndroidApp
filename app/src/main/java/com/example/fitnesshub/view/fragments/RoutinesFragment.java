@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class RoutinesFragment extends Fragment implements AdapterView.OnItemSelectedListener{
+public class RoutinesFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private RoutineListViewModel viewModel;
 
@@ -48,6 +48,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
     private Spinner orderSpinner;
 
     boolean noMoreEntries = false;
+    boolean searching = false;
 
     public RoutinesFragment() {
     }
@@ -59,18 +60,7 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         View view = binding.getRoot();
 
 
-        sortSpinner = view.findViewById(R.id.sortDiscoverSpinner);
-        ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.sort,android.R.layout.simple_spinner_item);
-        sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortSpinner.setAdapter(sortDiscoverAdapter);
-        sortSpinner.setOnItemSelectedListener(this);
-
-
-        orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
-        ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.order,android.R.layout.simple_spinner_item);
-        orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        orderSpinner.setAdapter(orderDiscoverAdapter);
-        orderSpinner.setOnItemSelectedListener(this);
+        setSpinners(view);
 
         nestedScrollView = binding.scrollView;
         recylcerView = binding.recyclerView;
@@ -80,21 +70,54 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         return view;
     }
 
+    private void setSpinners(View view) {
+        sortSpinner = view.findViewById(R.id.sortDiscoverSpinner);
+        ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, android.R.layout.simple_spinner_item);
+        sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(sortDiscoverAdapter);
+        sortSpinner.setOnItemSelectedListener(this);
+
+
+        orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
+        ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.order, android.R.layout.simple_spinner_item);
+        orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        orderSpinner.setAdapter(orderDiscoverAdapter);
+        orderSpinner.setOnItemSelectedListener(this);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(RoutineListViewModel.class);
 
-        noMoreEntries = viewModel.updateData(progressBar, routinesAdapter);
+        viewModel.updateData(routinesAdapter);
 
         recylcerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recylcerView.setAdapter(routinesAdapter);
 
+        viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    progressBar.setVisibility(View.VISIBLE);
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                    searching = false;
+                }
+            }
+        });
+
+        viewModel.getNoMoreEntries().observe(getViewLifecycleOwner(), value -> {
+            if (value != null) {
+                noMoreEntries=value;
+            }
+        });
+
         nestedScrollView.setOnScrollChangeListener(
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                    if (!noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
-                        noMoreEntries = viewModel.updateData(progressBar, routinesAdapter);
+                    if (!searching && !noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                        searching = true;
+                        viewModel.updateData(routinesAdapter);
                     }
                 });
     }
@@ -108,7 +131,6 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
 
 
 }

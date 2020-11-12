@@ -25,6 +25,8 @@ public class UserViewModel extends ViewModel {
     private MutableLiveData<AuthToken> token = new MutableLiveData<>();
     private MutableLiveData<Boolean> verified = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> loading = new MutableLiveData<>();
+
     private UserAPIService userService = new UserAPIService();
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -44,19 +46,26 @@ public class UserViewModel extends ViewModel {
         return token;
     }
 
+    public MutableLiveData<Boolean> getLoading() {
+        return loading;
+    }
+
     public void verifyUser(String code) {
-        disposable.add(userService.verifyEmail(new VerificationData(userInfo.getValue().getEmail(),code))
+        loading.setValue(true);
+        disposable.add(userService.verifyEmail(new VerificationData(userInfo.getValue().getEmail(), code))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         verified.setValue(true);
+                        loading.setValue(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         verified.setValue(false);
+                        loading.setValue(false);
                         e.printStackTrace();
                     }
                 })
@@ -66,17 +75,20 @@ public class UserViewModel extends ViewModel {
     public void resendVerification(String email) {
         Map<String, String> data = new HashMap<>();
         data.put("email", email);
+        loading.setValue(true);
         disposable.add(userService.resendVerification(data)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
+                        loading.setValue(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         e.printStackTrace();
+                        loading.setValue(false);
                     }
                 })
         );
@@ -84,7 +96,7 @@ public class UserViewModel extends ViewModel {
 
     public void tryLogin(String username, String password) {
         UserCredentials credentials = new UserCredentials(username, password);
-
+        loading.setValue(true);
         disposable.add(userService.login(credentials)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -99,11 +111,13 @@ public class UserViewModel extends ViewModel {
                                 .subscribeWith(new DisposableSingleObserver<UserInfo>() {
                                     @Override
                                     public void onSuccess(@NonNull UserInfo info) {
+                                        loading.setValue(false);
                                         userInfo.setValue(info);
                                     }
 
                                     @Override
                                     public void onError(@NonNull Throwable e) {
+                                        loading.setValue(false);
                                         e.printStackTrace();
                                     }
                                 })
@@ -119,6 +133,8 @@ public class UserViewModel extends ViewModel {
     }
 
     public void tryRegister(UserInfo data) {
+        loading.setValue(true);
+
         disposable.add((userService.register(data))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -126,11 +142,13 @@ public class UserViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull UserInfo info) {
                         userInfo.setValue(info);
+                        loading.setValue(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         e.printStackTrace();
+                        loading.setValue(false);
                     }
                 })
         );

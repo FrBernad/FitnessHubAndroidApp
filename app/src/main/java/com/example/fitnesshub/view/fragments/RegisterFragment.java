@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRegisterBinding;
@@ -29,6 +30,8 @@ public class RegisterFragment extends Fragment {
 
     private UserViewModel viewModel;
 
+    private FrameLayout progressBarHolder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class RegisterFragment extends Fragment {
         password = binding.registerPassword;
         username = binding.registerUsername;
         Button registerBtn = binding.registerBtn;
+        progressBarHolder = binding.progressBarHolder;
 
         View view = binding.getRoot();
 
@@ -52,9 +56,23 @@ public class RegisterFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
+
+        viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    progressBarHolder.setVisibility(View.VISIBLE);
+                } else {
+                    progressBarHolder.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void tryRegister() {
+        if (!validateEmail() | !validateUsername() | !validatePassword()) {
+            return;
+        }
+
         UserInfo userInfo = new UserInfo(username.getEditText().getText().toString()
                 , password.getEditText().getText().toString()
                 , ""
@@ -128,11 +146,5 @@ public class RegisterFragment extends Fragment {
             return true;
         }
     }
-
-    //Cuando se llame al metodo NEXT fragment hay que hacer esto
-//    if(!validateEmail() | !validateUsername() | !validatePassword()) {
-//        return;
-//    }
-
 
 }

@@ -22,6 +22,7 @@ public class InitialActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(InitialActivity.this, LoginActivity.class);
             startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             finish(); //elimino la actividad del stack
         },3000);
     }

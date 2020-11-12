@@ -41,6 +41,7 @@ public class RoutineExcecutionListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
 
         recyclerViewWarmUp = binding.warmUpExercises;
@@ -51,11 +52,14 @@ public class RoutineExcecutionListFragment extends Fragment {
 
         View view = binding.getRoot();
 
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
         return view;
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         if (getArguments() != null) {
             title.setText(RoutineExcecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
@@ -93,6 +97,12 @@ public class RoutineExcecutionListFragment extends Fragment {
                 cooldownAdapter.updateExercises(cooldownExercises);
             }
         });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
     }
 
 

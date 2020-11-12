@@ -7,12 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentLoginBinding;
@@ -29,6 +31,7 @@ public class LoginFragment extends Fragment {
     private TextInputLayout username, password;
 
     private UserViewModel viewModel;
+    private FrameLayout progressBarHolder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +40,7 @@ public class LoginFragment extends Fragment {
         FragmentLoginBinding binding = FragmentLoginBinding.inflate(getLayoutInflater());
         username = binding.loginUsername;
         password = binding.loginPassword;
+        progressBarHolder = binding.progressBarHolder;
 
         View view = binding.getRoot();
         Button loginBtn = view.findViewById(R.id.loginBtn);
@@ -50,12 +54,22 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
+
+        viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
+            if (isLoading != null) {
+                if (isLoading) {
+                    progressBarHolder.setVisibility(View.VISIBLE);
+                } else {
+                    progressBarHolder.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private void tryLogin() {
-//        if (!validateUsername() | !validatePassword()) {
-//            return;
-//        }
+        if (!validateUsername() | !validatePassword()) {
+            return;
+        }
 
         viewModel.tryLogin(username.getEditText().getText().toString(), password.getEditText().getText().toString());
 
@@ -63,6 +77,7 @@ public class LoginFragment extends Fragment {
             if (authToken != null) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 getActivity().finish();
             }
         });

@@ -60,7 +60,8 @@ public class RoutineFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRoutineBinding.inflate(getLayoutInflater());
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
+
         recyclerViewWarmUp = binding.warmUpExercises;
         recyclerViewMain = binding.mainExercises;
         recyclerViewCooldown = binding.cooldownExercises;
@@ -72,6 +73,8 @@ public class RoutineFragment extends Fragment {
         playBtn = binding.playBtn;
 
         View view = binding.getRoot();
+
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
 
         return view;
     }

@@ -11,12 +11,24 @@
             android:label="fragment_home"
             tools:layout="@layout/fragment_home">
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_homeFragment_to_routinesFragment"
                 app:destination="@id/routinesFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_homeFragment_to_meFragment"
                 app:destination="@id/meFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_homeFragment_to_myActivityFragment"
                 app:destination="@id/myActivityFragment" />
     </fragment>
@@ -27,15 +39,31 @@
             android:label="fragment_routines"
             tools:layout="@layout/fragment_routines">
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_routinesFragment_to_homeFragment"
                 app:destination="@id/homeFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_routinesFragment_to_meFragment"
                 app:destination="@id/meFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_routinesFragment_to_myActivityFragment"
                 app:destination="@id/myActivityFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_routinesFragment_to_routineFragment"
                 app:destination="@id/routineFragment" />
     </fragment>
@@ -46,15 +74,24 @@
             android:label="fragment_routine"
             tools:layout="@layout/fragment_routine">
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_routineFragment_to_routinesFragment"
                 app:destination="@id/routinesFragment" />
         <argument
                 android:name="routineId"
                 app:argType="integer"
                 android:defaultValue="-1" />
-        <argument android:name="routineData"
+        <argument
+                android:name="routineData"
                 app:argType="com.example.fitnesshub.model.RoutineData" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_routineFragment_to_routineExcecutionListFragment"
                 app:destination="@id/routineExcecutionListFragment" />
     </fragment>
@@ -65,6 +102,10 @@
             android:label="fragment_me"
             tools:layout="@layout/fragment_profile">
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_meFragment_to_routineFragment"
                 app:destination="@id/routineFragment" />
     </fragment>
@@ -75,19 +116,31 @@
             android:label="fragment_my_activity"
             tools:layout="@layout/fragment_my_activity">
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_myActivityFragment_to_meFragment"
                 app:destination="@id/meFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_myActivityFragment_to_routinesFragment"
                 app:destination="@id/routinesFragment" />
         <action
+                app:enterAnim="@anim/fragment_fade_enter"
+                app:exitAnim="@anim/fragment_fade_exit"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_myActivityFragment_to_homeFragment"
                 app:destination="@id/homeFragment" />
     </fragment>
     <fragment
             android:id="@+id/routineExcecutionListFragment"
             android:name="com.example.fitnesshub.view.fragments.RoutineExcecutionListFragment"
-            android:label="RoutineExcecutionListFragment" >
+            android:label="RoutineExcecutionListFragment">
         <argument
                 android:name="RoutineTitle"
                 app:argType="string" />
