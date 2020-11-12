@@ -58,7 +58,7 @@ public class RoutineListViewModel extends AndroidViewModel {
         loading.setValue(true);
 
         disposable.add(
-                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNTE5NDM0NzIwNSwiZXhwIjoxNjA1MTk2OTM5MjA1fQ.MDxHS8S-FceRlvwwzFLbDh0uaM2lp7OM8uHx7TNtvWk")
+                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTYwNTIxMDQwNDI3NCwiZXhwIjoxNjA1MjEyOTk2Mjc0fQ.oUkIXCNqX1d4YLaoAGSmrDVD1Hmw_5n_pFQcJhtbaRg")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
