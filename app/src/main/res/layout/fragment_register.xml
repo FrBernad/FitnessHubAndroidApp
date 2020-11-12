@@ -30,7 +30,6 @@
                 android:layout_marginTop="88dp"
                 android:text="@string/register"
                 android:textAllCaps="true"
-
                 android:textColor="@color/darkGrey"
                 android:textSize="40sp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -56,12 +55,12 @@
                 app:boxStrokeColor="@color/grey"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
-                app:layout_constraintWidth_percent="0.8"
                 app:endIconTint="@color/grey"
                 app:hintTextColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view2"
+                app:layout_constraintWidth_percent="0.8"
                 app:startIconDrawable="@drawable/ic_email_24"
                 app:startIconTint="@color/grey">
 
@@ -84,14 +83,14 @@
                 android:textColorHint="@color/grey"
                 app:boxStrokeColor="@color/grey"
                 app:boxStrokeWidthFocused="2dp"
-                app:layout_constraintWidth_percent="0.8"
-
                 app:endIconMode="clear_text"
+
                 app:endIconTint="@color/grey"
                 app:hintTextColor="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_email"
+                app:layout_constraintWidth_percent="0.8"
                 app:startIconDrawable="@drawable/ic_me_24"
                 app:startIconTint="@color/grey">
 
@@ -103,7 +102,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/register_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -111,16 +109,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:hint="@string/password"
-                app:layout_constraintWidth_percent="0.8"
-
                 android:textColorHint="@color/grey"
+
                 app:boxStrokeColor="@color/grey"
                 app:boxStrokeWidthFocused="2dp"
-
                 app:hintTextColor="@color/grey"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_username"
+                app:layout_constraintWidth_percent="0.8"
                 app:passwordToggleEnabled="true"
                 app:passwordToggleTint="@color/grey"
                 app:startIconDrawable="@drawable/ic_password_24"
@@ -142,14 +140,14 @@
                 android:backgroundTint="@color/grey"
                 android:elevation="5dp"
                 android:paddingVertical="15dp"
-                app:layout_constraintWidth_percent="0.6"
-
                 android:text="@string/register"
+
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_password" />
+                app:layout_constraintTop_toBottomOf="@+id/register_password"
+                app:layout_constraintWidth_percent="0.6" />
 
 
             <TextView
