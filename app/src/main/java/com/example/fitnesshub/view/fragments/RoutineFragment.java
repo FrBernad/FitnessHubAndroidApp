@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
-import com.example.fitnesshub.view.fragments.RoutineFragmentArgs;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,9 +35,14 @@ public class RoutineFragment extends Fragment {
     private RecyclerView recyclerViewMain;
     private RecyclerView recyclerViewCooldown;
 
+    private TextView title;
+    private TextView author;
+    private TextView detail;
+
     private FragmentRoutineBinding binding;
 
     private int routineId;
+    private RoutineData routineData;
 
     public RoutineFragment() {
     }
@@ -54,6 +60,10 @@ public class RoutineFragment extends Fragment {
         recyclerViewMain = binding.mainExercises;
         recyclerViewCooldown = binding.cooldownExercises;
 
+        title = binding.routineNameTitle;
+        author = binding.routineAuthorName;
+        detail = binding.routineDescription;
+
         View view = binding.getRoot();
 
         return view;
@@ -63,7 +73,12 @@ public class RoutineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
             routineId = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineId();
+            routineData = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineData();
         }
+
+        title.setText(routineData.getTitle());
+        author.setText(routineData.getAuthor().getUsername());
+        detail.setText(routineData.getDetail());
 
         viewModel = new ViewModelProvider(this).get(ExercisesViewModel.class);
         viewModel.refresh(routineId);

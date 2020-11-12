@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
+import com.example.fitnesshub.model.RoutineClickListener;
 import com.example.fitnesshub.model.RoutineData;
-import com.example.fitnesshub.view.fragments.RoutineEntryClickListener;
 import com.example.fitnesshub.view.fragments.RoutinesFragmentDirections;
 
 
 import java.util.List;
 
-public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> implements RoutineEntryClickListener {
+public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder>{
     private List<RoutineData> routinesList;
 
     public RoutinesAdapter(List<RoutineData> routinesList) {
@@ -37,7 +37,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
         holder.itemView.setRoutineData(routinesList.get(position));
-        holder.itemView.setClickListener(this);
+        holder.itemView.setClickListener(new RoutineClickListener(routinesList.get(position)));
     }
 
     @Override
@@ -45,19 +45,8 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
         return routinesList.size();
     }
 
-    @Override
-    public void onRoutineClick(View view) {
-        int routineId = Integer.parseInt(((TextView) view.findViewById(R.id.routineId)).getText().toString());
-        RoutinesFragmentDirections.ActionRoutinesFragmentToRoutineFragment action = RoutinesFragmentDirections.actionRoutinesFragmentToRoutineFragment();
-        action.setRoutineId(routineId);
-        Navigation.findNavController(view).navigate(action);
-    }
-
     public void updateRoutines(List<RoutineData> routineCards) {
-        System.out.println("updte "+routineCards);
         routinesList.addAll(routineCards);
-        System.out.println("new "+routinesList);
-
         notifyDataSetChanged();
     }
 

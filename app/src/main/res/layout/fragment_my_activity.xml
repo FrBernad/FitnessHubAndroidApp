@@ -1,74 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".view.fragments.MyActivityFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context=".view.fragments.MyActivityFragment">
 
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/myActivityTabs"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/darkGrey"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:tabIndicatorColor="@android:color/white"
-        app:tabIndicatorHeight="4dp"
-        app:tabSelectedTextColor="@color/whiteBright"
-        app:tabTextColor="@color/whiteOpaque">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/my_routines"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/my_routines" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/my_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/history" />
-
-    </com.google.android.material.tabs.TabLayout>
+            android:id="@+id/myActivityTabs"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/darkGrey"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabIndicatorHeight="4dp"
+            app:tabSelectedTextColor="@color/whiteBright"
+            app:tabTextColor="@color/whiteOpaque"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
             <Spinner
-                android:id="@+id/sortActivitySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="20dp"
-                android:prompt="@string/sort_title"
-                android:spinnerMode="dialog" />
+                    android:id="@+id/sortActivitySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp"
+                    android:prompt="@string/sort_title"
+                    android:spinnerMode="dialog" />
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
             <Spinner
-                android:id="@+id/orderActivitySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="20dp"
-                android:prompt="@string/order_title"
-                android:spinnerMode="dialog" />
+                    android:id="@+id/orderActivitySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp"
+                    android:prompt="@string/order_title"
+                    android:spinnerMode="dialog" />
 
         </androidx.cardview.widget.CardView>
 
@@ -77,50 +63,47 @@
 
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-       <com.google.android.material.chip.Chip
-            android:id="@+id/activity_rookie_chip"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rookie"
-            app:checkedIconVisible="false" />
+            android:layout_height="wrap_content">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/activity_beginner_chip"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/beginner"
-            app:checkedIconVisible="false" />
+                android:id="@+id/activity_rookie_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rookie"
+                app:checkedIconVisible="false" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/activity_intermediate_chip"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/intermediate"
-            app:checkedIconVisible="false" />
+                android:id="@+id/activity_beginner_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/beginner"
+                app:checkedIconVisible="false" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/activity_advanced_chip"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/advanced"
-            app:checkedIconVisible="false" />
+                android:id="@+id/activity_intermediate_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/intermediate"
+                app:checkedIconVisible="false" />
+
+        <com.google.android.material.chip.Chip
+                android:id="@+id/activity_advanced_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/advanced"
+                app:checkedIconVisible="false" />
 
     </com.google.android.material.chip.ChipGroup>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/NavActivyHost"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:navGraph="@navigation/my_activity_navigation">
-    </androidx.fragment.app.FragmentContainerView>
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
 
 </LinearLayout>

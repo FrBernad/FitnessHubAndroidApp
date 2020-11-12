@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
+import com.example.fitnesshub.model.RoutineClickListener;
 import com.example.fitnesshub.model.RoutineData;
-import com.example.fitnesshub.view.fragments.RoutineEntryClickListener;
 import com.example.fitnesshub.view.fragments.RoutinesFragmentDirections;
 
 import java.util.List;
 
-public class FavoriteAdapter  extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> implements RoutineEntryClickListener {
+public class FavoriteAdapter  extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>{
     private List<RoutineData> favoriteList;
 
     public FavoriteAdapter(List<RoutineData> favoriteList) {
@@ -42,18 +42,12 @@ public class FavoriteAdapter  extends RecyclerView.Adapter<FavoriteAdapter.Favor
     @Override
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
         holder.itemView.setRoutineData(favoriteList.get(position));
-        holder.itemView.setClickListener(this);
+        holder.itemView.setClickListener(new RoutineClickListener(favoriteList.get(position)));
     }
 
     @Override
     public int getItemCount() {
         return favoriteList.size();
-    }
-
-    @Override
-    public void onRoutineClick(View view) {
-        NavDirections action = RoutinesFragmentDirections.actionRoutinesFragmentToMeFragment();
-        Navigation.findNavController(view).navigate(action);
     }
 
     public static class FavoriteViewHolder extends RecyclerView.ViewHolder {

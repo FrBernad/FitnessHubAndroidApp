@@ -57,7 +57,7 @@ public class RoutineListViewModel extends AndroidViewModel {
         progressBar.setVisibility(View.VISIBLE);
 
         disposable.add(
-                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTYwNTA1OTY5NjkzNywiZXhwIjoxNjA1MDYyMjg4OTM3fQ.1u0xznSQCbPJPYN4_4veVj7LhvXVbHu2-EZeQyuOk50")
+                routinesService.getRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNTE1MTY5NDM1NiwiZXhwIjoxNjA1MTU0Mjg2MzU2fQ.LQ52n9uctfXt1brDA7c60efQT-6K0tku7ao0kZodEIE")
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {

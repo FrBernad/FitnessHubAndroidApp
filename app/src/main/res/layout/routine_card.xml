@@ -12,7 +12,7 @@
 
         <variable
                 name="clickListener"
-                type="com.example.fitnesshub.view.fragments.RoutineEntryClickListener" />
+                type="com.example.fitnesshub.model.RoutineClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -22,7 +22,7 @@
             app:cardCornerRadius="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:onClick="@{clickListener::onRoutineClick}"
+                android:onClick="@{clickListener::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="125dp">
 

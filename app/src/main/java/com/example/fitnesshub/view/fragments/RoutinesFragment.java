@@ -91,7 +91,6 @@ public class RoutinesFragment extends Fragment implements AdapterView.OnItemSele
         recylcerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recylcerView.setAdapter(routinesAdapter);
 
-
         nestedScrollView.setOnScrollChangeListener(
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                     if (!noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {

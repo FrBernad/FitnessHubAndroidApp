@@ -104,7 +104,6 @@ public class UserViewModel extends ViewModel {
 
                                     @Override
                                     public void onError(@NonNull Throwable e) {
-                                        System.out.println("error!!!!!\n\n\n\n");
                                         e.printStackTrace();
                                     }
                                 })

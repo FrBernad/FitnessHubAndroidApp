@@ -52,13 +52,15 @@
                 android:name="routineId"
                 app:argType="integer"
                 android:defaultValue="-1" />
+        <argument android:name="routineData"
+                app:argType="com.example.fitnesshub.model.RoutineData" />
     </fragment>
 
     <fragment
             android:id="@+id/meFragment"
-            android:name="com.example.fitnesshub.view.fragments.MeFragment"
+            android:name="com.example.fitnesshub.view.fragments.ProfileFragment"
             android:label="fragment_me"
-            tools:layout="@layout/fragment_me">
+            tools:layout="@layout/fragment_profile">
         <action
                 android:id="@+id/action_meFragment_to_myActivityFragment"
                 app:destination="@id/myActivityFragment" />

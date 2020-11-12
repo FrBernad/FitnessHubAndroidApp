@@ -7,9 +7,6 @@
             name="exerciseData"
             type="com.example.fitnesshub.model.ExerciseData" />
 
-        <variable
-            name="clickListener"
-            type="com.example.fitnesshub.view.fragments.RoutineEntryClickListener" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
