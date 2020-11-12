@@ -89,6 +89,10 @@ public class RoutineData implements Serializable {
         return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(id);

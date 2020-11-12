@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fitnesshub.R;
@@ -44,6 +45,8 @@ public class RoutineFragment extends Fragment {
     private TextView author;
     private TextView detail;
 
+    private ImageView image;
+
     private FragmentRoutineBinding binding;
 
     private int routineId;
@@ -72,6 +75,8 @@ public class RoutineFragment extends Fragment {
 
         playBtn = binding.playBtn;
 
+        image = binding.imageView;
+
         View view = binding.getRoot();
 
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
@@ -84,6 +89,7 @@ public class RoutineFragment extends Fragment {
         if (getArguments() != null) {
             routineId = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineId();
             routineData = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineData();
+            image.setImageResource(Integer.parseInt(routineData.getImage()));
         }
 
         playBtn.setOnClickListener(v -> {

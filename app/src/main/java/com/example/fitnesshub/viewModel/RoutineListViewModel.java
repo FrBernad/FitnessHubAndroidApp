@@ -24,6 +24,7 @@ public class RoutineListViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
+    private MutableLiveData<Boolean> changedOptions = new MutableLiveData<>();
 
     private RoutinesAPIService routinesService = new RoutinesAPIService();
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -32,6 +33,7 @@ public class RoutineListViewModel extends AndroidViewModel {
     private int totalPages = 0;
     private int itemsPerRequest = 5;
     private boolean isLastPage = false;
+    private String direction = "asc";
 
     public RoutineListViewModel(@NonNull Application application) {
         super(application);
@@ -43,12 +45,33 @@ public class RoutineListViewModel extends AndroidViewModel {
         }
     }
 
+    public void orderRoutines(int option) {
+        switch (option) {
+            case 1:
+                direction = "asc";
+                break;
+
+            case 2:
+                direction = "desc";
+                break;
+        }
+
+        applyChanges();
+    }
+
+    private void applyChanges() {
+        currentPage = 0;
+        isLastPage = false;
+        totalPages = 0;
+        changedOptions.setValue(true);
+        changedOptions.setValue(false);
+    }
 
     private void fetchFromRemote() {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(currentPage));
         options.put("orderBy", "averageRating");
-        options.put("direction", "desc");
+        options.put("direction", direction);
         options.put("size", String.valueOf(itemsPerRequest));
 
 
@@ -68,6 +91,7 @@ public class RoutineListViewModel extends AndroidViewModel {
                                 totalPages = (int) Math.ceil(routinesEntries.getTotalCount() / (double) itemsPerRequest);
                                 loading.setValue(false);
                             }
+
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                                 loading.setValue(false);
@@ -86,6 +110,10 @@ public class RoutineListViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
+    }
+
+    public MutableLiveData<Boolean> getChangedOptions() {
+        return changedOptions;
     }
 
     public MutableLiveData<Boolean> getNoMoreEntries() {
