@@ -27,6 +27,7 @@
     <string name="conditions">By clicking “Register”, you agree to our Terms of Service and Privacy Statement.</string>
     <string name="welcome_first_heading">Train yourself and others</string>
     <string name="welcome_second_heading">High-quality workout routines anywhere, anytime</string>
+    <string name="welcome_second_heading_land">High-quality workout routines\nanywhere, anytime</string>
 
     <string name="rookie">Rookie</string>
     <string name="beginner">Beginner</string>
