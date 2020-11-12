@@ -1,20 +1,16 @@
 package com.example.fitnesshub.view.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
-import com.example.fitnesshub.model.RoutineClickListener;
+import com.example.fitnesshub.view.fragments.RoutineClickListener;
 import com.example.fitnesshub.model.RoutineData;
-import com.example.fitnesshub.view.fragments.RoutinesFragmentDirections;
 
 
 import java.util.List;
@@ -37,7 +33,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
     @Override
     public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
         holder.itemView.setRoutineData(routinesList.get(position));
-        holder.itemView.setClickListener(new RoutineClickListener(routinesList.get(position)));
+        holder.itemView.setClickListener(new RoutineClickListener(routinesList.get(position),RoutineClickListener.ROUTINES_ID));
     }
 
     @Override

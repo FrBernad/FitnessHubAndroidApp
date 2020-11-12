@@ -35,7 +35,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="50dp"
-            android:text="@string/RoutineName"
+            android:text=""
             android:textAlignment="center"
             android:textColor="@color/whiteBright" />
 
@@ -63,7 +63,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/warmUpExercisesInExecution"
+        android:id="@+id/warmUpExercises"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout3" />
@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/warmUpExercisesInExecution">
+        app:layout_constraintTop_toBottomOf="@+id/warmUpExercises">
 
         <TextView
             style="@style/Titles"
@@ -90,7 +90,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/MainExercisesInExecution"
+        android:id="@+id/mainExercises"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout11" />
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MainExercisesInExecution">
+        app:layout_constraintTop_toBottomOf="@+id/mainExercises">
 
 
         <TextView
@@ -118,7 +118,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cooldownExercisesInExecution"
+        android:id="@+id/cooldownExercises"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout12" />

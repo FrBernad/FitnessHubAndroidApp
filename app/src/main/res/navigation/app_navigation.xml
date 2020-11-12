@@ -54,6 +54,9 @@
                 android:defaultValue="-1" />
         <argument android:name="routineData"
                 app:argType="com.example.fitnesshub.model.RoutineData" />
+        <action
+                android:id="@+id/action_routineFragment_to_routineExcecutionListFragment"
+                app:destination="@id/routineExcecutionListFragment" />
     </fragment>
 
     <fragment
@@ -62,8 +65,8 @@
             android:label="fragment_me"
             tools:layout="@layout/fragment_profile">
         <action
-                android:id="@+id/action_meFragment_to_myActivityFragment"
-                app:destination="@id/myActivityFragment" />
+                android:id="@+id/action_meFragment_to_routineFragment"
+                app:destination="@id/routineFragment" />
     </fragment>
 
     <fragment
@@ -80,6 +83,14 @@
         <action
                 android:id="@+id/action_myActivityFragment_to_homeFragment"
                 app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/routineExcecutionListFragment"
+            android:name="com.example.fitnesshub.view.fragments.RoutineExcecutionListFragment"
+            android:label="RoutineExcecutionListFragment" >
+        <argument
+                android:name="RoutineTitle"
+                app:argType="string" />
     </fragment>
 
 

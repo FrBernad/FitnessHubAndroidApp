@@ -130,7 +130,8 @@
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:textColor="@color/darkGrey"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:padding="10dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -254,7 +255,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/playBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
