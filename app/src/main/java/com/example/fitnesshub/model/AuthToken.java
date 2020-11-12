@@ -10,7 +10,6 @@ public class AuthToken {
     private String token;
 
     public AuthToken(String token) {
-        System.out.println("CREATEDDD");
         this.token = token;
     }
 
