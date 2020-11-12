@@ -10,7 +10,7 @@
             android:title="@string/navHome" />
 
     <item
-            android:id="@+id/routinesFragment"
+            android:id="@+id/discoverFragment"
             android:icon="@drawable/ic_explore_24"
             android:orderInCategory="2"
             app:labelVisibilityMode="labeled"
