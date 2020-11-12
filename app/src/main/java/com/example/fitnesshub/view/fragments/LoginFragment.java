@@ -71,7 +71,7 @@ public class LoginFragment extends Fragment {
     //Validation functions
     private boolean validateUsername() {
         String val = username.getEditText().getText().toString().trim();
-        String checkspaces = "\\A\\w{1,20}\\z"; //Check whitespaces
+        String checkspaces = "^[a-zA-Z0-9\\-_]{1,20}$"; //No white spaces, must contain at most 20 characters.
 
         if (val.isEmpty()) {
             username.setError("Field can not be empty");
@@ -91,18 +91,14 @@ public class LoginFragment extends Fragment {
 
     private boolean validatePassword() {
         String val = password.getEditText().getText().toString().trim();
-        String checkPassword = "^" +
-                "(?=.*[a-zA-Z])" +      //any letter
-                "(?=S+$)" +           //no white spaces
-                ".{4,}" +               //at least 4 characters
-                "$";
+        String checkPassword = "^[a-zA-Z0-9\\-_]{8,}$"; //No whitespaces, must contain more than 8 characters.
         ;
 
         if (val.isEmpty()) {
             password.setError("Field can not be empty");
             return false;
         } else if (!val.matches(checkPassword)) {
-            password.setError("Password should contain at least 4 characters!");
+            password.setError("Password should contain at least 8 characters!");
             return false;
         } else {
             password.setError(null);
