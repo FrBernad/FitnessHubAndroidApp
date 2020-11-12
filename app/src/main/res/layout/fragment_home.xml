@@ -100,7 +100,7 @@
             app:delay="0"
             app:error_image="@drawable/notfound"
             app:period="3000"
-            app:placeholder="@drawable/notfound" />
+            />
 
     </androidx.cardview.widget.CardView>
 
