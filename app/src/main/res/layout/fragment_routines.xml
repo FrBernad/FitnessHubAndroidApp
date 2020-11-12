@@ -18,10 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:strokeColor="@color/darkGrey"
+            app:strokeWidth="1dp">
+
 
             <Spinner
                 android:id="@+id/sortDiscoverSpinner"
@@ -31,12 +34,16 @@
                 android:prompt="@string/sort_title"
                 android:spinnerMode="dialog" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            app:strokeColor="@color/darkGrey"
+            app:strokeWidth="1dp">
+
 
             <Spinner
                 android:id="@+id/orderDiscoverSpinner"
@@ -46,8 +53,7 @@
                 android:prompt="@string/order_title"
                 android:spinnerMode="dialog" />
 
-        </androidx.cardview.widget.CardView>
-
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

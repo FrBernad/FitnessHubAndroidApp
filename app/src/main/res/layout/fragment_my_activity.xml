@@ -31,11 +31,11 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/darkGrey"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tabIndicatorColor="@android:color/white"
                 app:tabIndicatorHeight="4dp"
                 app:tabSelectedTextColor="@color/whiteBright"
-                app:tabTextColor="@color/whiteOpaque"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:tabTextColor="@color/whiteOpaque" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
@@ -45,10 +45,13 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/myActivityTabs">
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:strokeColor="@color/darkGrey"
+                    app:strokeWidth="1dp">
+
 
                     <Spinner
                         android:id="@+id/sortActivitySpinner"
@@ -58,12 +61,14 @@
                         android:prompt="@string/sort_title"
                         android:spinnerMode="dialog" />
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    app:strokeColor="@color/darkGrey"
+                    app:strokeWidth="1dp">
 
                     <Spinner
                         android:id="@+id/orderActivitySpinner"
@@ -73,10 +78,12 @@
                         android:prompt="@string/order_title"
                         android:spinnerMode="dialog" />
 
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
             </LinearLayout>
+
+
 
 
             <com.google.android.material.chip.ChipGroup
@@ -120,6 +127,8 @@
                     app:checkedIconVisible="false" />
 
             </com.google.android.material.chip.ChipGroup>
+
+
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
