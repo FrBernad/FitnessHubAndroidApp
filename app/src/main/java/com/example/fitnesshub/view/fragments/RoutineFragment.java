@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
@@ -55,7 +56,7 @@ public class RoutineFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRoutineBinding.inflate(getLayoutInflater());
-
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
         recyclerViewWarmUp = binding.warmUpExercises;
         recyclerViewMain = binding.mainExercises;
         recyclerViewCooldown = binding.cooldownExercises;
@@ -115,4 +116,9 @@ public class RoutineFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
+    }
 }
