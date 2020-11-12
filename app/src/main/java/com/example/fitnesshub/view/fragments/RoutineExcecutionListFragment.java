@@ -2,65 +2,98 @@ package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.FragmentRoutineExecutionListBinding;
+import com.example.fitnesshub.view.adapters.ExercisesAdapter;
+import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ExerciseListExcecutionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ExerciseListExcecutionFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class RoutineExcecutionListFragment extends Fragment {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentRoutineExecutionListBinding binding;
 
-    public ExerciseListExcecutionFragment() {
-        // Required empty public constructor
-    }
+    private ExercisesViewModel viewModel;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ExerciseListExcecutionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ExerciseListExcecutionFragment newInstance(String param1, String param2) {
-        ExerciseListExcecutionFragment fragment = new ExerciseListExcecutionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ExercisesAdapter warmUpAdapter = new ExercisesAdapter(new ArrayList<>());
+    private ExercisesAdapter mainAdapter = new ExercisesAdapter(new ArrayList<>());
+    private ExercisesAdapter cooldownAdapter = new ExercisesAdapter(new ArrayList<>());
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private RecyclerView recyclerViewWarmUp;
+    private RecyclerView recyclerViewMain;
+    private RecyclerView recyclerViewCooldown;
+
+    private TextView title;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exercise_list_excecution, container, false);
+
+        binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
+
+        recyclerViewWarmUp = binding.warmUpExercises;
+        recyclerViewMain = binding.mainExercises;
+        recyclerViewCooldown = binding.cooldownExercises;
+
+        title = binding.routineNameTitleInExecutionList;
+
+        View view = binding.getRoot();
+
+        return view;
     }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (getArguments() != null) {
+            title.setText(RoutineExcecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
+        }
+
+        viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
+
+        recyclerViewWarmUp.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewWarmUp.setAdapter(warmUpAdapter);
+
+        recyclerViewMain.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewMain.setAdapter(mainAdapter);
+
+        recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewCooldown.setAdapter(cooldownAdapter);
+
+        observeExerciseViewModel();
+    }
+
+    private void observeExerciseViewModel() {
+        viewModel.getWarmupExercises().observe(getViewLifecycleOwner(), warmupExercises -> {
+            if (warmupExercises != null) {
+                warmUpAdapter.updateExercises(warmupExercises);
+            }
+        });
+
+        viewModel.getMainExercises().observe(getViewLifecycleOwner(), mainExercises -> {
+            if (mainExercises != null) {
+                mainAdapter.updateExercises(mainExercises);
+            }
+        });
+
+        viewModel.getCooldownExercises().observe(getViewLifecycleOwner(), cooldownExercises -> {
+            if (cooldownExercises != null) {
+                cooldownAdapter.updateExercises(cooldownExercises);
+            }
+        });
+    }
+
+
 }
