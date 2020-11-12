@@ -70,6 +70,7 @@
                     app:boxBackgroundColor="#FFFFFF"
                     app:hintTextColor="@color/grey"
                     app:startIconDrawable="@drawable/ic_me_24"
+                    android:enabled="false"
                     app:startIconTint="@color/grey">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -88,11 +89,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:hint="@string/phoneField"
+                    android:enabled="false"
                     app:hintTextColor="@color/grey"
                     app:startIconDrawable="@drawable/ic_phone_24"
                     app:startIconTint="@color/grey">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -23,7 +23,7 @@ public class UserInfo {
 
     @Expose
     @SerializedName("birthdate")
-    private Integer birthdate;
+    private String birthdate;
 
     @Expose
     @SerializedName("email")
@@ -37,7 +37,7 @@ public class UserInfo {
     @SerializedName("avatarUrl")
     private String avatarUrl;
 
-    public UserInfo(String username, String password, String fullName, String gender, Integer birthdate, String email, String phone, String avatarUrl) {
+    public UserInfo(String username, String password, String fullName, String gender, String birthdate, String email, String phone, String avatarUrl) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -69,7 +69,7 @@ public class UserInfo {
         return gender;
     }
 
-    public Integer getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 

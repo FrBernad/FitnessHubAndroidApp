@@ -40,22 +40,21 @@ public class ExercisesViewModel extends ViewModel {
         List<RoutineCycleData> routineCycles = new ArrayList<>();
 
         disposable.add(
-                routinesService.getRoutineCycles(routineId, options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
+                routinesService.getRoutineCycles(routineId, options)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableSingleObserver<PagedList<RoutineCycleData>>() {
-
                             @Override
-                            public void onSuccess(@NonNull PagedList<RoutineCycleData> cyclesData) {
-                                routineCycles.addAll(cyclesData.getEntries());
+                            public void onSuccess(@NonNull PagedList<RoutineCycleData> cycles) {
+                                routineCycles.addAll(cycles.getEntries());
                                 for (RoutineCycleData cycle : routineCycles) {
                                     disposable.add(
-                                            routinesService.getExercises(routineId, cycle.getId(), options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
+                                            routinesService.getExercises(routineId, cycle.getId(), options)
                                                     .subscribeOn(Schedulers.newThread())
                                                     .observeOn(AndroidSchedulers.mainThread())
                                                     .subscribeWith(new DisposableSingleObserver<PagedList<ExerciseData>>() {
                                                         @Override
-                                                        public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<ExerciseData> cycleExercises) {
+                                                        public void onSuccess(@NonNull PagedList<ExerciseData> cycleExercises) {
                                                             switch (cycle.getType()) {
                                                                 case "warmup":
                                                                     warmupExercises.setValue(cycleExercises.getEntries());
@@ -76,9 +75,7 @@ public class ExercisesViewModel extends ViewModel {
                                                     })
                                     );
                                 }
-
                             }
-
                             @Override
                             public void onError(@NonNull Throwable e) {
                                 e.printStackTrace();

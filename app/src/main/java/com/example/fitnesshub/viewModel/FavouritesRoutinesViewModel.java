@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -34,12 +35,12 @@ public class FavouritesRoutinesViewModel extends ViewModel {
         options.put("size", String.valueOf(100));
 
         disposable.add(
-                routinesService.getFavouriteRoutines(options, "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImlhdCI6MTYwNDkzODQ0MDI3MCwiZXhwIjoxNjA0OTQxMDMyMjcwfQ.6t9Q3d56aZZ6GT8D4F-FNZsi6gqltZHyYDku4SBjyWM")
+                routinesService.getFavouriteRoutines(options)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
+                        .subscribeWith(new DisposableSingleObserver <PagedList<RoutineData>>() {
                             @Override
-                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> favourites) {
+                            public void onSuccess(@NonNull PagedList<RoutineData> favourites) {
                                 favouriteRoutines.setValue(favourites.getEntries());
                             }
 

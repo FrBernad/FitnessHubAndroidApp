@@ -12,29 +12,25 @@ public interface RoutinesAPI {
 
     @GET("routines")
     Single<PagedList<RoutineData>> getRoutines(
-            @QueryMap Map<String, String> options,
-            @Header("Authorization") String token
+            @QueryMap Map<String, String> options
     );
 
     @GET("routines/{routineId}/cycles")
     Single<PagedList<RoutineCycleData>> getRoutineCycles(
             @Path("routineId") Integer routineId,
-            @QueryMap Map<String, String> options,
-            @Header("Authorization") String token
+            @QueryMap Map<String, String> options
     );
 
     @GET("routines/{routineId}/cycles/{cycleId}/exercises")
     Single<PagedList<ExerciseData>> getExercises(
             @Path("routineId") Integer routineId,
             @Path("cycleId") Integer cycleId,
-            @QueryMap Map<String, String> options,
-            @Header("Authorization") String token
+            @QueryMap Map<String, String> options
     );
 
-     @GET("user/current/routines/favourites")
+    @GET("user/current/routines/favourites")
     Single<PagedList<RoutineData>> getFavouriteRoutines(
-            @QueryMap Map<String, String> options,
-            @Header("Authorization") String token
+            @QueryMap Map<String, String> options
     );
 
 }

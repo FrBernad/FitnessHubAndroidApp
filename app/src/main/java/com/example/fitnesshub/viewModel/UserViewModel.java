@@ -10,6 +10,8 @@ import com.example.fitnesshub.model.UserAPIService;
 import com.example.fitnesshub.model.UserCredentials;
 import com.example.fitnesshub.model.UserInfo;
 
+import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,11 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.HttpException;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class UserViewModel extends ViewModel {
     private MutableLiveData<UserInfo> userInfo = new MutableLiveData<>();
@@ -56,6 +62,7 @@ public class UserViewModel extends ViewModel {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         verified.setValue(true);
@@ -80,6 +87,7 @@ public class UserViewModel extends ViewModel {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         loading.setValue(false);
@@ -94,6 +102,25 @@ public class UserViewModel extends ViewModel {
         );
     }
 
+    public void setUserData() {
+        disposable.add(userService.getCurrentUser()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<UserInfo>() {
+
+                    @Override
+                    public void onSuccess(@NonNull UserInfo info) {
+                        userInfo.setValue(info);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                    }
+                })
+        );
+    }
+
     public void tryLogin(String username, String password) {
         UserCredentials credentials = new UserCredentials(username, password);
         loading.setValue(true);
@@ -101,32 +128,28 @@ public class UserViewModel extends ViewModel {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<AuthToken>() {
+
                     @Override
                     public void onSuccess(@NonNull AuthToken authToken) {
                         token.setValue(authToken);
                         APIService.setAuthToken(authToken.getToken());
-                        disposable.add(userService.getCurrentUser()
-                                .subscribeOn(Schedulers.newThread())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribeWith(new DisposableSingleObserver<UserInfo>() {
-                                    @Override
-                                    public void onSuccess(@NonNull UserInfo info) {
-                                        loading.setValue(false);
-                                        userInfo.setValue(info);
-                                    }
-
-                                    @Override
-                                    public void onError(@NonNull Throwable e) {
-                                        loading.setValue(false);
-                                        e.printStackTrace();
-                                    }
-                                })
-                        );
+                        loading.setValue(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        if (e instanceof HttpException) {
+                            HttpException httpException = (HttpException) e;
+                            int statusCode = httpException.code();
+                            System.out.println("status code:" + statusCode + httpException.message());
+                            try {
+                                System.out.println("status cause:" + httpException.response().errorBody().string());
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+                        }
                         e.printStackTrace();
+                        loading.setValue(false);
                     }
                 })
         );
