@@ -28,7 +28,6 @@
             />
 
 
-
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
@@ -98,6 +97,7 @@
             app:auto_cycle="true"
             app:corner_radius="5"
             app:delay="0"
+            app:placeholder="@drawable/logo"
             app:error_image="@drawable/notfound"
             app:period="3000"
             />
