@@ -1,162 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteBackground"
+    android:padding="0dp">
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whiteBackground"
-        android:padding="0dp">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-    <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="30dp">
-
-        <TextView
-                android:id="@+id/RegisterText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/register"
-                android:textColor="#212529"
-                android:textSize="40sp"
-                android:textAllCaps="true"
-                android:layout_marginTop="20dp" />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp">
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/register_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:hint="@string/email"
-                    app:startIconDrawable="@drawable/ic_email_24"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconTint="@color/grey"
-                    app:hintTextColor="@color/grey"
-                    android:textColorHint="@color/grey"
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/grey"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:boxStrokeColor="@color/grey">
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/register_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:hint="@string/username"
-                    app:startIconDrawable="@drawable/ic_me_24"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconTint="@color/grey"
-                    app:hintTextColor="@color/grey"
-                    android:textColorHint="@color/grey"
-                    app:endIconMode="clear_text"
-                    app:endIconTint="@color/grey"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:boxStrokeColor="@color/grey">
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/register_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:hint="@string/password"
-                    app:startIconDrawable="@drawable/ic_password_24"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconTint="@color/grey"
-                    app:hintTextColor="@color/grey"
-                    android:textColorHint="@color/grey"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:boxStrokeColor="@color/grey"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/grey">
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-        </LinearLayout>
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="15dp"
-                    android:id="@+id/registerBtn"
-                    android:text="@string/register"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/grey"
-                    android:elevation="5dp"
-                    android:layout_centerHorizontal="true" />
+            android:layout_height="wrap_content">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/registerBtn"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/conditions"
-                    android:textAlignment="center"
-                    android:textColor="#212529"
-                    android:textSize="12sp" />
-        </RelativeLayout>
-    </LinearLayout>
+                android:id="@+id/RegisterText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="88dp"
+                android:text="@string/register"
+                android:textAllCaps="true"
 
-    <FrameLayout
-            android:id="@+id/progressBarHolder"
-            android:animateLayoutChanges="true"
-            android:alpha="0.4"
-            android:background="#000000"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="0dp"
-            android:padding="0dp">
+                android:textColor="@color/darkGrey"
+                android:textSize="40sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
-        <ProgressBar
-                style="?android:attr/progressBarStyleLarge"
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="@string/email"
+                android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:layout_constraintWidth_percent="0.8"
+                app:endIconTint="@color/grey"
+                app:hintTextColor="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2"
+                app:startIconDrawable="@drawable/ic_email_24"
+                app:startIconTint="@color/grey">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/username"
+                android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
+                app:layout_constraintWidth_percent="0.8"
+
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/grey"
+                app:hintTextColor="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_email"
+                app:startIconDrawable="@drawable/ic_me_24"
+                app:startIconTint="@color/grey">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/register_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/password"
+                app:layout_constraintWidth_percent="0.8"
+
+                android:textColorHint="@color/grey"
+                app:boxStrokeColor="@color/grey"
+                app:boxStrokeWidthFocused="2dp"
+
+                app:hintTextColor="@color/grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_username"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/grey"
+                app:startIconDrawable="@drawable/ic_password_24"
+                app:startIconTint="@color/grey">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/registerBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/grey"
+                android:elevation="5dp"
+                android:paddingVertical="15dp"
+                app:layout_constraintWidth_percent="0.6"
+
+                android:text="@string/register"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_password" />
+
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:layout_gravity="center" />
-    </FrameLayout>
+                android:layout_below="@+id/registerBtn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:text="@string/conditions"
+                android:textAlignment="center"
+                android:textColor="@color/darkGrey"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+
+
+            <FrameLayout
+                android:id="@+id/progressBarHolder"
+                android:layout_width="342dp"
+                android:layout_height="143dp"
+                android:layout_margin="0dp"
+                android:alpha="0.4"
+                android:animateLayoutChanges="true"
+                android:background="#000000"
+                android:gravity="center"
+                android:padding="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true" />
+            </FrameLayout>
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
