@@ -195,6 +195,7 @@ public class UserViewModel extends AndroidViewModel {
                 .subscribeWith(new DisposableSingleObserver<UserInfo>() {
                     @Override
                     public void onSuccess(@NonNull UserInfo info) {
+                        System.out.println("succes");
                         userInfo.setValue(info);
                         loading.setValue(false);
                     }
@@ -254,7 +255,7 @@ public class UserViewModel extends AndroidViewModel {
         loginError.setValue(error);
     }
 
-     public void setRegisterErrorErrorCode(ErrorResponse error) {
+     public void setRegisterError(ErrorResponse error) {
         registerError.setValue(error);
     }
 

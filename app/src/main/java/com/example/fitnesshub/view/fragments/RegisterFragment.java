@@ -70,24 +70,6 @@ public class RegisterFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private void tryRegister() {
-        if (!validateEmail() | !validateUsername() | !validatePassword()) {
-            return;
-        }
-
-        UserInfo userInfo = new UserInfo(username.getEditText().getText().toString()
-                , password.getEditText().getText().toString()
-                , ""
-                , "other"
-                , 0
-                , email.getEditText().getText().toString()
-                , ""
-                , ""
-        );
-
-        viewModel.tryRegister(userInfo);
 
         viewModel.getRegisterError().observe(getViewLifecycleOwner(), error -> {
             if (error != null) {
@@ -103,14 +85,14 @@ public class RegisterFragment extends Fragment {
                             email.setError(null);
                             errorMessage.setText("");
                         }, 5000);
-                        viewModel.setRegisterErrorErrorCode(null);
+                        viewModel.setRegisterError(null);
                         break;
                     default:
                         errorMessage.setText(R.string.default_error);
                         new Handler().postDelayed(() -> {
                             errorMessage.setText("");
                         }, 3000);
-                        viewModel.setRegisterErrorErrorCode(null);
+                        viewModel.setRegisterError(null);
                         break;
                 }
             }
@@ -121,6 +103,23 @@ public class RegisterFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerifyUserFragment());
             }
         });
+    }
+
+    private void tryRegister() {
+        if (!validateEmail() | !validateUsername() | !validatePassword()) {
+            return;
+        }
+        UserInfo userInfo = new UserInfo(username.getEditText().getText().toString()
+                , password.getEditText().getText().toString()
+                , ""
+                , "other"
+                , 0
+                , email.getEditText().getText().toString()
+                , ""
+                , ""
+        );
+
+        viewModel.tryRegister(userInfo);
     }
 
     private boolean validateEmail() {
