@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_toolbar, menu);
         return true;
     }
+}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
