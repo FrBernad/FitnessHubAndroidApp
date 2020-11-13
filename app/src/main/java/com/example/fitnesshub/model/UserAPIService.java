@@ -62,4 +62,9 @@ public class UserAPIService extends APIService implements UserAPI {
     public Single<Response<Void>> resendVerification(Map<String,String> data) {
         return api.resendVerification(data);
     }
+
+    @Override
+    public Single<Response<Void>> logout() {
+        return api.logout();
+    }
 }

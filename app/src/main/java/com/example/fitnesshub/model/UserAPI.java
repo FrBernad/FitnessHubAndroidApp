@@ -13,6 +13,9 @@ public interface UserAPI {
     @POST("user/login")
     Single<AuthToken> login(@Body UserCredentials credentials);
 
+    @POST("user/logout")
+    Single<Response<Void>> logout();
+
     @GET("user/current")
     Single<UserInfo> getCurrentUser();
 
@@ -23,6 +26,6 @@ public interface UserAPI {
     Single<Response<Void>> verifyEmail(@Body VerificationData credentials);
 
     @POST("user/resend_verification")
-    Single<Response<Void>> resendVerification(@Body Map<String,String> data);
+    Single<Response<Void>> resendVerification(@Body Map<String, String> data);
 
 }

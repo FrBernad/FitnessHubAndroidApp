@@ -102,6 +102,25 @@ public class UserViewModel extends AndroidViewModel {
         );
     }
 
+    public void logout() {
+        disposable.add(userService.logout()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+                        new AppPreferences(app).setAuthToken(null);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                    }
+                })
+        );
+    }
+
     public void resendVerification(String email) {
         Map<String, String> data = new HashMap<>();
         data.put("email", email);
