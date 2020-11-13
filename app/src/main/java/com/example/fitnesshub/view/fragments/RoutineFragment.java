@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,6 +59,7 @@ public class RoutineFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -80,7 +82,6 @@ public class RoutineFragment extends Fragment {
         View view = binding.getRoot();
 
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
-
         return view;
     }
 
@@ -139,5 +140,13 @@ public class RoutineFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        
+        inflater.inflate(R.menu.routine_toolbar,menu);
+        super.onCreateOptionsMenu(menu,inflater);
     }
 }
