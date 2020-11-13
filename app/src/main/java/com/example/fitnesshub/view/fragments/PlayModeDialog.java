@@ -16,11 +16,9 @@ import com.example.fitnesshub.R;
 public class PlayModeDialog extends AppCompatDialogFragment {
 
     private String routineData;
-    private Context context;
 
-    public PlayModeDialog(String routineData, Context context) {
+    public PlayModeDialog(String routineData) {
         this.routineData = routineData;
-        this.context = context;
     }
 
     @Override
