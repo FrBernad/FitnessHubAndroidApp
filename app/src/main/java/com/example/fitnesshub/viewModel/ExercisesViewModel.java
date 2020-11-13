@@ -1,5 +1,9 @@
 package com.example.fitnesshub.viewModel;
 
+import android.app.Application;
+import android.content.Context;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,14 +23,20 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ExercisesViewModel extends ViewModel {
+public class ExercisesViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<ExerciseData>> warmupExercises = new MutableLiveData<>();
     private MutableLiveData<List<ExerciseData>> mainExercises = new MutableLiveData<>();
     private MutableLiveData<List<ExerciseData>> cooldownExercises = new MutableLiveData<>();
 
-    private RoutinesAPIService routinesService = new RoutinesAPIService();
+    private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
+
+
+    public ExercisesViewModel(@androidx.annotation.NonNull Application application) {
+        super(application);
+        routinesService = new RoutinesAPIService(application);
+    }
 
     public void refresh(int routineId) {
         fetchFromRemote(routineId);
@@ -76,6 +86,7 @@ public class ExercisesViewModel extends ViewModel {
                                     );
                                 }
                             }
+
                             @Override
                             public void onError(@NonNull Throwable e) {
                                 e.printStackTrace();

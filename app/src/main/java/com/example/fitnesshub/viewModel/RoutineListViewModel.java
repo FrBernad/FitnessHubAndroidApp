@@ -26,7 +26,7 @@ public class RoutineListViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<Boolean> changedOptions = new MutableLiveData<>();
 
-    private RoutinesAPIService routinesService = new RoutinesAPIService();
+    private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
 
     private int currentPage = 0;
@@ -35,8 +35,10 @@ public class RoutineListViewModel extends AndroidViewModel {
     private boolean isLastPage = false;
     private String direction = "asc";
 
+
     public RoutineListViewModel(@NonNull Application application) {
         super(application);
+        routinesService = new RoutinesAPIService(application);
     }
 
     public void updateData() {

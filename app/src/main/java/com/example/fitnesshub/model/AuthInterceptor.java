@@ -1,5 +1,7 @@
 package com.example.fitnesshub.model;
 
+import android.content.Context;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,12 +16,19 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class AuthInterceptor implements Interceptor {
+    private final AppPreferences preferences;
+
+    public AuthInterceptor(Context context) {
+        this.preferences = new AppPreferences(context);
+    }
+
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
-        Request newRequest = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer " + APIService.getAuthToken())
-                .build();
-        return chain.proceed(newRequest);
+        Request.Builder newRequest = chain.request().newBuilder();
+         if (preferences.getAuthToken() != null) {
+            newRequest.addHeader("Authorization", "Bearer " + preferences.getAuthToken());
+        }
+        return chain.proceed(newRequest.build());
     }
 }
