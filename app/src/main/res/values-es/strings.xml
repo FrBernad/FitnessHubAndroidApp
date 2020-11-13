@@ -30,6 +30,8 @@
     <string name="welcome_first_heading">Entrena al máximo</string>
     <string name="wrong_credentials">Usuario o contraseña incorrecta, intente denuevo.</string>
     <string name="user_not_verified">Tu cuenta no está verificada, redirigiendo a la ventana de verificacion.</string>
+    <string name="already_exists">Ya existe un usuario con bajo ese email o nombre, intenta denuevo.</string>
+    <string name="default_error">Ocurrió un error inesperado, intenta denuevo.</string>
 
     <string name="welcome_second_heading">Rutinas de alta calidad donde quieras y cuando quieras</string>
     <string name="welcome_second_heading_land">Rutinas de alta calidad\ndonde quieras y cuando quieras</string>

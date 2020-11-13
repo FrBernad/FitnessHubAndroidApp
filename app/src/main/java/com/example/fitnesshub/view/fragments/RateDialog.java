@@ -40,11 +40,7 @@ public class RateDialog extends AppCompatDialogFragment {
 
         View view = binding.getRoot();
 
-        builder.setView(view).setTitle("Rate the routine").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
+        builder.setView(view).setTitle("Rate the routine").setNegativeButton("Cancel", (dialog, which) -> {
         }).setPositiveButton("Ok", (dialog, which) -> {
             viewModel.rateRoutine(routineId,(int)ratingBar.getRating());
         });

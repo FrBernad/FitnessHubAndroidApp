@@ -93,6 +93,12 @@ public class LoginFragment extends Fragment {
                         }, 3000);
                         viewModel.setLoginErrorCode(null);
                         break;
+                    default:
+                        errorMessage.setText(R.string.default_error);
+                        new Handler().postDelayed(() -> {
+                            errorMessage.setText("");
+                        }, 3000);
+                        break;
                 }
             }
         });

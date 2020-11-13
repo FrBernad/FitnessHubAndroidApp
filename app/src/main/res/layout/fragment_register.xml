@@ -47,31 +47,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/RegisterText" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/register_email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:hint="@string/email"
-                android:textColorHint="@color/grey"
-                app:boxStrokeColor="@color/grey"
-                app:boxStrokeWidthFocused="2dp"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2"
-                app:layout_constraintWidth_percent="0.8"
-                app:startIconDrawable="@drawable/ic_email_24"
-                app:startIconTint="@color/grey">
+                    android:id="@+id/register_email"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:textColorHint="@color/grey"
+                    app:boxStrokeColor="@color/grey"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/grey"
+                    app:hintTextColor="@color/grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2"
+                    app:layout_constraintWidth_percent="0.8"
+                    app:startIconDrawable="@drawable/ic_email_24"
+                    app:startIconTint="@color/grey"
+                    android:layout_marginTop="35dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
 
-                    android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -134,37 +134,48 @@
 
 
             <Button
-                android:id="@+id/registerBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/grey"
-                android:elevation="5dp"
-                android:paddingVertical="15dp"
-                android:text="@string/register"
+                    android:id="@+id/registerBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:backgroundTint="@color/grey"
+                    android:elevation="5dp"
+                    android:paddingVertical="15dp"
+                    android:text="@string/register"
 
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/register_password"
-                app:layout_constraintWidth_percent="0.6" />
-
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.6"
+                    app:layout_constraintTop_toBottomOf="@+id/registerErrorMessage" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/registerBtn"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="24dp"
-                android:text="@string/conditions"
-                android:textAlignment="center"
-                android:textColor="@color/darkGrey"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/registerBtn"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/conditions"
+                    android:textAlignment="center"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+
+            <TextView
+                    android:gravity="center"
+                    android:textColor="@color/red"
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:id="@+id/registerErrorMessage"
+                    app:layout_constraintTop_toBottomOf="@+id/register_password"
+                    app:layout_constraintBottom_toTopOf="@+id/registerBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:paddingHorizontal="30dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

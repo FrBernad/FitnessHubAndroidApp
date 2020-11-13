@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRegisterBinding;
@@ -25,6 +27,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class RegisterFragment extends Fragment {
 
     private TextInputLayout email, username, password;
+    private TextView errorMessage;
 
     private FragmentRegisterBinding binding;
 
@@ -41,6 +44,7 @@ public class RegisterFragment extends Fragment {
         email = binding.registerEmail;
         password = binding.registerPassword;
         username = binding.registerUsername;
+        errorMessage = binding.registerErrorMessage;
         Button registerBtn = binding.registerBtn;
         progressBarHolder = binding.progressBarHolder;
 
@@ -77,13 +81,40 @@ public class RegisterFragment extends Fragment {
                 , password.getEditText().getText().toString()
                 , ""
                 , "other"
-                , ""
+                , 0
                 , email.getEditText().getText().toString()
                 , ""
                 , ""
         );
 
         viewModel.tryRegister(userInfo);
+
+        viewModel.getRegisterError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null) {
+                switch (error.getCode()) {
+                    case 2:
+                        errorMessage.setText(R.string.already_exists);
+                        password.setError(" ");
+                        username.setError(" ");
+                        email.setError(" ");
+                        new Handler().postDelayed(() -> {
+                            password.setError(null);
+                            username.setError(null);
+                            email.setError(null);
+                            errorMessage.setText("");
+                        }, 3000);
+                        viewModel.setRegisterErrorErrorCode(null);
+                        break;
+                    default:
+                        errorMessage.setText(R.string.default_error);
+                        new Handler().postDelayed(() -> {
+                            errorMessage.setText("");
+                        }, 3000);
+                        viewModel.setRegisterErrorErrorCode(null);
+                        break;
+                }
+            }
+        });
 
         viewModel.getUserData().observe(getViewLifecycleOwner(), userData -> {
             if (userData != null) {

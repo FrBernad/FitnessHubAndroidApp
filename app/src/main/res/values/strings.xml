@@ -30,6 +30,8 @@
     <string name="welcome_second_heading_land">High-quality workout routines\nanywhere, anytime</string>
     <string name="wrong_credentials">Invalid username or password, try again.</string>
     <string name="user_not_verified">Your account is not verified, redirecting to verification screen.</string>
+    <string name="already_exists">There is already a user with under that email or username, try again.</string>
+    <string name="default_error">Something went wrong, try again.</string>
 
     <string name="rookie">Rookie</string>
     <string name="beginner">Beginner</string>

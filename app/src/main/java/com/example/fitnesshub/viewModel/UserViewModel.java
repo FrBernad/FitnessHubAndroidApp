@@ -52,6 +52,7 @@ public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
     private MutableLiveData<ErrorResponse> loginError = new MutableLiveData<>();
+    private MutableLiveData<ErrorResponse> registerError = new MutableLiveData<>();
 
     private UserAPIService userService;
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -200,6 +201,18 @@ public class UserViewModel extends AndroidViewModel {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        if (e instanceof HttpException) {
+                            HttpException httpException = (HttpException) e;
+                            try {
+                                Gson gson = new Gson();
+                                ErrorResponse error;
+                                error = gson.fromJson(httpException.response().errorBody().string(), new TypeToken<ErrorResponse>() {
+                                }.getType());
+                                registerError.setValue(error);
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+                        }
                         e.printStackTrace();
                         loading.setValue(false);
                     }
@@ -233,8 +246,17 @@ public class UserViewModel extends AndroidViewModel {
         return loginError;
     }
 
-    public void setLoginErrorCode(ErrorResponse error){
+    public MutableLiveData<ErrorResponse> getRegisterError() {
+        return registerError;
+    }
+
+    public void setLoginErrorCode(ErrorResponse error) {
         loginError.setValue(error);
     }
+
+     public void setRegisterErrorErrorCode(ErrorResponse error) {
+        registerError.setValue(error);
+    }
+
 
 }
