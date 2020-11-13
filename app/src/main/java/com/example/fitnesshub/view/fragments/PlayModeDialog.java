@@ -2,16 +2,26 @@ package com.example.fitnesshub.view.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.navigation.Navigation;
 
 import com.example.fitnesshub.R;
 
 public class PlayModeDialog extends AppCompatDialogFragment {
+
+    private String routineData;
+    private Context context;
+
+    public PlayModeDialog(String routineData, Context context) {
+        this.routineData = routineData;
+        this.context = context;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,6 +35,12 @@ public class PlayModeDialog extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialog, int which) {
             }
         });
+
+        view.findViewById(R.id.simpleMode).setOnClickListener(v-> {
+            Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData));
+        }
+        );
+
         return builder.create();
     }
 }

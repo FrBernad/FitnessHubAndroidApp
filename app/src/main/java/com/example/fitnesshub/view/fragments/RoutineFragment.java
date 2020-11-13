@@ -50,7 +50,6 @@ public class RoutineFragment extends Fragment {
     private TextView author;
     private TextView detail;
 
-    private Menu menu;
     private MenuItem fav;
     private MenuItem unfav;
 
@@ -104,7 +103,6 @@ public class RoutineFragment extends Fragment {
         }
 
         playBtn.setOnClickListener(v -> {
-//            Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData.getTitle()));
                 openPlayModeDialog();
         });
 
@@ -195,7 +193,7 @@ public class RoutineFragment extends Fragment {
     }
 
     public void openPlayModeDialog() {
-        PlayModeDialog playModeDialog = new PlayModeDialog();
+        PlayModeDialog playModeDialog = new PlayModeDialog(routineData.getTitle(), getContext());
         playModeDialog.show(getParentFragmentManager(), "example dialog");
     }
 
