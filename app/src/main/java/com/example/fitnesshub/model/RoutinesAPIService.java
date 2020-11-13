@@ -44,6 +44,11 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
     }
 
     @Override
+    public Single<RoutineData> rateRoutine(Integer routineId, Map<String, String> rating) {
+        return api.rateRoutine(routineId,rating);
+    }
+
+    @Override
     public Single<PagedList<ExerciseData>> getExercises(Integer routineId, Integer cycleId, Map<String, String> options) {
         return api.getExercises(routineId, cycleId, options);
     }

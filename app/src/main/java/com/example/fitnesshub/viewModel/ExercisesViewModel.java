@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.fitnesshub.model.ExerciseData;
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineCycleData;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
 
 import java.util.ArrayList;
@@ -94,6 +95,28 @@ public class ExercisesViewModel extends AndroidViewModel {
                         })
         );
 
+    }
+
+    public void rateRoutine(int routineId, int value) {
+        Map<String, String> rating = new HashMap<>();
+        rating.put("score", String.valueOf(value));
+        rating.put("review", "");
+        disposable.add(
+                routinesService.rateRoutine(routineId, rating)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<RoutineData>() {
+                            @Override
+                            public void onSuccess(@NonNull RoutineData routineData) {
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
     }
 
     @Override

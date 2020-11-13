@@ -3,8 +3,9 @@ package com.example.fitnesshub.model;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -31,6 +32,12 @@ public interface RoutinesAPI {
     @GET("user/current/routines/favourites")
     Single<PagedList<RoutineData>> getFavouriteRoutines(
             @QueryMap Map<String, String> options
+    );
+
+    @POST("routines/{routineId}/ratings")
+    Single<RoutineData> rateRoutine(
+            @Path("routineId") Integer routineId,
+            @Body Map<String, String> rating
     );
 
 }

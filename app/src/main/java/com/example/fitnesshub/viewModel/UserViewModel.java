@@ -107,7 +107,6 @@ public class UserViewModel extends AndroidViewModel {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
-
                     @Override
                     public void onSuccess(@NonNull Response<Void> voidResponse) {
                         new AppPreferences(app).setAuthToken(null);

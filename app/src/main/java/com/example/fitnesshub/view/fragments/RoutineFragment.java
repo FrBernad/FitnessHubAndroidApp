@@ -166,8 +166,6 @@ public class RoutineFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        System.out.println(id);
-        System.out.println(R.id.app_bar_share);
         if(id == R.id.app_bar_rate){
             openRateDialog();
         }
@@ -191,7 +189,7 @@ public class RoutineFragment extends Fragment {
     }
 
     public void openRateDialog() {
-        RateDialog rateDialog = new RateDialog();
+        RateDialog rateDialog = new RateDialog(routineId, getActivity());
         rateDialog.show(getParentFragmentManager(), "Example dialog");
     }
 

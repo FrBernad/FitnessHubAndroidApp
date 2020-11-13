@@ -48,10 +48,13 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
         tabs = view.findViewById(R.id.myActivityTabs);
         viewPager = view.findViewById(R.id.viewPager);
 
+        TabsAdapter tabsAdapter = new TabsAdapter(this);
+
+        viewPager.setAdapter(tabsAdapter);
+
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                System.out.println(tab.getPosition());
                 viewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -65,9 +68,6 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
 
             }
         });
-
-        TabsAdapter tabsAdapter = new TabsAdapter(this);
-        viewPager.setAdapter(tabsAdapter);
 
         new TabLayoutMediator(tabs, viewPager, (tab, position) -> {
             switch (position) {
@@ -97,8 +97,6 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
         orderSpinner.setAdapter(orderActivityAdapter);
         orderSpinner.setOnItemSelectedListener(this);
     }
-
-    // perform setOnTabSelectedListener event on TabLayout
 
     @Override
     public void onDestroy() {
