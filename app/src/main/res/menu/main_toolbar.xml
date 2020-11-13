@@ -40,8 +40,8 @@
         android:id="@+id/app_bar_share"
         android:icon="@drawable/ic_share_24"
         android:title="@string/action_share"
-        app:showAsAction="ifRoom"
         android:orderInCategory="4"
+        app:showAsAction="ifRoom"
         android:visible="false"/>
 
 
