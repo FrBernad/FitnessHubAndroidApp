@@ -61,6 +61,7 @@ public class RoutineFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -81,8 +82,8 @@ public class RoutineFragment extends Fragment {
         image = binding.imageView;
 
         View view = binding.getRoot();
-
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
         return view;
     }
 

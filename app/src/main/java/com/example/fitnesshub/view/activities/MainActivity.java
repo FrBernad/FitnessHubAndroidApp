@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        System.out.println(id);
-        System.out.println(R.id.app_bar_share);
         if(id == R.id.app_bar_leave_session){
             System.out.println("leave session");
             return true;
