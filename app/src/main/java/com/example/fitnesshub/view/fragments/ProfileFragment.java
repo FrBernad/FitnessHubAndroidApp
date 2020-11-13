@@ -102,7 +102,6 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
     private void seedProfile() {
         userViewModel.getUserInfo().observe(getViewLifecycleOwner(),userInfo -> {
             if(userInfo!=null){
-                System.out.println("setting data");
                 binding.setUserInfo(userInfo);
                 if(!userInfo.getAvatarUrl().equals("")){
                     Glide.with(binding.getRoot()).load(userInfo.getAvatarUrl()).into(binding.profileImage);

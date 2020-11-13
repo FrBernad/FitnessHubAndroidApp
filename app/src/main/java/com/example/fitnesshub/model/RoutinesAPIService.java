@@ -40,6 +40,16 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
     }
 
     @Override
+    public Single<PagedList<RoutineData>> getUserRoutines(Map<String, String> options) {
+        return api.getUserRoutines(options);
+    }
+
+    @Override
+    public Single<PagedList<RoutineData>> getUserHistory(Map<String, String> options) {
+        return api.getUserHistory(options);
+    }
+
+    @Override
     public Single<PagedList<RoutineData>> getFavouriteRoutines(Map<String, String> options) {
         return api.getFavouriteRoutines(options);
     }

@@ -5,9 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -19,11 +17,8 @@ import android.widget.FrameLayout;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentLoginBinding;
 import com.example.fitnesshub.view.activities.MainActivity;
-import com.example.fitnesshub.viewModel.RoutineListViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.textfield.TextInputLayout;
-
-import java.nio.file.Path;
 
 public class LoginFragment extends Fragment {
 

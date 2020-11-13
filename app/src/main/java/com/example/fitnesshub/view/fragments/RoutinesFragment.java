@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
 import com.example.fitnesshub.view.adapters.OrderAdapter;
 import com.example.fitnesshub.view.adapters.RoutinesAdapter;
 import com.example.fitnesshub.view.adapters.SortAdapter;
-import com.example.fitnesshub.viewModel.RoutineListViewModel;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 
 public class RoutinesFragment extends Fragment {
 
-    private RoutineListViewModel viewModel;
+    private RoutinesViewModel viewModel;
 
     private TextView textViewFilter;
 
@@ -40,8 +41,9 @@ public class RoutinesFragment extends Fragment {
     private FragmentRoutinesBinding binding;
 
     private NestedScrollView nestedScrollView;
-    private RecyclerView recylcerView;
+    private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private Spinner sortSpinner;
     private Spinner orderSpinner;
@@ -59,44 +61,46 @@ public class RoutinesFragment extends Fragment {
         View view = binding.getRoot();
 
         nestedScrollView = binding.scrollView;
-        recylcerView = binding.recyclerView;
+        recyclerView = binding.recyclerView;
         progressBar = binding.progressBar;
+        swipeRefreshLayout = binding.swipeRefresh;
 
         return view;
     }
 
-    private void setSpinners(View view) {
-        sortSpinner = view.findViewById(R.id.sortDiscoverSpinner);
-        ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, android.R.layout.simple_spinner_item);
-        sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortSpinner.setAdapter(sortDiscoverAdapter);
-        sortSpinner.setOnItemSelectedListener(new SortAdapter(viewModel));
-
-        orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
-        ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.order, android.R.layout.simple_spinner_item);
-        orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        orderSpinner.setAdapter(orderDiscoverAdapter);
-        orderSpinner.setOnItemSelectedListener(new OrderAdapter(viewModel));
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(RoutineListViewModel.class);
-
-        viewModel.updateData();
+        viewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
 
         setSpinners(view);
 
-        recylcerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recylcerView.setAdapter(routinesAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(routinesAdapter);
+
+        viewModel.getRoutinesFirstLoad().observe(getViewLifecycleOwner(), firstLoad ->{
+            if (firstLoad!=null){
+                if(firstLoad){
+                    viewModel.updateData();
+                    viewModel.setRoutinesFirstLoad(false);
+                }
+            }
+        });
 
         viewModel.getRoutineCards().observe(getViewLifecycleOwner(), routines -> {
             if (routines != null) {
                 routinesAdapter.updateRoutines(routines);
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+                    routinesAdapter.resetRoutines();
+                    viewModel.resetData();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+        );
 
 //        viewModel.getChangedOptions().observe(getViewLifecycleOwner(), changed -> {
 //            if (changed != null) {
@@ -131,6 +135,22 @@ public class RoutinesFragment extends Fragment {
                         viewModel.updateData();
                     }
                 });
+
+    }
+
+
+    private void setSpinners(View view) {
+        sortSpinner = view.findViewById(R.id.sortDiscoverSpinner);
+        ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, android.R.layout.simple_spinner_item);
+        sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(sortDiscoverAdapter);
+        sortSpinner.setOnItemSelectedListener(new SortAdapter(viewModel));
+
+        orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
+        ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.order, android.R.layout.simple_spinner_item);
+        orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        orderSpinner.setAdapter(orderDiscoverAdapter);
+        orderSpinner.setOnItemSelectedListener(new OrderAdapter(viewModel));
     }
 
 }

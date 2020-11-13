@@ -4,13 +4,13 @@ import android.view.View;
 import android.widget.AdapterView;
 
 
-import com.example.fitnesshub.viewModel.RoutineListViewModel;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 public class SortAdapter implements AdapterView.OnItemSelectedListener {
 
-    private RoutineListViewModel viewModel;
+    private RoutinesViewModel viewModel;
 
-    public SortAdapter(RoutineListViewModel viewModel) {
+    public SortAdapter(RoutinesViewModel viewModel) {
         this.viewModel = viewModel;
     }
 

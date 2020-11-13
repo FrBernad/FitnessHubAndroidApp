@@ -18,6 +18,16 @@ public interface RoutinesAPI {
             @QueryMap Map<String, String> options
     );
 
+    @GET("user/current/routines/")
+    Single<PagedList<RoutineData>> getUserRoutines(
+            @QueryMap Map<String, String> options
+    );
+
+    @GET("user/current/routines/executions")
+    Single<PagedList<RoutineData>> getUserHistory(
+            @QueryMap Map<String, String> options
+    );
+
     @GET("routines/{routineId}/cycles")
     Single<PagedList<RoutineCycleData>> getRoutineCycles(
             @Path("routineId") Integer routineId,
