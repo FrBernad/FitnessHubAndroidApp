@@ -2,6 +2,7 @@ package com.example.fitnesshub.model;
 
 
 import android.content.Context;
+import android.media.Rating;
 
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
     }
 
     @Override
-    public Single<RoutineData> rateRoutine(Integer routineId, Map<String, String> rating) {
+    public Single<RoutineData> rateRoutine(Integer routineId, RoutineRating rating) {
         return api.rateRoutine(routineId,rating);
     }
 

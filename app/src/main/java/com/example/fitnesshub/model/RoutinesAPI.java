@@ -1,5 +1,7 @@
 package com.example.fitnesshub.model;
 
+import android.media.Rating;
+
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
@@ -37,7 +39,7 @@ public interface RoutinesAPI {
     @POST("routines/{routineId}/ratings")
     Single<RoutineData> rateRoutine(
             @Path("routineId") Integer routineId,
-            @Body Map<String, String> rating
+            @Body RoutineRating rating
     );
 
 }
