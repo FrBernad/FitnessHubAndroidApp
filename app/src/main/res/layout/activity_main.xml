@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/darkGrey"
             android:elevation="10dp"
-            android:theme="@style/Toolbar_style"/>
+            android:theme="@style/Toolbar_style" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

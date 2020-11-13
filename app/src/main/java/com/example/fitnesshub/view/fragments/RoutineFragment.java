@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -150,4 +151,29 @@ public class RoutineFragment extends Fragment {
         inflater.inflate(R.menu.routine_toolbar,menu);
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        System.out.println(id);
+        System.out.println(R.id.app_bar_share);
+        if(id == R.id.app_bar_rate){
+            System.out.println("Estrella");
+        }
+        else if(id == R.id.app_bar_favorite_filled){
+            System.out.println("favorito");
+        }
+        else{
+               return super.onOptionsItemSelected(item);
+        }
+//            default:
+//                // If we got here, the user's action was not recognized.
+//                // Invoke the superclass to handle it.
+//               return super.onOptionsItemSelected(item);
+//
+//        }
+        return true;
+    }
+
+
 }
