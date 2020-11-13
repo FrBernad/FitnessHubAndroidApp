@@ -28,6 +28,8 @@
     <string name="welcome_first_heading">Train yourself and others</string>
     <string name="welcome_second_heading">High-quality workout routines anywhere, anytime</string>
     <string name="welcome_second_heading_land">High-quality workout routines\nanywhere, anytime</string>
+    <string name="wrong_credentials">Invalid username or password, try again.</string>
+    <string name="user_not_verified">Your account is not verified, redirecting to verification screen.</string>
 
     <string name="rookie">Rookie</string>
     <string name="beginner">Beginner</string>

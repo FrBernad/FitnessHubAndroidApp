@@ -7,12 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentLoginBinding;
@@ -24,6 +27,7 @@ public class LoginFragment extends Fragment {
 
     //For validation
     private TextInputLayout username, password;
+    private TextView errorMessage;
 
     private UserViewModel viewModel;
     private FrameLayout progressBarHolder;
@@ -35,6 +39,7 @@ public class LoginFragment extends Fragment {
         FragmentLoginBinding binding = FragmentLoginBinding.inflate(getLayoutInflater());
         username = binding.loginUsername;
         password = binding.loginPassword;
+        errorMessage = binding.errorMessage;
         progressBarHolder = binding.progressBarHolder;
 
         View view = binding.getRoot();
@@ -65,8 +70,32 @@ public class LoginFragment extends Fragment {
         if (!validateUsername() | !validatePassword()) {
             return;
         }
-
         viewModel.tryLogin(username.getEditText().getText().toString(), password.getEditText().getText().toString());
+
+        viewModel.getLoginError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null) {
+                switch (error.getCode()) {
+                    case 4:
+                        errorMessage.setText(R.string.wrong_credentials);
+                        password.setError(" ");
+                        username.setError(" ");
+                        new Handler().postDelayed(() -> {
+                            password.setError(null);
+                            username.setError(null);
+                            errorMessage.setText("");
+                        }, 3000);
+                        viewModel.setLoginErrorCode(null);
+                        break;
+                    case 8:
+                        errorMessage.setText(R.string.user_not_verified);
+                        new Handler().postDelayed(() -> {
+                            Navigation.findNavController(getView()).navigate(LoginFragmentDirections.actionLoginFragmentToVerifyUserFragment());
+                        }, 3000);
+                        viewModel.setLoginErrorCode(null);
+                        break;
+                }
+            }
+        });
 
         viewModel.getToken().observe(getViewLifecycleOwner(), authToken -> {
             if (authToken != null) {

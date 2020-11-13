@@ -12,6 +12,7 @@
     <color name="whiteBright">#F8F9FA</color>
     <color name="whiteOpaque">#ADB5BD</color>
     <color name="whiteBackground">#E9ECEF</color>
+    <color name="red">#CC0000</color>
 
 
 </resources>

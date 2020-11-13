@@ -28,6 +28,8 @@
     <string name="register">Registrar</string>
     <string name="conditions">Presionando "Registar", acepta los terminos y condiciones de uso.</string>
     <string name="welcome_first_heading">Entrena al máximo</string>
+    <string name="wrong_credentials">Usuario o contraseña incorrecta, intente denuevo.</string>
+    <string name="user_not_verified">Tu cuenta no está verificada, redirigiendo a la ventana de verificacion.</string>
 
     <string name="welcome_second_heading">Rutinas de alta calidad donde quieras y cuando quieras</string>
     <string name="welcome_second_heading_land">Rutinas de alta calidad\ndonde quieras y cuando quieras</string>
