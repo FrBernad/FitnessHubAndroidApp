@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.databinding.ChooseExecutionDialogBinding;
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
@@ -102,7 +104,8 @@ public class RoutineFragment extends Fragment {
         }
 
         playBtn.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData.getTitle()));
+//            Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData.getTitle()));
+                openPlayModeDialog();
         });
 
         title.setText(routineData.getTitle());
@@ -189,6 +192,11 @@ public class RoutineFragment extends Fragment {
     public void changeFavStatus() {
         fav.setVisible(!isFav);
         unfav.setVisible(isFav);
+    }
+
+    public void openPlayModeDialog() {
+        PlayModeDialog playModeDialog = new PlayModeDialog();
+        playModeDialog.show(getParentFragmentManager(), "example dialog");
     }
 
 
