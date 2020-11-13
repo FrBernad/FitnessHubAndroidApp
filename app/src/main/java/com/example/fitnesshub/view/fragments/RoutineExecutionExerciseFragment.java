@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view;
+package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.fitnesshub.R;
 
-public class RoutineExecutionExercise extends Fragment {
+public class RoutineExecutionExerciseFragment extends Fragment {
 
 
     @Override

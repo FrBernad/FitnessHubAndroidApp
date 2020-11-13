@@ -58,7 +58,6 @@ public class RoutinesFragment extends Fragment {
 
         View view = binding.getRoot();
 
-
         nestedScrollView = binding.scrollView;
         recylcerView = binding.recyclerView;
         progressBar = binding.progressBar;
@@ -99,14 +98,14 @@ public class RoutinesFragment extends Fragment {
             }
         });
 
-        viewModel.getChangedOptions().observe(getViewLifecycleOwner(), changed -> {
-            if (changed != null) {
-                if (changed) {
-                    routinesAdapter.resetRoutines();
-                    viewModel.updateData();
-                }
-            }
-        });
+//        viewModel.getChangedOptions().observe(getViewLifecycleOwner(), changed -> {
+//            if (changed != null) {
+//                if (changed) {
+//                    routinesAdapter.resetRoutines();
+//                    viewModel.updateData();
+//                }
+//            }
+//        });
 
         viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading != null) {
