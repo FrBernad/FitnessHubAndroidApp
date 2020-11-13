@@ -63,10 +63,7 @@ public class RoutineFragment extends Fragment {
     private int routineId;
     private RoutineData routineData;
 
-    public RoutineFragment() {
-    }
-
-    @Override
+     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -159,6 +156,7 @@ public class RoutineFragment extends Fragment {
         menu.findItem(R.id.app_bar_share).setVisible(true);
         menu.findItem(R.id.app_bar_rate).setVisible(true);
         menu.findItem(R.id.app_bar_favorite_outlined).setVisible(true);
+
         fav = menu.findItem(R.id.app_bar_favorite_filled);
         unfav = menu.findItem(R.id.app_bar_favorite_outlined);
         super.onCreateOptionsMenu(menu,inflater);
@@ -180,12 +178,6 @@ public class RoutineFragment extends Fragment {
         else{
                return super.onOptionsItemSelected(item);
         }
-//            default:
-//                // If we got here, the user's action was not recognized.
-//                // Invoke the superclass to handle it.
-//               return super.onOptionsItemSelected(item);
-//
-//        }
         return true;
     }
 

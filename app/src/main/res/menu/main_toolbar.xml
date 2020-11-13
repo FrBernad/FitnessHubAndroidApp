@@ -6,6 +6,7 @@
         android:id="@+id/app_bar_leave_session"
         android:icon="@drawable/ic_exit_24"
         android:title="@string/leave_session"
+        android:orderInCategory="5"
         app:showAsAction="never"
         android:visible="false" />
 
@@ -14,13 +15,17 @@
         android:icon="@drawable/ic_star_24"
         android:title="@string/action_rate"
         app:showAsAction="ifRoom"
-        android:visible="false"/>
+        android:visible="false"
+        android:orderInCategory="1"
+
+        />
 
     <item
         android:id="@+id/app_bar_favorite_outlined"
         android:icon="@drawable/ic_favorite_outlined_24"
         android:title="@string/action_favorite_outlined"
         app:showAsAction="always"
+        android:orderInCategory="2"
         android:visible="false"/>
 
     <item
@@ -28,6 +33,7 @@
         android:icon="@drawable/ic_favorite_filled_24"
         android:title="@string/action_favorite_filled"
         app:showAsAction="always"
+        android:orderInCategory="2"
         android:visible="false"/>
 
     <item
@@ -35,6 +41,7 @@
         android:icon="@drawable/ic_share_24"
         android:title="@string/action_share"
         app:showAsAction="ifRoom"
+        android:orderInCategory="4"
         android:visible="false"/>
 
 
