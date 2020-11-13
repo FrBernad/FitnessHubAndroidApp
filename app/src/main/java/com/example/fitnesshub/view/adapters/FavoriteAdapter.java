@@ -14,7 +14,7 @@ import com.example.fitnesshub.model.RoutineData;
 
 import java.util.List;
 
-public class FavoriteAdapter  extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>{
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
     private List<RoutineData> favoriteList;
 
     public FavoriteAdapter(List<RoutineData> favoriteList) {
@@ -37,8 +37,48 @@ public class FavoriteAdapter  extends RecyclerView.Adapter<FavoriteAdapter.Favor
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
+        RoutineData routine = favoriteList.get(position);
+
+        int id = routine.getCategory().getId();
+        switch (id) {
+            case 1:
+                holder.itemView.routineImg.setImageResource(R.drawable.p1);
+                routine.setImage(String.valueOf(R.drawable.p1));
+                break;
+
+            case 2:
+                holder.itemView.routineImg.setImageResource(R.drawable.p2);
+                routine.setImage(String.valueOf(R.drawable.p2));
+                break;
+
+            case 3:
+                holder.itemView.routineImg.setImageResource(R.drawable.p3);
+                routine.setImage(String.valueOf(R.drawable.p3));
+                break;
+
+            case 4:
+                holder.itemView.routineImg.setImageResource(R.drawable.p4);
+                routine.setImage(String.valueOf(R.drawable.p4));
+                break;
+
+            case 5:
+                holder.itemView.routineImg.setImageResource(R.drawable.p5);
+                routine.setImage(String.valueOf(R.drawable.p5));
+                break;
+
+            case 6:
+                holder.itemView.routineImg.setImageResource(R.drawable.p6);
+                routine.setImage(String.valueOf(R.drawable.p6));
+                break;
+
+            case 7:
+                holder.itemView.routineImg.setImageResource(R.drawable.p7);
+                routine.setImage(String.valueOf(R.drawable.p7));
+                break;
+        }
+
         holder.itemView.setRoutineData(favoriteList.get(position));
-        holder.itemView.setClickListener(new RoutineClickListener(favoriteList.get(position),RoutineClickListener.FAV_ID));
+        holder.itemView.setClickListener(new RoutineClickListener(favoriteList.get(position), RoutineClickListener.FAV_ID));
     }
 
     @Override

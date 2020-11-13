@@ -1,5 +1,9 @@
 package com.example.fitnesshub.viewModel;
 
+import android.app.Application;
+import android.content.Context;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -17,11 +21,16 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class FavouritesRoutinesViewModel extends ViewModel {
+public class FavouritesRoutinesViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> favouriteRoutines = new MutableLiveData<>();
 
-    private RoutinesAPIService routinesService = new RoutinesAPIService();
+    private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    public FavouritesRoutinesViewModel(@androidx.annotation.NonNull Application application) {
+        super(application);
+        routinesService = new RoutinesAPIService(application);
+    }
 
     public void updateData() {
         fetchFromRemote();
@@ -38,7 +47,7 @@ public class FavouritesRoutinesViewModel extends ViewModel {
                 routinesService.getFavouriteRoutines(options)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver <PagedList<RoutineData>>() {
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
                             @Override
                             public void onSuccess(@NonNull PagedList<RoutineData> favourites) {
                                 favouriteRoutines.setValue(favourites.getEntries());

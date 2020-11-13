@@ -1,6 +1,8 @@
 package com.example.fitnesshub.model;
 
 
+import android.content.Context;
+
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
@@ -14,12 +16,12 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
 
     private RoutinesAPI api;
 
-    public RoutinesAPIService() {
+    public RoutinesAPIService(Context context) {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
-                .addInterceptor(new AuthInterceptor())
+                .addInterceptor(new AuthInterceptor(context))
                 .build();
 
         api = new Retrofit.Builder()

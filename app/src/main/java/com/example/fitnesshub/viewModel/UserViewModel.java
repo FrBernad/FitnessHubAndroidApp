@@ -1,9 +1,14 @@
 package com.example.fitnesshub.viewModel;
 
+import android.app.Application;
+import android.content.Context;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.fitnesshub.model.APIService;
+import com.example.fitnesshub.model.AppPreferences;
 import com.example.fitnesshub.model.AuthToken;
 import com.example.fitnesshub.model.VerificationData;
 import com.example.fitnesshub.model.UserAPIService;
@@ -26,15 +31,23 @@ import retrofit2.HttpException;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class UserViewModel extends ViewModel {
+public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<UserInfo> userInfo = new MutableLiveData<>();
     private MutableLiveData<AuthToken> token = new MutableLiveData<>();
     private MutableLiveData<Boolean> verified = new MutableLiveData<>();
 
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
-    private UserAPIService userService = new UserAPIService();
+    private UserAPIService userService;
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    private Application app;
+
+    public UserViewModel(@androidx.annotation.NonNull Application application) {
+        super(application);
+        userService = new UserAPIService(application);
+        app = application;
+    }
 
     public MutableLiveData<UserInfo> getUserInfo() {
         return userInfo;
@@ -55,6 +68,7 @@ public class UserViewModel extends ViewModel {
     public MutableLiveData<Boolean> getLoading() {
         return loading;
     }
+
 
     public void verifyUser(String code) {
         loading.setValue(true);
@@ -133,6 +147,8 @@ public class UserViewModel extends ViewModel {
                     public void onSuccess(@NonNull AuthToken authToken) {
                         token.setValue(authToken);
                         APIService.setAuthToken(authToken.getToken());
+                        AppPreferences preferences = new AppPreferences(app);
+                        preferences.setAuthToken(authToken.getToken());
                         loading.setValue(false);
                     }
 
