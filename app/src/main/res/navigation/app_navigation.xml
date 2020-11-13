@@ -147,19 +147,12 @@
         <argument
                 android:name="RoutineTitle"
                 app:argType="string" />
-        <action
-            android:id="@+id/action_routineExcecutionListFragment_to_routineExecutionExercise"
-            app:destination="@id/routineExecutionExercise" />
     </fragment>
     <fragment
         android:id="@+id/routineExecutionExercise"
         android:name="com.example.fitnesshub.view.fragments.RoutineExecutionExerciseFragment"
         android:label="fragment_routine_execution_exercise"
-        tools:layout="@layout/fragment_routine_execution_exercise" >
-        <action
-            android:id="@+id/action_routineExecutionExercise_to_routineExcecutionListFragment"
-            app:destination="@id/routineExcecutionListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_routine_execution_exercise" />
 
 
 </navigation>
