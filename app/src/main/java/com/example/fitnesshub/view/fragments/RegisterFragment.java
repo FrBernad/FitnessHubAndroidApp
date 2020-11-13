@@ -102,7 +102,7 @@ public class RegisterFragment extends Fragment {
                             username.setError(null);
                             email.setError(null);
                             errorMessage.setText("");
-                        }, 3000);
+                        }, 5000);
                         viewModel.setRegisterErrorErrorCode(null);
                         break;
                     default:

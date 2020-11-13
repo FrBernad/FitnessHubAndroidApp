@@ -34,9 +34,9 @@ public class PlayModeDialog extends AppCompatDialogFragment {
             }
         });
 
-        view.findViewById(R.id.simpleMode).setOnClickListener(v-> {
-            Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData));
-        }
+        view.findViewById(R.id.simpleMode).setOnClickListener(v -> {
+                    Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData));
+                }
         );
 
         return builder.create();

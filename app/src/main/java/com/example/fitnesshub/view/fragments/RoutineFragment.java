@@ -193,8 +193,8 @@ public class RoutineFragment extends Fragment {
     }
 
     public void openPlayModeDialog() {
-//        PlayModeDialog playModeDialog = new PlayModeDialog(routineData.getTitle(), getContext());
-//        playModeDialog.show(getParentFragmentManager(), "example dialog");
+        PlayModeDialog playModeDialog = new PlayModeDialog(routineData.getTitle());
+        playModeDialog.show(getParentFragmentManager(), "example dialog");
     }
 
 
