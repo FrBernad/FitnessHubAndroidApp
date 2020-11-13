@@ -25,7 +25,7 @@ public class RoutineData implements Serializable {
 
     @Expose
     @SerializedName("averageRating")
-    private Integer rating;
+    private Double rating;
 
     @Expose
     @SerializedName("diffilcuty")
@@ -41,7 +41,7 @@ public class RoutineData implements Serializable {
 
     private String image;
 
-    public RoutineData(Integer id, String title, String detail, String creationDate, Integer rating, String diffilcuty, RoutineCreator author, RoutineCategory category, String image) {
+    public RoutineData(Integer id, String title, String detail, String creationDate, Double rating, String diffilcuty, RoutineCreator author, RoutineCategory category, String image) {
         this.id = id;
         this.title = title;
         this.detail = detail;
@@ -69,7 +69,7 @@ public class RoutineData implements Serializable {
         return creationDate;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 

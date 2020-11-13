@@ -86,6 +86,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
     }
 
     public void updateRoutines(List<RoutineData> routineCards) {
+        routinesList.clear();
         routinesList.addAll(routineCards);
         notifyDataSetChanged();
     }

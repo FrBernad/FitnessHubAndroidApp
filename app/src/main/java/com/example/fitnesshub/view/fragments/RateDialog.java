@@ -2,10 +2,8 @@ package com.example.fitnesshub.view.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RatingBar;
 
@@ -15,10 +13,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RatingDialogBinding;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
-import com.example.fitnesshub.viewModel.RoutineListViewModel;
 
 public class RateDialog extends AppCompatDialogFragment {
 
@@ -50,7 +46,7 @@ public class RateDialog extends AppCompatDialogFragment {
 
             }
         }).setPositiveButton("Ok", (dialog, which) -> {
-            viewModel.rateRoutine(routineId,ratingBar.getNumStars());
+            viewModel.rateRoutine(routineId,(int)ratingBar.getRating());
         });
         return builder.create();
     }

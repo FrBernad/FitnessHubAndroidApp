@@ -3,14 +3,14 @@ package com.example.fitnesshub.view.adapters;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.example.fitnesshub.viewModel.RoutineListViewModel;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 public class OrderAdapter implements AdapterView.OnItemSelectedListener {
 
-    private RoutineListViewModel viewModel;
+    private RoutinesViewModel viewModel;
 
 
-    public OrderAdapter(RoutineListViewModel viewModel) {
+    public OrderAdapter(RoutinesViewModel viewModel) {
         this.viewModel = viewModel;
     }
 

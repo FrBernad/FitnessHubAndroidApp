@@ -10,6 +10,7 @@ import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutinesAPIService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,15 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class RoutineListViewModel extends AndroidViewModel {
+public class RoutinesViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
+    private MutableLiveData<List<RoutineData>> userRoutines = new MutableLiveData<>();
+    private MutableLiveData<List<RoutineData>> userHistory = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<Boolean> changedOptions = new MutableLiveData<>();
+    private MutableLiveData<Boolean> routinesFirstLoad = new MutableLiveData<>(true);
 
     private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -36,9 +40,17 @@ public class RoutineListViewModel extends AndroidViewModel {
     private String direction = "asc";
 
 
-    public RoutineListViewModel(@NonNull Application application) {
+    public RoutinesViewModel(@NonNull Application application) {
         super(application);
         routinesService = new RoutinesAPIService(application);
+    }
+
+    public void resetData() {
+        currentPage = 0;
+        isLastPage = false;
+        totalPages = 0;
+        routineCards.setValue(new ArrayList<>());
+        updateData();
     }
 
     public void updateData() {
@@ -46,6 +58,57 @@ public class RoutineListViewModel extends AndroidViewModel {
             fetchFromRemote();
         }
     }
+
+    public void updateUserRoutines() {
+        Map<String, String> options = new HashMap<>();
+        options.put("page", "0");
+        options.put("orderBy", "averageRating");
+        options.put("direction", "asc");
+        options.put("size", String.valueOf(1000));
+
+        disposable.add(
+                routinesService.getUserRoutines(options)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
+                                userRoutines.setValue(routinesEntries.getEntries());
+                            }
+
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
+    }
+
+
+    public void updateUserHistory() {
+        Map<String, String> options = new HashMap<>();
+        options.put("page", "0");
+        options.put("direction", "asc");
+        options.put("size", String.valueOf(1000));
+
+        disposable.add(
+                routinesService.getUserHistory(options)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
+                                userHistory.setValue(routinesEntries.getEntries());
+                            }
+
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
+    }
+
 
     public void orderRoutines(int option) {
         switch (option) {
@@ -76,7 +139,6 @@ public class RoutineListViewModel extends AndroidViewModel {
         options.put("direction", direction);
         options.put("size", String.valueOf(itemsPerRequest));
 
-
         loading.setValue(true);
 
         disposable.add(
@@ -89,7 +151,12 @@ public class RoutineListViewModel extends AndroidViewModel {
                                 isLastPage = routinesEntries.getLastPage();
                                 noMoreEntries.setValue(isLastPage);
                                 currentPage++;
-                                routineCards.setValue(routinesEntries.getEntries());
+                                List<RoutineData> aux = new ArrayList<>();
+                                if (routineCards.getValue() != null) {
+                                    aux = routineCards.getValue();
+                                }
+                                aux.addAll(routinesEntries.getEntries());
+                                routineCards.setValue(aux);
                                 totalPages = (int) Math.ceil(routinesEntries.getTotalCount() / (double) itemsPerRequest);
                                 loading.setValue(false);
                             }
@@ -118,11 +185,28 @@ public class RoutineListViewModel extends AndroidViewModel {
         return changedOptions;
     }
 
+    public MutableLiveData<List<RoutineData>> getUserHistory() {
+        return userHistory;
+    }
+
     public MutableLiveData<Boolean> getNoMoreEntries() {
         return noMoreEntries;
+    }
+
+    public MutableLiveData<Boolean> getRoutinesFirstLoad() {
+        return routinesFirstLoad;
+    }
+
+    public void setRoutinesFirstLoad(Boolean firstLoad) {
+        routinesFirstLoad.setValue(firstLoad);
     }
 
     public MutableLiveData<Boolean> getLoading() {
         return loading;
     }
+
+    public MutableLiveData<List<RoutineData>> getUserRoutines() {
+        return userRoutines;
+    }
+
 }

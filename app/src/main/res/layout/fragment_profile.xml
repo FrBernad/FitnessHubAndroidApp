@@ -5,7 +5,6 @@
         tools:context=".view.fragments.ProfileFragment">
 
     <data>
-
         <variable
                 name="userInfo"
                 type="com.example.fitnesshub.model.UserInfo" />
