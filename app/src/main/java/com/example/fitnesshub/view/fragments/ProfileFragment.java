@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentProfileBinding;
 import com.example.fitnesshub.view.adapters.FavoriteAdapter;
@@ -103,6 +104,9 @@ public class ProfileFragment extends Fragment implements AdapterView.OnItemSelec
             if(userInfo!=null){
                 System.out.println("setting data");
                 binding.setUserInfo(userInfo);
+                if(!userInfo.getAvatarUrl().equals("")){
+                    Glide.with(binding.getRoot()).load(userInfo.getAvatarUrl()).into(binding.profileImage);
+                }
             }
         });
 
