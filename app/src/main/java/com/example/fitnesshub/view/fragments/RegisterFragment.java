@@ -169,7 +169,7 @@ public class RegisterFragment extends Fragment {
             password.setError("Field can not be empty");
             return false;
         } else if (!val.matches(checkPassword)) {
-            password.setError("Password should contain at least 4 characters!");
+            password.setError("Password should contain at least 8 characters!");
             return false;
         } else {
             password.setError(null);
