@@ -14,8 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/whiteBright"
-            android:padding="10dp"
-            >
+            android:padding="10dp">
 
         <ImageView
             android:id="@+id/infoButton"
