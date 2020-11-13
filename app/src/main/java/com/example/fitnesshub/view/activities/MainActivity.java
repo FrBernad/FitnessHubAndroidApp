@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menu.clear();
         super.onCreateOptionsMenu(menu);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;

@@ -145,8 +145,9 @@ public class RoutineFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        
-        inflater.inflate(R.menu.routine_toolbar,menu);
+        menu.clear();
         super.onCreateOptionsMenu(menu,inflater);
+        inflater.inflate(R.menu.routine_toolbar,menu);
+
     }
 }
