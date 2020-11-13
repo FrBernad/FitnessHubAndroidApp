@@ -1,5 +1,6 @@
 package com.example.fitnesshub.view.fragments;
 
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,14 @@ public class RoutineFragment extends Fragment {
     private TextView author;
     private TextView detail;
 
+    private Menu menu;
+    private MenuItem fav;
+    private MenuItem unfav;
+
+    private boolean isFav = false;
+
+    private View view;
+
     private ImageView image;
 
     private FragmentRoutineBinding binding;
@@ -80,9 +89,10 @@ public class RoutineFragment extends Fragment {
 
         image = binding.imageView;
 
-        View view = binding.getRoot();
+        view = binding.getRoot();
 
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
         return view;
     }
 
@@ -149,7 +159,8 @@ public class RoutineFragment extends Fragment {
         menu.clear();
         super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.routine_toolbar,menu);
-
+        fav = menu.findItem(R.id.app_bar_favorite_filled);
+        unfav = menu.findItem(R.id.app_bar_favorite_outlined);
     }
 
     @Override
@@ -158,10 +169,14 @@ public class RoutineFragment extends Fragment {
         System.out.println(id);
         System.out.println(R.id.app_bar_share);
         if(id == R.id.app_bar_rate){
-            System.out.println("Estrella");
+            openRateDialog();
         }
         else if(id == R.id.app_bar_favorite_filled){
-            System.out.println("favorito");
+            isFav = true;
+            changeFavStatus();
+        } else if(id == R.id.app_bar_favorite_outlined) {
+            isFav = false;
+            changeFavStatus();
         }
         else{
                return super.onOptionsItemSelected(item);
@@ -173,6 +188,16 @@ public class RoutineFragment extends Fragment {
 //
 //        }
         return true;
+    }
+
+    public void openRateDialog() {
+        RateDialog rateDialog = new RateDialog();
+        rateDialog.show(getParentFragmentManager(), "Example dialog");
+    }
+
+    public void changeFavStatus() {
+        fav.setVisible(!isFav);
+        unfav.setVisible(isFav);
     }
 
 

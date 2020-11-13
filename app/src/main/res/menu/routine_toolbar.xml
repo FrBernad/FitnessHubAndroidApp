@@ -6,11 +6,20 @@
         android:icon="@drawable/ic_star_24"
         android:title="@string/action_rate"
         app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/app_bar_favorite_outlined"
         android:icon="@drawable/ic_favorite_outlined_24"
         android:title="@string/action_favorite_outlined"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/app_bar_favorite_filled"
+        android:icon="@drawable/ic_favorite_filled_24"
+        android:title="@string/action_favorite_filled"
+        app:showAsAction="always"
+        android:visible="false"/>
 
     <item
         android:id="@+id/app_bar_share"
