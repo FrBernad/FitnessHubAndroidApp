@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.clear();
         super.onCreateOptionsMenu(menu);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
         getMenuInflater().inflate(R.menu.main_toolbar, menu);
+        menu.findItem(R.id.app_bar_leave_session).setVisible(true);
         return true;
     }
 

@@ -156,11 +156,12 @@ public class RoutineFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        super.onCreateOptionsMenu(menu,inflater);
-        inflater.inflate(R.menu.routine_toolbar,menu);
+        menu.findItem(R.id.app_bar_share).setVisible(true);
+        menu.findItem(R.id.app_bar_rate).setVisible(true);
+        menu.findItem(R.id.app_bar_favorite_outlined).setVisible(true);
         fav = menu.findItem(R.id.app_bar_favorite_filled);
         unfav = menu.findItem(R.id.app_bar_favorite_outlined);
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override
