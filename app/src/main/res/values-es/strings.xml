@@ -87,7 +87,8 @@
     <string name="userame">Nombre de usuario</string>
     <string name="sign_in">Ingresar</string>
     <string name="forgot_password">¿Olvidaste la contraseña?</string>
-    <string name="About_us">Sobre nosotros</string>
     <string name="my_routines">MIS RUTINAS</string>
     <string name="history">HISTORIAL</string>
+    <string name="leave_session">Cerrar sesión</string>
+
 </resources>

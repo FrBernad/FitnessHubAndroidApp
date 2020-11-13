@@ -62,6 +62,18 @@
 
     <string name="sort_title">SORT BY</string>
     <string name="order_title">ORDER BY</string>
+    <string name="reorderbutton">Reorder button</string>
+    <string name="RoutineImage">Routine Image</string>
+    <string name="loadingLogo">Loading Logo</string>
+    <string name="email">Email</string>
+    <string name="login">Login</string>
+    <string name="userame">Username</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="my_routines">MY ROUTINES</string>
+    <string name="history">HISTORY</string>
+    <string name="leave_session">Leave session</string>
+    <string name="playButton">Play button</string>
 
 
     <!--EXAMPLES -->.
@@ -71,23 +83,9 @@
     <string name="RoutineName">MUSCLE AND STRENGHT</string>
     <string name="AuthorRoutineName">By John</string>
     <string name="DurationRoutine">15 min</string>
-    <string name="playButton">Play button</string>
     <string name="exerciseName">Abs</string>
     <string name="exerciseReps">20</string>
-    <string name="reorderbutton">Reorder button</string>
-    <string name="RoutineImage">Routine Image</string>
-    <string name="loadingLogo">Loading Logo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="email">Email</string>
-    <string name="login">Login</string>
-    <string name="userame">Userame</string>
-    <string name="Userame" />
-    <string name="sign_in">Sign in</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="About_us">About us</string>
-    <string name="my_routines">MY ROUTINES</string>
-    <string name="history">HISTORY</string>
+
 
 
 </resources>
