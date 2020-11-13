@@ -1,5 +1,7 @@
 package com.example.fitnesshub.model;
 
+import android.graphics.drawable.Drawable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -37,6 +39,8 @@ public class UserInfo {
     @SerializedName("avatarUrl")
     private String avatarUrl;
 
+    private Drawable profileImg;
+
     public UserInfo(String username, String password, String fullName, String gender, String birthdate, String email, String phone, String avatarUrl) {
         this.username = username;
         this.password = password;
@@ -51,6 +55,14 @@ public class UserInfo {
     @Override
     public String toString() {
         return "userame: "+username;
+    }
+
+    public Drawable getProfileImg() {
+        return profileImg;
+    }
+
+    public void setProfileImg(Drawable profileImg) {
+        this.profileImg = profileImg;
     }
 
     public String getUsername() {

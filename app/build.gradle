@@ -44,6 +44,7 @@ android {
 def butterknifeVersion = '10.2.3'
 def retrofitVersion = '2.9.0'
 def rxJavaVersion = '3.0.0'
+def gradleVersion = '4.11.0'
 def navVersion = '2.3.1'
 
 dependencies {
@@ -56,6 +57,9 @@ dependencies {
     implementation "com.google.android.material:material:1.2.1"
     implementation "androidx.constraintlayout:constraintlayout:2.0.4"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
+
+    implementation "com.github.bumptech.glide:glide:$gradleVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$gradleVersion"
 
     implementation "androidx.navigation:navigation-fragment:$navVersion"
     implementation "androidx.navigation:navigation-ui:$navVersion"
