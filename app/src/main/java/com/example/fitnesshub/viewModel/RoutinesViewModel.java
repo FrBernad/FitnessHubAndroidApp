@@ -22,6 +22,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class RoutineListViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
+    private MutableLiveData<List<RoutineData>> userRoutines = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<Boolean> changedOptions = new MutableLiveData<>();
@@ -45,6 +46,31 @@ public class RoutineListViewModel extends AndroidViewModel {
         if (!isLastPage) {
             fetchFromRemote();
         }
+    }
+
+    public void updateUserRoutines() {
+        Map<String, String> options = new HashMap<>();
+        options.put("page", "0");
+        options.put("orderBy", "averageRating");
+        options.put("direction", "asc");
+        options.put("size", String.valueOf(1000));
+
+        disposable.add(
+                routinesService.getUserRoutines(options)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
+                                userRoutines.setValue(routinesEntries.getEntries());
+                            }
+
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
     }
 
     public void orderRoutines(int option) {
@@ -125,4 +151,9 @@ public class RoutineListViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> getLoading() {
         return loading;
     }
+
+    public MutableLiveData<List<RoutineData>> getUserRoutines() {
+        return userRoutines;
+    }
+
 }
