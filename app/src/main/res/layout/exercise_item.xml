@@ -17,14 +17,14 @@
             android:padding="10dp"
             >
 
-        <ImageButton
-            android:id="@+id/imageButton"
+        <ImageView
+            android:id="@+id/infoButton"
             android:layout_width="0.1dp"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:contentDescription="@string/reorderbutton"
-            app:srcCompat="@drawable/ic_reorder_24" />
+            app:srcCompat="@drawable/ic_info_24" />
 
         <TextView
             android:id="@+id/exerciseName"
