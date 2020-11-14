@@ -63,7 +63,7 @@ public class RoutineExcecutionListFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.INVISIBLE);
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
 
         return view;
     }
