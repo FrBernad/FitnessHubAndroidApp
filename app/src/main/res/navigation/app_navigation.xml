@@ -145,7 +145,7 @@
     </fragment>
     <fragment
             android:id="@+id/routineExcecutionListFragment"
-            android:name="com.example.fitnesshub.view.fragments.RoutineExcecutionListFragment"
+            android:name="com.example.fitnesshub.view.fragments.RoutineExecutionListFragment"
             android:label="RoutineExcecutionListFragment">
         <argument
                 android:name="RoutineTitle"

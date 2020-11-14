@@ -53,15 +53,14 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         ExerciseData exercise = exerciseList.get(position);
         holder.itemView.setExerciseData(exercise);
-        if( exercise.isRunning() ){
-            holder.itemView.exerciseContainer.setBackgroundColor(Color.BLUE);
-        }
-        else{
-            holder.itemView.exerciseContainer.setBackgroundColor(Color.WHITE);
-        }
+        if (exercise.isRunning())
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.whiteOpaque));
+        else
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.whiteBright));
+
         holder.itemView.infoButton.setOnClickListener(v -> openExerciseInfoDialog(exercise));
-        holder.itemView.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
-        holder.itemView.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);
+        holder.itemView.repsExercise.setVisibility(exercise.getReps() != 0 ? View.VISIBLE : View.GONE);
+        holder.itemView.timeExercise.setVisibility(exercise.getTime() != 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -80,7 +79,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
 
     public void openExerciseInfoDialog(ExerciseData exerciseData) {
         ShowExerciseDialog showExerciseDialog = new ShowExerciseDialog(exerciseData);
-        showExerciseDialog.show(((AppCompatActivity)parentContext).getSupportFragmentManager(), "example dialog");
+        showExerciseDialog.show(((AppCompatActivity) parentContext).getSupportFragmentManager(), "example dialog");
     }
 
     public List<ExerciseData> getExerciseList() {
@@ -88,7 +87,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         return exerciseList;
     }
 
-    public int getCurrentExercise(){
+    public int getCurrentExercise() {
         return currentExercise;
     }
 

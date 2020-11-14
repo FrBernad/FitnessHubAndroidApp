@@ -23,7 +23,7 @@ import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import java.util.ArrayList;
 
-public class RoutineExcecutionListFragment extends Fragment {
+public class RoutineExecutionListFragment extends Fragment {
 
     private FragmentRoutineExecutionListBinding binding;
 
@@ -52,7 +52,6 @@ public class RoutineExcecutionListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
 
         recyclerViewWarmUp = binding.warmUpExercises;
@@ -73,7 +72,7 @@ public class RoutineExcecutionListFragment extends Fragment {
 
 
         if (getArguments() != null) {
-            title.setText(RoutineExcecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
+            title.setText(RoutineExecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
         }
 
         viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
@@ -88,6 +87,10 @@ public class RoutineExcecutionListFragment extends Fragment {
         recyclerViewCooldown.setAdapter(cooldownAdapter);
 
         observeExerciseViewModel();
+
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
+
 
     }
 
@@ -122,23 +125,20 @@ public class RoutineExcecutionListFragment extends Fragment {
 
     @Override
     public void onResume() {
-
         super.onResume();
         ArrayList<ExercisesAdapter> adapters = new ArrayList<>();
         adapters.add(warmUpAdapter);
         adapters.add(mainAdapter);
         adapters.add(cooldownAdapter);
         runCycles(0,adapters);
-
     }
 
     private void runCycles(int index,ArrayList<ExercisesAdapter> adapters){
-        if(index >= adapters.size())
+        if (index >= adapters.size())
             return;
 
         doExercise(0,adapters.get(index), (ArrayList<ExerciseData>) adapters.get(index).getExerciseList());
-
-        cycleHandler.postDelayed(()-> runCycles(index+1,adapters),10000);
+        runCycles(index+1,adapters);
 
     }
 
