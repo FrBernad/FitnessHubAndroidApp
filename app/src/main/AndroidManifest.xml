@@ -13,12 +13,22 @@
             android:theme="@style/Theme.FitnessHub"
             android:usesCleartextTraffic="true">
         <activity android:name="com.example.fitnesshub.view.activities.InitialActivity">
-            <intent-filter>
+            <intent-filter android:label="intent1">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+            <intent-filter android:label="intent2">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="http"
+                    android:host="www.fitnesshub.com"
+                    android:pathPrefix="/rotuine"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.activities.LoginActivity" />
+        <activity android:name=".view.activities.LoginActivity"/>
         <activity android:name=".view.activities.MainActivity"/>
 
 

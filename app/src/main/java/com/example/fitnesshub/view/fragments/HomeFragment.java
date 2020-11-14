@@ -41,4 +41,16 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Bundle aux=getArguments();
+        int RoutineID= aux.getInt("RoutineId");
+        if(RoutineID!=-1){
+            //pedir los datos de la rutina
+            //abrir view de la rutina con los datos
+
+        }
+    }
 }

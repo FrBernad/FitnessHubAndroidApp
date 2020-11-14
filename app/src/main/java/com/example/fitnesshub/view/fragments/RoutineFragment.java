@@ -1,6 +1,6 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -174,11 +174,24 @@ public class RoutineFragment extends Fragment {
         } else if(id == R.id.app_bar_favorite_outlined) {
             isFav = false;
             changeFavStatus();
+        }else if(id== R.id.app_bar_share){
+            share();
         }
         else{
                return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void share(){
+
+        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT,routineData.getTitle());
+        sharingIntent.putExtra("RoutineId",routineId);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://fitneshub/Routines/" + routineId);
+        startActivity(Intent.createChooser(sharingIntent,"Share Rutine"));
+
     }
 
     public void openRateDialog() {
@@ -190,6 +203,5 @@ public class RoutineFragment extends Fragment {
         fav.setVisible(!isFav);
         unfav.setVisible(isFav);
     }
-
 
 }
