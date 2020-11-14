@@ -80,23 +80,10 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
             }
         }).attach();
 
-        setSpinner();
 
         return view;
     }
 
-    private void setSpinner() {
-        Spinner sortSpinner = view.findViewById(R.id.sortActivitySpinner);
-        ArrayAdapter<CharSequence> sortActivityAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, android.R.layout.simple_spinner_item);
-        sortActivityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortSpinner.setAdapter(sortActivityAdapter);
-        sortSpinner.setOnItemSelectedListener(this);
-        Spinner orderSpinner = view.findViewById(R.id.orderActivitySpinner);
-        ArrayAdapter<CharSequence> orderActivityAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.order, android.R.layout.simple_spinner_item);
-        orderActivityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        orderSpinner.setAdapter(orderActivityAdapter);
-        orderSpinner.setOnItemSelectedListener(this);
-    }
 
     @Override
     public void onDestroy() {
