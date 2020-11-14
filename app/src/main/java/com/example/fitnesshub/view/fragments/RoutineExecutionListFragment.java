@@ -1,6 +1,5 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import java.util.ArrayList;
 
-public class RoutineExcecutionListFragment extends Fragment {
+public class RoutineExecutionListFragment extends Fragment {
 
     private FragmentRoutineExecutionListBinding binding;
 
@@ -39,11 +38,9 @@ public class RoutineExcecutionListFragment extends Fragment {
     private RecyclerView recyclerViewCooldown;
 
     private TextView title;
+    private static Handler handler = new Handler();
+    private static Handler cycleHandler = new Handler();
 
-
-    private CountDownTimer countDownTimer;
-    private long millisecondsLeft;
-    private boolean timerRunning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,6 @@ public class RoutineExcecutionListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
         binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
 
@@ -76,7 +72,7 @@ public class RoutineExcecutionListFragment extends Fragment {
 
 
         if (getArguments() != null) {
-            title.setText(RoutineExcecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
+            title.setText(RoutineExecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
         }
 
         viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
@@ -91,6 +87,10 @@ public class RoutineExcecutionListFragment extends Fragment {
         recyclerViewCooldown.setAdapter(cooldownAdapter);
 
         observeExerciseViewModel();
+
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
+
 
     }
 
@@ -126,74 +126,35 @@ public class RoutineExcecutionListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        ArrayList<ExercisesAdapter> adapters = new ArrayList<>();
+        adapters.add(warmUpAdapter);
+        adapters.add(mainAdapter);
+        adapters.add(cooldownAdapter);
+        runCycles(0,adapters);
+    }
 
-        ExecutionListThread thread = new ExecutionListThread();
-        runCycles(thread,warmUpAdapter);
-        runCycles(thread,mainAdapter);
-        runCycles(thread,cooldownAdapter);
+    private void runCycles(int index,ArrayList<ExercisesAdapter> adapters){
+        if (index >= adapters.size())
+            return;
+
+        doExercise(0,adapters.get(index), (ArrayList<ExerciseData>) adapters.get(index).getExerciseList());
+        runCycles(index+1,adapters);
 
     }
 
-
-    public void runCycles(ExecutionListThread thread, ExercisesAdapter adapter){
-        ArrayList<ExerciseData> exercises;
-        ExerciseData ex;
-        thread.setAdapter(adapter);
-        int curr = 0;
-        int cycleSize = adapter.getItemCount();
-        exercises = (ArrayList<ExerciseData>) adapter.getExerciseList();
-
-        while( curr < cycleSize ){
-            ex = exercises.get(curr);
-            thread.setCurrent(curr,ex);
-            thread.execute(10000);
-            curr++;
+    private void doExercise(final int curr, ExercisesAdapter adapter,ArrayList<ExerciseData> exercises){
+        if (curr >= exercises.size()){
+            return;
         }
-
-    }
-
-
-
-    public static class ExecutionListThread extends AsyncTask<Integer, Void, Void> {
-
-        private ExerciseData exercise;
-        private int curr;
-        private ExercisesAdapter adapter;
-
-       public void setCurrent(int curr,ExerciseData exercise) {
-            this.curr = curr;
-            this.exercise = exercise;
-        }
-
-        public void setAdapter(ExercisesAdapter adapter){
-            this.adapter = adapter;
-        }
-
-
-        @Override
-        protected Void doInBackground(Integer... integers) {
-            try {
-                Thread.sleep(integers[0]);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-           super.onPreExecute();
-            exercise.setRunning(true);
+        final ExerciseData ex = exercises.get(curr);
+        ex.setRunning(true);
+        adapter.notifyItemChanged(curr);
+        handler.postDelayed(() -> {
+            ex.setRunning(false);
             adapter.notifyItemChanged(curr);
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            exercise.setRunning(false);
-            adapter.notifyItemChanged(curr);
-        }
-
+            doExercise(curr + 1,adapter,exercises);
+        }, ex.getTime()*1000);
     }
 
 }
+
