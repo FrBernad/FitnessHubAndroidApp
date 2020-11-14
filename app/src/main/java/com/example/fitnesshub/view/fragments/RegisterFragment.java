@@ -113,7 +113,7 @@ public class RegisterFragment extends Fragment {
                 , password.getEditText().getText().toString()
                 , ""
                 , "other"
-                , 0
+                , (long) 0
                 , email.getEditText().getText().toString()
                 , ""
                 , ""
