@@ -57,11 +57,12 @@
         <item>Rating</item>
         <item>Category</item>
         <item>Difficulty</item>
+        <item>Name</item>
     </string-array>
 
     <string-array name="order">
-        <item>Ascending</item>
         <item>Descending</item>
+        <item>Ascending</item>
     </string-array>
 
     <string name="sort_title">SORT BY</string>

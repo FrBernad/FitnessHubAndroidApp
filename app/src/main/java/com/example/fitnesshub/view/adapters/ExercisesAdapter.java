@@ -44,22 +44,15 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         LayoutInflater inflater = LayoutInflater.from(parentContext);
         binding = DataBindingUtil.inflate(inflater, R.layout.exercise_item, parent, false);
         infoButton = binding.infoButton;
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openExerciseInfoDialog();
-            }
-        });
+        infoButton.setOnClickListener(v -> openExerciseInfoDialog());
         return new ExerciseViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         ExerciseData exercise = exerciseList.get(position);
-        holder.itemView.setExerciseData(exercise);
         binding.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
         binding.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);
-
     }
 
     @Override

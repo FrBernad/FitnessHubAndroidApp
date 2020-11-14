@@ -59,12 +59,13 @@
         <item>Fecha de creación</item>
         <item>Popularidad</item>
         <item>Categoría</item>
-        <item>Difficultad</item>
+        <item>Dificultad</item>
+        <item>Nombre</item>
     </string-array>
 
     <string-array name="order">
-        <item>Ascendente</item>
         <item>Descendiente</item>
+        <item>Ascendente</item>
     </string-array>
 
     <string name="sort_title">ORDENAR POR</string>

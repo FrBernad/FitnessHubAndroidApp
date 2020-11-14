@@ -16,10 +16,13 @@ import com.example.fitnesshub.R;
 public class PlayModeDialog extends AppCompatDialogFragment {
 
     private String routineData;
+    private View view;
 
-    public PlayModeDialog(String routineData) {
+    public PlayModeDialog(String routineData, View view) {
+        this.view = view;
         this.routineData = routineData;
     }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -28,17 +31,16 @@ public class PlayModeDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.choose_execution_dialog, null);
 
-        builder.setView(view).setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
+        builder.setView(view).setNegativeButton("Close", (dialog, which) -> {
         });
 
         view.findViewById(R.id.simpleMode).setOnClickListener(v -> {
-                    Navigation.findNavController(v).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData));
+                    dismiss();
+                    Navigation.findNavController(this.view).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData));
                 }
         );
-
         return builder.create();
     }
+
+
 }

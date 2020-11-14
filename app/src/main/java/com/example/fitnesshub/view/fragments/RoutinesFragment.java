@@ -34,8 +34,6 @@ public class RoutinesFragment extends Fragment {
 
     private RoutinesViewModel viewModel;
 
-    private TextView textViewFilter;
-
     private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
 
     private FragmentRoutinesBinding binding;
@@ -101,15 +99,6 @@ public class RoutinesFragment extends Fragment {
                     swipeRefreshLayout.setRefreshing(false);
                 }
         );
-
-//        viewModel.getChangedOptions().observe(getViewLifecycleOwner(), changed -> {
-//            if (changed != null) {
-//                if (changed) {
-//                    routinesAdapter.resetRoutines();
-//                    viewModel.updateData();
-//                }
-//            }
-//        });
 
         viewModel.getLoading().observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading != null) {

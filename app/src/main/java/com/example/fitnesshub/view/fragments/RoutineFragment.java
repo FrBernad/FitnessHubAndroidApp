@@ -1,17 +1,6 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.media.Image;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,8 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.fitnesshub.R;
-import com.example.fitnesshub.databinding.ChooseExecutionDialogBinding;
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
@@ -64,7 +60,9 @@ public class RoutineFragment extends Fragment {
     private int routineId;
     private RoutineData routineData;
 
-     @Override
+    PlayModeDialog playModeDialog;
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
@@ -102,8 +100,10 @@ public class RoutineFragment extends Fragment {
             image.setImageResource(Integer.parseInt(routineData.getImage()));
         }
 
+        playModeDialog = new PlayModeDialog(routineData.getTitle(), getView());
+
         playBtn.setOnClickListener(v -> {
-                openPlayModeDialog();
+            openPlayModeDialog();
         });
 
         title.setText(routineData.getTitle());
@@ -143,6 +143,7 @@ public class RoutineFragment extends Fragment {
                 cooldownAdapter.updateExercises(cooldownExercises);
             }
         });
+
     }
 
     @Override
@@ -160,24 +161,22 @@ public class RoutineFragment extends Fragment {
 
         fav = menu.findItem(R.id.app_bar_favorite_filled);
         unfav = menu.findItem(R.id.app_bar_favorite_outlined);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.app_bar_rate){
+        if (id == R.id.app_bar_rate) {
             openRateDialog();
-        }
-        else if(id == R.id.app_bar_favorite_filled){
+        } else if (id == R.id.app_bar_favorite_filled) {
             isFav = true;
             changeFavStatus();
-        } else if(id == R.id.app_bar_favorite_outlined) {
+        } else if (id == R.id.app_bar_favorite_outlined) {
             isFav = false;
             changeFavStatus();
-        }
-        else{
-               return super.onOptionsItemSelected(item);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
         return true;
     }
@@ -193,7 +192,6 @@ public class RoutineFragment extends Fragment {
     }
 
     public void openPlayModeDialog() {
-        PlayModeDialog playModeDialog = new PlayModeDialog(routineData.getTitle());
         playModeDialog.show(getParentFragmentManager(), "example dialog");
     }
 

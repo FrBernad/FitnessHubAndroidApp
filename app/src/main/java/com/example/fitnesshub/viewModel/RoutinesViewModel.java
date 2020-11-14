@@ -27,7 +27,6 @@ public class RoutinesViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> userHistory = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
-    private MutableLiveData<Boolean> changedOptions = new MutableLiveData<>();
     private MutableLiveData<Boolean> routinesFirstLoad = new MutableLiveData<>(true);
 
     private RoutinesAPIService routinesService;
@@ -37,8 +36,8 @@ public class RoutinesViewModel extends AndroidViewModel {
     private int totalPages = 0;
     private int itemsPerRequest = 5;
     private boolean isLastPage = false;
-    private String direction = "asc";
-
+    private String direction = "desc";
+    private String orderBy = "dateCreated";
 
     public RoutinesViewModel(@NonNull Application application) {
         super(application);
@@ -62,8 +61,8 @@ public class RoutinesViewModel extends AndroidViewModel {
     public void updateUserRoutines() {
         Map<String, String> options = new HashMap<>();
         options.put("page", "0");
-        options.put("orderBy", "averageRating");
-        options.put("direction", "asc");
+        options.put("orderBy", orderBy);
+        options.put("direction", direction);
         options.put("size", String.valueOf(1000));
 
         disposable.add(
@@ -113,29 +112,61 @@ public class RoutinesViewModel extends AndroidViewModel {
     public void orderRoutines(int option) {
         switch (option) {
             case 1:
-                direction = "asc";
+                direction = "desc";
                 break;
 
-            case 2:
-                direction = "desc";
+            case 0:
+                direction = "asc";
                 break;
         }
 
         applyChanges();
     }
 
+    public void sortRoutines(int option) {
+        switch (option) {
+            case 0:
+                orderBy = "dateCreated";
+                break;
+
+            case 1:
+                orderBy = "averageRating";
+                break;
+
+            case 2:
+                orderBy = "categoryId";
+                break;
+
+            case 3:
+                orderBy = "difficulty";
+                break;
+
+            case 4:
+                orderBy = "name";
+                break;
+        }
+
+        //   'Rating', value: 'averageRating'},
+//       'Creation date', value: 'dateCreated'},
+//       'Difficulty', value: 'difficulty'},
+//       'Name', value: 'name'},
+//       'Category', value: 'categoryId'}],
+
+        applyChanges();
+    }
+
     private void applyChanges() {
+        routineCards.setValue(new ArrayList<>());
         currentPage = 0;
         isLastPage = false;
         totalPages = 0;
-        changedOptions.setValue(true);
-        changedOptions.setValue(false);
+        fetchFromRemote();
     }
 
     private void fetchFromRemote() {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(currentPage));
-        options.put("orderBy", "averageRating");
+        options.put("orderBy", orderBy);
         options.put("direction", direction);
         options.put("size", String.valueOf(itemsPerRequest));
 
@@ -179,10 +210,6 @@ public class RoutinesViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
-    }
-
-    public MutableLiveData<Boolean> getChangedOptions() {
-        return changedOptions;
     }
 
     public MutableLiveData<List<RoutineData>> getUserHistory() {

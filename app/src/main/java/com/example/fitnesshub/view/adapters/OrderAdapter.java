@@ -16,8 +16,7 @@ public class OrderAdapter implements AdapterView.OnItemSelectedListener {
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-//        viewModel.orderRoutines(position);
+        viewModel.orderRoutines(position);
     }
 
     @Override
