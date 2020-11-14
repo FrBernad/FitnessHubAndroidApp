@@ -29,7 +29,7 @@ public class MyRoutinesFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
+    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(), RoutineClickListener.MY_ACTIVITY);
 
 
     @Override

@@ -46,8 +46,6 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         this.parentContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(parentContext);
         binding = DataBindingUtil.inflate(inflater, R.layout.exercise_item, parent, false);
-        infoButton = binding.infoButton;
-        infoButton.setOnClickListener(v -> openExerciseInfoDialog());
         return new ExerciseViewHolder(binding);
     }
 
@@ -58,8 +56,9 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         if( exercise.isRunning() ){
             holder.itemView.exerciseContainer.setBackgroundColor(Color.BLUE);
         }
-        binding.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
-        binding.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);
+        holder.itemView.infoButton.setOnClickListener(v -> openExerciseInfoDialog(exercise));
+        holder.itemView.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
+        holder.itemView.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -76,8 +75,8 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         }
     }
 
-    public void openExerciseInfoDialog() {
-        ShowExerciseDialog showExerciseDialog = new ShowExerciseDialog();
+    public void openExerciseInfoDialog(ExerciseData exerciseData) {
+        ShowExerciseDialog showExerciseDialog = new ShowExerciseDialog(exerciseData);
         showExerciseDialog.show(((AppCompatActivity)parentContext).getSupportFragmentManager(), "example dialog");
     }
 

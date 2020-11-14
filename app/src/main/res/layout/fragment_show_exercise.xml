@@ -1,64 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.ShowExerciseFragment"
-    android:padding="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/LinearLayoutShowExercise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_corner">
+    <data>
 
-        <TextView
-            android:id="@+id/showExerciseName"
+        <variable
+                name="exerciseData"
+                type="com.example.fitnesshub.model.ExerciseData" />
+    </data>
+
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:text="SQUAT"
-            android:textColor="@color/black"
-            android:textAlignment="center"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:text="DESCRIPTION"/>
+            android:layout_height="match_parent"
+            tools:context=".view.fragments.ShowExerciseFragment"
+            android:padding="10dp">
 
-        <TextView
-            android:id="@+id/showExerciseDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
-            android:text="Stretch your quad gently"/>
+        <LinearLayout
+                android:id="@+id/LinearLayoutShowExercise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_corner">
 
-        <TextView
-            android:id="@+id/showExerciseTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
-            android:text="SEGS: 20"
-            android:textStyle="bold"
-            />
+            <TextView
+                    android:id="@+id/showExerciseName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:text="@{exerciseData.name}"
+                    android:textColor="@color/black"
+                    android:textAlignment="center" />
 
-    </LinearLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:text="DESCRIPTION" />
 
+            <TextView
+                    android:id="@+id/showExerciseDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:text="@{exerciseData.detail}" />
 
+            <TextView
+                    android:id="@+id/showExerciseTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:text="@{exerciseData.timeString}"
+                    android:textStyle="bold" />
 
-</RelativeLayout>
+            <TextView
+                    android:id="@+id/showExerciseReps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:text="@{exerciseData.repsString}"
+                    android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

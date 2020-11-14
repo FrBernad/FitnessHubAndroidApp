@@ -56,6 +56,14 @@ public class ExerciseData {
         return reps;
     }
 
+    public String getTimeString() {
+        return "TIME: " + time;
+    }
+
+    public String getRepsString() {
+        return "REPS: " + reps;
+    }
+
     public void setRunning(boolean state) {
         isRunning = state;
     }
