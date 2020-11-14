@@ -23,6 +23,7 @@ import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
+import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +32,8 @@ import java.util.ArrayList;
 
 public class RoutineFragment extends Fragment {
 
-    private ExercisesViewModel viewModel;
+    private ExercisesViewModel exercisesViewModel;
+    private FavouritesRoutinesViewModel favViewModel;
 
     private ExercisesAdapter warmUpAdapter = new ExercisesAdapter(new ArrayList<>());
     private ExercisesAdapter mainAdapter = new ExercisesAdapter(new ArrayList<>());
@@ -48,8 +50,6 @@ public class RoutineFragment extends Fragment {
 
     private MenuItem fav;
     private MenuItem unfav;
-
-    private boolean isFav = false;
 
     private View view;
 
@@ -102,16 +102,16 @@ public class RoutineFragment extends Fragment {
 
         playModeDialog = new PlayModeDialog(routineData.getTitle(), getView());
 
-        playBtn.setOnClickListener(v -> {
-            openPlayModeDialog();
-        });
+        playBtn.setOnClickListener(v -> openPlayModeDialog());
+
+        favViewModel = new ViewModelProvider(getActivity()).get(FavouritesRoutinesViewModel.class);
 
         title.setText(routineData.getTitle());
         author.setText(routineData.getAuthor().getUsername());
         detail.setText(routineData.getDetail());
 
-        viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
-        viewModel.refresh(routineId);
+        exercisesViewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
+        exercisesViewModel.refresh(routineId);
 
         recyclerViewWarmUp.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewWarmUp.setAdapter(warmUpAdapter);
@@ -126,19 +126,19 @@ public class RoutineFragment extends Fragment {
     }
 
     private void observeExerciseViewModel() {
-        viewModel.getWarmupExercises().observe(getViewLifecycleOwner(), warmupExercises -> {
+        exercisesViewModel.getWarmupExercises().observe(getViewLifecycleOwner(), warmupExercises -> {
             if (warmupExercises != null) {
                 warmUpAdapter.updateExercises(warmupExercises);
             }
         });
 
-        viewModel.getMainExercises().observe(getViewLifecycleOwner(), mainExercises -> {
+        exercisesViewModel.getMainExercises().observe(getViewLifecycleOwner(), mainExercises -> {
             if (mainExercises != null) {
                 mainAdapter.updateExercises(mainExercises);
             }
         });
 
-        viewModel.getCooldownExercises().observe(getViewLifecycleOwner(), cooldownExercises -> {
+        exercisesViewModel.getCooldownExercises().observe(getViewLifecycleOwner(), cooldownExercises -> {
             if (cooldownExercises != null) {
                 cooldownAdapter.updateExercises(cooldownExercises);
             }
@@ -152,7 +152,6 @@ public class RoutineFragment extends Fragment {
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.findItem(R.id.app_bar_share).setVisible(true);
@@ -161,6 +160,22 @@ public class RoutineFragment extends Fragment {
 
         fav = menu.findItem(R.id.app_bar_favorite_filled);
         unfav = menu.findItem(R.id.app_bar_favorite_outlined);
+
+        favViewModel.getFavouriteRoutines()
+                .observe(getViewLifecycleOwner(), favourites -> {
+                    boolean isFav = false;
+                    for (RoutineData routine : favourites) {
+                        if (routine.getId() == routineId) {
+                            isFav = true;
+                            break;
+                        }
+                    }
+                    if (isFav) {
+                        favRoutine();
+                    } else {
+                        unfavRoutine();
+                    }
+                });
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -170,11 +185,11 @@ public class RoutineFragment extends Fragment {
         if (id == R.id.app_bar_rate) {
             openRateDialog();
         } else if (id == R.id.app_bar_favorite_filled) {
-            isFav = true;
-            changeFavStatus();
+            favViewModel.unfavRoutine(routineId);
+            unfavRoutine();
         } else if (id == R.id.app_bar_favorite_outlined) {
-            isFav = false;
-            changeFavStatus();
+            favViewModel.favRoutine(routineId);
+            favRoutine();
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -186,9 +201,14 @@ public class RoutineFragment extends Fragment {
         rateDialog.show(getParentFragmentManager(), "Example dialog");
     }
 
-    public void changeFavStatus() {
-        fav.setVisible(!isFav);
-        unfav.setVisible(isFav);
+    public void favRoutine() {
+        fav.setVisible(true);
+        unfav.setVisible(false);
+    }
+
+    public void unfavRoutine() {
+        fav.setVisible(false);
+        unfav.setVisible(true);
     }
 
     public void openPlayModeDialog() {

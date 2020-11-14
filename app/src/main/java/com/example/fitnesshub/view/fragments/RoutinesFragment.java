@@ -82,9 +82,9 @@ public class RoutinesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(routinesAdapter);
 
-        viewModel.getRoutinesFirstLoad().observe(getViewLifecycleOwner(), firstLoad ->{
-            if (firstLoad!=null){
-                if(firstLoad){
+        viewModel.getRoutinesFirstLoad().observe(getViewLifecycleOwner(), firstLoad -> {
+            if (firstLoad != null) {
+                if (firstLoad) {
                     viewModel.updateData();
                     viewModel.setRoutinesFirstLoad(false);
                 }
@@ -139,12 +139,14 @@ public class RoutinesFragment extends Fragment {
         ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, android.R.layout.simple_spinner_item);
         sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortDiscoverAdapter);
+        sortSpinner.setSelection(0, false);
         sortSpinner.setOnItemSelectedListener(new SortAdapter(viewModel));
 
         orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
         ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.order, android.R.layout.simple_spinner_item);
         orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         orderSpinner.setAdapter(orderDiscoverAdapter);
+        orderSpinner.setSelection(0, false);
         orderSpinner.setOnItemSelectedListener(new OrderAdapter(viewModel));
     }
 

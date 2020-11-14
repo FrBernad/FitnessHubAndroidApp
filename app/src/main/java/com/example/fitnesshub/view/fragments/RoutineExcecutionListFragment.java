@@ -10,15 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineExecutionListBinding;
@@ -140,7 +135,11 @@ public class RoutineExcecutionListFragment extends Fragment {
             ex = exercises.get(curr);
             ex.setRunning(true);
             warmUpAdapter.notifyItemChanged(curr);
-
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             ex.setRunning(false);
             warmUpAdapter.notifyItemChanged(curr);
             curr++;

@@ -5,7 +5,9 @@ import android.media.Rating;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -51,5 +53,16 @@ public interface RoutinesAPI {
             @Path("routineId") Integer routineId,
             @Body RoutineRating rating
     );
+
+    @POST("user/current/routines/{routineId}/favourites")
+    Single<Response<Void>> favRoutine(
+            @Path("routineId") Integer routineId
+    );
+
+    @DELETE("user/current/routines/{routineId}/favourites")
+    Single<Response<Void>> unfavRoutine(
+            @Path("routineId") Integer routineId
+    );
+
 
 }

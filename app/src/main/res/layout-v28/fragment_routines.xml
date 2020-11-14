@@ -32,6 +32,7 @@
                     android:layout_height="match_parent"
                     android:padding="20dp"
                     android:prompt="@string/sort_title"
+    android:outlineAmbientShadowColor="@color/black"
                     android:spinnerMode="dialog"
                     android:layout_weight="1" />
 

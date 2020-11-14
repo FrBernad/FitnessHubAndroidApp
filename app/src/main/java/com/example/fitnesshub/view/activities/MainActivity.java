@@ -11,9 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.ActivityMainBinding;
+import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setUpBottomNavigation();
         setSupportActionBar(findViewById(R.id.main_toolbar));
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        new ViewModelProvider(this).get(FavouritesRoutinesViewModel.class).updateData();
         viewModel.setUserData();
     }
 

@@ -9,6 +9,7 @@ import java.util.Map;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -57,6 +58,16 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
     @Override
     public Single<RoutineData> rateRoutine(Integer routineId, RoutineRating rating) {
         return api.rateRoutine(routineId,rating);
+    }
+
+    @Override
+    public Single<Response<Void>> favRoutine(Integer routineId) {
+        return api.favRoutine(routineId);
+    }
+
+    @Override
+    public Single<Response<Void>> unfavRoutine(Integer routineId) {
+        return api.unfavRoutine(routineId);
     }
 
     @Override
