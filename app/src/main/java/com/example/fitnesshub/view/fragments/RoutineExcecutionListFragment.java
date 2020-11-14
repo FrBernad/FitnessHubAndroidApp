@@ -1,6 +1,5 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RoutineExcecutionListFragment extends Fragment {
 
@@ -40,11 +38,9 @@ public class RoutineExcecutionListFragment extends Fragment {
     private RecyclerView recyclerViewCooldown;
 
     private TextView title;
+    private static Handler handler = new Handler();
+    private static Handler cycleHandler = new Handler();
 
-
-    private CountDownTimer countDownTimer;
-    private long millisecondsLeft;
-    private boolean timerRunning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +63,7 @@ public class RoutineExcecutionListFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.INVISIBLE);
 
         return view;
     }
@@ -126,104 +122,39 @@ public class RoutineExcecutionListFragment extends Fragment {
 
     @Override
     public void onResume() {
+
         super.onResume();
-
-        ArrayList<ExecutionListThread>  threads = new ArrayList<>();
-        List<ExerciseData> warmUp = warmUpAdapter.getExerciseList();
-        List<ExerciseData> main = mainAdapter.getExerciseList();
-        List<ExerciseData> cooldown = cooldownAdapter.getExerciseList();
-        ExecutionListThread t;
-        int i=0;
-        for (int j = 0; j < warmUp.size() ;j++, i++) {
-            t = new ExecutionListThread();
-            t.setAdapter(warmUpAdapter);
-            t.setCurrent(i,warmUp.get(j));
-            threads.add(i,new ExecutionListThread());
-            t.execute(10000);
-        }
-        for(int j=0;j<main.size();j++,i++){
-            t = new ExecutionListThread();
-            t.setAdapter(mainAdapter);
-            t.setCurrent(i,main.get(j));
-            threads.add(i,new ExecutionListThread());
-            t.execute(10000);
-        }
-        for(int j=0;j<cooldown.size();j++,i++){
-            t = new ExecutionListThread();
-            t.setAdapter(cooldownAdapter);
-            t.setCurrent(i,cooldown.get(j));
-            threads.add(i,new ExecutionListThread());
-            t.execute(10000);
-        }
-
-        for (int j = 0 ; j < i ; j++){
-            threads.get(i).join();
-        }
-    }
-
-
-    public void runCycles(ExecutionListThread thread, ExercisesAdapter adapter){
-        ArrayList<ExerciseData> exercises;
-        ExerciseData ex;
-        thread.setAdapter(adapter);
-        int curr = 0;
-        int cycleSize = adapter.getItemCount();
-        exercises = (ArrayList<ExerciseData>) adapter.getExerciseList();
-
-        for ()
-
-
-        while( curr < cycleSize ){
-            ex = exercises.get(curr);
-            thread.setCurrent(curr,ex);
-            thread.execute(10000);
-            curr++;
-        }
+        ArrayList<ExercisesAdapter> adapters = new ArrayList<>();
+        adapters.add(warmUpAdapter);
+        adapters.add(mainAdapter);
+        adapters.add(cooldownAdapter);
+        runCycles(0,adapters);
 
     }
 
+    private void runCycles(int index,ArrayList<ExercisesAdapter> adapters){
+        if(index >= adapters.size())
+            return;
 
+        doExercise(0,adapters.get(index), (ArrayList<ExerciseData>) adapters.get(index).getExerciseList());
 
-    public static class ExecutionListThread extends AsyncTask<Integer, Void, Void> {
+        cycleHandler.postDelayed(()-> runCycles(index+1,adapters),10000);
 
-        private ExerciseData exercise;
-        private int curr;
-        private ExercisesAdapter adapter;
+    }
 
-       public void setCurrent(int curr,ExerciseData exercise) {
-            this.curr = curr;
-            this.exercise = exercise;
+    private void doExercise(final int curr, ExercisesAdapter adapter,ArrayList<ExerciseData> exercises){
+        if (curr >= exercises.size()){
+            return;
         }
-
-        public void setAdapter(ExercisesAdapter adapter){
-            this.adapter = adapter;
-        }
-
-
-        @Override
-        protected Void doInBackground(Integer... integers) {
-            try {
-                Thread.sleep(integers[0]);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        synchronized protected void onPreExecute() {
-           super.onPreExecute();
-            exercise.setRunning(true);
+        final ExerciseData ex = exercises.get(curr);
+        ex.setRunning(true);
+        adapter.notifyItemChanged(curr);
+        handler.postDelayed(() -> {
+            ex.setRunning(false);
             adapter.notifyItemChanged(curr);
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            exercise.setRunning(false);
-            adapter.notifyItemChanged(curr);
-        }
-
+            doExercise(curr + 1,adapter,exercises);
+        }, ex.getTime()*1000);
     }
 
 }
+
