@@ -23,6 +23,7 @@ import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoutineExcecutionListFragment extends Fragment {
 
@@ -127,11 +128,37 @@ public class RoutineExcecutionListFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ExecutionListThread thread = new ExecutionListThread();
-        runCycles(thread,warmUpAdapter);
-        runCycles(thread,mainAdapter);
-        runCycles(thread,cooldownAdapter);
+        ArrayList<ExecutionListThread>  threads = new ArrayList<>();
+        List<ExerciseData> warmUp = warmUpAdapter.getExerciseList();
+        List<ExerciseData> main = mainAdapter.getExerciseList();
+        List<ExerciseData> cooldown = cooldownAdapter.getExerciseList();
+        ExecutionListThread t;
+        int i=0;
+        for (int j = 0; j < warmUp.size() ;j++, i++) {
+            t = new ExecutionListThread();
+            t.setAdapter(warmUpAdapter);
+            t.setCurrent(i,warmUp.get(j));
+            threads.add(i,new ExecutionListThread());
+            t.execute(10000);
+        }
+        for(int j=0;j<main.size();j++,i++){
+            t = new ExecutionListThread();
+            t.setAdapter(mainAdapter);
+            t.setCurrent(i,main.get(j));
+            threads.add(i,new ExecutionListThread());
+            t.execute(10000);
+        }
+        for(int j=0;j<cooldown.size();j++,i++){
+            t = new ExecutionListThread();
+            t.setAdapter(cooldownAdapter);
+            t.setCurrent(i,cooldown.get(j));
+            threads.add(i,new ExecutionListThread());
+            t.execute(10000);
+        }
 
+        for (int j = 0 ; j < i ; j++){
+            threads.get(i).join();
+        }
     }
 
 
@@ -142,6 +169,9 @@ public class RoutineExcecutionListFragment extends Fragment {
         int curr = 0;
         int cycleSize = adapter.getItemCount();
         exercises = (ArrayList<ExerciseData>) adapter.getExerciseList();
+
+        for ()
+
 
         while( curr < cycleSize ){
             ex = exercises.get(curr);
@@ -181,7 +211,7 @@ public class RoutineExcecutionListFragment extends Fragment {
         }
 
         @Override
-        protected void onPreExecute() {
+        synchronized protected void onPreExecute() {
            super.onPreExecute();
             exercise.setRunning(true);
             adapter.notifyItemChanged(curr);
