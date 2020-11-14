@@ -1,5 +1,6 @@
 package com.example.fitnesshub.view.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -125,28 +126,74 @@ public class RoutineExcecutionListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ArrayList<ExerciseData> exercises;
-        ExerciseData ex;
-        int curr = 0;
-        int cycleSize = warmUpAdapter.getItemCount();
-        exercises = (ArrayList<ExerciseData>) warmUpAdapter.getExerciseList();
 
-        while( curr < cycleSize ){
-            ex = exercises.get(curr);
-            ex.setRunning(true);
-            warmUpAdapter.notifyItemChanged(curr);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            ex.setRunning(false);
-            warmUpAdapter.notifyItemChanged(curr);
-            curr++;
-        }
-
+        ExecutionListThread thread = new ExecutionListThread();
+        runCycles(thread,warmUpAdapter);
+        runCycles(thread,mainAdapter);
+        runCycles(thread,cooldownAdapter);
 
     }
 
+
+    public void runCycles(ExecutionListThread thread, ExercisesAdapter adapter){
+        ArrayList<ExerciseData> exercises;
+        ExerciseData ex;
+        thread.setAdapter(adapter);
+        int curr = 0;
+        int cycleSize = adapter.getItemCount();
+        exercises = (ArrayList<ExerciseData>) adapter.getExerciseList();
+
+        while( curr < cycleSize ){
+            ex = exercises.get(curr);
+            thread.setCurrent(curr,ex);
+            thread.execute(10000);
+            curr++;
+        }
+
+    }
+
+
+
+    public static class ExecutionListThread extends AsyncTask<Integer, Void, Void> {
+
+        private ExerciseData exercise;
+        private int curr;
+        private ExercisesAdapter adapter;
+
+       public void setCurrent(int curr,ExerciseData exercise) {
+            this.curr = curr;
+            this.exercise = exercise;
+        }
+
+        public void setAdapter(ExercisesAdapter adapter){
+            this.adapter = adapter;
+        }
+
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            try {
+                Thread.sleep(integers[0]);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+           super.onPreExecute();
+            exercise.setRunning(true);
+            adapter.notifyItemChanged(curr);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            exercise.setRunning(false);
+            adapter.notifyItemChanged(curr);
+        }
+
+    }
 
 }
