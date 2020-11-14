@@ -1,6 +1,7 @@
 package com.example.fitnesshub.view.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.ExerciseViewHolder> {
 
     private List<ExerciseData> exerciseList;
+    private int currentExercise = -1;
     ExerciseItemBinding binding;
 
     private Context parentContext;
@@ -51,6 +54,10 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
     @Override
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         ExerciseData exercise = exerciseList.get(position);
+        holder.itemView.setExerciseData(exercise);
+        if( exercise.isRunning() ){
+            holder.itemView.exerciseContainer.setBackgroundColor(Color.BLUE);
+        }
         binding.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
         binding.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);
     }
@@ -73,4 +80,14 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         ShowExerciseDialog showExerciseDialog = new ShowExerciseDialog();
         showExerciseDialog.show(((AppCompatActivity)parentContext).getSupportFragmentManager(), "example dialog");
     }
+
+    public List<ExerciseData> getExerciseList() {
+        currentExercise = 0;
+        return exerciseList;
+    }
+
+    public int getCurrentExercise(){
+        return currentExercise;
+    }
+
 }

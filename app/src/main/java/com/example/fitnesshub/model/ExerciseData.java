@@ -25,12 +25,15 @@ public class ExerciseData {
     @SerializedName("repetitions")
     private Integer reps;
 
+    private boolean isRunning;
+
     public ExerciseData(Integer id, String name, String detail, Integer time, Integer reps) {
         this.id = id;
         this.name = name;
         this.detail = detail;
         this.time = time;
         this.reps = reps;
+        isRunning = false;
     }
 
     public Integer getId() {
@@ -51,6 +54,14 @@ public class ExerciseData {
 
     public Integer getReps() {
         return reps;
+    }
+
+    public void setRunning(boolean state) {
+        isRunning = state;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 }
 

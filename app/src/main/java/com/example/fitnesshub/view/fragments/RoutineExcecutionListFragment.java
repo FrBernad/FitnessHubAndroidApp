@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,9 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineExecutionListBinding;
+import com.example.fitnesshub.model.ExerciseData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
@@ -39,6 +43,11 @@ public class RoutineExcecutionListFragment extends Fragment {
     private RecyclerView recyclerViewCooldown;
 
     private TextView title;
+
+
+    private CountDownTimer countDownTimer;
+    private long millisecondsLeft;
+    private boolean timerRunning;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +95,7 @@ public class RoutineExcecutionListFragment extends Fragment {
         recyclerViewCooldown.setAdapter(cooldownAdapter);
 
         observeExerciseViewModel();
+
     }
 
     private void observeExerciseViewModel() {
@@ -115,4 +125,29 @@ public class RoutineExcecutionListFragment extends Fragment {
     }
 
 
- }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ArrayList<ExerciseData> exercises;
+        ExerciseData ex;
+        int curr = 0;
+        int cycleSize = warmUpAdapter.getItemCount();
+        exercises = (ArrayList<ExerciseData>) warmUpAdapter.getExerciseList();
+
+        while( curr < cycleSize ){
+            ex = exercises.get(curr);
+            ex.setRunning(true);
+            warmUpAdapter.notifyItemChanged(curr);
+
+            ex.setRunning(false);
+            warmUpAdapter.notifyItemChanged(curr);
+            curr++;
+        }
+
+
+    }
+
+
+}
