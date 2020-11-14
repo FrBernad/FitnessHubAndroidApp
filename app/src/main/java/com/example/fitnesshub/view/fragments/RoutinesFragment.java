@@ -35,7 +35,7 @@ public class RoutinesFragment extends Fragment {
 
     private RoutinesViewModel viewModel;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
+    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(),RoutineClickListener.ROUTINES_ID);
 
     private FragmentRoutinesBinding binding;
 
