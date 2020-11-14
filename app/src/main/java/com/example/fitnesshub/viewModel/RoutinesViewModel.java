@@ -37,6 +37,7 @@ public class RoutinesViewModel extends AndroidViewModel {
     private int itemsPerRequest = 5;
     private boolean isLastPage = false;
     private String direction = "desc";
+    private String filter = null;
     private String orderBy = "dateCreated";
 
     public RoutinesViewModel(@NonNull Application application) {
@@ -111,13 +112,40 @@ public class RoutinesViewModel extends AndroidViewModel {
 
     public void orderRoutines(int option) {
         switch (option) {
-            case 1:
+            case 0:
                 direction = "desc";
                 break;
 
-            case 0:
+            case 1:
                 direction = "asc";
                 break;
+        }
+
+        applyChanges();
+    }
+
+    public void filterRoutines(Integer option) {
+        switch (option) {
+            case -1:
+                filter = null;
+                break;
+
+            case 0:
+                filter = "rookie";
+                break;
+
+            case 1:
+                filter = "beginner";
+                break;
+
+            case 2:
+                filter = "intermediate";
+                break;
+
+            case 3:
+                filter = "advanced";
+                break;
+
         }
 
         applyChanges();
@@ -146,12 +174,6 @@ public class RoutinesViewModel extends AndroidViewModel {
                 break;
         }
 
-        //   'Rating', value: 'averageRating'},
-//       'Creation date', value: 'dateCreated'},
-//       'Difficulty', value: 'difficulty'},
-//       'Name', value: 'name'},
-//       'Category', value: 'categoryId'}],
-
         applyChanges();
     }
 
@@ -169,6 +191,9 @@ public class RoutinesViewModel extends AndroidViewModel {
         options.put("orderBy", orderBy);
         options.put("direction", direction);
         options.put("size", String.valueOf(itemsPerRequest));
+        if (filter != null) {
+            options.put("difficulty", filter);
+        }
 
         loading.setValue(true);
 

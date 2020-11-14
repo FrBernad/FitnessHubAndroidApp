@@ -25,6 +25,7 @@ import com.example.fitnesshub.view.adapters.OrderAdapter;
 import com.example.fitnesshub.view.adapters.RoutinesAdapter;
 import com.example.fitnesshub.view.adapters.SortAdapter;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;
+import com.google.android.material.chip.ChipGroup;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +47,8 @@ public class RoutinesFragment extends Fragment {
     private Spinner sortSpinner;
     private Spinner orderSpinner;
 
+    private ChipGroup chipGroup;
+
     boolean noMoreEntries = false;
     boolean searching = false;
 
@@ -61,6 +64,7 @@ public class RoutinesFragment extends Fragment {
         nestedScrollView = binding.scrollView;
         recyclerView = binding.recyclerView;
         progressBar = binding.progressBar;
+        chipGroup = binding.chipGroupRoutines;
         swipeRefreshLayout = binding.swipeRefresh;
 
         return view;
@@ -116,6 +120,8 @@ public class RoutinesFragment extends Fragment {
                 noMoreEntries = value;
             }
         });
+
+        chipGroup.setOnCheckedChangeListener(new ChipSelectorListener(viewModel));
 
         nestedScrollView.setOnScrollChangeListener(
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
