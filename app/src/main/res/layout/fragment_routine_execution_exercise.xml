@@ -71,6 +71,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="50dp"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@color/whiteBright"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -139,6 +140,7 @@
         <TextView
             android:id="@+id/exerciseTitleInExecutionList"
             style="@style/Titles"
+            android:textAllCaps="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
