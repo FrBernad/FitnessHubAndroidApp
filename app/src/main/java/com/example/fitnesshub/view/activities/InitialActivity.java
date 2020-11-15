@@ -7,8 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.widget.Toast;
+
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.model.AppPreferences;
+
+import java.util.List;
 
 public class InitialActivity extends AppCompatActivity {
 
@@ -19,24 +23,32 @@ public class InitialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_initial);
 
         new Handler().postDelayed(() -> {
-            Intent intentInvocador = getIntent();
-            int routineId = intentInvocador.getIntExtra("RoutineId",-1);
 
+            Intent appLinkIntent = getIntent();
+            Uri appLinkData = appLinkIntent.getData();
+            Intent intent;
             AppPreferences preferences = new AppPreferences(this.getApplication());
-            if (preferences.getAuthToken() != null) {
 
-                Intent intent = new Intent(InitialActivity.this, MainActivity.class);
-                intent.putExtra("RoutineId",routineId);
+            if(appLinkData!=null){ // cuando inicio la aplicacion desde un link
+                List<String> params = appLinkData.getPathSegments();
+                String routineId = params.get(params.size()-1);
+
+            }else{ //Cuando inicio la aplicacion normalmente
+
+                if (preferences.getAuthToken() != null) {
+
+                    intent = new Intent(InitialActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish(); //elimino la actividad del stack
+                    return;
+                }
+                intent = new Intent(InitialActivity.this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish(); //elimino la actividad del stack
-                return;
             }
-            Intent intent = new Intent(InitialActivity.this, LoginActivity.class);
-            intent.putExtra("RoutineId",routineId);
-            startActivity(intent);
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            finish(); //elimino la actividad del stack
+
         }, 3000);
 
     }

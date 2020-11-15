@@ -71,10 +71,7 @@ public class LoginFragment extends Fragment {
         viewModel.getToken().observe(getViewLifecycleOwner(), authToken -> {
             if (authToken != null) {
 
-                int routineId = getActivity().getIntent().getIntExtra("RoutineId",-1);
-
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                intent.putExtra("RoutineId",routineId);
                 startActivity(intent);
                 getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 getActivity().finish();

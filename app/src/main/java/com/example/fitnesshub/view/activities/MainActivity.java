@@ -1,22 +1,17 @@
 package com.example.fitnesshub.view.activities;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.fitnesshub.R;
-import com.example.fitnesshub.databinding.ActivityMainBinding;
-import com.example.fitnesshub.viewModel.ParticularRoutineViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
 
     private UserViewModel viewModel;
-    private ParticularRoutineViewModel particularRoutine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.main_toolbar));
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         viewModel.setUserData();
-        particularRoutine = new ViewModelProvider(this).get(ParticularRoutineViewModel.class);
-        particularRoutine.setParticularRoutine(getIntent().getIntExtra("RoutineId",-1));
+
     }
 
 
@@ -44,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNav);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.mainNavFragment);
-        Bundle bundle = new Bundle();
-        bundle.putInt("RoutineId", particularRoutine.getParticularRoutine());
-        navHostFragment.setArguments(bundle);
         assert navHostFragment != null;
         NavigationUI.setupWithNavController(bottomNavigationView,
                 navHostFragment.getNavController());
