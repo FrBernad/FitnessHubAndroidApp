@@ -5,22 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.view.fragments.RoutineFragment;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import static androidx.core.app.NotificationCompat.CATEGORY_REMINDER;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private UserViewModel viewModel;
 
-    private static final String CHANNEL_ID = "simplified_coding";
-    private static final String CHANNEL_NAME = "Simplified_coding";
-    private static final String CHANNEL_DESC = "Simplified_coding notifications";
+    private static final String CHANNEL_ID = "Routine channel";
+    private static final String CHANNEL_NAME = "Routine recordatory";
+    private static final String CHANNEL_DESC = "Get a reminder so you remember to train";
+    private static final String GROUP_KEY_ROUTINES = "ROUTINES";
 
 
 
@@ -44,32 +52,45 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         new ViewModelProvider(this).get(FavouritesRoutinesViewModel.class).updateData();
         viewModel.setUserData();
-
+        Navigation.findNavController()
         createNotificationChannel();
-
         findViewById(R.id.notificationBtn).setOnClickListener(v -> displayNotification());
-        I
 
     }
 
     public void createNotificationChannel(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription(CHANNEL_DESC);
+            NotificationChannel routineCh = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
+            routineCh.setDescription(CHANNEL_DESC);
             NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            manager.createNotificationChannel(routineCh);
         }
     }
 
     private void displayNotification(){
+
+        /*Create an explicit intent for an activity in your app*/
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("name",)
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
+
+
+        /*Configuro el contenido y el canal de la notificaion*/
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this,CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
-                .setContentTitle("Fitness Hub")
-                .setContentText("Rutina")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setContentTitle("Nombre de la rutina")
+                .setContentText("Comenza tu entrenamiento con la rutina")
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setCategory(NotificationCompat.CATEGORY_REMINDER)
+                .setGroup(GROUP_KEY_ROUTINES);
 
         NotificationManagerCompat mNotificationMgr = NotificationManagerCompat.from(this);
-        mNotificationMgr.notify(1,mBuilder.build());
+        mNotificationMgr.notify((int)System.currentTimeMillis(),mBuilder.build());
 
     }
 
