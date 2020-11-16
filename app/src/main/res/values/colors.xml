@@ -5,6 +5,8 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="darkGrey">#212529</color>
@@ -12,7 +14,33 @@
     <color name="whiteBright">#F8F9FA</color>
     <color name="whiteOpaque">#ADB5BD</color>
     <color name="whiteBackground">#E9ECEF</color>
+
+    <color name="background">@color/whiteBackground</color>
+    <color name="backgroundAlternative">@color/whiteOpaque</color>
+    <color name="titlesBackground">@color/darkGrey</color>
+    <color name="titlesColor">@color/whiteBright</color>
+    <color name="titlesCycleBackground">@color/grey</color>
+    <color name="floatingButtonColorBG">@color/darkGrey</color>
+    <color name="floatingButtonColor">@color/whiteBright</color>
+    <color name="initialBackground">@color/whiteBackground</color>
+    <color name="navBarSelected">@color/whiteBright</color>
+    <color name="navBarNotSelected">@color/whiteOpaque</color>
+    <color name="navBarBackground">@color/darkGrey</color>
+    <color name="toolbarBackground">@color/darkGrey</color>
+    <color name="backgroundPopUp">@color/whiteBright</color>
+    <color name="buttomPopUpBG">@color/grey</color>
+    <color name="buttomPopUpText">@color/whiteBright</color>
+    <color name="executionBarBG">@color/darkGrey</color>
+    <color name="executionBarBottom">@color/whiteBright</color>
+    <color name="exerciseItemBg">@color/whiteBright</color>
+    <color name="exerciseInfo">@color/darkGrey</color>
+    <color name="exerciseItemText">@color/darkGrey</color>
+    <color name="textBody">@color/darkGrey</color>
+    <color name="startProgressBar">@color/whiteBright</color>
+    <color name="endProgressBar">@color/darkGrey</color>
+    <color name="exerciseTimer">@color/darkGrey</color>
+
+
+
     <color name="red">#CC0000</color>
-
-
 </resources>

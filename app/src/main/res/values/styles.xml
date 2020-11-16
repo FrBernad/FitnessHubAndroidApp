@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Titles" parent="@android:style/Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/titlesColor</item>
+   </style>
+
+    <style name="Titles.RoutineTitle">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+
+    <style name="Titles.AuthorTitle">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+    <style name="Titles.ExerciseItem">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/exerciseItemText</item>
+    </style>
+
+    <style name="Titles.Timer">
+        <item name="android:textColor">@color/exerciseTimer</item>
+    </style>
+
+    <style name="Titles.PopUp">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/exerciseItemText</item>
+    </style>
+
+    <style name="Titles.PopUpSubtitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/exerciseItemText</item>
+    </style>
+
+    <style name="TextBody" parent="@android:style/Widget.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/textBody</item>
+    </style>
+
+    <style name="ButtonInTitle" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="background">@android:color/transparent</item>
+        <item name="tint">@color/titlesColor</item>
+    </style>
+
+    <style name="executionBarButtom" parent="Widget.AppCompat.Button">
+        <item name="background">@android:color/transparent</item>
+        <item name="tint">@color/executionBarBottom</item>
+    </style>
+
+
+    <style name="ButtomPopUp" parent="Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/buttomPopUpBG</item>
+        <item name="android:textColor">@color/buttomPopUpText</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+
+    </style>
+
     <style name="routineCardTitle">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
@@ -13,21 +79,6 @@
 
     </style>
 
-    <style name="Titles">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">22sp</item>
-
-    </style>
-
-    <style name="TextBody">
-        <item name="android:textStyle">normal</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="Items">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">20sp</item>
-    </style>
 
     <style name="Toolbar_style" parent="Theme.AppCompat.Light">
         <item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>

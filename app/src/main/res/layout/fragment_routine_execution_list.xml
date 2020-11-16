@@ -7,12 +7,12 @@
     android:orientation="vertical"
     android:weightSum="10">
 
-        <ScrollView
-        android:layout_width="match_parent"
-        android:layout_weight="9"
+    <ScrollView
         android:id="@+id/scview"
-        android:background="@color/whiteOpaque"
-            android:layout_height="0dp">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:background="@color/backgroundAlternative">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +27,7 @@
                 android:id="@+id/relativeLayout10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/darkGrey"
+                android:background="@color/titlesBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,17 +36,14 @@
                 <TextView
                     android:id="@+id/routineNameTitleInExecutionList"
                     style="@style/Titles"
-                    android:layout_width="216dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="50dp"
-                    android:text=""
-                    android:textAlignment="center"
-                    android:textColor="@color/whiteBright" />
+                    android:layout_marginEnd="50dp" />
 
             </RelativeLayout>
 
@@ -54,7 +51,7 @@
                 android:id="@+id/relativeLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey"
+                android:background="@color/titlesCycleBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -66,9 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/WarmupTitle"
-                    android:textColor="@color/whiteBright"
-                    android:textSize="20sp" />
+                    android:text="@string/WarmupTitle" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -81,7 +76,7 @@
                 android:id="@+id/relativeLayout11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey"
+                android:background="@color/titlesCycleBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -93,8 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/MainExercisesTitle"
-                    android:textColor="@color/whiteBright" />
+                    android:text="@string/MainExercisesTitle"/>
             </RelativeLayout>
 
 
@@ -109,7 +103,7 @@
                 android:id="@+id/relativeLayout12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey"
+                android:background="@color/titlesCycleBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -122,8 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/CooldownTitle"
-                    android:textColor="@color/whiteBright" />
+                    android:text="@string/CooldownTitle" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -139,10 +132,10 @@
 
     <include
         layout="@layout/execution_bar"
-        app:layout_constraintTop_toBottomOf="@id/scview"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_width="match_parent" />
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@id/scview" />
 
 
 </LinearLayout>
