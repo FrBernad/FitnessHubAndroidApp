@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="iconsInputBox">#343A40</color>
-    <color name="primaryColor">#212529</color>   <!--darkGrey-->
-    <color name="primaryColorAlternative">#343A40</color>  <!--grey-->
-    <color name="secondaryColor">#ADB5BD</color> <!--whiteOpaque-->
-    <color name="secondaryColorAlternative">#E9ECEF</color> <!--whitebackground-->
-    <color name="mainTextColor">#F8F9FA</color>             <!--whiteBright-->
-    <color name="mainTextColorAlternative">#212529</color>  <!--darkgrey-->
-    <color name="thirdColor">#F8F9FA</color> <!--whiteBrigh-->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="iconsInputBox">#F8F9FA</color>
+    <color name="primaryColor">#212529</color>
+    <color name="primaryColorAlternative">#343A40</color>
+    <color name="secondaryColor">#484d51</color>
+    <color name="secondaryColorAlternative">#ADB5BD</color>
+    <color name="mainTextColor">#F8F9FA</color>
+    <color name="mainTextColorAlternative">#F8F9FA</color>
+    <color name="thirdColor">#F8F9FA</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="red">#CC0000</color>
 
-    <!--    <color name="whiteOpaque">#484d51</color>           &lt;!&ndash;secondaryColorAlternative&ndash;&gt;-->
-    <!--    <color name="primaryColor">#212529</color>-->
-
-    <color name="background">@color/white</color>
+    <color name="background">@color/secondaryColor</color>
     <color name="backgroundAlternative">@color/secondaryColor</color>
     <color name="titlesBackground">@color/primaryColor</color>
     <color name="titlesColor">@color/mainTextColor</color>
@@ -24,7 +21,7 @@
     <color name="titlesCycleBackground">@color/primaryColorAlternative</color>
     <color name="floatingButtonColorBG">@color/primaryColor</color>
     <color name="floatingButtonColor">@color/thirdColor</color>
-    <color name="initialBackground">@color/white</color>
+    <color name="initialBackground">@color/primaryColor</color>
     <color name="navBarSelected">@color/mainTextColor</color>
     <color name="navBarNotSelected">@color/secondaryColor</color>
     <color name="navBarBackground">@color/primaryColor</color>

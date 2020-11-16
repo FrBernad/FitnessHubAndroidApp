@@ -78,7 +78,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/relativeLayoutP"
                     app:startIconDrawable="@drawable/ic_me_24"
-                    app:startIconTint="@color/primaryColorAlternative">
+                    app:startIconTint="@color/iconsInputBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fullName"
@@ -98,7 +98,6 @@
                     android:enabled="false"
                     android:hint="@string/phoneField"
                     app:boxBackgroundColor="@color/boxInput"
-
                     app:hintTextColor="@color/textInputHint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -110,9 +109,10 @@
                         android:id="@+id/phone"
                         style="@style/TextBody"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:autofillHints="@string/phoneField"
                         android:background="@android:color/transparent"
+                        android:drawablePadding="10dp"
                         android:ems="10"
                         android:inputType="phone"
                         android:text="@{userInfo.phone}"
@@ -137,8 +137,8 @@
                     <Spinner
                         android:id="@+id/genderSpinner"
                         android:layout_width="match_parent"
-                        android:background="@android:color/transparent"
                         android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
                         android:spinnerMode="dialog" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -163,8 +163,8 @@
                         android:layout_height="match_parent"
                         android:drawablePadding="10dp"
                         android:hint="@string/BirthdateField"
-                        android:textAlignment="viewStart"
                         android:padding="8dp"
+                        android:textAlignment="viewStart"
                         app:drawableLeftCompat="@drawable/ic_birthday_24" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -182,11 +182,11 @@
 
                     <TextView
                         android:id="@+id/FavoriteRoutines"
+                        style="@style/Titles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="@string/FavoriteRoutines"
-                        style="@style/Titles"/>
+                        android:text="@string/FavoriteRoutines" />
                 </RelativeLayout>
 
 
