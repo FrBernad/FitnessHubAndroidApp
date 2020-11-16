@@ -30,7 +30,7 @@
                 <data
                     android:scheme="https"
                     android:host="www.fitnesshub.com"
-                    android:pathPrefix="/Routines" />
+                    android:pathPrefix="/Routines"/>
             </intent-filter>
         </activity>
         <activity android:name=".view.activities.LoginActivity" />

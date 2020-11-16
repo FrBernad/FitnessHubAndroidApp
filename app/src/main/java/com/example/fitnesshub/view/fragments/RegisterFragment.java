@@ -1,6 +1,5 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,10 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRegisterBinding;
 import com.example.fitnesshub.model.UserInfo;
-import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 

@@ -189,7 +189,7 @@ public class RoutineFragment extends Fragment {
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT,routineData.getTitle());
         sharingIntent.putExtra("RoutineId",routineId);
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://fitneshub/Routines/" + routineId);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://www.fitneshub.com/Routines/" + routineId);
         startActivity(Intent.createChooser(sharingIntent,"Share Rutine"));
 
     }
