@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/welcome_container"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".view.fragments.WelcomeFragment"
     android:padding="30dp">
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/welcome_first_heading"
             android:textSize="36sp"
-            android:textColor="@color/grey"
+            android:textColor="@color/titleWelcome"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:layout_marginTop="100dp"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:text="@string/welcome_second_heading"
             android:textSize="25sp"
-            android:textColor="@color/grey"
+            android:textColor="@color/titleWelcome"
             android:layout_gravity="center"
             android:textAlignment="center"/>
         
@@ -49,7 +49,7 @@
              android:layout_width="0dp"
              android:layout_height="wrap_content"
              android:text="@string/login"
-             android:backgroundTint="@color/grey"
+             style="@style/Buttom"
              android:elevation="5dp"
              android:paddingVertical="15dp"
              android:layout_weight="1"
@@ -60,7 +60,7 @@
                 android:id="@+id/welcomeRegisterButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey"
+                style="@style/Buttom"
                 android:elevation="5dp"
                 android:paddingVertical="15dp"
                 android:text="@string/register"
@@ -68,8 +68,6 @@
                 android:layout_marginStart="10dp"/>
 
         </LinearLayout>
-
-
 
     </LinearLayout>
 

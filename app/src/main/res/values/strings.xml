@@ -96,6 +96,9 @@
     <string name="next">Next</string>
     <string name="ListMode">List Mode</string>
     <string name="detailMode">Detail Mode</string>
+    <string name="TIP">TIP OF THE DAY\nNo matter how bad your stomach is telling you to go for candy over healthy food, try to stay away from sweets.</string>
+    <string name="ButtomHome1">CARDIO\nWORKOUT</string>
+    <string name="ButtomHome2">ABS\nWORKOUT</string>
 
 
 </resources>

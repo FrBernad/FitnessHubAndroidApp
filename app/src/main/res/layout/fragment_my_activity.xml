@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".view.fragments.MyActivityFragment">
 
     <ScrollView
@@ -29,13 +30,13 @@
                 android:id="@+id/myActivityTabs"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/darkGrey"
+                android:background="@color/titlesBackground"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorColor="@color/selectedTab"
                 app:tabIndicatorHeight="4dp"
-                app:tabSelectedTextColor="@color/whiteBright"
-                app:tabTextColor="@color/whiteOpaque" />
+                app:tabSelectedTextColor="@color/selectedTab"
+                app:tabTextColor="@color/notSelectedTab" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"

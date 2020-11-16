@@ -13,6 +13,13 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="Titles.Welcome">
+        <item name="android:textColor">@color/titleWelcome</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 
     <style name="Titles.AuthorTitle">
         <item name="android:textSize">18sp</item>
@@ -45,6 +52,20 @@
         <item name="android:textColor">@color/textBody</item>
     </style>
 
+    <style name="TextBody.Home">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/textBodyHome</item>
+    </style>
+
+    <style name="TextBody.Welcome">
+        <item name="android:textColor">@color/titleWelcome</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
     <style name="ButtonInTitle" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -57,14 +78,13 @@
         <item name="tint">@color/executionBarBottom</item>
     </style>
 
-
-    <style name="ButtomPopUp" parent="Widget.AppCompat.Button">
-        <item name="backgroundTint">@color/buttomPopUpBG</item>
-        <item name="android:textColor">@color/buttomPopUpText</item>
+    <style name="Buttom" parent="Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/buttomBG</item>
+        <item name="android:textColor">@color/buttomText</item>
+        <item name="elevation">5dp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textAlignment">center</item>
-
     </style>
 
     <style name="routineCardTitle">

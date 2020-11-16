@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whiteBackground"
+    android:background="@color/background"
     android:padding="0dp">
 
 
@@ -23,7 +23,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             <TextView
                     android:id="@+id/RegisterText"
@@ -32,9 +32,8 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="88dp"
                     android:text="@string/login"
-                    android:textAllCaps="true"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="40sp"
+                    style="@style/Titles.Welcome"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
-                    android:background="@android:color/darker_gray"
+                    android:background="@color/separatorColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/RegisterText" />
 
@@ -58,6 +57,7 @@
                     android:hint="@string/username"
                     android:textColorHint="@color/grey"
                     app:boxStrokeColor="@color/grey"
+                    android:background="@color/boxInput"
                     app:boxStrokeWidthFocused="2dp"
                     app:endIconMode="clear_text"
                     app:endIconTint="@color/grey"
@@ -82,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:hint="@string/password"
+                    android:background="@color/boxInput"
                     android:textColorHint="@color/grey"
                     app:boxStrokeColor="@color/grey"
                     app:boxStrokeWidthFocused="2dp"
@@ -107,12 +108,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:backgroundTint="@color/grey"
                     android:elevation="5dp"
                     android:paddingVertical="15dp"
                     android:text="@string/login"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
+                    style="@style/Buttom"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.6"

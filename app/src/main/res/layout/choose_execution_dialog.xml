@@ -16,12 +16,12 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        style="@style/ButtomPopUp"
+        style="@style/Buttom"
         android:text="@string/detailMode"       />
 
         <Button
             android:id="@+id/simpleMode"
-            style="@style/ButtomPopUp"
+            style="@style/Buttom"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_marginStart="10dp"

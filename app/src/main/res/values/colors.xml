@@ -14,33 +14,40 @@
     <color name="whiteBright">#F8F9FA</color>
     <color name="whiteOpaque">#ADB5BD</color>
     <color name="whiteBackground">#E9ECEF</color>
+    <color name="red">#CC0000</color>
+
 
     <color name="background">@color/whiteBackground</color>
     <color name="backgroundAlternative">@color/whiteOpaque</color>
     <color name="titlesBackground">@color/darkGrey</color>
     <color name="titlesColor">@color/whiteBright</color>
+    <color name="titleWelcome">@color/darkGrey</color>
     <color name="titlesCycleBackground">@color/grey</color>
     <color name="floatingButtonColorBG">@color/darkGrey</color>
     <color name="floatingButtonColor">@color/whiteBright</color>
     <color name="initialBackground">@color/whiteBackground</color>
     <color name="navBarSelected">@color/whiteBright</color>
     <color name="navBarNotSelected">@color/whiteOpaque</color>
+    <color name="boxInput">@color/whiteBright</color>
     <color name="navBarBackground">@color/darkGrey</color>
     <color name="toolbarBackground">@color/darkGrey</color>
+    <color name="separatorColor">@color/darkGrey</color>
     <color name="backgroundPopUp">@color/whiteBright</color>
-    <color name="buttomPopUpBG">@color/grey</color>
-    <color name="buttomPopUpText">@color/whiteBright</color>
+    <color name="buttomBG">@color/grey</color>
+    <color name="buttomText">@color/whiteBright</color>
     <color name="executionBarBG">@color/darkGrey</color>
     <color name="executionBarBottom">@color/whiteBright</color>
     <color name="exerciseItemBg">@color/whiteBright</color>
     <color name="exerciseInfo">@color/darkGrey</color>
     <color name="exerciseItemText">@color/darkGrey</color>
     <color name="textBody">@color/darkGrey</color>
+    <color name="textBodyHome">@color/whiteBright</color>
     <color name="startProgressBar">@color/whiteBright</color>
     <color name="endProgressBar">@color/darkGrey</color>
     <color name="exerciseTimer">@color/darkGrey</color>
+    <color name="selectedTab">@color/whiteBright</color>
+    <color name="notSelectedTab">@color/whiteBright</color>
+    <color name="cardBG">@color/whiteBright</color>
+    <color name="cardText">@color/darkGrey</color>
 
-
-
-    <color name="red">#CC0000</color>
 </resources>
