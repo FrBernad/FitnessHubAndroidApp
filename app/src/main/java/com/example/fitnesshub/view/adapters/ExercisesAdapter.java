@@ -54,9 +54,9 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         ExerciseData exercise = exerciseList.get(position);
         holder.itemView.setExerciseData(exercise);
         if (exercise.isRunning())
-            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.whiteOpaque));
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionSelected));
         else
-            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.whiteBright));
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionNotSelected));
 
         holder.itemView.infoButton.setOnClickListener(v -> openExerciseInfoDialog(exercise));
         holder.itemView.repsExercise.setVisibility(exercise.getReps() != 0 ? View.VISIBLE : View.GONE);

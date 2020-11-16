@@ -52,18 +52,18 @@
                 android:layout_marginTop="35dp"
                 android:background="@color/boxInput"
                 android:hint="@string/email"
-                android:textColorHint="@color/grey"
-                app:boxStrokeColor="@color/grey"
+                android:textColorHint="@color/mainTextColorHint"
+                app:boxStrokeColor="@color/mainTextColorHint"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
+                app:endIconTint="@color/mainTextColorAlternative"
+                app:hintTextColor="@color/mainTextColorHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view2"
                 app:layout_constraintWidth_percent="0.8"
                 app:startIconDrawable="@drawable/ic_email_24"
-                app:startIconTint="@color/grey">
+                app:startIconTint="@color/mainTextColorAlternative">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -80,20 +80,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@color/boxInput"
                 android:hint="@string/username"
-                android:textColorHint="@color/grey"
-                app:boxStrokeColor="@color/grey"
+                android:textColorHint="@color/mainTextColorHint"
+                app:boxStrokeColor="@color/mainTextColorHint"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
-                android:background="@color/boxInput"
-                app:endIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
+                app:endIconTint="@color/mainTextColorAlternative"
+                app:hintTextColor="@color/mainTextColorHint"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_email"
                 app:layout_constraintWidth_percent="0.8"
                 app:startIconDrawable="@drawable/ic_me_24"
-                app:startIconTint="@color/grey">
+                app:startIconTint="@color/mainTextColorAlternative">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -109,23 +109,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:hint="@string/password"
                 android:background="@color/boxInput"
+                android:hint="@string/password"
 
-                android:textColorHint="@color/grey"
+                android:textColorHint="@color/mainTextColorHint"
 
-                app:boxStrokeColor="@color/grey"
+                app:boxStrokeColor="@color/mainTextColorHint"
                 app:boxStrokeWidthFocused="2dp"
-                app:hintTextColor="@color/grey"
+                app:hintTextColor="@color/mainTextColorHint"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_username"
                 app:layout_constraintWidth_percent="0.8"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/grey"
+                app:passwordToggleTint="@color/primaryColorAlternative"
                 app:startIconDrawable="@drawable/ic_password_24"
-                app:startIconTint="@color/grey">
+                app:startIconTint="@color/mainTextColorAlternative">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -136,24 +136,24 @@
 
             <Button
                 android:id="@+id/registerBtn"
+                style="@style/Buttom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:elevation="5dp"
                 android:paddingVertical="15dp"
                 android:text="@string/register"
-                style="@style/Buttom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/registerErrorMessage"
                 app:layout_constraintWidth_percent="0.6" />
 
             <TextView
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/registerBtn"
                 android:layout_centerHorizontal="true"
-                style="@style/TextBody"
                 android:layout_marginTop="10dp"
                 android:text="@string/conditions"
                 android:textSize="12sp"
@@ -173,7 +173,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/register_password" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

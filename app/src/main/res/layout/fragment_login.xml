@@ -55,19 +55,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:hint="@string/username"
-                    android:textColorHint="@color/grey"
-                    app:boxStrokeColor="@color/grey"
-                    android:background="@color/boxInput"
+                    android:textColorHint="@color/mainTextColorAlternative"
+                    app:boxStrokeColor="@color/mainTextColorAlternative"
                     app:boxStrokeWidthFocused="2dp"
                     app:endIconMode="clear_text"
-                    app:endIconTint="@color/grey"
-                    app:hintTextColor="@color/grey"
+                    app:endIconTint="@color/mainTextColorAlternative"
+                    app:hintTextColor="@color/mainTextColorAlternative"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/RegisterText"
                     app:layout_constraintWidth_percent="0.8"
                     app:startIconDrawable="@drawable/ic_me_24"
-                    app:startIconTint="@color/grey">
+                    app:startIconTint="@color/mainTextColorAlternative">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -83,18 +82,18 @@
                     android:layout_marginTop="40dp"
                     android:hint="@string/password"
                     android:background="@color/boxInput"
-                    android:textColorHint="@color/grey"
-                    app:boxStrokeColor="@color/grey"
+                    android:textColorHint="@color/mainTextColorAlternative"
+                    app:boxStrokeColor="@color/mainTextColorAlternative"
                     app:boxStrokeWidthFocused="2dp"
-                    app:hintTextColor="@color/grey"
+                    app:hintTextColor="@color/mainTextColorAlternative"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/login_username"
                     app:layout_constraintWidth_percent="0.8"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/grey"
+                    app:passwordToggleTint="@color/mainTextColorAlternative"
                     app:startIconDrawable="@drawable/ic_password_24"
-                    app:startIconTint="@color/grey">
+                    app:startIconTint="@color/mainTextColorAlternative">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

@@ -73,12 +73,12 @@
                     android:enabled="false"
                     android:hint="@string/nameField"
                     app:boxBackgroundColor="@color/boxInput"
-                    app:hintTextColor="@color/grey"
+                    app:hintTextColor="@color/primaryColorAlternative"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/relativeLayoutP"
                     app:startIconDrawable="@drawable/ic_me_24"
-                    app:startIconTint="@color/grey">
+                    app:startIconTint="@color/primaryColorAlternative">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fullName"
@@ -88,7 +88,7 @@
                         android:background="@android:color/transparent"
                         android:drawablePadding="10dp"
                         android:text="@{userInfo.fullName}"
-                        android:textColor="@color/darkGrey" />
+                        android:textColor="@color/mainTextColorAlternative" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -99,12 +99,12 @@
                     android:hint="@string/phoneField"
                     app:boxBackgroundColor="@color/boxInput"
 
-                    app:hintTextColor="@color/grey"
+                    app:hintTextColor="@color/textInputHint"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
                     app:startIconDrawable="@drawable/ic_phone_24"
-                    app:startIconTint="@color/grey">
+                    app:startIconTint="@color/iconsInputBox">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone"
@@ -116,7 +116,7 @@
                         android:ems="10"
                         android:inputType="phone"
                         android:text="@{userInfo.phone}"
-                        android:textColor="@color/darkGrey"
+                        android:textColor="@color/mainTextColor"
                         tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,14 +130,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/inputLayoutPhone"
-                    app:strokeColor="@color/darkGrey"
+                    app:strokeColor="@color/primaryColor"
+
                     app:strokeWidth="1dp">
 
                     <Spinner
                         android:id="@+id/genderSpinner"
                         android:layout_width="match_parent"
+                        android:background="@android:color/transparent"
                         android:layout_height="match_parent"
-                        android:background="@color/boxInput"
                         android:spinnerMode="dialog" />
                 </com.google.android.material.card.MaterialCardView>
 
@@ -148,11 +149,10 @@
                     android:layout_height="60dp"
                     android:layout_marginVertical="3dp"
                     android:layout_weight="1"
-                    android:background="@color/boxInput"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView"
-                    app:strokeColor="@color/darkGrey"
+                    app:strokeColor="@color/primaryColorAlternative"
                     app:strokeWidth="1dp">
 
 
@@ -161,9 +161,9 @@
                         style="@style/TextBody"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/boxInput"
                         android:drawablePadding="10dp"
                         android:hint="@string/BirthdateField"
+                        android:textAlignment="viewStart"
                         android:padding="8dp"
                         app:drawableLeftCompat="@drawable/ic_birthday_24" />
                 </com.google.android.material.card.MaterialCardView>

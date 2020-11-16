@@ -2,6 +2,7 @@ package com.example.fitnesshub.view.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         new ViewModelProvider(this).get(FavouritesRoutinesViewModel.class).updateData();
         viewModel.setUserData();
+
     }
 
 

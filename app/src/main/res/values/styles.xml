@@ -107,7 +107,7 @@
 
 
     <style name="ActionButtonOverflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:tint">@color/whiteBright</item>
+        <item name="android:tint">@color/thirdColor</item>
     </style>
 
 

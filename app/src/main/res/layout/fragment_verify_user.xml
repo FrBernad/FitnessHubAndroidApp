@@ -98,17 +98,17 @@
                 android:layout_marginTop="12dp"
                 android:hint="@string/text_verification_email"
                 android:background="@color/boxInput"
-                android:textColorHint="@color/grey"
-                app:boxStrokeColor="@color/grey"
+                android:textColorHint="@color/mainTextColorHint"
+                app:boxStrokeColor="@color/mainTextColorHint"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
+                app:endIconTint="@color/mainTextColorAlternative"
+                app:hintTextColor="@color/mainTextColorAlternative"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8"
                 app:layout_constraintWidth_percent="0.8"
-                app:startIconTint="@color/grey">
+                app:startIconTint="@color/mainTextColorAlternative">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -127,17 +127,17 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/boxInput"
                 android:hint="@string/text_verification_code"
-                android:textColorHint="@color/grey"
-                app:boxStrokeColor="@color/grey"
+                android:textColorHint="@color/mainTextColorHint"
+                app:boxStrokeColor="@color/mainTextColorHint"
                 app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
-                app:endIconTint="@color/grey"
-                app:hintTextColor="@color/grey"
+                app:endIconTint="@color/mainTextColorAlternative"
+                app:hintTextColor="@color/mainTextColorAlternative"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
                 app:layout_constraintWidth_percent="0.8"
-                app:startIconTint="@color/grey">
+                app:startIconTint="@color/mainTextColorAlternative">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

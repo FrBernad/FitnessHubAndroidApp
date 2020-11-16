@@ -1,6 +1,7 @@
 package com.example.fitnesshub.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import com.example.fitnesshub.model.AppPreferences;
 import com.example.fitnesshub.view.fragments.LoginFragment;
 
 public class InitialActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
