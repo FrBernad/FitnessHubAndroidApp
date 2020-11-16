@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
 
     <color name="iconsInputBox">#343A40</color>
-    <color name="primaryColor">#212529</color>   <!--darkGrey-->
-    <color name="primaryColorAlternative">#343A40</color>  <!--grey-->
-    <color name="secondaryColor">#ADB5BD</color> <!--whiteOpaque-->
-    <color name="secondaryColorAlternative">#E9ECEF</color> <!--whitebackground-->
-    <color name="mainTextColor">#F8F9FA</color>             <!--whiteBright-->
-    <color name="mainTextColorAlternative">#212529</color>  <!--darkgrey-->
-    <color name="mainTextColorHint">#ADB5BD</color>  <!--darkgrey-->
-
-    <color name="thirdColor">#F8F9FA</color> <!--whiteBrigh-->
+    <color name="primaryColor">#212529</color>
+    <color name="primaryColorAlternative">#343A40</color>
+    <color name="secondaryColor">#ADB5BD</color>
+    <color name="secondaryColorAlternative">#E9ECEF</color>
+    <color name="mainTextColor">#F8F9FA</color>
+    <color name="mainTextColorAlternative">#212529</color>
+    <color name="mainTextColorHint">#ADB5BD</color>
+    <color name="thirdColor">#F8F9FA</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#CC0000</color>
