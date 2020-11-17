@@ -72,19 +72,26 @@
     <string name="order_title">ORDERNAR POR</string>
 
 
-    <!--EXAMPLES -->.
 
-    <string name="DescriptionExample">DESCRIPCION DE RUTINA</string>
-    <string name="Roman">Juan Roman Riquelme</string>
-    <string name="RoutineName">MUSCLE AND STRENGHT</string>
-    <string name="AuthorRoutineName">By John</string>
-    <string name="DurationRoutine">15 min</string>
     <string name="playButton">Play button</string>
-    <string name="exerciseName">Abs</string>
-    <string name="exerciseReps">20</string>
     <string name="reorderbutton">Reorder button</string>
     <string name="RoutineImage">Routine Image</string>
     <string name="loadingLogo">Loading Logo</string>
+    <string name="previous">Anterior</string>
+    <string name="pause">Pausa</string>
+    <string name="play">Play</string>
+    <string name="next">Próximo</string>
+    <string name="ListMode">Modo lista</string>
+    <string name="detailMode">Modo detallado</string>
+
+    <string name="LightMode">Tema claro</string>
+    <string name="DarkMode">Tema oscuro</string>
+
+    <string name="TIP">TIP DEL DÍA\nNo importa cuánto tu estómago pida comer caramelos antes que comida saludable. Intenta alejarte de los dulces!.</string>
+    <string name="PopularRoutinesSlide">Da un vistazo a las rutinas más populares!</string>
+    <string name="FavoriteRoutinesSlide">Chequea tus favoritos</string>
+    <string name="HistoryRoutinesSlide">Observa tu historial y repite una rutina</string>
+
 
 
     <string name="email">Email</string>

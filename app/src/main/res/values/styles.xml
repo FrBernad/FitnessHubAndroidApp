@@ -52,6 +52,16 @@
         <item name="android:textColor">@color/textBody</item>
     </style>
 
+
+    <style name="TextBody.Description">
+        <item name="android:textColor">@color/primaryColor</item>
+
+    </style>
+
+    <style name="TextBody.Profile">
+        <item name="android:textAlignment">textStart</item>
+    </style>
+
     <style name="TextBody.Home">
         <item name="android:textSize">16sp</item>
         <item name="android:textAlignment">center</item>
@@ -108,6 +118,14 @@
 
     <style name="ActionButtonOverflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
         <item name="android:tint">@color/thirdColor</item>
+    </style>
+
+    <style name="PopUp" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">@color/mainTextColorAlternative</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">@color/mainTextColorAlternative</item>
+        <item name="android:background">@color/backgroundPopUp</item>
     </style>
 
 

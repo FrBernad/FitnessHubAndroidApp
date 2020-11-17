@@ -79,26 +79,20 @@
     <string name="history">HISTORY</string>
     <string name="leave_session">Leave session</string>
     <string name="playButton">Play button</string>
-
-
-    <!--EXAMPLES -->.
-
-    <string name="DescriptionExample">Get your joints moving and your muscles burning with this strenght building routine. This routine will target your core, arms and legs. Short and straight to the point, you can do it with no equipment at all.</string>
-    <string name="Roman">Juan Roman Riquelme</string>
-    <string name="RoutineName">MUSCLE AND STRENGHT</string>
-    <string name="AuthorRoutineName">By John</string>
-    <string name="DurationRoutine">15 min</string>
-    <string name="exerciseName">Abs</string>
-    <string name="exerciseReps">20</string>
     <string name="previous">Previous</string>
     <string name="pause">Pause</string>
     <string name="play">Play</string>
     <string name="next">Next</string>
     <string name="ListMode">List Mode</string>
     <string name="detailMode">Detail Mode</string>
-    <string name="TIP">TIP OF THE DAY\nNo matter how bad your stomach is telling you to go for candy over healthy food, try to stay away from sweets.</string>
-    <string name="ButtomHome1">CARDIO\nWORKOUT</string>
-    <string name="ButtomHome2">ABS\nWORKOUT</string>
 
+    <string name="PopularRoutinesSlide">Check the most popular routines!</string>
+    <string name="FavoriteRoutinesSlide">Check your favorites</string>
+    <string name="HistoryRoutinesSlide">See your history and give an old routine another shot</string>
+
+    <string name="LightMode">Light mode</string>
+    <string name="DarkMode">Dark mode</string>
+
+    <string name="TIP">TIP OF THE DAY\nNo matter how bad your stomach is telling you to go for candy over healthy food, try to stay away from sweets.</string>
 
 </resources>

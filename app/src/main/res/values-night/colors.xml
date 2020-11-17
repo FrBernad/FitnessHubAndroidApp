@@ -17,7 +17,7 @@
     <color name="backgroundAlternative">@color/secondaryColor</color>
     <color name="titlesBackground">@color/primaryColor</color>
     <color name="titlesColor">@color/mainTextColor</color>
-    <color name="titleWelcome">@color/primaryColor</color>
+    <color name="titleWelcome">@color/mainTextColor</color>
     <color name="titlesCycleBackground">@color/primaryColorAlternative</color>
     <color name="floatingButtonColorBG">@color/primaryColor</color>
     <color name="floatingButtonColor">@color/thirdColor</color>
@@ -25,15 +25,15 @@
     <color name="navBarSelected">@color/mainTextColor</color>
     <color name="navBarNotSelected">@color/secondaryColor</color>
     <color name="navBarBackground">@color/primaryColor</color>
-    <color name="boxInput">@color/thirdColor</color>
+    <color name="boxInput">@color/primaryColor</color>
     <color name="toolbarBackground">@color/primaryColor</color>
     <color name="separatorColor">@color/primaryColor</color>
-    <color name="backgroundPopUp">@color/thirdColor</color>
-    <color name="buttomBG">@color/primaryColorAlternative</color>
-    <color name="buttomText">@color/thirdColor</color>
+    <color name="backgroundPopUp">@color/primaryColorAlternative</color>
+    <color name="buttomBG">@color/thirdColor</color>
+    <color name="buttomText">@color/primaryColor</color>
     <color name="executionBarBG">@color/primaryColor</color>
     <color name="executionBarBottom">@color/thirdColor</color>
-    <color name="exerciseItemBg">@color/thirdColor</color>
+    <color name="exerciseItemBg">@color/primaryColorAlternative</color>
     <color name="exerciseInfo">@color/mainTextColorAlternative</color>
     <color name="exerciseItemText">@color/mainTextColorAlternative</color>
     <color name="textBody">@color/mainTextColorAlternative</color>
@@ -46,8 +46,8 @@
     <color name="cardBG">@color/thirdColor</color>
     <color name="cardText">@color/mainTextColorAlternative</color>
     <color name="textInputHint">@color/mainTextColorAlternative</color>
-    <color name="executionSelected">@color/secondaryColor</color>
-    <color name="executionNotSelected">@color/thirdColor</color>
+    <color name="executionSelected">@color/secondaryColorAlternative</color>
+    <color name="executionNotSelected">@color/primaryColor</color>
 
 
 
