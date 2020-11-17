@@ -9,21 +9,21 @@
         android:id="@+id/svContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whiteBackground"
+        android:background="@color/background"
         android:orientation="vertical"
         tools:context=".view.fragments.RoutineFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/whiteBackground"
+            android:background="@color/secondaryColorAlternative"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="115dp"
-                android:background="@color/darkGrey"
+                android:background="@color/titlesBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,7 @@
 
                 <TextView
                     android:id="@+id/routineNameTitle"
+                    style="@style/Titles.RoutineTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -39,13 +40,12 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="50dp"
-                    android:textAlignment="center"
-                    android:textAllCaps="true"
-                    android:textColor="@color/whiteBright"
-                    android:textSize="20sp" />
+
+                    />
 
                 <TextView
                     android:id="@+id/routineAuthorName"
+                    style="@style/Titles.AuthorTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -53,10 +53,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="50dp"
                     android:layout_marginEnd="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/whiteBright"
-                    android:textSize="18sp" />
+                    android:layout_marginBottom="5dp" />
 
             </RelativeLayout>
 
@@ -82,6 +79,7 @@
 
                 <TextView
                     android:id="@+id/RoutineDuration"
+                    style="@style/TextBody"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -89,9 +87,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="18sp" />
+                    android:layout_marginBottom="2dp" />
             </RelativeLayout>
 
 
@@ -100,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:background="@color/darkGrey"
+                android:background="@color/titlesBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -108,12 +104,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout5">
 
                 <TextView
+                    style="@style/Titles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/DescriptionTitle"
-                    android:textColor="@color/whiteBright"
-                    android:textSize="20sp" />
+                    android:text="@string/DescriptionTitle" />
 
             </RelativeLayout>
 
@@ -127,12 +122,10 @@
 
                 <TextView
                     android:id="@+id/routineDescription"
+                    style="@style/TextBody.Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="20sp" />
+                    android:padding="10dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -146,16 +139,15 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/grey"
+                    android:background="@color/titlesCycleBackground"
                     android:padding="20dp">
 
                     <TextView
+                        style="@style/Titles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="@string/WarmupTitle"
-                        android:textColor="@color/whiteBright"
-                        android:textSize="20sp" />
+                        android:text="@string/WarmupTitle" />
 
 
                 </RelativeLayout>
@@ -168,16 +160,15 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/grey"
+                    android:background="@color/titlesCycleBackground"
                     android:padding="20dp">
 
                     <TextView
+                        style="@style/Titles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="@string/MainExercisesTitle"
-                        android:textColor="@color/whiteBright"
-                        android:textSize="20sp" />
+                        android:text="@string/MainExercisesTitle" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -188,16 +179,15 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/grey"
+                    android:background="@color/titlesCycleBackground"
                     android:padding="20dp">
 
                     <TextView
+                        style="@style/Titles"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="@string/CooldownTitle"
-                        android:textColor="@color/whiteBright"
-                        android:textSize="20sp" />
+                        android:text="@string/CooldownTitle" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -212,7 +202,7 @@
                 android:id="@+id/relativeLayout8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/darkGrey"
+                android:background="@color/titlesBackground"
                 android:padding="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -221,13 +211,13 @@
 
                 <TextView
                     android:id="@+id/textView3"
+                    style="@style/Titles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="@string/ExercisesTitle"
-                    android:textColor="@color/whiteBright"
-                    android:textSize="20sp"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -235,6 +225,7 @@
 
                 <ImageButton
                     android:id="@+id/EditRoutineButton"
+                    style="@style/ButtonInTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -243,7 +234,7 @@
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/EditButton"
                     android:src="@drawable/ic_edit_24"
-                    android:tint="@color/whiteBright"
+
                     app:layout_constraintEnd_toStartOf="@+id/textView3"
                     app:layout_constraintHorizontal_bias="0.122"
                     app:layout_constraintStart_toStartOf="parent"
@@ -261,11 +252,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="@color/darkGrey"
+        android:backgroundTint="@color/floatingButtonColorBG"
         android:contentDescription="@string/playButton"
         android:src="@drawable/ic_play_arrow_24"
-        android:tint="@color/white"
-        app:backgroundTint="@color/white"
+        android:tint="@color/floatingButtonColor"
         app:borderWidth="0dp"
         app:layout_anchor="@id/svContent"
         app:layout_anchorGravity="bottom|right|end"
@@ -273,6 +263,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/floatingButtonColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

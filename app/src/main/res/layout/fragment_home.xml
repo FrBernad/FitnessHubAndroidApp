@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     android:padding="30dp"
     tools:context=".view.fragments.HomeFragment">
 
@@ -12,7 +13,7 @@
         android:id="@+id/cardView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/grey"
+        app:cardBackgroundColor="@color/titlesBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,12 +21,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TIP OF THE DAY\nNo matter how bad your stomach is telling you to go for candy over healthy food, try to stay away from sweets."
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:textAlignment="center"
-            android:padding="10dp"
-            />
+            style="@style/TextBody.Home"
+            android:text="@string/TIP"
+            android:padding="10dp"/>
 
 
     </androidx.cardview.widget.CardView>
@@ -38,57 +36,16 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            app:cardBackgroundColor="#ADB5BD"
-            app:cardCornerRadius="6dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="CARDIO\nWORKOUT"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:layout_marginTop="12dp"
-                android:textSize="20sp" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            app:cardBackgroundColor="#ADB5BD"
-            app:cardCornerRadius="6dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ABS\nWORKOUT"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:layout_marginTop="12dp"
-                android:textSize="20sp" />
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/cardView3"/>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="6dp"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/home_slider"
@@ -97,10 +54,9 @@
             app:auto_cycle="true"
             app:corner_radius="5"
             app:delay="0"
-            app:placeholder="@drawable/logo"
             app:error_image="@drawable/notfound"
             app:period="3000"
-            />
+            app:placeholder="@drawable/logo" />
 
     </androidx.cardview.widget.CardView>
 

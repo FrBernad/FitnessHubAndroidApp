@@ -5,7 +5,7 @@
     android:id="@+id/executionBar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/darkGrey">
+    android:background="@color/executionBarBG">
 
 
     <ImageButton
@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:background="@android:color/transparent"
+        style="@style/executionBarButtom"
         android:contentDescription="@string/previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            style="@style/executionBarButtom"
             android:contentDescription="@string/play"
             app:srcCompat="@drawable/ic_play_arrow_24" />
 
@@ -41,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
+            style="@style/executionBarButtom"
             android:contentDescription="@string/pause"
             android:visibility="invisible"
             app:srcCompat="@drawable/ic_pause_24" />
@@ -52,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:background="@android:color/transparent"
+        style="@style/executionBarButtom"
         android:contentDescription="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

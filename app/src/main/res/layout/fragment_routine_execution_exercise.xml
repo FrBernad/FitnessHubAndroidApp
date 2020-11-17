@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="9"
-    android:background="@color/whiteOpaque"
+    android:background="@color/backgroundAlternative"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -41,7 +41,7 @@
             android:progressDrawable="@drawable/pg_barstyle" />
 
         <TextView
-            style="@style/Titles"
+            style="@style/Titles.Timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -53,7 +53,7 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/darkGrey"
+        android:background="@color/titlesBackground"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,25 +62,21 @@
         <TextView
             android:id="@+id/routineNameTitleInExecutionExercise"
             style="@style/Titles"
-            android:layout_width="216dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="50dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="50dp"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/whiteBright"
-            android:textSize="20sp" />
+            android:layout_marginEnd="50dp"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey"
+        android:background="@color/titlesCycleBackground"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,9 +87,7 @@
             style="@style/Titles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/whiteBright"
-            android:textSize="20sp" />
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -101,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:background="@color/darkGrey"
+        android:background="@color/titlesBackground"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,21 +103,17 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
 
         <TextView
-            style="@style/Titles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/DescriptionTitle"
-            android:textColor="@color/whiteBright"
-            android:textSize="22sp" />
+            style="@style/Titles"/>
     </RelativeLayout>
 
     <TextView
         style="@style/TextBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/darkGrey"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout6" />
@@ -139,14 +129,10 @@
 
         <TextView
             android:id="@+id/exerciseTitleInExecutionList"
-            style="@style/Titles"
-            android:textAllCaps="true"
+            style="@style/Titles.ExerciseItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/darkGrey"
-
-            android:textSize="20sp" />
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
 
 
