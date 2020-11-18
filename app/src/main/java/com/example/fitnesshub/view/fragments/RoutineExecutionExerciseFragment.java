@@ -30,14 +30,26 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private ArrayList<ExerciseData> warmUp;
     private ArrayList<ExerciseData> main;
     private ArrayList<ExerciseData> cooldown;
-    private int currentCycle;
-    private String cycleTitle;
+
+    private static final int WARMUP_CYCLE = 0;
+    private static final int MAIN_CYCLE = 1;
+    private static final int COOLDOWN_CYCLE = 2;
+    private static final String WARMUP_TITLE = "WARM UP";
+    private static final String MAIN_TITLE = "MAIN EXERCISES";
+    private static final String COOLDOWN_TITLE = "COOLDOWN";
+
+
+
+    private int currentCycle; //rescatado
+    private String cycleTitle; //rescatado
     private ArrayList<ExerciseData> currCycle;
-    private int currentExercise;
-    private boolean finished;
+    private int currentExercise; //rescatado
+    private boolean finished; //rescatado
+    private boolean played = false;
 
 
     private TextView title;
+    private TextView timeExercise;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +62,22 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentRoutineExecutionExerciseBinding.inflate(getLayoutInflater());
         title = binding.routineNameTitleInExecutionExercise;
+        timeExercise = binding.timeExercise;
         View view = binding.getRoot();
+
+        binding.executionBar.play.setOnClickListener(v -> playExecution());
+
+        binding.executionBar.pause.setOnClickListener(v-> pauseExecution());
+        binding.executionBar.next.setOnClickListener(v-> nextExecution());
+        binding.executionBar.previous.setOnClickListener(v-> previousExecution());
+
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
         return view;
     }
+
+
+
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
@@ -62,6 +86,22 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         }
 
         viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
+
+
+        if(!viewModel.getStarted()){
+            currentExercise = viewModel.getCurrentExercise();
+            currentCycle = viewModel.getCurrentCycle();
+             played = viewModel.getPlayed();
+            cycleTitle = getCycleTitle();
+        }else{
+            viewModel.setCurrentExercise(0);
+            viewModel.setCurrentCycle(0);
+            cycleTitle = WARMUP_TITLE;
+            currentCycle = 0;
+            currentExercise = 0;
+            viewModel.setStarted(true);
+        }
+
         observeExerciseViewModel();
 
     }
@@ -89,27 +129,44 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        startExecution();
     }
 
-    private void startExecution(){
-        currentCycle = 0;
-        currentExercise = 0;
-        cycleTitle = "WARM UP";
-        finished = false;
+    private void playExecution(){
+        binding.executionBar.play.setVisibility(View.INVISIBLE);
+        binding.executionBar.pause.setVisibility(View.VISIBLE);
 
-        viewModel.getCountDownTimer().start(getNextExercise().getTime()*1000, 1000);
+        if(played){
+            viewModel.getCountDownTimer().resume();
+        }
+        else{
+            viewModel.getCountDownTimer().start((getNextExercise().getTime()+1)*1000, 1000);
+        }
+        finished = false;
         viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
-            if (countDown.isFinished() && !finished) {
-                ExerciseData exercise;
-                currentExercise++;
-                if((exercise = getNextExercise()) != null ){
-                    viewModel.getCountDownTimer().start(exercise.getTime()*1000, 1000);
+            if(!finished){
+                if(countDown.isFinished()){
+                    ExerciseData exercise;
+                    currentExercise++;
+                    if((exercise = getNextExercise()) != null )
+                        viewModel.getCountDownTimer().start((exercise.getTime()+1)*1000, 1000);
+                }
+                else{
+                    timeExercise.setText(String.valueOf(Math.ceil(countDown.getRemainingTime())));
                 }
             }
         });
+    }
 
+    private void pauseExecution(){
+        binding.executionBar.play.setVisibility(View.VISIBLE);
+        binding.executionBar.pause.setVisibility(View.INVISIBLE);
+        viewModel.getCountDownTimer().pause();
+    }
 
+    private void nextExecution() {
+    }
+
+    private void previousExecution() {
     }
 
     private ExerciseData getNextExercise(){
@@ -129,28 +186,26 @@ public class RoutineExecutionExerciseFragment extends Fragment {
 
     }
 
-
-
     private ArrayList<ExerciseData> getCurrentCycle(){
-        if(currentCycle == 0 ){
+        if(currentCycle == WARMUP_CYCLE ){
             if(currentExercise < warmUp.size()){
                 return warmUp;
             }
-            cycleTitle = "MAIN EXERCISES";
+            cycleTitle = MAIN_TITLE;
             currentCycle++;
             currentExercise=0;
         }
 
-        if(currentCycle == 1){
+        if(currentCycle == MAIN_CYCLE){
             if(currentExercise < main.size())
                 return main;
             currentCycle++;
             currentExercise=0;
-            cycleTitle = "COOLDOWN";
+            cycleTitle = COOLDOWN_TITLE;
 
         }
 
-        if(currentCycle == 2){
+        if(currentCycle == COOLDOWN_CYCLE){
             if(currentExercise < cooldown.size())
                 return cooldown;
         }
@@ -158,7 +213,29 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         return null;
     }
 
+    private String getCycleTitle(){
+        if(currentCycle == WARMUP_CYCLE){
+            return WARMUP_TITLE;
+        }
+        else if(currentCycle == MAIN_CYCLE){
+            return MAIN_TITLE;
+        }
+        else
+            return COOLDOWN_TITLE;
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModel.setStarted(false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewModel.setCurrentCycle(currentCycle);
+        viewModel.setCurrentExercise(currentExercise);
+    }
 
 
 }

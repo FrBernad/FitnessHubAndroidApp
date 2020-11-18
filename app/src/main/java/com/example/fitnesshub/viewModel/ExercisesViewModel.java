@@ -38,6 +38,13 @@ public class ExercisesViewModel extends AndroidViewModel {
     private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
 
+    private boolean started;
+    private int currentCycle;
+    private String cycleTitle;
+    private int currentExercise;
+    private boolean finished;
+    private boolean played;
+    private ArrayList<ExerciseData> currCycle;
 
     public ExercisesViewModel(@androidx.annotation.NonNull Application application) {
         super(application);
@@ -136,12 +143,38 @@ public class ExercisesViewModel extends AndroidViewModel {
         return mainExercises;
     }
 
+    public MutableLiveData<List<ExerciseData>> getCooldownExercises() {return cooldownExercises;}
+
     public CountDownTimer getCountDownTimer() {
         return countDownTimer;
     }
 
-    public MutableLiveData<List<ExerciseData>> getCooldownExercises() {
-        return cooldownExercises;
+    public void setStarted(boolean state) {
+        started = state;
+    }
+
+    public boolean getStarted() {
+        return started;
+    }
+
+    public int getCurrentCycle() {
+        return currentCycle;
+    }
+
+    public int getCurrentExercise() {
+        return currentExercise;
+    }
+
+    public void setCurrentCycle(int currentCycle) {
+        this.currentCycle = currentCycle;
+    }
+
+    public void setCurrentExercise(int currentExercise) {
+        this.currentExercise = currentExercise;
+    }
+
+    public boolean getPlayed() {
+        return played;
     }
 }
 
