@@ -30,6 +30,11 @@ public interface RoutinesAPI {
             @QueryMap Map<String, String> options
     );
 
+    @GET("routines/{routineId}")
+    Single<RoutineData> getRoutineById(
+            @Path("routineId") Integer routineId
+    );
+
     @GET("routines/{routineId}/cycles")
     Single<PagedList<RoutineCycleData>> getRoutineCycles(
             @Path("routineId") Integer routineId,

@@ -80,6 +80,7 @@ public class RoutinesFragment extends Fragment {
 
         setSpinners(view);
 
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(routinesAdapter);
 
@@ -138,10 +139,9 @@ public class RoutinesFragment extends Fragment {
             chipGroup.check(id);
         }
 
-        recyclerView.canScrollVertically(1)
         nestedScrollView.setOnScrollChangeListener(
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                    if (!searching && !noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
+                    if (!searching && !noMoreEntries && !nestedScrollView.canScrollVertically(1)) {
                         searching = true;
                         viewModel.updateData();
                     }

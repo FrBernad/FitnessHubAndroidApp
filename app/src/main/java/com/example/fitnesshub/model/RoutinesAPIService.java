@@ -84,4 +84,9 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
     public Single<RoutineData> addRoutineExecution(Integer routineId, RoutineExecution routineExecution) {
         return api.addRoutineExecution(routineId, routineExecution);
     }
+
+    @Override
+    public Single<RoutineData> getRoutineById(Integer routineId) {
+        return api.getRoutineById(routineId);
+    }
 }
