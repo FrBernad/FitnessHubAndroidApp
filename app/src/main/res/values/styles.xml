@@ -37,12 +37,12 @@
 
     <style name="Titles.PopUp">
         <item name="android:textSize">40sp</item>
-        <item name="android:textColor">@color/exerciseItemText</item>
+        <item name="android:textColor">@color/mainTextColorAlternative</item>
     </style>
 
     <style name="Titles.PopUpSubtitle">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/exerciseItemText</item>
+        <item name="android:textColor">@color/mainTextColorAlternative</item>
     </style>
 
     <style name="TextBody" parent="@android:style/Widget.TextView">

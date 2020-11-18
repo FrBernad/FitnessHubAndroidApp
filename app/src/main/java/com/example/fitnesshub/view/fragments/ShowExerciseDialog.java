@@ -24,7 +24,7 @@ public class ShowExerciseDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.PopUp);
 
 
         FragmentShowExerciseBinding binding = FragmentShowExerciseBinding.inflate(getLayoutInflater());
@@ -36,11 +36,8 @@ public class ShowExerciseDialog extends AppCompatDialogFragment {
         View view = binding.getRoot();
 
 
-        builder.setView(view).setNegativeButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setView(view).setNegativeButton(getString(R.string.Close), (dialog, which) -> {
 
-            }
         });
         return builder.create();
     }

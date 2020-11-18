@@ -2,31 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@color/backgroundPopUp">
+    android:background="@color/backgroundPopUp"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
-    <Button
-        android:id="@+id/detailedMode"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        style="@style/Buttom"
-        android:text="@string/detailMode"       />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/detailedMode"
+            style="@style/Buttom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/detailMode" />
 
         <Button
             android:id="@+id/simpleMode"
             style="@style/Buttom"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
-            android:layout_height="wrap_content"
-            android:text="@string/ListMode"/>
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/ListMode" />
     </LinearLayout>
 
 </RelativeLayout>

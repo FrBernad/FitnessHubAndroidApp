@@ -19,8 +19,8 @@
     <color name="titlesColor">@color/mainTextColor</color>
     <color name="titleWelcome">@color/mainTextColor</color>
     <color name="titlesCycleBackground">@color/primaryColorAlternative</color>
-    <color name="floatingButtonColorBG">@color/primaryColor</color>
-    <color name="floatingButtonColor">@color/thirdColor</color>
+    <color name="floatingButtonColorBG">@color/thirdColor</color>
+    <color name="floatingButtonColor">@color/primaryColor</color>
     <color name="initialBackground">@color/primaryColor</color>
     <color name="navBarSelected">@color/mainTextColor</color>
     <color name="navBarNotSelected">@color/secondaryColor</color>

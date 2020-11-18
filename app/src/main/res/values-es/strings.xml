@@ -102,5 +102,11 @@
     <string name="my_routines">MIS RUTINAS</string>
     <string name="history">HISTORIAL</string>
     <string name="leave_session">Cerrar sesión</string>
+    <string name="RateRoutineDialog">Puntua la rutina</string>
+    <string name="ExecutionRoutineDialog">Elige el modo de ejecución</string>
+    <string name="Close">Cerrar</string>
+    <string name="Rate">Puntuar</string>
+    <string name="setEnglish">Cambiar idioma a inglés</string>
+    <string name="setSpanish">Cambiar idioma a español</string>
 
 </resources>

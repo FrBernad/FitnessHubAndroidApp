@@ -9,7 +9,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +25,8 @@ import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -31,14 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         preferences = new AppPreferences(this.getApplication());
-        if(preferences.loadNightModeState()){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            isDarkMode = true;
-        }
-        else{
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            isDarkMode = false;
-        }
+        setAppMode();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpBottomNavigation();
@@ -46,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         new ViewModelProvider(this).get(FavouritesRoutinesViewModel.class).updateData();
         viewModel.setUserData();
-
     }
-
 
     public void setUpBottomNavigation() {
         bottomNavigationView = findViewById(R.id.bottomNav);
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         getMenuInflater().inflate(R.menu.main_toolbar, menu);
         menu.findItem(R.id.app_bar_leave_session).setVisible(true);
-        if(isDarkMode)
+        if (isDarkMode)
             menu.findItem(R.id.app_bar_light_mode).setVisible(true);
         else
             menu.findItem(R.id.app_bar_dark_mode).setVisible(true);
@@ -82,13 +79,11 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.app_bar_leave_session) {
             logout();
             return true;
-        }
-        else if(id == R.id.app_bar_dark_mode){
+        } else if (id == R.id.app_bar_dark_mode) {
             preferences.setNightModeState(true);
             restartApp();
             return true;
-        }
-        else if(id == R.id.app_bar_light_mode){
+        } else if (id == R.id.app_bar_light_mode) {
             preferences.setNightModeState(false);
             restartApp();
             return true;
@@ -96,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void restartApp(){
-        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+    public void restartApp() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
 
@@ -109,6 +104,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish(); //elimino la actividad del stack
+    }
+
+    public void setAppMode() {
+        if (preferences.loadNightModeState()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            isDarkMode = true;
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            isDarkMode = false;
+        }
     }
 
 

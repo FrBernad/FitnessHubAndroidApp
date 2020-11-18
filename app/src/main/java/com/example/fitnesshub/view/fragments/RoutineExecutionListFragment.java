@@ -37,9 +37,10 @@ public class RoutineExecutionListFragment extends Fragment {
     private RecyclerView recyclerViewMain;
     private RecyclerView recyclerViewCooldown;
 
+
+
     private TextView title;
-    private static Handler handler = new Handler();
-    private static Handler cycleHandler = new Handler();
+
 
 
     @Override
@@ -49,8 +50,7 @@ public class RoutineExecutionListFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
 
@@ -126,35 +126,31 @@ public class RoutineExecutionListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ArrayList<ExercisesAdapter> adapters = new ArrayList<>();
-        adapters.add(warmUpAdapter);
-        adapters.add(mainAdapter);
-        adapters.add(cooldownAdapter);
-        runCycles(0,adapters);
-    }
-
-    private void runCycles(int index,ArrayList<ExercisesAdapter> adapters){
-        if (index >= adapters.size())
-            return;
-
-        doExercise(0,adapters.get(index), (ArrayList<ExerciseData>) adapters.get(index).getExerciseList());
-        runCycles(index+1,adapters);
+        Cycle[] a = Cycle.values();
+        currCycle = a[0];
+        currExercise = 0;
+        startExecution(adapters);
 
     }
 
-    private void doExercise(final int curr, ExercisesAdapter adapter,ArrayList<ExerciseData> exercises){
-        if (curr >= exercises.size()){
-            return;
+    private void startExecution(ArrayList<ExercisesAdapter> adapters){
+        boolean finish = false;
+        ExercisesAdapter cycle = adapters.get(currCycle);
+
+        while(getNextExercise() != null){
+
         }
-        final ExerciseData ex = exercises.get(curr);
-        ex.setRunning(true);
-        adapter.notifyItemChanged(curr);
-        handler.postDelayed(() -> {
-            ex.setRunning(false);
-            adapter.notifyItemChanged(curr);
-            doExercise(curr + 1,adapter,exercises);
-        }, ex.getTime()*1000);
     }
+    private ExerciseData getNextExercise(){
+        if(currCycle == 2 &&)
+        ExercisesAdapter cycle= adapters.get(currCycle);
+        if(cycle)
+        if(currCycle == Cycle.WARMUP && )
+        if(currCycle == Cycle.COOLDOWN && currExercise == )
+
+
+    }
+
 
 }
 

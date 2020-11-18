@@ -6,7 +6,7 @@
         android:id="@+id/app_bar_leave_session"
         android:icon="@drawable/ic_exit_24"
         android:title="@string/leave_session"
-        android:orderInCategory="6"
+        android:orderInCategory="7"
         app:showAsAction="never"
         android:visible="false" />
 
@@ -23,6 +23,20 @@
         android:orderInCategory="5"
         app:showAsAction="never"
         android:visible="false"/>
+
+    <item
+        android:id="@+id/app_bar_english"
+        android:title="@string/setEnglish"
+        app:showAsAction="never"
+        android:visible="false"
+        android:orderInCategory="6"/>
+
+    <item
+        android:id="@+id/app_bar_spanish"
+        android:title="@string/setSpanish"
+        app:showAsAction="never"
+        android:visible="false"
+        android:orderInCategory="6"/>
 
     <item
         android:id="@+id/app_bar_rate"

@@ -26,12 +26,12 @@ public class PlayModeDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.PopUp);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.choose_execution_dialog, null);
 
-        builder.setView(view).setNegativeButton("Close", (dialog, which) -> {
+        builder.setView(view).setTitle(getString(R.string.ExecutionRoutineDialog).toUpperCase()).setNegativeButton(getString(R.string.Close), (dialog, which) -> {
         });
 
         view.findViewById(R.id.simpleMode).setOnClickListener(v -> {
