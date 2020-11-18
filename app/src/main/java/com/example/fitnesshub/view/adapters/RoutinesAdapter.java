@@ -79,7 +79,6 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
                 break;
         }
 
-
         holder.itemView.setRoutineData(routine);
         holder.itemView.setClickListener(new RoutineClickListener(routine, host));
     }

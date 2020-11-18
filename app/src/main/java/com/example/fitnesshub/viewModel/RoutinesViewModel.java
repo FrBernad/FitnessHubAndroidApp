@@ -27,6 +27,7 @@ public class RoutinesViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
     private MutableLiveData<List<RoutineData>> userRoutines = new MutableLiveData<>();
     private MutableLiveData<List<RoutineData>> userHistory = new MutableLiveData<>();
+    private MutableLiveData<RoutineData> externLinkRoutine = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<Boolean> routinesFirstLoad = new MutableLiveData<>(true);
@@ -89,6 +90,23 @@ public class RoutinesViewModel extends AndroidViewModel {
         );
     }
 
+    public void getRoutineById(int id) {
+        disposable.add(
+                routinesService.getRoutineById(id)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<RoutineData>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineData routine) {
+                                externLinkRoutine.setValue(routine);
+                            }
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
+    }
 
     public void updateUserHistory() {
         Map<String, String> options = new HashMap<>();
@@ -289,6 +307,10 @@ public class RoutinesViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<RoutineData>> getUserRoutines() {
         return userRoutines;
+    }
+
+    public MutableLiveData<RoutineData> getExternLinkRoutine() {
+        return externLinkRoutine;
     }
 
     public String getDirection() {
