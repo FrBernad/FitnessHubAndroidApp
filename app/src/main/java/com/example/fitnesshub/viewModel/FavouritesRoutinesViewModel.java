@@ -20,12 +20,48 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class FavouritesRoutinesViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> favouriteRoutines = new MutableLiveData<>();
 
     private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    public void favRoutine(int routineId) {
+        disposable.add(routinesService.favRoutine(routineId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                    }
+                }));
+    }
+
+
+    public void unfavRoutine(int routineId) {
+        disposable.add(routinesService.unfavRoutine(routineId)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Response<Void>>() {
+                    @Override
+                    public void onSuccess(@NonNull Response<Void> voidResponse) {
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
+                    }
+                }));
+    }
 
     public FavouritesRoutinesViewModel(@androidx.annotation.NonNull Application application) {
         super(application);

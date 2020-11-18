@@ -13,6 +13,7 @@ import com.example.fitnesshub.model.RoutineCycleData;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutineRating;
 import com.example.fitnesshub.model.RoutinesAPIService;
+import com.example.fitnesshub.view.fragments.CountDownTimer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,9 +28,12 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ExercisesViewModel extends AndroidViewModel {
 
+    private com.example.fitnesshub.view.fragments.CountDownTimer countDownTimer = new CountDownTimer();
+
     private MutableLiveData<List<ExerciseData>> warmupExercises = new MutableLiveData<>();
     private MutableLiveData<List<ExerciseData>> mainExercises = new MutableLiveData<>();
     private MutableLiveData<List<ExerciseData>> cooldownExercises = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isFav = new MutableLiveData<>();
 
     private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -99,7 +103,7 @@ public class ExercisesViewModel extends AndroidViewModel {
     }
 
     public void rateRoutine(int routineId, int value) {
-        RoutineRating rating = new RoutineRating(value,"");
+        RoutineRating rating = new RoutineRating(value, "");
         disposable.add(
                 routinesService.rateRoutine(routineId, rating)
                         .subscribeOn(Schedulers.newThread())
@@ -130,6 +134,10 @@ public class ExercisesViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<ExerciseData>> getMainExercises() {
         return mainExercises;
+    }
+
+    public CountDownTimer getCountDownTimer() {
+        return countDownTimer;
     }
 
     public MutableLiveData<List<ExerciseData>> getCooldownExercises() {

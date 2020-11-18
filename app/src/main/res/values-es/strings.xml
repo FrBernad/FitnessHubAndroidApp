@@ -27,6 +27,10 @@
     <string name="register">Registrar</string>
     <string name="conditions">Presionando "Registar", acepta los terminos y condiciones de uso.</string>
     <string name="welcome_first_heading">Entrena al máximo</string>
+    <string name="wrong_credentials">Usuario o contraseña incorrecta, intente denuevo.</string>
+    <string name="user_not_verified">Tu cuenta no está verificada, redirigiendo a la ventana de verificacion.</string>
+    <string name="already_exists">Ya existe un usuario con bajo ese email o nombre, intenta denuevo.</string>
+    <string name="default_error">Ocurrió un error inesperado, intenta denuevo.</string>
 
     <string name="welcome_second_heading">Rutinas de alta calidad donde quieras y cuando quieras</string>
     <string name="welcome_second_heading_land">Rutinas de alta calidad\ndonde quieras y cuando quieras</string>
@@ -54,31 +58,39 @@
         <item>Fecha de creación</item>
         <item>Popularidad</item>
         <item>Categoría</item>
-        <item>Difficultad</item>
+        <item>Dificultad</item>
+        <item>Nombre</item>
     </string-array>
 
     <string-array name="order">
-        <item>Ascendente</item>
         <item>Descendiente</item>
+        <item>Ascendente</item>
     </string-array>
 
     <string name="sort_title">ORDENAR POR</string>
     <string name="order_title">ORDERNAR POR</string>
 
 
-    <!--EXAMPLES -->.
 
-    <string name="DescriptionExample">DESCRIPCION DE RUTINA</string>
-    <string name="Roman">Juan Roman Riquelme</string>
-    <string name="RoutineName">MUSCLE AND STRENGHT</string>
-    <string name="AuthorRoutineName">By John</string>
-    <string name="DurationRoutine">15 min</string>
     <string name="playButton">Play button</string>
-    <string name="exerciseName">Abs</string>
-    <string name="exerciseReps">20</string>
     <string name="reorderbutton">Reorder button</string>
     <string name="RoutineImage">Routine Image</string>
     <string name="loadingLogo">Loading Logo</string>
+    <string name="previous">Anterior</string>
+    <string name="pause">Pausa</string>
+    <string name="play">Play</string>
+    <string name="next">Próximo</string>
+    <string name="ListMode">Modo lista</string>
+    <string name="detailMode">Modo detallado</string>
+
+    <string name="LightMode">Tema claro</string>
+    <string name="DarkMode">Tema oscuro</string>
+
+    <string name="TIP">TIP DEL DÍA\nNo importa cuánto tu estómago pida comer caramelos antes que comida saludable. Intenta alejarte de los dulces!.</string>
+    <string name="PopularRoutinesSlide">Da un vistazo a las rutinas más populares!</string>
+    <string name="FavoriteRoutinesSlide">Chequea tus favoritos</string>
+    <string name="HistoryRoutinesSlide">Observa tu historial y repite una rutina</string>
+
 
 
     <string name="email">Email</string>
@@ -89,5 +101,11 @@
     <string name="my_routines">MIS RUTINAS</string>
     <string name="history">HISTORIAL</string>
     <string name="leave_session">Cerrar sesión</string>
+    <string name="RateRoutineDialog">Puntua la rutina</string>
+    <string name="ExecutionRoutineDialog">Elige el modo de ejecución</string>
+    <string name="Close">Cerrar</string>
+    <string name="Rate">Puntuar</string>
+    <string name="setEnglish">Cambiar idioma a inglés</string>
+    <string name="setSpanish">Cambiar idioma a español</string>
 
 </resources>

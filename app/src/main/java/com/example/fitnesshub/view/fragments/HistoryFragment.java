@@ -28,7 +28,7 @@ public class HistoryFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>());
+    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(),RoutineClickListener.MY_ACTIVITY);
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -57,10 +57,8 @@ public class HistoryFragment extends Fragment {
 
         viewModel.getUserHistory().observe(getViewLifecycleOwner(), routines -> {
             if (routines != null) {
-                System.out.println(routines);
                 routinesAdapter.updateRoutines(routines);
             }
         });
-
     }
 }

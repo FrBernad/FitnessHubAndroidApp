@@ -142,26 +142,26 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_myActivityFragment_to_homeFragment"
                 app:destination="@id/homeFragment" />
+        <action
+                android:id="@+id/action_myActivityFragment_to_routineFragment"
+                app:destination="@id/routineFragment" />
     </fragment>
     <fragment
             android:id="@+id/routineExcecutionListFragment"
-            android:name="com.example.fitnesshub.view.fragments.RoutineExcecutionListFragment"
+            android:name="com.example.fitnesshub.view.fragments.RoutineExecutionListFragment"
             android:label="RoutineExcecutionListFragment">
         <argument
                 android:name="RoutineTitle"
                 app:argType="string" />
-        <action
-            android:id="@+id/action_routineExcecutionListFragment_to_routineExecutionExercise"
-            app:destination="@id/routineExecutionExercise" />
     </fragment>
     <fragment
         android:id="@+id/routineExecutionExercise"
         android:name="com.example.fitnesshub.view.fragments.RoutineExecutionExerciseFragment"
         android:label="fragment_routine_execution_exercise"
         tools:layout="@layout/fragment_routine_execution_exercise" >
-        <action
-            android:id="@+id/action_routineExecutionExercise_to_routineExcecutionListFragment"
-            app:destination="@id/routineExcecutionListFragment" />
+        <argument
+                android:name="title"
+                app:argType="string" />
     </fragment>
 
 

@@ -16,6 +16,7 @@ public class RoutineClickListener implements View.OnClickListener {
     private int from;
     public static final int ROUTINES_ID = 1;
     public static final int FAV_ID = 2;
+    public static final int MY_ACTIVITY = 3;
 
     public RoutineClickListener(RoutineData routineData, int from) {
         this.routineData = routineData;
@@ -37,6 +38,12 @@ public class RoutineClickListener implements View.OnClickListener {
                 action2.setRoutineId(routineId);
                 action2.setRoutineData(routineData);
                 Navigation.findNavController(view).navigate(action2);
+                break;
+            case MY_ACTIVITY:
+                MyActivityFragmentDirections.ActionMyActivityFragmentToRoutineFragment action3 = MyActivityFragmentDirections.actionMyActivityFragmentToRoutineFragment(routineData);
+                action3.setRoutineId(routineId);
+                action3.setRoutineData(routineData);
+                Navigation.findNavController(view).navigate(action3);
                 break;
         }
     }

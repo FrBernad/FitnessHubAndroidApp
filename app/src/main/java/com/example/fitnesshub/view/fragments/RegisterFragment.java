@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.fitnesshub.databinding.FragmentRegisterBinding;
 import com.example.fitnesshub.model.UserInfo;
@@ -22,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 public class RegisterFragment extends Fragment {
 
     private TextInputLayout email, username, password;
+    private TextView errorMessage;
 
     private FragmentRegisterBinding binding;
 
@@ -38,6 +41,7 @@ public class RegisterFragment extends Fragment {
         email = binding.registerEmail;
         password = binding.registerPassword;
         username = binding.registerUsername;
+        errorMessage = binding.registerErrorMessage;
         Button registerBtn = binding.registerBtn;
         progressBarHolder = binding.progressBarHolder;
 
@@ -63,30 +67,56 @@ public class RegisterFragment extends Fragment {
                 }
             }
         });
-    }
 
-    private void tryRegister() {
-        if (!validateEmail() | !validateUsername() | !validatePassword()) {
-            return;
-        }
-
-        UserInfo userInfo = new UserInfo(username.getEditText().getText().toString()
-                , password.getEditText().getText().toString()
-                , ""
-                , "other"
-                , ""
-                , email.getEditText().getText().toString()
-                , ""
-                , ""
-        );
-
-        viewModel.tryRegister(userInfo);
+        viewModel.getRegisterError().observe(getViewLifecycleOwner(), error -> {
+            if (error != null) {
+                switch (error.getCode()) {
+                    case 2:
+                        errorMessage.setText(R.string.already_exists);
+                        password.setError(" ");
+                        username.setError(" ");
+                        email.setError(" ");
+                        new Handler().postDelayed(() -> {
+                            password.setError(null);
+                            username.setError(null);
+                            email.setError(null);
+                            errorMessage.setText("");
+                        }, 5000);
+                        viewModel.setRegisterError(null);
+                        break;
+                    default:
+                        errorMessage.setText(R.string.default_error);
+                        new Handler().postDelayed(() -> {
+                            errorMessage.setText("");
+                        }, 3000);
+                        viewModel.setRegisterError(null);
+                        break;
+                }
+            }
+        });
 
         viewModel.getUserData().observe(getViewLifecycleOwner(), userData -> {
             if (userData != null) {
                 Navigation.findNavController(getView()).navigate(RegisterFragmentDirections.actionRegisterFragmentToVerifyUserFragment());
             }
         });
+    }
+
+    private void tryRegister() {
+        if (!validateEmail() | !validateUsername() | !validatePassword()) {
+            return;
+        }
+        UserInfo userInfo = new UserInfo(username.getEditText().getText().toString()
+                , password.getEditText().getText().toString()
+                , ""
+                , "other"
+                , (long) 0
+                , email.getEditText().getText().toString()
+                , ""
+                , ""
+        );
+
+        viewModel.tryRegister(userInfo);
     }
 
     private boolean validateEmail() {
@@ -135,7 +165,7 @@ public class RegisterFragment extends Fragment {
             password.setError("Field can not be empty");
             return false;
         } else if (!val.matches(checkPassword)) {
-            password.setError("Password should contain at least 4 characters!");
+            password.setError("Password should contain at least 8 characters!");
             return false;
         } else {
             password.setError(null);

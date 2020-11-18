@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.model.RoutineExecution;
+import com.example.fitnesshub.model.RoutineHistory;
 import com.example.fitnesshub.model.RoutinesAPIService;
 
 import java.util.ArrayList;
@@ -25,9 +27,9 @@ public class RoutinesViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
     private MutableLiveData<List<RoutineData>> userRoutines = new MutableLiveData<>();
     private MutableLiveData<List<RoutineData>> userHistory = new MutableLiveData<>();
+    private MutableLiveData<RoutineData> externLinkRoutine = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
-    private MutableLiveData<Boolean> changedOptions = new MutableLiveData<>();
     private MutableLiveData<Boolean> routinesFirstLoad = new MutableLiveData<>(true);
 
     private RoutinesAPIService routinesService;
@@ -37,8 +39,12 @@ public class RoutinesViewModel extends AndroidViewModel {
     private int totalPages = 0;
     private int itemsPerRequest = 5;
     private boolean isLastPage = false;
-    private String direction = "asc";
-
+    private String direction = "desc";
+    private String filter = null;
+    private String orderBy = "dateCreated";
+    private int orderById = 0;
+    private int directionId = 0;
+    private int filterId = -1;
 
     public RoutinesViewModel(@NonNull Application application) {
         super(application);
@@ -62,8 +68,8 @@ public class RoutinesViewModel extends AndroidViewModel {
     public void updateUserRoutines() {
         Map<String, String> options = new HashMap<>();
         options.put("page", "0");
-        options.put("orderBy", "averageRating");
-        options.put("direction", "asc");
+        options.put("orderBy", orderBy);
+        options.put("direction", direction);
         options.put("size", String.valueOf(1000));
 
         disposable.add(
@@ -84,6 +90,23 @@ public class RoutinesViewModel extends AndroidViewModel {
         );
     }
 
+    public void getRoutineById(int id) {
+        disposable.add(
+                routinesService.getRoutineById(id)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<RoutineData>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineData routine) {
+                                externLinkRoutine.setValue(routine);
+                            }
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
+    }
 
     public void updateUserHistory() {
         Map<String, String> options = new HashMap<>();
@@ -95,10 +118,14 @@ public class RoutinesViewModel extends AndroidViewModel {
                 routinesService.getUserHistory(options)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineHistory>>() {
                             @Override
-                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
-                                userHistory.setValue(routinesEntries.getEntries());
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineHistory> routinesEntries) {
+                                List<RoutineData> routines = new ArrayList<>();
+                                for (RoutineHistory execution : routinesEntries.getEntries()) {
+                                    routines.add(execution.getRoutine());
+                                }
+                                userHistory.setValue(routines);
                             }
 
                             @Override
@@ -111,13 +138,69 @@ public class RoutinesViewModel extends AndroidViewModel {
 
 
     public void orderRoutines(int option) {
+        directionId = option;
         switch (option) {
+            case 0:
+                direction = "desc";
+                break;
+
             case 1:
                 direction = "asc";
                 break;
+        }
+
+        applyChanges();
+    }
+
+    public void filterRoutines(Integer option) {
+        filterId = option;
+        switch (option) {
+            case -1:
+                filter = null;
+                break;
+
+            case 0:
+                filter = "rookie";
+                break;
+
+            case 1:
+                filter = "beginner";
+                break;
 
             case 2:
-                direction = "desc";
+                filter = "intermediate";
+                break;
+
+            case 3:
+                filter = "advanced";
+                break;
+
+        }
+
+        applyChanges();
+    }
+
+    public void sortRoutines(int option) {
+        orderById = option;
+        switch (option) {
+            case 0:
+                orderBy = "dateCreated";
+                break;
+
+            case 1:
+                orderBy = "averageRating";
+                break;
+
+            case 2:
+                orderBy = "categoryId";
+                break;
+
+            case 3:
+                orderBy = "difficulty";
+                break;
+
+            case 4:
+                orderBy = "name";
                 break;
         }
 
@@ -125,19 +208,22 @@ public class RoutinesViewModel extends AndroidViewModel {
     }
 
     private void applyChanges() {
+        routineCards.setValue(new ArrayList<>());
         currentPage = 0;
         isLastPage = false;
         totalPages = 0;
-        changedOptions.setValue(true);
-        changedOptions.setValue(false);
+        fetchFromRemote();
     }
 
     private void fetchFromRemote() {
         Map<String, String> options = new HashMap<>();
         options.put("page", String.valueOf(currentPage));
-        options.put("orderBy", "averageRating");
+        options.put("orderBy", orderBy);
         options.put("direction", direction);
         options.put("size", String.valueOf(itemsPerRequest));
+        if (filter != null) {
+            options.put("difficulty", filter);
+        }
 
         loading.setValue(true);
 
@@ -170,6 +256,24 @@ public class RoutinesViewModel extends AndroidViewModel {
         );
     }
 
+    public void addRoutineExcecution(int routineId) {
+        RoutineExecution routineExecution = new RoutineExecution(1, false);
+        disposable.add(
+                routinesService.addRoutineExecution(routineId, routineExecution)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<RoutineData>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineData routinesEntries) {
+                            }
+
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
+    }
 
     @Override
     protected void onCleared() {
@@ -179,10 +283,6 @@ public class RoutinesViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<RoutineData>> getRoutineCards() {
         return routineCards;
-    }
-
-    public MutableLiveData<Boolean> getChangedOptions() {
-        return changedOptions;
     }
 
     public MutableLiveData<List<RoutineData>> getUserHistory() {
@@ -209,4 +309,32 @@ public class RoutinesViewModel extends AndroidViewModel {
         return userRoutines;
     }
 
+    public MutableLiveData<RoutineData> getExternLinkRoutine() {
+        return externLinkRoutine;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public int getOrderById() {
+        return orderById;
+    }
+
+    public int getDirectionId() {
+        return directionId;
+    }
+
+    public int getFilterId() {
+        return filterId;
+    }
 }
+

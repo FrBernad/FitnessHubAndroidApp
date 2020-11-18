@@ -1,6 +1,7 @@
 package com.example.fitnesshub.view.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +23,7 @@ import java.util.List;
 public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.ExerciseViewHolder> {
 
     private List<ExerciseData> exerciseList;
+    private int currentExercise = -1;
     ExerciseItemBinding binding;
 
     private Context parentContext;
@@ -43,13 +46,6 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         this.parentContext = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(parentContext);
         binding = DataBindingUtil.inflate(inflater, R.layout.exercise_item, parent, false);
-        infoButton = binding.infoButton;
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openExerciseInfoDialog();
-            }
-        });
         return new ExerciseViewHolder(binding);
     }
 
@@ -57,9 +53,27 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
         ExerciseData exercise = exerciseList.get(position);
         holder.itemView.setExerciseData(exercise);
-        binding.repsExercise.setVisibility(exercise.getReps()!=0 ? View.VISIBLE : View.GONE);
-        binding.timeExercise.setVisibility(exercise.getTime()!=0 ? View.VISIBLE : View.GONE);
+        if (exercise.isRunning()){
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionSelected));
+            holder.itemView.exerciseName.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
+            holder.itemView.repsExercise.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
+            holder.itemView.timeExercise.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
+            holder.itemView.infoButton.setColorFilter(parentContext.getColor(R.color.primaryColorAlternative));
 
+        }
+        else{
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionNotSelected));
+            holder.itemView.exerciseName.setTextColor(parentContext.getColor(R.color.mainTextColorAlternative));
+            holder.itemView.repsExercise.setTextColor(parentContext.getColor(R.color.mainTextColorAlternative));
+            holder.itemView.timeExercise.setTextColor(parentContext.getColor(R.color.mainTextColorAlternative));
+            holder.itemView.infoButton.setColorFilter(parentContext.getColor(R.color.mainTextColorAlternative));
+
+
+        }
+
+        holder.itemView.infoButton.setOnClickListener(v -> openExerciseInfoDialog(exercise));
+        holder.itemView.repsExercise.setVisibility(exercise.getReps() != 0 ? View.VISIBLE : View.GONE);
+        holder.itemView.timeExercise.setVisibility(exercise.getTime() != 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -76,8 +90,17 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         }
     }
 
-    public void openExerciseInfoDialog() {
-        ShowExerciseDialog showExerciseDialog = new ShowExerciseDialog();
-        showExerciseDialog.show(((AppCompatActivity)parentContext).getSupportFragmentManager(), "example dialog");
+    public void openExerciseInfoDialog(ExerciseData exerciseData) {
+        ShowExerciseDialog showExerciseDialog = new ShowExerciseDialog(exerciseData);
+        showExerciseDialog.show(((AppCompatActivity) parentContext).getSupportFragmentManager(), "example dialog");
     }
+
+    public List<ExerciseData> getExerciseList() {
+        return exerciseList;
+    }
+
+    public ExerciseData getExercise(int index) {
+         return exerciseList.get(index);
+    }
+
 }

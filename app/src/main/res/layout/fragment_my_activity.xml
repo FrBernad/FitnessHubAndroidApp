@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".view.fragments.MyActivityFragment">
 
     <ScrollView
@@ -29,106 +30,13 @@
                 android:id="@+id/myActivityTabs"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/darkGrey"
+                android:background="@color/titlesBackground"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorColor="@color/selectedTab"
                 app:tabIndicatorHeight="4dp"
-                app:tabSelectedTextColor="@color/whiteBright"
-                app:tabTextColor="@color/whiteOpaque" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/myActivityTabs">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:strokeColor="@color/darkGrey"
-                    app:strokeWidth="1dp">
-
-
-                    <Spinner
-                        android:id="@+id/sortActivitySpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="20dp"
-                        android:prompt="@string/sort_title"
-                        android:spinnerMode="dialog" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:strokeColor="@color/darkGrey"
-                    app:strokeWidth="1dp">
-
-                    <Spinner
-                        android:id="@+id/orderActivitySpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="20dp"
-                        android:prompt="@string/order_title"
-                        android:spinnerMode="dialog" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-
-
-
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/activity_rookie_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rookie"
-                    app:checkedIconVisible="false" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/activity_beginner_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/beginner"
-                    app:checkedIconVisible="false" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/activity_intermediate_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/intermediate"
-                    app:checkedIconVisible="false" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/activity_advanced_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/advanced"
-                    app:checkedIconVisible="false" />
-
-            </com.google.android.material.chip.ChipGroup>
-
-
+                app:tabSelectedTextColor="@color/selectedTab"
+                app:tabTextColor="@color/notSelectedTab" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
@@ -136,7 +44,7 @@
                 android:layout_height="fill_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+                app:layout_constraintTop_toBottomOf="@+id/myActivityTabs" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

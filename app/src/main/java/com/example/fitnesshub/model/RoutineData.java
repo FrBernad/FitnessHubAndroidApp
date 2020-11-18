@@ -95,7 +95,17 @@ public class RoutineData implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(id);
+        return "RoutineData{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", detail='" + detail + '\'' +
+                ", creationDate='" + creationDate + '\'' +
+                ", rating=" + rating +
+                ", diffilcuty='" + diffilcuty + '\'' +
+                ", author=" + author +
+                ", category=" + category +
+                ", image='" + image + '\'' +
+                '}';
     }
 
     public static class RoutineCategory {

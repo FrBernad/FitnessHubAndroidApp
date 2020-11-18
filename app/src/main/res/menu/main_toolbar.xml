@@ -6,9 +6,37 @@
         android:id="@+id/app_bar_leave_session"
         android:icon="@drawable/ic_exit_24"
         android:title="@string/leave_session"
-        android:orderInCategory="5"
+        android:orderInCategory="7"
         app:showAsAction="never"
         android:visible="false" />
+
+    <item
+        android:id="@+id/app_bar_dark_mode"
+        android:title="@string/DarkMode"
+        android:orderInCategory="5"
+        app:showAsAction="never"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/app_bar_light_mode"
+        android:title="@string/LightMode"
+        android:orderInCategory="5"
+        app:showAsAction="never"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/app_bar_english"
+        android:title="@string/setEnglish"
+        app:showAsAction="never"
+        android:visible="false"
+        android:orderInCategory="6"/>
+
+    <item
+        android:id="@+id/app_bar_spanish"
+        android:title="@string/setSpanish"
+        app:showAsAction="never"
+        android:visible="false"
+        android:orderInCategory="6"/>
 
     <item
         android:id="@+id/app_bar_rate"
@@ -16,9 +44,7 @@
         android:title="@string/action_rate"
         app:showAsAction="ifRoom"
         android:visible="false"
-        android:orderInCategory="1"
-
-        />
+        android:orderInCategory="1"/>
 
     <item
         android:id="@+id/app_bar_favorite_outlined"
@@ -43,8 +69,5 @@
         android:orderInCategory="4"
         app:showAsAction="ifRoom"
         android:visible="false"/>
-
-
-
 
 </menu>

@@ -1,6 +1,7 @@
 package com.example.fitnesshub.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,17 +16,22 @@ import java.util.List;
 
 public class InitialActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        AppPreferences preferences = new AppPreferences(this.getApplication());
+        if(preferences.loadNightModeState())
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial);
 
         new Handler().postDelayed(() -> {
 
             Intent appLinkIntent = getIntent();
             Uri appLinkData = appLinkIntent.getData();
-            AppPreferences preferences = new AppPreferences(this.getApplication());
 
             if(appLinkData!=null){ // cuando inicio la aplicacion desde un link
                 String routineId = appLinkData.getLastPathSegment();

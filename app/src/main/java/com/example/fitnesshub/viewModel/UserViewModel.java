@@ -19,10 +19,14 @@ import com.bumptech.glide.request.target.Target;
 import com.example.fitnesshub.model.APIService;
 import com.example.fitnesshub.model.AppPreferences;
 import com.example.fitnesshub.model.AuthToken;
+import com.example.fitnesshub.model.ErrorResponse;
 import com.example.fitnesshub.model.VerificationData;
 import com.example.fitnesshub.model.UserAPIService;
 import com.example.fitnesshub.model.UserCredentials;
 import com.example.fitnesshub.model.UserInfo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -47,6 +51,9 @@ public class UserViewModel extends AndroidViewModel {
 
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
+    private MutableLiveData<ErrorResponse> loginError = new MutableLiveData<>();
+    private MutableLiveData<ErrorResponse> registerError = new MutableLiveData<>();
+
     private UserAPIService userService;
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -56,26 +63,6 @@ public class UserViewModel extends AndroidViewModel {
         super(application);
         userService = new UserAPIService(application);
         app = application;
-    }
-
-    public MutableLiveData<UserInfo> getUserInfo() {
-        return userInfo;
-    }
-
-    public MutableLiveData<Boolean> getVerified() {
-        return verified;
-    }
-
-    public MutableLiveData<UserInfo> getUserData() {
-        return userInfo;
-    }
-
-    public MutableLiveData<AuthToken> getToken() {
-        return token;
-    }
-
-    public MutableLiveData<Boolean> getLoading() {
-        return loading;
     }
 
 
@@ -174,6 +161,7 @@ public class UserViewModel extends AndroidViewModel {
                         APIService.setAuthToken(authToken.getToken());
                         AppPreferences preferences = new AppPreferences(app);
                         preferences.setAuthToken(authToken.getToken());
+                        loginError.setValue(null);
                         loading.setValue(false);
                     }
 
@@ -181,10 +169,12 @@ public class UserViewModel extends AndroidViewModel {
                     public void onError(@NonNull Throwable e) {
                         if (e instanceof HttpException) {
                             HttpException httpException = (HttpException) e;
-                            int statusCode = httpException.code();
-                            System.out.println("status code:" + statusCode + httpException.message());
                             try {
-                                System.out.println("status cause:" + httpException.response().errorBody().string());
+                                Gson gson = new Gson();
+                                ErrorResponse error;
+                                error = gson.fromJson(httpException.response().errorBody().string(), new TypeToken<ErrorResponse>() {
+                                }.getType());
+                                loginError.setValue(error);
                             } catch (IOException ioException) {
                                 ioException.printStackTrace();
                             }
@@ -205,12 +195,25 @@ public class UserViewModel extends AndroidViewModel {
                 .subscribeWith(new DisposableSingleObserver<UserInfo>() {
                     @Override
                     public void onSuccess(@NonNull UserInfo info) {
+                        System.out.println("succes");
                         userInfo.setValue(info);
                         loading.setValue(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        if (e instanceof HttpException) {
+                            HttpException httpException = (HttpException) e;
+                            try {
+                                Gson gson = new Gson();
+                                ErrorResponse error;
+                                error = gson.fromJson(httpException.response().errorBody().string(), new TypeToken<ErrorResponse>() {
+                                }.getType());
+                                registerError.setValue(error);
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+                        }
                         e.printStackTrace();
                         loading.setValue(false);
                     }
@@ -218,5 +221,43 @@ public class UserViewModel extends AndroidViewModel {
         );
 
     }
+
+
+    public MutableLiveData<UserInfo> getUserInfo() {
+        return userInfo;
+    }
+
+    public MutableLiveData<Boolean> getVerified() {
+        return verified;
+    }
+
+    public MutableLiveData<UserInfo> getUserData() {
+        return userInfo;
+    }
+
+    public MutableLiveData<AuthToken> getToken() {
+        return token;
+    }
+
+    public MutableLiveData<Boolean> getLoading() {
+        return loading;
+    }
+
+    public MutableLiveData<ErrorResponse> getLoginError() {
+        return loginError;
+    }
+
+    public MutableLiveData<ErrorResponse> getRegisterError() {
+        return registerError;
+    }
+
+    public void setLoginErrorCode(ErrorResponse error) {
+        loginError.setValue(error);
+    }
+
+     public void setRegisterError(ErrorResponse error) {
+        registerError.setValue(error);
+    }
+
 
 }

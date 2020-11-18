@@ -21,9 +21,12 @@ import java.util.List;
 public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> {
     private List<RoutineData> routinesList;
     private View view;
+    private int host;
 
-    public RoutinesAdapter(List<RoutineData> routinesList) {
+
+    public RoutinesAdapter(List<RoutineData> routinesList, int host) {
         this.routinesList = routinesList;
+        this.host = host;
     }
 
     @NonNull
@@ -77,7 +80,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
         }
 
         holder.itemView.setRoutineData(routine);
-        holder.itemView.setClickListener(new RoutineClickListener(routine, RoutineClickListener.ROUTINES_ID));
+        holder.itemView.setClickListener(new RoutineClickListener(routine, host));
     }
 
     @Override

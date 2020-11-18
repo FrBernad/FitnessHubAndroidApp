@@ -25,7 +25,7 @@ public class UserInfo {
 
     @Expose
     @SerializedName("birthdate")
-    private String birthdate;
+    private Long birthdate;
 
     @Expose
     @SerializedName("email")
@@ -41,7 +41,7 @@ public class UserInfo {
 
     private Drawable profileImg;
 
-    public UserInfo(String username, String password, String fullName, String gender, String birthdate, String email, String phone, String avatarUrl) {
+    public UserInfo(String username, String password, String fullName, String gender, Long birthdate, String email, String phone, String avatarUrl) {
         this.username = username;
         this.password = password;
         this.fullName = fullName;
@@ -81,7 +81,7 @@ public class UserInfo {
         return gender;
     }
 
-    public String getBirthdate() {
+    public Long getBirthdate() {
         return birthdate;
     }
 

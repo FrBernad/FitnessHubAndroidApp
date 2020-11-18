@@ -1,5 +1,7 @@
 package com.example.fitnesshub.view.fragments;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,8 +26,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         FragmentHomeBinding binding = FragmentHomeBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
@@ -33,9 +34,10 @@ public class HomeFragment extends Fragment {
 
         List<SlideModel> slideModels = new ArrayList<>();
 
-        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1500468756762-a401b6f17b46?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80", "Best routines of the week!"));
-        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1560233026-ad254fa8da38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=610&q=80", "Check your favorites"));
-        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1567740034541-1ff8b618a370?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80", "See your history and give an old routine another shot"));
+        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1500468756762-a401b6f17b46?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80", getString(R.string.PopularRoutinesSlide)));
+        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1560233026-ad254fa8da38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=610&q=80", getString(R.string.FavoriteRoutinesSlide)));
+        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1567740034541-1ff8b618a370?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80", getString(R.string.HistoryRoutinesSlide)));
+
 
         imageSlider.setImageList(slideModels, true);
 

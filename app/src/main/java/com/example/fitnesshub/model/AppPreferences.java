@@ -22,6 +22,26 @@ public class AppPreferences {
         editor.apply();
     }
 
+    public void setNightModeState(Boolean state){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("NightMode",state);
+        editor.apply();
+    }
+
+    public void setLanguage(String language){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Language",language);
+        editor.apply();
+    }
+
+    public String getLanguage(){
+        return sharedPreferences.getString("Language","en");
+    }
+
+    public Boolean loadNightModeState(){
+        return sharedPreferences.getBoolean("NightMode",false);
+    }
+
     public String getAuthToken() {
         return sharedPreferences.getString(AUTH_TOKEN, null);
     }

@@ -9,22 +9,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineExecutionListBinding;
+import com.example.fitnesshub.model.ExerciseData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import java.util.ArrayList;
 
-public class RoutineExcecutionListFragment extends Fragment {
+public class RoutineExecutionListFragment extends Fragment {
 
     private FragmentRoutineExecutionListBinding binding;
 
@@ -38,7 +37,13 @@ public class RoutineExcecutionListFragment extends Fragment {
     private RecyclerView recyclerViewMain;
     private RecyclerView recyclerViewCooldown;
 
+    private int currentCycle;
+    private int currentExercise;
+    private ExercisesAdapter currentAdapter;
+    private boolean finished;
+
     private TextView title;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,10 +51,9 @@ public class RoutineExcecutionListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
 
@@ -71,7 +75,7 @@ public class RoutineExcecutionListFragment extends Fragment {
 
 
         if (getArguments() != null) {
-            title.setText(RoutineExcecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
+            title.setText(RoutineExecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
         }
 
         viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
@@ -86,6 +90,10 @@ public class RoutineExcecutionListFragment extends Fragment {
         recyclerViewCooldown.setAdapter(cooldownAdapter);
 
         observeExerciseViewModel();
+
+        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+
+
     }
 
     private void observeExerciseViewModel() {
@@ -115,4 +123,70 @@ public class RoutineExcecutionListFragment extends Fragment {
     }
 
 
- }
+    @Override
+    public void onResume() {
+        super.onResume();
+        startExecution();
+    }
+
+    private void startExecution() {
+        currentCycle = 0;
+        currentExercise = 0;
+        finished = false;
+        viewModel.getCountDownTimer().start(getNextExercise().getTime(), 1000);
+        viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
+            if (countDown.isFinished() && !finished) {
+                ExerciseData exercise;
+                currentAdapter.getExercise(currentExercise).setRunning(false);
+                currentAdapter.notifyItemChanged(currentExercise);
+                currentExercise++;
+                if((exercise = getNextExercise()) != null ){
+                    viewModel.getCountDownTimer().start(exercise.getTime()*1000, 1000);
+                }
+            }
+        });
+    }
+
+    private ExerciseData getNextExercise() {
+        ExerciseData exercise = null;
+        currentAdapter = getCurrentCycle();
+        if(currentAdapter != null){
+            exercise = currentAdapter.getExercise(currentExercise);
+            exercise.setRunning(true);
+            currentAdapter.notifyItemChanged(currentExercise);
+        }
+        return exercise;
+    }
+
+
+
+    public ExercisesAdapter getCurrentCycle(){
+
+        if(currentCycle == 0 ){
+            if(currentExercise < warmUpAdapter.getExerciseList().size())
+                return warmUpAdapter;
+            currentCycle++;
+            currentExercise=0;
+        }
+
+        if(currentCycle == 1){
+            if(currentExercise < mainAdapter.getExerciseList().size())
+                return mainAdapter;
+            currentCycle++;
+            currentExercise=0;
+        }
+
+        if(currentCycle == 2){
+            if(currentExercise < cooldownAdapter.getExerciseList().size())
+                return cooldownAdapter;
+        }
+        finished = true;
+
+        return null;
+
+
+
+    }
+}
+
+
