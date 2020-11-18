@@ -31,6 +31,9 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_homeFragment_to_myActivityFragment"
                 app:destination="@id/myActivityFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_routineFragment"
+            app:destination="@id/routineFragment" />
     </fragment>
 
     <fragment

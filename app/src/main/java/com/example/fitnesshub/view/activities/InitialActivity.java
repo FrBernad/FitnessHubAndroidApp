@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.WindowManager;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.model.AppPreferences;
+import com.example.fitnesshub.view.fragments.HomeFragment;
 
 import java.util.List;
 
@@ -27,9 +28,7 @@ public class InitialActivity extends AppCompatActivity {
             AppPreferences preferences = new AppPreferences(this.getApplication());
 
             if(appLinkData!=null){ // cuando inicio la aplicacion desde un link
-
-                List<String> params = appLinkData.getPathSegments();
-                String routineId = params.get(params.size()-1);
+                String routineId = appLinkData.getLastPathSegment();
                 newActivity(preferences,routineId);
 
             }else{ //Cuando inicio la aplicacion normalmente

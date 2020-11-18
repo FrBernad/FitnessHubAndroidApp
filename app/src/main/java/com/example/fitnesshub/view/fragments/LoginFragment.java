@@ -1,6 +1,7 @@
 package com.example.fitnesshub.view.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,11 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
+
+
+
+
+
     }
 
     private void tryLogin() {
@@ -72,6 +78,15 @@ public class LoginFragment extends Fragment {
             if (authToken != null) {
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                Bundle aux = getArguments();
+                if(aux!=null){
+                    intent.putExtra("RoutineId",aux.getString("RoutineId"));
+                }
+                else{
+                    Bundle newBundle = new Bundle();
+                    newBundle.putString("RoutineId",null);
+                    intent.putExtra("RoutineId",newBundle);
+                }
                 startActivity(intent);
                 getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 getActivity().finish();

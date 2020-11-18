@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentVerifyUserBinding;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.textfield.TextInputLayout;
@@ -44,7 +46,7 @@ public class VerifyUserFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        verifyBtn.setOnClickListener(v -> tryVerify());
+        verifyBtn.setOnClickListener(v -> tryVerify(view));
         resendBtn.setOnClickListener(v -> resendVerification());
 
         return view;
@@ -73,11 +75,19 @@ public class VerifyUserFragment extends Fragment {
         viewModel.resendVerification(email.getEditText().getText().toString());
     }
 
-    private void tryVerify() {
+    private void tryVerify(View v) {
         viewModel.verifyUser(code.getEditText().getText().toString());
         viewModel.getVerified().observe(getViewLifecycleOwner(), verified -> {
             if (verified) {
-                Navigation.findNavController(getView()).navigate(VerifyUserFragmentDirections.actionVerifyUserFragmentToWelcome());
+                Bundle b = getArguments();
+
+                NavController navController = Navigation.findNavController(v);
+                VerifyUserFragmentDirections.ActionVerifyUserFragmentToWelcome action = VerifyUserFragmentDirections.actionVerifyUserFragmentToWelcome();
+                if(b!=null){
+                    navController.navigate(action.setRoutineId(b.getString("RoutineId")));
+                }
+                else
+                    navController.navigate(action);
             }
         });
     }
