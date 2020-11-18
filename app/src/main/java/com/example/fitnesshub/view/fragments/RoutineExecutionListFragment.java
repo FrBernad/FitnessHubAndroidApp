@@ -39,6 +39,8 @@ public class RoutineExecutionListFragment extends Fragment {
 
     private int currentCycle;
     private int currentExercise;
+    private ExercisesAdapter currentAdapter;
+    private boolean finished;
 
     private TextView title;
 
@@ -130,61 +132,60 @@ public class RoutineExecutionListFragment extends Fragment {
     private void startExecution() {
         currentCycle = 0;
         currentExercise = 0;
+        finished = false;
         viewModel.getCountDownTimer().start(getNextExercise().getTime(), 1000);
         viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
-            if (countDown.isFinished()) {
-                switch (currentExercise) {
-                    case 0:
-                        warmUpAdapter.getExercise(currentExercise).setRunning(false);
-                        warmUpAdapter.notifyItemChanged(currentExercise);
-                        break;
-                    case 1:
-                        mainAdapter.getExercise(currentExercise).setRunning(false);
-                        mainAdapter.notifyItemChanged(currentExercise);
-                        break;
-                    case 2:
-                        cooldownAdapter.getExercise(currentExercise).setRunning(false);
-                        cooldownAdapter.notifyItemChanged(currentExercise);
-                        break;
+            if (countDown.isFinished() && !finished) {
+                ExerciseData exercise;
+                currentAdapter.getExercise(currentExercise).setRunning(false);
+                currentAdapter.notifyItemChanged(currentExercise);
+                currentExercise++;
+                if((exercise = getNextExercise()) != null ){
+                    viewModel.getCountDownTimer().start(exercise.getTime()*1000, 1000);
                 }
-                getNextExercise();
             }
         });
     }
 
     private ExerciseData getNextExercise() {
-        ExerciseData exercise;
-        if (currentCycle == 0) {
-            exercise = warmUpAdapter.getExercise(currentExercise);
-            if (exercise == null) {
-                currentCycle++;
-                currentExercise = 0;
-            } else {
-                exercise.setRunning(true);
-                warmUpAdapter.notifyItemChanged(currentExercise);
-            }
-        } else if (currentExercise == 1) {
-            exercise = mainAdapter.getExercise(currentExercise);
-            if (exercise == null) {
-                currentCycle++;
-                currentExercise = 0;
-            } else {
-                exercise.setRunning(true);
-                mainAdapter.notifyItemChanged(currentExercise);
-            }
-        } else {
-            exercise = cooldownAdapter.getExercise(currentExercise);
-            if (exercise == null) {
-                currentCycle++;
-                currentExercise = 0;
-            } else {
-                exercise.setRunning(true);
-                cooldownAdapter.notifyItemChanged(currentExercise);
-            }
+        ExerciseData exercise = null;
+        currentAdapter = getCurrentCycle();
+        if(currentAdapter != null){
+            exercise = currentAdapter.getExercise(currentExercise);
+            exercise.setRunning(true);
+            currentAdapter.notifyItemChanged(currentExercise);
         }
-        currentExercise++;
-        System.out.println(exercise);
         return exercise;
+    }
+
+
+
+    public ExercisesAdapter getCurrentCycle(){
+
+        if(currentCycle == 0 ){
+            if(currentExercise < warmUpAdapter.getExerciseList().size())
+                return warmUpAdapter;
+            currentCycle++;
+            currentExercise=0;
+        }
+
+        if(currentCycle == 1){
+            if(currentExercise < mainAdapter.getExerciseList().size())
+                return mainAdapter;
+            currentCycle++;
+            currentExercise=0;
+        }
+
+        if(currentCycle == 2){
+            if(currentExercise < cooldownAdapter.getExerciseList().size())
+                return cooldownAdapter;
+        }
+        finished = true;
+
+        return null;
+
+
+
     }
 }
 

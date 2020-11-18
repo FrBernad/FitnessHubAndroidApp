@@ -126,7 +126,16 @@
         <!-- Used for the title and text -->
         <item name="android:textColorPrimary">@color/mainTextColorAlternative</item>
         <item name="android:background">@color/backgroundPopUp</item>
+        <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
     </style>
 
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/mainTextColorAlternative</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/mainTextColorAlternative</item>
+    </style>
 
 </resources>

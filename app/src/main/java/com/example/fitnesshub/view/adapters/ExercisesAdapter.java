@@ -100,10 +100,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
     }
 
     public ExerciseData getExercise(int index) {
-        if(exerciseList.size()>=index)
-            return null;
-
-        return exerciseList.get(index);
+         return exerciseList.get(index);
     }
 
 }
