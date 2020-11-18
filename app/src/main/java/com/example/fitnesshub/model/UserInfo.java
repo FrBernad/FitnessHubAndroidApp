@@ -5,6 +5,11 @@ import android.graphics.drawable.Drawable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class UserInfo {
 
     @Expose
@@ -59,6 +64,11 @@ public class UserInfo {
 
     public Drawable getProfileImg() {
         return profileImg;
+    }
+
+    public String getBirthdateString(){
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy", Locale.US);
+        return dateFormat.format(birthdate);
     }
 
     public void setProfileImg(Drawable profileImg) {
