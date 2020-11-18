@@ -1,7 +1,5 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.widget.RadioGroup;
-
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;
 import com.google.android.material.chip.ChipGroup;

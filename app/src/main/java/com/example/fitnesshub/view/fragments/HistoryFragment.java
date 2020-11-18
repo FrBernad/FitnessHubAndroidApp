@@ -57,10 +57,8 @@ public class HistoryFragment extends Fragment {
 
         viewModel.getUserHistory().observe(getViewLifecycleOwner(), routines -> {
             if (routines != null) {
-                System.out.println(routines);
                 routinesAdapter.updateRoutines(routines);
             }
         });
-
     }
 }

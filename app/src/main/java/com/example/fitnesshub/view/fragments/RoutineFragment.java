@@ -100,7 +100,7 @@ public class RoutineFragment extends Fragment {
             image.setImageResource(Integer.parseInt(routineData.getImage()));
         }
 
-        playModeDialog = new PlayModeDialog(routineData.getTitle(), getView());
+        playModeDialog = new PlayModeDialog(routineData, getView());
 
         playBtn.setOnClickListener(v -> openPlayModeDialog());
 

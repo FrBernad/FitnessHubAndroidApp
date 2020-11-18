@@ -2,6 +2,7 @@ package com.example.fitnesshub.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,18 @@ public class PagedList<T> {
 
     public Boolean getLastPage() {
         return isLastPage;
+    }
+
+    @Override
+    public String toString() {
+        return "PagedList{" +
+                "totalCount=" + totalCount +
+                ", orderBy='" + orderBy + '\'' +
+                ", direction='" + direction + '\'' +
+                ", entries=" + entries +
+                ", size=" + size +
+                ", page=" + page +
+                ", isLastPage=" + isLastPage +
+                '}';
     }
 }

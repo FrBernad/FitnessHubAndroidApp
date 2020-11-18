@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
-
     }
 
     private void logout() {
@@ -115,6 +114,5 @@ public class MainActivity extends AppCompatActivity {
             isDarkMode = false;
         }
     }
-
 
 }

@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.model.RoutineExecution;
+import com.example.fitnesshub.model.RoutineHistory;
 import com.example.fitnesshub.model.RoutinesAPIService;
 
 import java.util.ArrayList;
@@ -39,6 +41,9 @@ public class RoutinesViewModel extends AndroidViewModel {
     private String direction = "desc";
     private String filter = null;
     private String orderBy = "dateCreated";
+    private int orderById = 0;
+    private int directionId = 0;
+    private int filterId = -1;
 
     public RoutinesViewModel(@NonNull Application application) {
         super(application);
@@ -95,10 +100,14 @@ public class RoutinesViewModel extends AndroidViewModel {
                 routinesService.getUserHistory(options)
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineData>>() {
+                        .subscribeWith(new DisposableSingleObserver<PagedList<RoutineHistory>>() {
                             @Override
-                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineData> routinesEntries) {
-                                userHistory.setValue(routinesEntries.getEntries());
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull PagedList<RoutineHistory> routinesEntries) {
+                                List<RoutineData> routines = new ArrayList<>();
+                                for (RoutineHistory execution : routinesEntries.getEntries()) {
+                                    routines.add(execution.getRoutine());
+                                }
+                                userHistory.setValue(routines);
                             }
 
                             @Override
@@ -111,6 +120,7 @@ public class RoutinesViewModel extends AndroidViewModel {
 
 
     public void orderRoutines(int option) {
+        directionId = option;
         switch (option) {
             case 0:
                 direction = "desc";
@@ -125,6 +135,7 @@ public class RoutinesViewModel extends AndroidViewModel {
     }
 
     public void filterRoutines(Integer option) {
+        filterId = option;
         switch (option) {
             case -1:
                 filter = null;
@@ -152,6 +163,7 @@ public class RoutinesViewModel extends AndroidViewModel {
     }
 
     public void sortRoutines(int option) {
+        orderById = option;
         switch (option) {
             case 0:
                 orderBy = "dateCreated";
@@ -226,6 +238,24 @@ public class RoutinesViewModel extends AndroidViewModel {
         );
     }
 
+    public void addRoutineExcecution(int routineId) {
+        RoutineExecution routineExecution = new RoutineExecution(1, false);
+        disposable.add(
+                routinesService.addRoutineExecution(routineId, routineExecution)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableSingleObserver<RoutineData>() {
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineData routinesEntries) {
+                            }
+
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                e.printStackTrace();
+                            }
+                        })
+        );
+    }
 
     @Override
     protected void onCleared() {
@@ -261,4 +291,28 @@ public class RoutinesViewModel extends AndroidViewModel {
         return userRoutines;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public String getFilter() {
+        return filter;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public int getOrderById() {
+        return orderById;
+    }
+
+    public int getDirectionId() {
+        return directionId;
+    }
+
+    public int getFilterId() {
+        return filterId;
+    }
 }
+

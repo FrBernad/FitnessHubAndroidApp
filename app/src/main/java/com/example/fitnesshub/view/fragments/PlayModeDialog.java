@@ -9,24 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 public class PlayModeDialog extends AppCompatDialogFragment {
 
-    private String routineData;
+    private RoutineData routineData;
     private View view;
+    private RoutinesViewModel viewModel;
 
-    public PlayModeDialog(String routineData, View view) {
+    public PlayModeDialog(RoutineData routineData, View view) {
         this.view = view;
         this.routineData = routineData;
     }
 
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),R.style.PopUp);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.PopUp);
+        this.viewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.choose_execution_dialog, null);
@@ -36,9 +40,18 @@ public class PlayModeDialog extends AppCompatDialogFragment {
 
         view.findViewById(R.id.simpleMode).setOnClickListener(v -> {
                     dismiss();
-                    Navigation.findNavController(this.view).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData));
+                    viewModel.addRoutineExcecution(routineData.getId());
+                    Navigation.findNavController(this.view).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExcecutionListFragment(routineData.getTitle()));
                 }
         );
+
+        view.findViewById(R.id.detailedMode).setOnClickListener(v -> {
+                    dismiss();
+                    viewModel.addRoutineExcecution(routineData.getId());
+                    Navigation.findNavController(this.view).navigate(RoutineFragmentDirections.actionRoutineFragmentToRoutineExecutionExercise(routineData.getTitle()));
+                }
+        );
+
         return builder.create();
     }
 

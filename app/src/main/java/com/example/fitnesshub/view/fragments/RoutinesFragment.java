@@ -2,6 +2,7 @@ package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
@@ -35,7 +36,7 @@ public class RoutinesFragment extends Fragment {
 
     private RoutinesViewModel viewModel;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(),RoutineClickListener.ROUTINES_ID);
+    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(), RoutineClickListener.ROUTINES_ID);
 
     private FragmentRoutinesBinding binding;
 
@@ -122,7 +123,22 @@ public class RoutinesFragment extends Fragment {
         });
 
         chipGroup.setOnCheckedChangeListener(new ChipSelectorListener(viewModel));
+        int filtered = viewModel.getFilterId();
+        if (filtered != -1) {
+            int id = 0;
+            if (filtered == 0) {
+                id = R.id.rookie_chip;
+            } else if (filtered == 1) {
+                id = R.id.beginner_chip;
+            } else if (filtered == 2) {
+                id = R.id.intermediate_chip;
+            } else if (filtered == 3) {
+                id = R.id.advanced_chip;
+            }
+            chipGroup.check(id);
+        }
 
+        recyclerView.canScrollVertically(1)
         nestedScrollView.setOnScrollChangeListener(
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                     if (!searching && !noMoreEntries && scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()) {
@@ -130,23 +146,21 @@ public class RoutinesFragment extends Fragment {
                         viewModel.updateData();
                     }
                 });
-
     }
-
 
     private void setSpinners(View view) {
         sortSpinner = view.findViewById(R.id.sortDiscoverSpinner);
         ArrayAdapter<CharSequence> sortDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, android.R.layout.simple_spinner_item);
         sortDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortDiscoverAdapter);
-        sortSpinner.setSelection(0, false);
+        sortSpinner.setSelection(viewModel.getOrderById(), false);
         sortSpinner.setOnItemSelectedListener(new SortAdapter(viewModel));
 
         orderSpinner = view.findViewById(R.id.orderDiscoverSpinner);
         ArrayAdapter<CharSequence> orderDiscoverAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.order, android.R.layout.simple_spinner_item);
         orderDiscoverAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         orderSpinner.setAdapter(orderDiscoverAdapter);
-        orderSpinner.setSelection(0, false);
+        orderSpinner.setSelection(viewModel.getDirectionId(), false);
         orderSpinner.setOnItemSelectedListener(new OrderAdapter(viewModel));
     }
 

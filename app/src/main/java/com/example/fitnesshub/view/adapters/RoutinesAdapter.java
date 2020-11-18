@@ -26,7 +26,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
 
     public RoutinesAdapter(List<RoutineData> routinesList, int host) {
         this.routinesList = routinesList;
-        this.host=host;
+        this.host = host;
     }
 
     @NonNull
@@ -78,6 +78,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
                 routine.setImage(String.valueOf(R.drawable.p7));
                 break;
         }
+
 
         holder.itemView.setRoutineData(routine);
         holder.itemView.setClickListener(new RoutineClickListener(routine, host));

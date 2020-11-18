@@ -46,7 +46,7 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
     }
 
     @Override
-    public Single<PagedList<RoutineData>> getUserHistory(Map<String, String> options) {
+    public Single<PagedList<RoutineHistory>> getUserHistory(Map<String, String> options) {
         return api.getUserHistory(options);
     }
 
@@ -57,7 +57,7 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
 
     @Override
     public Single<RoutineData> rateRoutine(Integer routineId, RoutineRating rating) {
-        return api.rateRoutine(routineId,rating);
+        return api.rateRoutine(routineId, rating);
     }
 
     @Override
@@ -80,4 +80,8 @@ public class RoutinesAPIService extends APIService implements RoutinesAPI {
         return api.getRoutineCycles(routineId, options);
     }
 
+    @Override
+    public Single<RoutineData> addRoutineExecution(Integer routineId, RoutineExecution routineExecution) {
+        return api.addRoutineExecution(routineId, routineExecution);
+    }
 }

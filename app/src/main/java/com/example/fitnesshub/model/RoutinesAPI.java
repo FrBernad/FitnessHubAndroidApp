@@ -26,7 +26,7 @@ public interface RoutinesAPI {
     );
 
     @GET("user/current/routines/executions")
-    Single<PagedList<RoutineData>> getUserHistory(
+    Single<PagedList<RoutineHistory>> getUserHistory(
             @QueryMap Map<String, String> options
     );
 
@@ -57,6 +57,12 @@ public interface RoutinesAPI {
     @POST("user/current/routines/{routineId}/favourites")
     Single<Response<Void>> favRoutine(
             @Path("routineId") Integer routineId
+    );
+
+    @POST("routines/{routineId}/executions")
+    Single<RoutineData> addRoutineExecution(
+            @Path("routineId") Integer routineId,
+            @Body RoutineExecution routineExecution
     );
 
     @DELETE("user/current/routines/{routineId}/favourites")
