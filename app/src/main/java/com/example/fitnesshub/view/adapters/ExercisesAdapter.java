@@ -96,12 +96,14 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
     }
 
     public List<ExerciseData> getExerciseList() {
-        currentExercise = 0;
         return exerciseList;
     }
 
-    public int getCurrentExercise() {
-        return currentExercise;
+    public ExerciseData getExercise(int index) {
+        if(exerciseList.size()>=index)
+            return null;
+
+        return exerciseList.get(index);
     }
 
 }

@@ -36,6 +36,13 @@ public class ExerciseData {
         isRunning = false;
     }
 
+    @Override
+    public String toString() {
+        return "ExerciseData{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

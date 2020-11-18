@@ -37,10 +37,10 @@ public class RoutineExecutionListFragment extends Fragment {
     private RecyclerView recyclerViewMain;
     private RecyclerView recyclerViewCooldown;
 
-
+    private int currentCycle;
+    private int currentExercise;
 
     private TextView title;
-
 
 
     @Override
@@ -49,8 +49,9 @@ public class RoutineExecutionListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentRoutineExecutionListBinding.inflate(getLayoutInflater());
 
@@ -91,7 +92,6 @@ public class RoutineExecutionListFragment extends Fragment {
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
 
 
-
     }
 
     private void observeExerciseViewModel() {
@@ -121,36 +121,71 @@ public class RoutineExecutionListFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onResume() {
         super.onResume();
-        Cycle[] a = Cycle.values();
-        currCycle = a[0];
-        currExercise = 0;
-        startExecution(adapters);
-
+        startExecution();
     }
 
-    private void startExecution(ArrayList<ExercisesAdapter> adapters){
-        boolean finish = false;
-        ExercisesAdapter cycle = adapters.get(currCycle);
+    private void startExecution() {
+        currentCycle = 0;
+        currentExercise = 0;
+        viewModel.getCountDownTimer().start(getNextExercise().getTime(), 1000);
+        viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
+            if (countDown.isFinished()) {
+                switch (currentExercise) {
+                    case 0:
+                        warmUpAdapter.getExercise(currentExercise).setRunning(false);
+                        warmUpAdapter.notifyItemChanged(currentExercise);
+                        break;
+                    case 1:
+                        mainAdapter.getExercise(currentExercise).setRunning(false);
+                        mainAdapter.notifyItemChanged(currentExercise);
+                        break;
+                    case 2:
+                        cooldownAdapter.getExercise(currentExercise).setRunning(false);
+                        cooldownAdapter.notifyItemChanged(currentExercise);
+                        break;
+                }
+                getNextExercise();
+            }
+        });
+    }
 
-        while(getNextExercise() != null){
-
+    private ExerciseData getNextExercise() {
+        ExerciseData exercise;
+        if (currentCycle == 0) {
+            exercise = warmUpAdapter.getExercise(currentExercise);
+            if (exercise == null) {
+                currentCycle++;
+                currentExercise = 0;
+            } else {
+                exercise.setRunning(true);
+                warmUpAdapter.notifyItemChanged(currentExercise);
+            }
+        } else if (currentExercise == 1) {
+            exercise = mainAdapter.getExercise(currentExercise);
+            if (exercise == null) {
+                currentCycle++;
+                currentExercise = 0;
+            } else {
+                exercise.setRunning(true);
+                mainAdapter.notifyItemChanged(currentExercise);
+            }
+        } else {
+            exercise = cooldownAdapter.getExercise(currentExercise);
+            if (exercise == null) {
+                currentCycle++;
+                currentExercise = 0;
+            } else {
+                exercise.setRunning(true);
+                cooldownAdapter.notifyItemChanged(currentExercise);
+            }
         }
+        currentExercise++;
+        System.out.println(exercise);
+        return exercise;
     }
-    private ExerciseData getNextExercise(){
-        if(currCycle == 2 &&)
-        ExercisesAdapter cycle= adapters.get(currCycle);
-        if(cycle)
-        if(currCycle == Cycle.WARMUP && )
-        if(currCycle == Cycle.COOLDOWN && currExercise == )
-
-
-    }
-
-
 }
+
 
