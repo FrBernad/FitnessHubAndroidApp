@@ -2,7 +2,6 @@ package com.example.fitnesshub.view.activities;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -40,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (idInt != -1) {
                    routinesViewModel =  new ViewModelProvider(this).get(RoutinesViewModel.class);
-                   //routinesViewModel.getRoutineById(idInt);
-                   //routinesViewModel.getExternLinkRoutine().observe(getLifecycle(),externRoutine ->{
+                   routinesViewModel.getRoutineById(idInt);
+                   routinesViewModel.getExternLinkRoutine().observe(getLifecycle(),externRoutine ->{
 
                        if(externRoutine!=null){
                            //NavController aux = Navigation.findNavController(this,R.id.mainNavFragment);
