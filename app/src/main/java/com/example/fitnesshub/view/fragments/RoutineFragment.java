@@ -190,7 +190,10 @@ public class RoutineFragment extends Fragment {
         } else if (id == R.id.app_bar_favorite_outlined) {
             favViewModel.favRoutine(routineId);
             favRoutine();
-        } else {
+        }else if(id==R.id.app_bar_share){
+            share();
+        }
+        else {
             return super.onOptionsItemSelected(item);
         }
 
@@ -203,7 +206,7 @@ public class RoutineFragment extends Fragment {
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT,routineData.getTitle());
         sharingIntent.putExtra("RoutineId",routineId);
-        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://www.fitneshub.com/Routines/" + routineId);
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://www.fitnesshub.com/Routines/" + routineId);
         startActivity(Intent.createChooser(sharingIntent,"Share Rutine"));
 
     }

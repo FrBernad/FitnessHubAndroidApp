@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRegisterBinding;
 import com.example.fitnesshub.model.UserInfo;
 import com.example.fitnesshub.viewModel.UserViewModel;

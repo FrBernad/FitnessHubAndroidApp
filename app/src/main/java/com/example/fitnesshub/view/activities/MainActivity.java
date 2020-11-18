@@ -3,17 +3,14 @@ package com.example.fitnesshub.view.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +18,7 @@ import android.view.View;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.ActivityMainBinding;
 import com.example.fitnesshub.model.AppPreferences;
+import com.example.fitnesshub.view.fragments.HomeFragmentDirections;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
@@ -58,12 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 if (idInt != -1) {
                    routinesViewModel =  new ViewModelProvider(this).get(RoutinesViewModel.class);
                    routinesViewModel.getRoutineById(idInt);
-                   routinesViewModel.getExternLinkRoutine().observe((LifecycleOwner) getLifecycle(), externRoutine ->{
+                   routinesViewModel.getExternLinkRoutine().observe(this, externRoutine ->{
 
                        if(externRoutine!=null){
-                           //NavController aux = Navigation.findNavController(this,R.id.mainNavFragment);
-                           //action
-                           //navigate
+                           System.out.println("LLEGO FRANO");
+                           NavController aux = Navigation.findNavController(this,R.id.mainNavFragment);
+                           HomeFragmentDirections.ActionHomeFragmentToRoutineFragment action = HomeFragmentDirections.actionHomeFragmentToRoutineFragment(externRoutine);
+                           aux.navigate(action.setRoutineId(idInt));
                        }
 
 
@@ -71,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-
 
     }
     private int verifyAndConvertId(String id){

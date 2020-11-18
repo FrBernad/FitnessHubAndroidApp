@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavArgument;
 import androidx.navigation.NavController;
@@ -11,6 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.model.AppPreferences;
 import com.example.fitnesshub.view.fragments.HomeFragmentDirections;
 import com.example.fitnesshub.view.fragments.LoginFragment;
 import com.example.fitnesshub.view.fragments.LoginFragmentDirections;
