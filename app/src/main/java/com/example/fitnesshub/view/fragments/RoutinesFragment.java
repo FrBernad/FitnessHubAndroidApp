@@ -139,6 +139,13 @@ public class RoutinesFragment extends Fragment {
             chipGroup.check(id);
         }
 
+        while (!nestedScrollView.canScrollVertically(1)) {
+            if (!searching && !noMoreEntries && !nestedScrollView.canScrollVertically(1)) {
+                searching = true;
+                viewModel.updateData();
+            }
+        }
+
         nestedScrollView.setOnScrollChangeListener(
                 (NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                     if (!searching && !noMoreEntries && !nestedScrollView.canScrollVertically(1)) {
