@@ -22,9 +22,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        NavController aux = Navigation.findNavController(this,R.id.nav_host_login);
-        WelcomeFragmentDirections.ActionWelcomeToLoginFragment action = WelcomeFragmentDirections.actionWelcomeToLoginFragment();
-        aux.navigate(action.setRoutineId(getIntent().getStringExtra("RoutineId")));
+//        NavController aux = Navigation.findNavController(this,R.id.nav_host_login);
+//        WelcomeFragmentDirections.ActionWelcomeToLoginFragment action = WelcomeFragmentDirections.actionWelcomeToLoginFragment();
+//        aux.navigate(action.setRoutineId(getIntent().getStringExtra("RoutineId")));
 
     }
 }

@@ -13,13 +13,19 @@
         <item name="android:textSize">22sp</item>
     </style>
 
+    <style name="Titles.Settings">
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/titlesColor</item>
+    </style>
+
+
+
     <style name="Titles.Welcome">
         <item name="android:textColor">@color/titleWelcome</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:textSize">40sp</item>
         <item name="android:textStyle">normal</item>
     </style>
-
 
     <style name="Titles.AuthorTitle">
         <item name="android:textSize">18sp</item>
@@ -106,8 +112,9 @@
     <style name="routineCardSecondary">
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
-
     </style>
+
+
 
 
     <style name="Toolbar_style" parent="Theme.AppCompat.Light">

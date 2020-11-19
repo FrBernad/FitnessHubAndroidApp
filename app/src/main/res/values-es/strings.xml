@@ -83,9 +83,6 @@
     <string name="ListMode">Modo lista</string>
     <string name="detailMode">Modo detallado</string>
 
-    <string name="LightMode">Tema claro</string>
-    <string name="DarkMode">Tema oscuro</string>
-
     <string name="TIP">TIP DEL DÍA\nNo importa cuánto tu estómago pida comer caramelos antes que comida saludable. Intenta alejarte de los dulces!.</string>
     <string name="PopularRoutinesSlide">Da un vistazo a las rutinas más populares!</string>
     <string name="FavoriteRoutinesSlide">Chequea tus favoritos</string>
@@ -105,7 +102,10 @@
     <string name="ExecutionRoutineDialog">Elige el modo de ejecución</string>
     <string name="Close">Cerrar</string>
     <string name="Rate">Puntuar</string>
-    <string name="setEnglish">Cambiar idioma a inglés</string>
-    <string name="setSpanish">Cambiar idioma a español</string>
+    <string name="EnableDarkMode">Enable dark mode</string>
+    <string name="LogOut">Cerrar sesión</string>
+    <string name="settings">Ajustes</string>
+    <string name="DarkMode">Tema oscuro</string>
+
 
 </resources>

@@ -2,41 +2,49 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/app_bar_leave_session"
-        android:icon="@drawable/ic_exit_24"
-        android:title="@string/leave_session"
-        android:orderInCategory="7"
-        app:showAsAction="never"
-        android:visible="false" />
+<!--    <item-->
+<!--        android:id="@+id/app_bar_leave_session"-->
+<!--        android:icon="@drawable/ic_exit_24"-->
+<!--        android:title="@string/leave_session"-->
+<!--        android:orderInCategory="7"-->
+<!--        app:showAsAction="never"-->
+<!--        android:visible="false" />-->
 
     <item
-        android:id="@+id/app_bar_dark_mode"
-        android:title="@string/DarkMode"
+        android:id="@+id/app_bar_settings"
+        android:icon="@drawable/ic_settings_24"
+        android:title="@string/settings"
         android:orderInCategory="5"
-        app:showAsAction="never"
-        android:visible="false"/>
-
-    <item
-        android:id="@+id/app_bar_light_mode"
-        android:title="@string/LightMode"
-        android:orderInCategory="5"
-        app:showAsAction="never"
-        android:visible="false"/>
-
-    <item
-        android:id="@+id/app_bar_english"
-        android:title="@string/setEnglish"
-        app:showAsAction="never"
         android:visible="false"
-        android:orderInCategory="6"/>
+        app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/app_bar_spanish"
-        android:title="@string/setSpanish"
-        app:showAsAction="never"
-        android:visible="false"
-        android:orderInCategory="6"/>
+<!--    <item-->
+<!--        android:id="@+id/app_bar_dark_mode"-->
+<!--        android:title="@string/DarkMode"-->
+<!--        android:orderInCategory="5"-->
+<!--        app:showAsAction="never"-->
+<!--        android:visible="false"/>-->
+
+<!--    <item-->
+<!--        android:id="@+id/app_bar_light_mode"-->
+<!--        android:title="@string/LightMode"-->
+<!--        android:orderInCategory="5"-->
+<!--        app:showAsAction="never"-->
+<!--        android:visible="false"/>-->
+
+<!--    <item-->
+<!--        android:id="@+id/app_bar_english"-->
+<!--        android:title="@string/setEnglish"-->
+<!--        app:showAsAction="never"-->
+<!--        android:visible="false"-->
+<!--        android:orderInCategory="6"/>-->
+
+<!--    <item-->
+<!--        android:id="@+id/app_bar_spanish"-->
+<!--        android:title="@string/setSpanish"-->
+<!--        app:showAsAction="never"-->
+<!--        android:visible="false"-->
+<!--        android:orderInCategory="6"/>-->
 
     <item
         android:id="@+id/app_bar_rate"

@@ -7,10 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,7 +22,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentProfileBinding;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.FavoriteAdapter;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;
@@ -42,12 +48,16 @@ public class ProfileFragment extends Fragment {
     private TextView phone;
     private TextView birthdate;
     private ImageView profilePic;
+    private View view;
 
     private Spinner spinner;
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    public ProfileFragment() {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -55,7 +65,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
+        view = binding.getRoot();
 
         username = binding.userName;
         fullName = binding.fullName;
@@ -104,5 +114,30 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.findItem(R.id.app_bar_settings).setVisible(true);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.app_bar_settings) {
+            settings();
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+    public void settings(){
+        Navigation.findNavController(view).navigate(ProfileFragmentDirections.actionMeFragmentToSettingsFragment());
+    }
+
 
 }

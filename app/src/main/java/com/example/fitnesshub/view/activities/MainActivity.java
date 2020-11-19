@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private RoutinesViewModel routinesViewModel;
     private UserViewModel userviewModel;
-    private boolean isDarkMode;
     AppPreferences preferences;
 
     @Override
@@ -87,55 +86,16 @@ public class MainActivity extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
         getMenuInflater().inflate(R.menu.main_toolbar, menu);
-        menu.findItem(R.id.app_bar_leave_session).setVisible(true);
-        if (isDarkMode)
-            menu.findItem(R.id.app_bar_light_mode).setVisible(true);
-        else
-            menu.findItem(R.id.app_bar_dark_mode).setVisible(true);
+
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.app_bar_leave_session) {
-            logout();
-            return true;
-        } else if (id == R.id.app_bar_dark_mode) {
-            preferences.setNightModeState(true);
-            restartApp();
-            return true;
-        } else if (id == R.id.app_bar_light_mode) {
-            preferences.setNightModeState(false);
-            restartApp();
-            return true;
-        }
-
-        return false;
-    }
-
-    public void restartApp() {
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    private void logout() {
-        userviewModel.logout();
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        finish(); //elimino la actividad del stack
-    }
-
     public void setAppMode() {
-        if (preferences.loadNightModeState()) {
+        if (preferences.loadNightModeState())
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            isDarkMode = true;
-        } else {
+         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            isDarkMode = false;
-        }
+
     }
 
 }

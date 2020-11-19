@@ -92,16 +92,17 @@
     <string name="FavoriteRoutinesSlide">Check your favorites</string>
     <string name="HistoryRoutinesSlide">See your history and give an old routine another shot</string>
 
-    <string name="LightMode">Light mode</string>
-    <string name="DarkMode">Dark mode</string>
-
-    <string name="TIP">TIP OF THE DAY\nNo matter how bad your stomach is telling you to go for candy over healthy food, try to stay away from sweets.</string>
+        <string name="TIP">TIP OF THE DAY\nNo matter how bad your stomach is telling you to go for candy over healthy food, try to stay away from sweets.</string>
     <string name="RateRoutineDialog">Rate the routine</string>
     <string name="ExecutionRoutineDialog">Choose the execution mode</string>
     <string name="Close">Close</string>
     <string name="Rate">Rate</string>
-    <string name="setEnglish">Set language to english</string>
-    <string name="setSpanish">Set language to spanish</string>
+
+    <string name="EnableDarkMode">Enable dark mode</string>
+
+    <string name="LogOut">Log out</string>
+    <string name="settings">Settings</string>
+    <string name="DarkMode">Dark mode</string>
 
 
 </resources>

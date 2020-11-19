@@ -111,6 +111,9 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"
                 android:id="@+id/action_meFragment_to_routineFragment"
                 app:destination="@id/routineFragment" />
+        <action
+            android:id="@+id/action_meFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -159,6 +162,15 @@
         <argument
                 android:name="title"
                 app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.fitnesshub.view.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_meFragment"
+            app:destination="@id/meFragment" />
     </fragment>
 
 
