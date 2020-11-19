@@ -67,7 +67,7 @@ public class UserInfo {
     }
 
     public String getBirthdateString(){
-        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy", Locale.US);
+        DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy", Locale.US);
         return dateFormat.format(birthdate);
     }
 

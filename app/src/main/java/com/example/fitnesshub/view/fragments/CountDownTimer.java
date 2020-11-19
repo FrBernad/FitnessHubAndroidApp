@@ -34,12 +34,10 @@ public class CountDownTimer {
 
     private void start(long time) {
         countDownTimer = new android.os.CountDownTimer(time, interval) {
-
             @Override
             public void onTick(long millisUntilFinished) {
                 CountDownTimer.this.onTick(millisUntilFinished);
             }
-
             @Override
             public void onFinish() {
                 CountDownTimer.this.onFinish();
@@ -73,7 +71,6 @@ public class CountDownTimer {
         public long getRemainingTime() {
             return remainingTime;
         }
-
 
         public boolean isFinished() {
             return isFinished;

@@ -38,7 +38,7 @@ public class RoutinesViewModel extends AndroidViewModel {
 
     private int currentPage = 0;
     private int totalPages = 0;
-    private int itemsPerRequest = 5;
+    private int itemsPerRequest = 15;
     private boolean isLastPage = false;
     private String direction = "desc";
     private String filter = null;
@@ -213,7 +213,6 @@ public class RoutinesViewModel extends AndroidViewModel {
             case 3:
                 filter = "advanced";
                 break;
-
         }
 
         applyChanges();
