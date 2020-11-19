@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -31,6 +32,9 @@ public class AlarmDialog extends AppCompatDialogFragment {
 
         binding = AlarmDialogBinding.inflate(getActivity().getLayoutInflater());
         View view = binding.getRoot();
+
+        TimePicker timePicker = binding.timePicker;
+        timePicker.setIs24HourView(true);
 
         builder.setView(view).setNegativeButton(R.string.Close, (dialog, which) -> {
 
