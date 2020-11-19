@@ -41,6 +41,8 @@ public class HomeFragment extends Fragment {
 
         imageSlider.setImageList(slideModels, true);
 
+
         return view;
     }
+
 }

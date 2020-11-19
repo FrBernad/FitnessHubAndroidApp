@@ -2,8 +2,11 @@ package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -15,9 +18,19 @@ import com.example.fitnesshub.R;
 
 public class WelcomeFragment extends Fragment {
 
+    private String arg1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle a = getArguments();
+        if(a!=null){
+            arg1 = a.getString("RoutineId");
+        }else {
+            arg1=null;
+        }
+
     }
 
     @Override
@@ -30,18 +43,24 @@ public class WelcomeFragment extends Fragment {
         Button loginBtn = rootView.findViewById(R.id.welcomeLoginButton);
         Button registerBtn = rootView.findViewById(R.id.welcomeRegisterButton);
 
-        loginBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_welcome_to_loginFragment));
-        registerBtn.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_welcome_to_registerFragment));
+        loginBtn.setOnClickListener((v) -> {
+
+            NavController navController = Navigation.findNavController(v);
+            WelcomeFragmentDirections.ActionWelcomeToLoginFragment action = WelcomeFragmentDirections.actionWelcomeToLoginFragment();
+            action.setRoutineId(arg1);
+            navController.navigate(action);
+
+        });
+        registerBtn.setOnClickListener(v -> {
+
+            NavController navController = Navigation.findNavController(v);
+            WelcomeFragmentDirections.ActionWelcomeToRegisterFragment action = WelcomeFragmentDirections.actionWelcomeToRegisterFragment();
+            action.setRoutineId(arg1);
+            navController.navigate(action);
+
+        });
 
         return rootView;
-    }
-
-
-    public void replaceFragment(Fragment someFragment) {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.welcome_container, someFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
 }

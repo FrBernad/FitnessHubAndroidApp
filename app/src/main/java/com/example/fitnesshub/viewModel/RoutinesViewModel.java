@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.fitnesshub.R;
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.model.RoutineExecution;
@@ -98,6 +99,44 @@ public class RoutinesViewModel extends AndroidViewModel {
                         .subscribeWith(new DisposableSingleObserver<RoutineData>() {
                             @Override
                             public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull RoutineData routine) {
+                                int id = routine.getCategory().getId();
+                                switch (id) {
+                                    case 1:
+
+                                        routine.setImage(String.valueOf(R.drawable.p1));
+                                        break;
+
+                                    case 2:
+                                        routine.setImage(String.valueOf(R.drawable.p2));
+
+                                        break;
+
+                                    case 3:
+                                        routine.setImage(String.valueOf(R.drawable.p3));
+
+                                        break;
+
+                                    case 4:
+                                        routine.setImage(String.valueOf(R.drawable.p4));
+
+                                        break;
+
+                                    case 5:
+                                        routine.setImage(String.valueOf(R.drawable.p5));
+
+                                        break;
+
+                                    case 6:
+                                        routine.setImage(String.valueOf(R.drawable.p6));
+
+                                        break;
+
+                                    case 7:
+                                        routine.setImage(String.valueOf(R.drawable.p7));
+
+                                        break;
+                                }
+
                                 externLinkRoutine.setValue(routine);
                             }
                             @Override
