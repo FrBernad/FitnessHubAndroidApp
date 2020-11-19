@@ -87,9 +87,6 @@
                 android:name="routineId"
                 app:argType="integer"
                 android:defaultValue="-1" />
-        <argument
-                android:name="routineData"
-                app:argType="com.example.fitnesshub.model.RoutineData" />
         <action
                 app:enterAnim="@anim/fragment_fade_enter"
                 app:exitAnim="@anim/fragment_fade_exit"

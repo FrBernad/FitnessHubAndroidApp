@@ -9,6 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,37 +47,31 @@ public class MainActivity extends AppCompatActivity {
         userviewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userviewModel.setUserData();
 
+        String id = appLinkIntent.getStringExtra("RoutineId");
 
-            String id = appLinkIntent.getStringExtra("RoutineId");
+        if (id != null) {
+            int idInt = verifyAndConvertId(id);
 
-            if(id!=null) {
-
-                int idInt = verifyAndConvertId(id);
-
-                if (idInt != -1) {
-                   routinesViewModel =  new ViewModelProvider(this).get(RoutinesViewModel.class);
-                   routinesViewModel.getRoutineById(idInt);
-                   routinesViewModel.getExternLinkRoutine().observe(this, externRoutine ->{
-
-                       if(externRoutine!=null){
-                           System.out.println("LLEGO FRANO");
-                           NavController aux = Navigation.findNavController(this,R.id.mainNavFragment);
-                           HomeFragmentDirections.ActionHomeFragmentToRoutineFragment action = HomeFragmentDirections.actionHomeFragmentToRoutineFragment(externRoutine);
-                           aux.navigate(action);
-                       }
-
-
-                   });
-
-                }
+            if (idInt != -1) {
+                routinesViewModel = new ViewModelProvider(this).get(RoutinesViewModel.class);
+                routinesViewModel.getRoutineById(idInt);
+                routinesViewModel.getCurrentRoutine().observe(this, externRoutine -> {
+                    if (externRoutine != null) {
+                        NavController aux = Navigation.findNavController(this, R.id.mainNavFragment);
+                        HomeFragmentDirections.ActionHomeFragmentToRoutineFragment action = HomeFragmentDirections.actionHomeFragmentToRoutineFragment();
+                        aux.navigate(action);
+                    }
+                });
             }
+        }
 
     }
-    private int verifyAndConvertId(String id){
+
+    private int verifyAndConvertId(String id) {
         Integer aux;
         try {
             aux = Integer.parseInt(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
         return aux;
@@ -89,10 +84,7 @@ public class MainActivity extends AppCompatActivity {
         assert navHostFragment != null;
         NavigationUI.setupWithNavController(bottomNavigationView,
                 navHostFragment.getNavController());
-        
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

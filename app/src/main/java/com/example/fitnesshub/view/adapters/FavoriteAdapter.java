@@ -11,14 +11,17 @@ import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
 import com.example.fitnesshub.view.fragments.RoutineClickListener;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
     private List<RoutineData> favoriteList;
+    private RoutinesViewModel routinesViewModel;
 
-    public FavoriteAdapter(List<RoutineData> favoriteList) {
+    public FavoriteAdapter(List<RoutineData> favoriteList, RoutinesViewModel routinesViewModel) {
         this.favoriteList = favoriteList;
+        this.routinesViewModel = routinesViewModel;
     }
 
     public void updateFavoriteList(List<RoutineData> newRoutinesList) {
@@ -78,7 +81,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         }
 
         holder.itemView.setRoutineData(favoriteList.get(position));
-        holder.itemView.setClickListener(new RoutineClickListener(favoriteList.get(position), RoutineClickListener.FAV_ID));
+        holder.itemView.setClickListener(new RoutineClickListener(routinesViewModel, RoutineClickListener.FAV_ID));
     }
 
     @Override

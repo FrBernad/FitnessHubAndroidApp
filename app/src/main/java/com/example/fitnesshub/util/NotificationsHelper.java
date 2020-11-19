@@ -1,4 +1,4 @@
-package com.example.fitnesshub.Util;
+package com.example.fitnesshub.util;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
