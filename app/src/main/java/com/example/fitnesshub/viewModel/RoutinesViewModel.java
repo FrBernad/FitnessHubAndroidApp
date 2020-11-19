@@ -28,7 +28,7 @@ public class RoutinesViewModel extends AndroidViewModel {
     private MutableLiveData<List<RoutineData>> routineCards = new MutableLiveData<>();
     private MutableLiveData<List<RoutineData>> userRoutines = new MutableLiveData<>();
     private MutableLiveData<List<RoutineData>> userHistory = new MutableLiveData<>();
-    private MutableLiveData<RoutineData> externLinkRoutine = new MutableLiveData<>();
+    private MutableLiveData<RoutineData> currentRoutine = new MutableLiveData<>();
     private MutableLiveData<Boolean> noMoreEntries = new MutableLiveData<>();
     private MutableLiveData<Boolean> loading = new MutableLiveData<>();
     private MutableLiveData<Boolean> routinesFirstLoad = new MutableLiveData<>(true);
@@ -137,7 +137,7 @@ public class RoutinesViewModel extends AndroidViewModel {
                                         break;
                                 }
 
-                                externLinkRoutine.setValue(routine);
+                                currentRoutine.setValue(routine);
                             }
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
@@ -348,8 +348,8 @@ public class RoutinesViewModel extends AndroidViewModel {
         return userRoutines;
     }
 
-    public MutableLiveData<RoutineData> getExternLinkRoutine() {
-        return externLinkRoutine;
+    public MutableLiveData<RoutineData> getCurrentRoutine() {
+        return currentRoutine;
     }
 
     public String getDirection() {

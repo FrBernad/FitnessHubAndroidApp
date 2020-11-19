@@ -28,7 +28,7 @@ public class HistoryFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(),RoutineClickListener.MY_ACTIVITY);
+    private RoutinesAdapter routinesAdapter;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         viewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
-
+        routinesAdapter = new RoutinesAdapter(new ArrayList<>(),RoutineClickListener.MY_ACTIVITY,viewModel);
         viewModel.updateUserHistory();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

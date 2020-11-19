@@ -24,6 +24,7 @@ import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +35,7 @@ public class RoutineFragment extends Fragment {
 
     private ExercisesViewModel exercisesViewModel;
     private FavouritesRoutinesViewModel favViewModel;
+    private RoutinesViewModel routinesViewModel;
 
     private ExercisesAdapter warmUpAdapter = new ExercisesAdapter(new ArrayList<>());
     private ExercisesAdapter mainAdapter = new ExercisesAdapter(new ArrayList<>());
@@ -57,8 +59,9 @@ public class RoutineFragment extends Fragment {
 
     private FragmentRoutineBinding binding;
 
-    private int routineId;
     private RoutineData routineData;
+
+    private int routineId;
 
     PlayModeDialog playModeDialog;
 
@@ -71,7 +74,6 @@ public class RoutineFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRoutineBinding.inflate(getLayoutInflater());
-
 
         recyclerViewWarmUp = binding.warmUpExercises;
         recyclerViewMain = binding.mainExercises;
@@ -96,19 +98,24 @@ public class RoutineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
             routineId = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineId();
-            routineData = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineData();
-            image.setImageResource(Integer.parseInt(routineData.getImage()));
         }
 
-        playModeDialog = new PlayModeDialog(routineData, getView());
+        routinesViewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
+
+        routinesViewModel.getCurrentRoutine().observe(getViewLifecycleOwner(), routineData -> {
+            if (routineData != null) {
+                this.routineData = routineData;
+                image.setImageResource(Integer.parseInt(routineData.getImage()));
+                title.setText(routineData.getTitle());
+                author.setText(routineData.getAuthor().getUsername());
+                detail.setText(routineData.getDetail());
+                playModeDialog = new PlayModeDialog(routineData, getView());
+            }
+        });
 
         playBtn.setOnClickListener(v -> openPlayModeDialog());
 
         favViewModel = new ViewModelProvider(getActivity()).get(FavouritesRoutinesViewModel.class);
-
-        title.setText(routineData.getTitle());
-        author.setText(routineData.getAuthor().getUsername());
-        detail.setText(routineData.getDetail());
 
         exercisesViewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
         exercisesViewModel.refresh(routineId);
@@ -201,14 +208,12 @@ public class RoutineFragment extends Fragment {
     }
 
     private void share(){
-
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT,routineData.getTitle());
         sharingIntent.putExtra("RoutineId",routineId);
         sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://www.fitnesshub.com/Routines/" + routineId);
         startActivity(Intent.createChooser(sharingIntent,"Share Rutine"));
-
     }
 
     public void openRateDialog() {
