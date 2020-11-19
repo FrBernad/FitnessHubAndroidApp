@@ -7,7 +7,7 @@
         <item name="textAllCaps">true</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/titlesColor</item>
-   </style>
+    </style>
 
     <style name="Titles.RoutineTitle">
         <item name="android:textSize">22sp</item>
@@ -17,8 +17,6 @@
         <item name="android:textAlignment">textStart</item>
         <item name="android:textColor">@color/titlesColor</item>
     </style>
-
-
 
     <style name="Titles.Welcome">
         <item name="android:textColor">@color/titleWelcome</item>
@@ -81,6 +79,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="SwitchButtom" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/switchActivated</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">@color/switchNormal</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">@color/switchForeground</item>
+    </style>
 
     <style name="ButtonInTitle" parent="Widget.AppCompat.ImageButton">
         <item name="android:layout_height">wrap_content</item>
@@ -113,8 +121,6 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
-
-
 
 
     <style name="Toolbar_style" parent="Theme.AppCompat.Light">
