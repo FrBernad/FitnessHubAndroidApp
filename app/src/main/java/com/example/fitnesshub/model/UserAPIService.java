@@ -2,7 +2,6 @@ package com.example.fitnesshub.model;
 
 import android.content.Context;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;

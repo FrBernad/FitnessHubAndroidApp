@@ -1,11 +1,9 @@
 package com.example.fitnesshub.viewModel;
 
 import android.app.Application;
-import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.fitnesshub.model.PagedList;
 import com.example.fitnesshub.model.RoutineData;

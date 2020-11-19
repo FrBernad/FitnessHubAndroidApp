@@ -3,11 +3,9 @@ package com.example.fitnesshub.view.fragments;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
 import com.example.fitnesshub.R;
-import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.view.fragments.ProfileFragmentDirections;
 import com.example.fitnesshub.view.fragments.RoutinesFragmentDirections;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;

@@ -1,7 +1,5 @@
 package com.example.fitnesshub.view.fragments;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

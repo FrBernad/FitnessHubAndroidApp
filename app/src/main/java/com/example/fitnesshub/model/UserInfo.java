@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 public class UserInfo {
