@@ -1,7 +1,6 @@
 package com.example.fitnesshub.view.fragments;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -94,16 +93,12 @@ public class LoginFragment extends Fragment {
                         break;
                     case 8:
                         errorMessage.setText(R.string.user_not_verified);
-                        new Handler().postDelayed(() -> {
-                            Navigation.findNavController(getView()).navigate(LoginFragmentDirections.actionLoginFragmentToVerifyUserFragment());
-                        }, 3000);
+                        new Handler().postDelayed(() -> Navigation.findNavController(getView()).navigate(LoginFragmentDirections.actionLoginFragmentToVerifyUserFragment()), 3000);
                         viewModel.setLoginErrorCode(null);
                         break;
                     default:
                         errorMessage.setText(R.string.default_error);
-                        new Handler().postDelayed(() -> {
-                            errorMessage.setText("");
-                        }, 3000);
+                        new Handler().postDelayed(() -> errorMessage.setText(""), 3000);
                         break;
                 }
             }
@@ -153,7 +148,6 @@ public class LoginFragment extends Fragment {
     private boolean validatePassword() {
         String val = password.getEditText().getText().toString().trim();
         String checkPassword = "^[a-zA-Z0-9\\-_]{8,}$"; //No whitespaces, must contain more than 8 characters.
-        ;
 
         if (val.isEmpty()) {
             password.setError("Field can not be empty");

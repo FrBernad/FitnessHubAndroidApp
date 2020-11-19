@@ -1,7 +1,5 @@
 package com.example.fitnesshub.model;
 
-import android.media.Rating;
-
 import java.util.Map;
 
 import io.reactivex.rxjava3.core.Single;

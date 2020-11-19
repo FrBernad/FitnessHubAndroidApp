@@ -10,9 +10,6 @@ import android.os.Handler;
 import android.view.WindowManager;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.model.AppPreferences;
-import com.example.fitnesshub.view.fragments.HomeFragment;
-
-import java.util.List;
 
 public class InitialActivity extends AppCompatActivity {
 

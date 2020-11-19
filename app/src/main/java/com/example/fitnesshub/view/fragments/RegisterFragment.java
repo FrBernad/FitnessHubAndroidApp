@@ -71,27 +71,24 @@ public class RegisterFragment extends Fragment {
 
         viewModel.getRegisterError().observe(getViewLifecycleOwner(), error -> {
             if (error != null) {
-                switch (error.getCode()) {
-                    case 2:
-                        errorMessage.setText(R.string.already_exists);
-                        password.setError(" ");
-                        username.setError(" ");
-                        email.setError(" ");
-                        new Handler().postDelayed(() -> {
-                            password.setError(null);
-                            username.setError(null);
-                            email.setError(null);
-                            errorMessage.setText("");
-                        }, 5000);
-                        viewModel.setRegisterError(null);
-                        break;
-                    default:
-                        errorMessage.setText(R.string.default_error);
-                        new Handler().postDelayed(() -> {
-                            errorMessage.setText("");
-                        }, 3000);
-                        viewModel.setRegisterError(null);
-                        break;
+                if (error.getCode() == 2) {
+                    errorMessage.setText(R.string.already_exists);
+                    password.setError(" ");
+                    username.setError(" ");
+                    email.setError(" ");
+                    new Handler().postDelayed(() -> {
+                        password.setError(null);
+                        username.setError(null);
+                        email.setError(null);
+                        errorMessage.setText("");
+                    }, 5000);
+                    viewModel.setRegisterError(null);
+                } else {
+                    errorMessage.setText(R.string.default_error);
+                    new Handler().postDelayed(() -> {
+                        errorMessage.setText("");
+                    }, 3000);
+                    viewModel.setRegisterError(null);
                 }
             }
         });
@@ -160,7 +157,6 @@ public class RegisterFragment extends Fragment {
     private boolean validatePassword() {
         String val = password.getEditText().getText().toString().trim();
         String checkPassword = "^[a-zA-Z0-9\\-_]{8,}$"; //No whitespaces, must contain more than 8 characters.
-        ;
 
         if (val.isEmpty()) {
             password.setError("Field can not be empty");

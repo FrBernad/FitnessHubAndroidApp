@@ -3,7 +3,6 @@ package com.example.fitnesshub.view.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -14,18 +13,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.fitnesshub.R;
-import com.example.fitnesshub.databinding.ActivityMainBinding;
 import com.example.fitnesshub.model.AppPreferences;
 import com.example.fitnesshub.view.fragments.HomeFragmentDirections;
-import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;
 import com.example.fitnesshub.viewModel.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 

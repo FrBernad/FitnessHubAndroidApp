@@ -2,7 +2,6 @@ package com.example.fitnesshub.view.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RatingBar;
@@ -40,9 +39,7 @@ public class RateDialog extends AppCompatDialogFragment {
         ratingBar = binding.ratingBar;
         View view = binding.getRoot();
         builder.setView(view).setTitle(getString(R.string.RateRoutineDialog).toUpperCase()).setNegativeButton(getString(R.string.Close), (dialog, which) -> {
-        }).setPositiveButton(getString(R.string.Rate), (dialog, which) -> {
-            viewModel.rateRoutine(routineId,(int)ratingBar.getRating());
-        });
+        }).setPositiveButton(getString(R.string.Rate), (dialog, which) -> viewModel.rateRoutine(routineId,(int)ratingBar.getRating()));
         return builder.create();
     }
 }

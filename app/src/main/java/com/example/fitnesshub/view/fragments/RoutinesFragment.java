@@ -2,7 +2,6 @@ package com.example.fitnesshub.view.fragments;
 
 import android.os.Bundle;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
@@ -18,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutinesBinding;

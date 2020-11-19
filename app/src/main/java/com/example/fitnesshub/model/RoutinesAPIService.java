@@ -2,7 +2,6 @@ package com.example.fitnesshub.model;
 
 
 import android.content.Context;
-import android.media.Rating;
 
 import java.util.Map;
 

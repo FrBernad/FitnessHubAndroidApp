@@ -1,21 +1,10 @@
 package com.example.fitnesshub.viewModel;
 
-import android.annotation.SuppressLint;
 import android.app.Application;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.example.fitnesshub.model.APIService;
 import com.example.fitnesshub.model.AppPreferences;
 import com.example.fitnesshub.model.AuthToken;
@@ -25,11 +14,9 @@ import com.example.fitnesshub.model.UserAPIService;
 import com.example.fitnesshub.model.UserCredentials;
 import com.example.fitnesshub.model.UserInfo;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,11 +25,8 @@ import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.observers.DisposableSingleObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import okhttp3.ResponseBody;
-import retrofit2.Converter;
 import retrofit2.HttpException;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class UserViewModel extends AndroidViewModel {
     private MutableLiveData<UserInfo> userInfo = new MutableLiveData<>();

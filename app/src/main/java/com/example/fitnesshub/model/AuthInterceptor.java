@@ -2,11 +2,6 @@ package com.example.fitnesshub.model;
 
 import android.content.Context;
 
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.fitnesshub.viewModel.UserViewModel;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
