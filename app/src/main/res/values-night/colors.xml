@@ -48,6 +48,9 @@
     <color name="textInputHint">@color/mainTextColorAlternative</color>
     <color name="executionSelected">@color/secondaryColorAlternative</color>
     <color name="executionNotSelected">@color/primaryColor</color>
+    <color name="switchActivated">@color/thirdColor</color>
+    <color name="switchForeground">@color/secondaryColor</color>
+    <color name="switchNormal">@color/thirdColor</color>
 
 
 
