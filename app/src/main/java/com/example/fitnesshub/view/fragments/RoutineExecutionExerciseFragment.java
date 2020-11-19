@@ -83,24 +83,25 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         if (getArguments() != null) {
             title.setText(RoutineExecutionExerciseFragmentArgs.fromBundle(getArguments()).getTitle());
 
-        viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
+            viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
 
 
-        if (viewModel.getStarted()) {
-            currentExercise = viewModel.getCurrentExercise();
-            currentCycle = viewModel.getCurrentCycle();
-            played = viewModel.getPlayed();
-            cycleTitle = getCycleTitle();
-        } else {
-            viewModel.setCurrentExercise(0);
-            viewModel.setCurrentCycle(0);
-            cycleTitle = WARMUP_TITLE;
-            currentCycle = 0;
-            currentExercise = 0;
-            viewModel.setStarted(true);
+            if (viewModel.getStarted()) {
+                currentExercise = viewModel.getCurrentExercise();
+                currentCycle = viewModel.getCurrentCycle();
+                played = viewModel.getPlayed();
+                cycleTitle = getCycleTitle();
+            } else {
+                viewModel.setCurrentExercise(0);
+                viewModel.setCurrentCycle(0);
+                cycleTitle = WARMUP_TITLE;
+                currentCycle = 0;
+                currentExercise = 0;
+                viewModel.setStarted(true);
+            }
+
+            observeExerciseViewModel();
         }
-
-        observeExerciseViewModel();
     }
 
     private void observeExerciseViewModel() {
