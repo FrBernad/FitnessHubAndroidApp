@@ -59,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this,R.id.mainNavFragment);
+        return navController.navigateUp();
     }
 
     private int verifyAndConvertId(String id) {
