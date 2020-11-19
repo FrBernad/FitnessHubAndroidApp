@@ -14,19 +14,22 @@ import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.RoutineCardBinding;
 import com.example.fitnesshub.view.fragments.RoutineClickListener;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 
 import java.util.List;
 
 public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.RoutineViewHolder> {
     private List<RoutineData> routinesList;
+    private RoutinesViewModel routinesViewModel;
     private View view;
     private int host;
 
 
-    public RoutinesAdapter(List<RoutineData> routinesList, int host) {
+    public RoutinesAdapter(List<RoutineData> routinesList, int host, RoutinesViewModel routinesViewModel) {
         this.routinesList = routinesList;
         this.host = host;
+        this.routinesViewModel = routinesViewModel;
     }
 
     @NonNull
@@ -80,7 +83,7 @@ public class RoutinesAdapter extends RecyclerView.Adapter<RoutinesAdapter.Routin
         }
 
         holder.itemView.setRoutineData(routine);
-        holder.itemView.setClickListener(new RoutineClickListener(routine, host));
+        holder.itemView.setClickListener(new RoutineClickListener(routinesViewModel, host));
     }
 
     @Override

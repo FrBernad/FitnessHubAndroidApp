@@ -29,7 +29,7 @@ public class MyRoutinesFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(), RoutineClickListener.MY_ACTIVITY);
+    private RoutinesAdapter routinesAdapter;
 
 
     @Override
@@ -53,6 +53,8 @@ public class MyRoutinesFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
 
         viewModel.updateUserRoutines();
+
+        routinesAdapter = new RoutinesAdapter(new ArrayList<>(), RoutineClickListener.MY_ACTIVITY, viewModel);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(routinesAdapter);

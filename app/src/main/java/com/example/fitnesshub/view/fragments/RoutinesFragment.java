@@ -36,7 +36,7 @@ public class RoutinesFragment extends Fragment {
 
     private RoutinesViewModel viewModel;
 
-    private RoutinesAdapter routinesAdapter = new RoutinesAdapter(new ArrayList<>(), RoutineClickListener.ROUTINES_ID);
+    private RoutinesAdapter routinesAdapter;
 
     private FragmentRoutinesBinding binding;
 
@@ -71,7 +71,6 @@ public class RoutinesFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -79,6 +78,8 @@ public class RoutinesFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
 
         setSpinners(view);
+
+        routinesAdapter = new RoutinesAdapter(new ArrayList<>(), RoutineClickListener.ROUTINES_ID, viewModel);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
