@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     if (externRoutine != null) {
                         NavController aux = Navigation.findNavController(this, R.id.mainNavFragment);
                         HomeFragmentDirections.ActionHomeFragmentToRoutineFragment action = HomeFragmentDirections.actionHomeFragmentToRoutineFragment();
-                        aux.navigate(action);
+                        aux.navigate(action.setRoutineId(idInt));
                     }
                 });
             }
