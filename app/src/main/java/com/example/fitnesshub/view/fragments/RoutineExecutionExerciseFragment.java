@@ -132,27 +132,29 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private void playExecution() {
         binding.executionBar.play.setVisibility(View.INVISIBLE);
         binding.executionBar.pause.setVisibility(View.VISIBLE);
+        finished = false;
 
         if (played) {
             viewModel.getCountDownTimer().resume();
         } else {
+            played=true;
             viewModel.getCountDownTimer().start((getNextExercise().getTime() + 1) * 1000, 1000);
-        }
-        finished = false;
-        viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
-            if (!finished) {
-                if (countDown.isFinished()) {
-                    ExerciseData exercise;
-                    currentExercise++;
-                    if ((exercise = getNextExercise()) != null)
-                        viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
-                } else {
-                    System.out.println(countDown.getRemainingTime());
-                    timeExercise.setText(String.valueOf(Math.ceil(countDown.getRemainingTime())));
-                }
+            viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
+                if (!finished) {
+                    if (countDown.isFinished()) {
+                        ExerciseData exercise;
+                        currentExercise++;
+                        if ((exercise = getNextExercise()) != null)
+                            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+                    } else {
+                        System.out.println(countDown.getRemainingTime());
+                        timeExercise.setText(String.valueOf(Math.ceil(countDown.getRemainingTime())));
+                    }
 
-            }
-        });
+                }
+            });
+        }
+
     }
 
     private void pauseExecution() {
@@ -162,9 +164,18 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     }
 
     private void nextExecution() {
+        viewModel.getCountDownTimer().stop();
+        currentExercise++;
+        ExerciseData exercise = getNextExercise();
+        if(exercise != null){
+            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+        }
+
     }
 
     private void previousExecution() {
+        
+
     }
 
     private ExerciseData getNextExercise() {
@@ -229,6 +240,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         super.onDestroyView();
         viewModel.setCurrentCycle(currentCycle);
         viewModel.setCurrentExercise(currentExercise);
+        viewModel.getCountDownTimer().stop();
     }
 
 }
