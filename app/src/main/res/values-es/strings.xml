@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">FitnessHub</string>
     <string name="navHome">Inicio</string>
     <string name="navDiscover">Descubre</string>
