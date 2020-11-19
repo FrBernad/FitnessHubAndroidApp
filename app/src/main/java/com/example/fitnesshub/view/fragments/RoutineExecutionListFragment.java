@@ -54,6 +54,12 @@ public class RoutineExecutionListFragment extends Fragment {
     private int status; //la uso para ver si el ejercicio esta corriendo o pausado
     private boolean executed; //me fijo para ver si presiono play alguna la primera vez
 
+    private static final int WARMUP_CYCLE = 0;
+    private static final int MAIN_CYCLE = 1;
+    private static final int COOLDOWN_CYCLE = 2;
+
+    private ExercisesAdapter[] adapters = new ExercisesAdapter[3]; //NEWWW
+
     private TextView title;
 
     private MainActivity mainActivity;
@@ -64,7 +70,6 @@ public class RoutineExecutionListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -233,6 +238,31 @@ public class RoutineExecutionListFragment extends Fragment {
         }
         return exercise;
     }
+
+//    public ExercisesAdapter getCurrentAdapter() {
+//
+//        if (currentCycle == 0) {
+//            if (currentExercise < warmUpAdapter.getExerciseList().size())
+//                return warmUpAdapter;
+//            currentCycle++;
+//            currentExercise = 0;
+//        }
+//
+//        if (currentCycle == 1) {
+//            if (currentExercise < mainAdapter.getExerciseList().size())
+//                return mainAdapter;
+//            currentCycle++;
+//            currentExercise = 0;
+//        }
+//
+//        if (currentCycle == 2) {
+//            if (currentExercise < cooldownAdapter.getExerciseList().size())
+//                return cooldownAdapter;
+//        }
+//
+//        finished = true;
+//        return null;
+//    }
 
     public ExercisesAdapter getCurrentAdapter() {
         if (currentExercise >= adapters[currentCycle].getExerciseList().size()) {
