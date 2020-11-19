@@ -44,7 +44,6 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private int currentExerciseIndex; //rescatado
     private boolean finished; //rescatado
     private boolean played = false;
-    private boolean paused = false;
     private ExerciseData currentExercise;
 
     private TextView title;
@@ -136,11 +135,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         finished = false;
 
         if (played) {
-            if (paused) {
-                viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
-            } else {
-                viewModel.getCountDownTimer().resume();
-            }
+            viewModel.getCountDownTimer().resume();
         } else {
             played = true;
             currentExercise = getNextExercise();
@@ -160,7 +155,6 @@ public class RoutineExecutionExerciseFragment extends Fragment {
                         progressBar.setProgress(progressBar.getMax() - (int) remainingTime);
                         timeExercise.setText(String.valueOf(remainingTime));
                     }
-
                 }
             });
         }
@@ -171,32 +165,27 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.play.setVisibility(View.VISIBLE);
         binding.executionBar.pause.setVisibility(View.INVISIBLE);
         viewModel.getCountDownTimer().pause();
-        paused = true;
     }
 
     private void nextExecution() {
-        viewModel.getCountDownTimer().pause();
+        viewModel.getCountDownTimer().stop();
         currentExerciseIndex++;
         currentExercise = getNextExercise();
         if (currentExercise != null) {
             progressBar.setProgress(0);
             progressBar.setMax(currentExercise.getTime());
-            if (!paused) {
-                viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
-            }
+            viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
         }
     }
 
     private void previousExecution() {
-        viewModel.getCountDownTimer().pause();
+        viewModel.getCountDownTimer().stop();
         currentExerciseIndex--;
         currentExercise = getPrevExercise();
         if (currentExercise != null) {
             progressBar.setProgress(0);
             progressBar.setMax(currentExercise.getTime());
-            if (!paused) {
-                viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
-            }
+            viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
         }
     }
 
