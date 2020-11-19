@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         assert navHostFragment != null;
         NavigationUI.setupWithNavController(bottomNavigationView,
                 navHostFragment.getNavController());
+        
     }
 
 
