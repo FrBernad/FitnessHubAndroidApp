@@ -1,151 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10">
 
     <ScrollView
-        android:id="@+id/scview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:background="@color/backgroundAlternative">
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/backgroundAlternative"
-            android:orientation="vertical"
-            tools:context=".view.fragments.RoutineExecutionExerciseFragment">
+            android:layout_weight="9"
+            android:background="@color/backgroundAlternative">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/backgroundAlternative"
+                android:orientation="vertical"
+                tools:context=".view.fragments.RoutineExecutionExerciseFragment"
+                app:layout_constraintStart_toStartOf="@+id/ExerciseDescription"
+                app:layout_constraintEnd_toStartOf="@+id/ExerciseDescription">
 
             <RelativeLayout
-                android:id="@+id/relativeLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout9">
-
-                <ProgressBar
-                    android:id="@+id/pg_bar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="147dp"
-                    android:layout_marginEnd="171dp"
-                    android:max="500"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/pg_barstyle" />
-
-                <TextView
-                    android:id="@+id/timeExercise"
-                    style="@style/Titles.Timer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/titlesBackground"
-                android:padding="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/routineNameTitleInExecutionExercise"
-                    style="@style/Titles"
+                    android:id="@+id/relativeLayout4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="50dp" />
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout9">
+
+
+                <ProgressBar
+                        android:id="@+id/progress_bar"
+                        style="?android:attr/progressBarStyle"
+                        android:progressDrawable="@drawable/circle"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:indeterminateOnly="false"
+                        android:layout_centerInParent="true" />
+
+                <TextView
+                        android:id="@+id/timeExercise"
+                        style="@style/Titles.Timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
+
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relativeLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/titlesCycleBackground"
-                android:padding="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/titlesBackground"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/routineCycleTitleInExecutionExercise"
-                    style="@style/Titles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
+                        android:id="@+id/routineNameTitleInExecutionExercise"
+                        style="@style/Titles"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="50dp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/relativeLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:background="@color/titlesBackground"
-                android:padding="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/titlesCycleBackground"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
                 <TextView
-                    style="@style/Titles"
-                    android:layout_width="wrap_content"
+                        android:id="@+id/routineCycleTitleInExecutionExercise"
+                        style="@style/Titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:id="@+id/relativeLayout6"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/DescriptionTitle" />
+                    android:layout_marginTop="44dp"
+                    android:background="@color/titlesBackground"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout4">
+
+                <TextView
+                        style="@style/Titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/DescriptionTitle" />
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/ExerciseDescription"
-                style="@style/TextBody"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout6" />
-
-            <RelativeLayout
-                android:id="@+id/relativeLayout9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
-
-                <TextView
-                    android:id="@+id/exerciseTitleInExecutionList"
-                    style="@style/Titles.ExerciseItem"
+                    android:id="@+id/ExerciseDescription"
+                    style="@style/TextBody"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true" />
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout6" />
+
+            <RelativeLayout
+                    android:id="@+id/relativeLayout9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout3">
+
+                <TextView
+                        android:id="@+id/exerciseTitleInExecutionList"
+                        style="@style/Titles.ExerciseItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true" />
             </RelativeLayout>
 
 
@@ -154,14 +150,13 @@
 
     </ScrollView>
 
-        <include
+    <include
             layout="@layout/execution_bar"
             android:id="@+id/executionBar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             app:layout_constraintTop_toBottomOf="@id/scview" />
-
 
 
 </LinearLayout>

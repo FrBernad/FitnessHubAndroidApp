@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.fitnesshub.R;
@@ -46,6 +47,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
 
     private TextView title;
     private TextView timeExercise;
+    private ProgressBar progressBar;
 
     private MainActivity mainActivity;
 
@@ -68,6 +70,8 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.next.setOnClickListener(v -> nextExecution());
         binding.executionBar.previous.setOnClickListener(v -> previousExecution());
 
+        progressBar = binding.progressBar;
+
         mainActivity = (MainActivity) getActivity();
         mainActivity.setNavigationVisibility(false);
 
@@ -80,7 +84,6 @@ public class RoutineExecutionExerciseFragment extends Fragment {
             title.setText(RoutineExecutionExerciseFragmentArgs.fromBundle(getArguments()).getTitle());
 
             viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
-
 
             if (viewModel.getStarted()) {
                 currentExercise = viewModel.getCurrentExercise();
@@ -133,18 +136,24 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         if (played) {
             viewModel.getCountDownTimer().resume();
         } else {
-            played=true;
-            viewModel.getCountDownTimer().start((getNextExercise().getTime() + 1) * 1000, 1000);
+            played = true;
+            ExerciseData firstExercise = getNextExercise();
+            progressBar.setMax(firstExercise.getTime());
+            viewModel.getCountDownTimer().start((firstExercise.getTime() + 1) * 1000, 1000);
             viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
                 if (!finished) {
                     if (countDown.isFinished()) {
                         ExerciseData exercise;
                         currentExercise++;
-                        if ((exercise = getNextExercise()) != null)
+                        if ((exercise = getNextExercise()) != null) {
                             viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+                            progressBar.setProgress(0);
+                            progressBar.setMax(exercise.getTime());
+                        }
                     } else {
-                        System.out.println(countDown.getRemainingTime());
-                        timeExercise.setText(String.valueOf(Math.ceil(countDown.getRemainingTime())));
+                        long remainingTime = countDown.getRemainingTime();
+                        progressBar.setProgress(progressBar.getMax() - (int) remainingTime);
+                        timeExercise.setText(String.valueOf(remainingTime));
                     }
 
                 }
@@ -163,14 +172,14 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         viewModel.getCountDownTimer().stop();
         currentExercise++;
         ExerciseData exercise = getNextExercise();
-        if(exercise != null){
+        if (exercise != null) {
             viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
         }
 
     }
 
     private void previousExecution() {
-        
+
 
     }
 
