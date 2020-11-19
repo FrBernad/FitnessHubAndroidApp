@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineExecutionExerciseBinding;
 import com.example.fitnesshub.model.ExerciseData;
+import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
 import java.util.ArrayList;
@@ -43,9 +44,10 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private boolean finished; //rescatado
     private boolean played = false;
 
-
     private TextView title;
     private TextView timeExercise;
+
+    private MainActivity mainActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,11 +72,11 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.next.setOnClickListener(v -> nextExecution());
         binding.executionBar.previous.setOnClickListener(v -> previousExecution());
 
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.setNavigationVisibility(false);
 
         return view;
     }
-
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

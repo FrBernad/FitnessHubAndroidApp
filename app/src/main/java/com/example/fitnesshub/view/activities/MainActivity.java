@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.model.AppPreferences;
@@ -30,13 +31,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         preferences = new AppPreferences(this.getApplication());
         setAppMode();
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         Intent appLinkIntent = getIntent();
+
         setUpBottomNavigation();
+
         setSupportActionBar(findViewById(R.id.main_toolbar));
+
         userviewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userviewModel.setUserData();
 
@@ -57,12 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
-
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this,R.id.mainNavFragment);
+        NavController navController = Navigation.findNavController(this, R.id.mainNavFragment);
         return navController.navigateUp();
     }
 
@@ -85,6 +91,14 @@ public class MainActivity extends AppCompatActivity {
                 navHostFragment.getNavController());
     }
 
+    public void setNavigationVisibility(boolean b) {
+        if (b) {
+            bottomNavigationView.setVisibility(View.VISIBLE);
+        } else {
+            bottomNavigationView.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -99,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void setAppMode() {
         if (preferences.loadNightModeState())
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-         else
+        else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
     }

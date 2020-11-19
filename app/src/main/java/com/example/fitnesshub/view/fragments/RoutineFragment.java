@@ -94,13 +94,12 @@ public class RoutineFragment extends Fragment {
 
         view = binding.getRoot();
 
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+        main = (MainActivity) getActivity();
 
-       main = (MainActivity) getActivity();
+        main.showUpButton();
+        main.setNavigationVisibility(false);
 
-       main.showUpButton();
-
-       return view;
+        return view;
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -164,9 +163,8 @@ public class RoutineFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
         main.hideUpButton();
+        super.onDestroyView();
     }
 
     @Override
@@ -207,22 +205,22 @@ public class RoutineFragment extends Fragment {
         } else if (id == R.id.app_bar_favorite_outlined) {
             favViewModel.favRoutine(routineId);
             favRoutine();
-        }else if(id==R.id.app_bar_share){
+        } else if (id == R.id.app_bar_share) {
             share();
-        }else {
+        } else {
             return super.onOptionsItemSelected(item);
         }
 
         return true;
     }
 
-    private void share(){
+    private void share() {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(Intent.EXTRA_SUBJECT,routineData.getTitle());
-        sharingIntent.putExtra("RoutineId",routineId);
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, routineData.getTitle());
+        sharingIntent.putExtra("RoutineId", routineId);
         sharingIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.subject) + ": http://www.fitnesshub.com/Routines/" + routineId);
-        startActivity(Intent.createChooser(sharingIntent,"Share Rutine"));
+        startActivity(Intent.createChooser(sharingIntent, "Share Rutine"));
     }
 
     public void openRateDialog() {

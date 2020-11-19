@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentProfileBinding;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.view.adapters.FavoriteAdapter;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
 import com.example.fitnesshub.viewModel.RoutinesViewModel;
@@ -75,6 +76,8 @@ public class ProfileFragment extends Fragment {
 
         favoriteCardsList = binding.favRecycler;
 
+        ((MainActivity) getActivity()).setNavigationVisibility(true);
+
         return view;
     }
 
@@ -86,7 +89,7 @@ public class ProfileFragment extends Fragment {
         favRoutinesViewModel = new ViewModelProvider(getActivity()).get(FavouritesRoutinesViewModel.class);
         favRoutinesViewModel.updateData();
 
-        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(),new ViewModelProvider(getActivity()).get(RoutinesViewModel.class));
+        favoriteAdapter = new FavoriteAdapter(new ArrayList<>(), new ViewModelProvider(getActivity()).get(RoutinesViewModel.class));
 
         userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
 
@@ -128,14 +131,13 @@ public class ProfileFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.app_bar_settings) {
             settings();
-        }
-        else {
+        } else {
             return super.onOptionsItemSelected(item);
         }
         return true;
     }
 
-    public void settings(){
+    public void settings() {
         Navigation.findNavController(view).navigate(ProfileFragmentDirections.actionMeFragmentToSettingsFragment());
     }
 

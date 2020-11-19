@@ -12,6 +12,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentHomeBinding;
+import com.example.fitnesshub.view.activities.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class HomeFragment extends Fragment {
 
 
         imageSlider.setImageList(slideModels, true);
-
+        ((MainActivity) getActivity()).setNavigationVisibility(true);
 
         return view;
     }

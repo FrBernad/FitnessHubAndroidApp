@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.fitnesshub.R;
+import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.view.adapters.TabsAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -44,6 +45,8 @@ public class MyActivityFragment extends Fragment implements AdapterView.OnItemSe
         TabsAdapter tabsAdapter = new TabsAdapter(this);
 
         viewPager.setAdapter(tabsAdapter);
+
+        ((MainActivity) getActivity()).setNavigationVisibility(true);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

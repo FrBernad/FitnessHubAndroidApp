@@ -20,6 +20,7 @@ import android.widget.Spinner;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutinesBinding;
+import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.view.adapters.OrderAdapter;
 import com.example.fitnesshub.view.adapters.RoutinesAdapter;
 import com.example.fitnesshub.view.adapters.SortAdapter;
@@ -65,6 +66,8 @@ public class RoutinesFragment extends Fragment {
         progressBar = binding.progressBar;
         chipGroup = binding.chipGroupRoutines;
         swipeRefreshLayout = binding.swipeRefresh;
+
+        ((MainActivity) getActivity()).setNavigationVisibility(true);
 
         return view;
     }

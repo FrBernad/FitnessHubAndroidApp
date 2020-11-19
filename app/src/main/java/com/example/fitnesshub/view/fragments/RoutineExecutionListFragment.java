@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineExecutionListBinding;
 import com.example.fitnesshub.model.ExerciseData;
+import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 
@@ -43,6 +44,8 @@ public class RoutineExecutionListFragment extends Fragment {
 
     private TextView title;
 
+    private MainActivity mainActivity;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,8 @@ public class RoutineExecutionListFragment extends Fragment {
 
         View view = binding.getRoot();
 
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.setNavigationVisibility(false);
 
         return view;
     }
@@ -90,8 +94,8 @@ public class RoutineExecutionListFragment extends Fragment {
 
         observeExerciseViewModel();
 
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
-
+        mainActivity = (MainActivity) getActivity();
+        mainActivity.setNavigationVisibility(false);
 
     }
 
@@ -118,7 +122,6 @@ public class RoutineExecutionListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
     }
 
 
@@ -132,15 +135,15 @@ public class RoutineExecutionListFragment extends Fragment {
         currentCycle = 0;
         currentExercise = 0;
         finished = false;
-        viewModel.getCountDownTimer().start(getNextExercise().getTime()*1000, 1000);
+        viewModel.getCountDownTimer().start(getNextExercise().getTime() * 1000, 1000);
         viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
             if (countDown.isFinished() && !finished) {
                 ExerciseData exercise;
                 currentAdapter.getExercise(currentExercise).setRunning(false);
                 currentAdapter.notifyItemChanged(currentExercise);
                 currentExercise++;
-                if((exercise = getNextExercise()) != null ){
-                    viewModel.getCountDownTimer().start(exercise.getTime()*1000, 1000);
+                if ((exercise = getNextExercise()) != null) {
+                    viewModel.getCountDownTimer().start(exercise.getTime() * 1000, 1000);
                 }
             }
         });
@@ -149,7 +152,7 @@ public class RoutineExecutionListFragment extends Fragment {
     private ExerciseData getNextExercise() {
         ExerciseData exercise = null;
         currentAdapter = getCurrentCycle();
-        if(currentAdapter != null){
+        if (currentAdapter != null) {
             exercise = currentAdapter.getExercise(currentExercise);
             exercise.setRunning(true);
             currentAdapter.notifyItemChanged(currentExercise);
@@ -158,31 +161,29 @@ public class RoutineExecutionListFragment extends Fragment {
     }
 
 
+    public ExercisesAdapter getCurrentCycle() {
 
-    public ExercisesAdapter getCurrentCycle(){
-
-        if(currentCycle == 0 ){
-            if(currentExercise < warmUpAdapter.getExerciseList().size())
+        if (currentCycle == 0) {
+            if (currentExercise < warmUpAdapter.getExerciseList().size())
                 return warmUpAdapter;
             currentCycle++;
-            currentExercise=0;
+            currentExercise = 0;
         }
 
-        if(currentCycle == 1){
-            if(currentExercise < mainAdapter.getExerciseList().size())
+        if (currentCycle == 1) {
+            if (currentExercise < mainAdapter.getExerciseList().size())
                 return mainAdapter;
             currentCycle++;
-            currentExercise=0;
+            currentExercise = 0;
         }
 
-        if(currentCycle == 2){
-            if(currentExercise < cooldownAdapter.getExerciseList().size())
+        if (currentCycle == 2) {
+            if (currentExercise < cooldownAdapter.getExerciseList().size())
                 return cooldownAdapter;
         }
         finished = true;
 
         return null;
-
 
 
     }
