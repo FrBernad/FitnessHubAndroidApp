@@ -38,11 +38,11 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private static final String COOLDOWN_TITLE = "COOLDOWN";
 
 
-    private int currentCycle; //rescatado
-    private String cycleTitle; //rescatado
+    private int currentCycle;
+    private String cycleTitle;
     private ArrayList<ExerciseData> currCycle;
-    private int currentExercise; //rescatado
-    private boolean finished; //rescatado
+    private int currentExercise;
+    private boolean finished;
     private boolean played = false;
 
     private TextView title;

@@ -41,6 +41,7 @@ public class RoutineExecutionListFragment extends Fragment {
     private int currentExercise;
     private ExercisesAdapter currentAdapter;
     private boolean finished;
+    private boolean played;
 
     private TextView title;
 
@@ -64,6 +65,11 @@ public class RoutineExecutionListFragment extends Fragment {
         recyclerViewCooldown = binding.cooldownExercises;
 
         title = binding.routineNameTitleInExecutionList;
+
+        binding.executionBar.play.setOnClickListener(v -> playExecution());
+        binding.executionBar.pause.setOnClickListener(v -> pauseExecution());
+        binding.executionBar.next.setOnClickListener(v -> nextExecution());
+        binding.executionBar.previous.setOnClickListener(v -> previousExecution());
 
         View view = binding.getRoot();
 
@@ -90,6 +96,18 @@ public class RoutineExecutionListFragment extends Fragment {
 
         recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewCooldown.setAdapter(cooldownAdapter);
+
+        if (viewModel.getStarted()) {
+            currentExercise = viewModel.getCurrentExercise();
+            currentCycle = viewModel.getCurrentCycle();
+            played = viewModel.getPlayed();
+        } else {
+            viewModel.setCurrentExercise(0);
+            viewModel.setCurrentCycle(0);
+            currentCycle = 0;
+            currentExercise = 0;
+            viewModel.setStarted(true);
+        }
 
         observeExerciseViewModel();
 
@@ -126,30 +144,34 @@ public class RoutineExecutionListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        startExecution();
     }
 
-    private void startExecution() {
-        currentCycle = 0;
-        currentExercise = 0;
+    private void playExecution() {
+        binding.executionBar.play.setVisibility(View.INVISIBLE);
+        binding.executionBar.pause.setVisibility(View.VISIBLE);
         finished = false;
-        viewModel.getCountDownTimer().start(getNextExercise().getTime() * 1000, 1000);
-        viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
-            if (countDown.isFinished() && !finished) {
-                ExerciseData exercise;
-                currentAdapter.getExercise(currentExercise).setRunning(false);
-                currentAdapter.notifyItemChanged(currentExercise);
-                currentExercise++;
-                if ((exercise = getNextExercise()) != null) {
-                    viewModel.getCountDownTimer().start(exercise.getTime() * 1000, 1000);
+        if(played)
+            viewModel.getCountDownTimer().resume();
+        else{
+            played = true;
+            viewModel.getCountDownTimer().start(getNextExercise().getTime() * 1000, 1000);
+            viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
+                if (countDown.isFinished() && !finished) {
+                    ExerciseData exercise;
+                    currentAdapter.getExercise(currentExercise).setRunning(false);
+                    currentAdapter.notifyItemChanged(currentExercise);
+                    currentExercise++;
+                    if ((exercise = getNextExercise()) != null) {
+                        viewModel.getCountDownTimer().start(exercise.getTime() * 1000, 1000);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private ExerciseData getNextExercise() {
         ExerciseData exercise = null;
-        currentAdapter = getCurrentCycle();
+        currentAdapter = getCurrentAdapter();
         if (currentAdapter != null) {
             exercise = currentAdapter.getExercise(currentExercise);
             exercise.setRunning(true);
@@ -158,7 +180,7 @@ public class RoutineExecutionListFragment extends Fragment {
         return exercise;
     }
 
-    public ExercisesAdapter getCurrentCycle() {
+    public ExercisesAdapter getCurrentAdapter() {
 
         if (currentCycle == 0) {
             if (currentExercise < warmUpAdapter.getExerciseList().size())
@@ -183,6 +205,74 @@ public class RoutineExecutionListFragment extends Fragment {
         return null;
     }
 
+
+    private void pauseExecution() {
+        binding.executionBar.play.setVisibility(View.VISIBLE);
+        binding.executionBar.pause.setVisibility(View.INVISIBLE);
+        viewModel.getCountDownTimer().pause();
+    }
+
+    private void nextExecution() {
+        viewModel.getCountDownTimer().stop();
+        currentAdapter.getExercise(currentExercise).setRunning(false);
+        currentAdapter.notifyItemChanged(currentExercise);
+
+        currentExercise++;
+        ExerciseData exercise = getNextExercise();
+        if (exercise != null) {
+            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+        }
+
+    }
+
+    private void previousExecution() {
+        viewModel.getCountDownTimer().stop();
+        currentAdapter.getExercise(currentExercise).setRunning(false);
+        currentAdapter.notifyItemChanged(currentExercise);
+        currentExercise--;
+        ExerciseData exercise = getPrevExercise();
+        if (exercise != null) {
+            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+        }
+    }
+
+    private ExerciseData getPrevExercise() {
+        ExerciseData exercise = null;
+        currentAdapter = getPrevAdapter();
+        if (currentAdapter != null) {
+            exercise = currentAdapter.getExercise(currentExercise);
+            exercise.setRunning(true);
+            currentAdapter.notifyItemChanged(currentExercise);
+        }
+        return exercise;
+    }
+
+    private ExercisesAdapter getPrevAdapter(){
+        if (currentCycle == 0) {
+            if (currentExercise < warmUpAdapter.getExerciseList().size())
+                return warmUpAdapter;
+            currentCycle++;
+            currentExercise = 0;
+        }
+
+        if (currentCycle == 1) {
+            if (currentExercise < mainAdapter.getExerciseList().size())
+                return mainAdapter;
+            currentCycle++;
+            currentExercise = 0;
+        }
+
+        if (currentCycle == 2) {
+            if (currentExercise < cooldownAdapter.getExerciseList().size())
+                return cooldownAdapter;
+        }
+
+        finished = true;
+        return null;
+
+
+
+    }
 }
 
 
