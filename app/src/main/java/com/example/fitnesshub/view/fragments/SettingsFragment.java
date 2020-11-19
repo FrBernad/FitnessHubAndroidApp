@@ -42,6 +42,8 @@ public class SettingsFragment extends Fragment{
 
     View view;
 
+    private MainActivity main;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         userviewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
@@ -65,6 +67,11 @@ public class SettingsFragment extends Fragment{
             preferences.setNightModeState(isChecked);
             restartApp();
         });
+
+        main = (MainActivity) getActivity();
+
+        main.showUpButton();
+        main.setNavigationVisibility(false);
         return view;
     }
 
@@ -82,8 +89,11 @@ public class SettingsFragment extends Fragment{
         getActivity().finish(); //elimino la actividad del stack
     }
 
-
-
+    @Override
+    public void onDestroyView() {
+        main.hideUpButton();
+        super.onDestroyView();
+    }
 }
 
 
