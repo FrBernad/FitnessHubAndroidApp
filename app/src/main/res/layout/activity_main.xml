@@ -21,7 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/toolbarBackground"
             android:elevation="10dp"
-            android:theme="@style/Toolbar_style" />
+            app:theme="@style/ThemeOverlay.AppCompat" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

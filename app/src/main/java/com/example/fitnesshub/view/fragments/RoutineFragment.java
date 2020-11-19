@@ -15,12 +15,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.FragmentRoutineBinding;
 import com.example.fitnesshub.model.RoutineData;
+import com.example.fitnesshub.view.activities.MainActivity;
 import com.example.fitnesshub.view.adapters.ExercisesAdapter;
 import com.example.fitnesshub.viewModel.ExercisesViewModel;
 import com.example.fitnesshub.viewModel.FavouritesRoutinesViewModel;
@@ -63,6 +66,8 @@ public class RoutineFragment extends Fragment {
 
     private int routineId;
 
+    private MainActivity main;
+
     PlayModeDialog playModeDialog;
 
     @Override
@@ -91,7 +96,11 @@ public class RoutineFragment extends Fragment {
 
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
 
-        return view;
+       main = (MainActivity) getActivity();
+
+       main.showUpButton();
+
+       return view;
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -157,6 +166,7 @@ public class RoutineFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.VISIBLE);
+        main.hideUpButton();
     }
 
     @Override
@@ -199,8 +209,7 @@ public class RoutineFragment extends Fragment {
             favRoutine();
         }else if(id==R.id.app_bar_share){
             share();
-        }
-        else {
+        }else {
             return super.onOptionsItemSelected(item);
         }
 

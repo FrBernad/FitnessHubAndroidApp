@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this,R.id.mainNavFragment);
+        return navController.navigateUp();
+    }
+
     private int verifyAndConvertId(String id) {
         int aux;
         try {
@@ -96,6 +102,14 @@ public class MainActivity extends AppCompatActivity {
          else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
+    }
+
+    public void showUpButton() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void hideUpButton() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
 }

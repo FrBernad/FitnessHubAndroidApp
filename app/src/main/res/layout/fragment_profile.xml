@@ -1,212 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.fragments.ProfileFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".view.fragments.ProfileFragment">
 
     <data>
 
         <variable
-            name="userInfo"
-            type="com.example.fitnesshub.model.UserInfo" />
+                name="userInfo"
+                type="com.example.fitnesshub.model.UserInfo" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        android:padding="0dp">
-
-        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            android:background="@color/background"
+            android:padding="0dp">
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background">
-
-                <RelativeLayout
-                    android:id="@+id/relativeLayoutP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:background="@color/background">
+
+                <RelativeLayout
+                        android:id="@+id/relativeLayoutP"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/profile_image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_centerHorizontal="true"
-                        android:contentDescription="@string/ProfileImage"
-                        android:src="@drawable/empty_user" />
+                            android:id="@+id/profile_image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_centerHorizontal="true"
+                            android:contentDescription="@string/ProfileImage"
+                            android:src="@drawable/empty_user" />
 
                     <TextView
-                        android:id="@+id/userName"
-                        style="@style/Titles.ExerciseItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/profile_image"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="10dp"
+                            android:id="@+id/userName"
+                            style="@style/Titles.ExerciseItem"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/profile_image"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="10dp"
 
-                        android:includeFontPadding="false"
-                        android:text="@{userInfo.username}" />
+                            android:includeFontPadding="false"
+                            android:text="@{userInfo.username}" />
 
                 </RelativeLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/nameField"
-                    app:boxBackgroundColor="@color/boxInput"
-                    app:hintTextColor="@color/primaryColorAlternative"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/relativeLayoutP"
-                    app:startIconDrawable="@drawable/ic_me_24"
-                    app:startIconTint="@color/iconsInputBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fullName"
-                        style="@style/TextBody.Profile"
+                        android:id="@+id/textInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:drawablePadding="10dp"
-                        android:text="@{userInfo.fullName}"
-                        android:textColor="@color/mainTextColorAlternative" />
+                        android:enabled="false"
+                        android:hint="@string/nameField"
+                        app:boxBackgroundColor="@color/boxInput"
+                        app:hintTextColor="@color/primaryColorAlternative"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/relativeLayoutP"
+                        app:startIconDrawable="@drawable/ic_me_24"
+                        app:startIconTint="@color/iconsInputBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fullName"
+                            style="@style/TextBody.Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawablePadding="10dp"
+                            android:text="@{userInfo.fullName}"
+                            android:textColor="@color/mainTextColorAlternative" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputLayoutPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/phoneField"
-                    app:boxBackgroundColor="@color/boxInput"
-                    app:hintTextColor="@color/primaryColorAlternative"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-                    app:startIconDrawable="@drawable/ic_phone_24"
-                    app:startIconTint="@color/iconsInputBox">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phone"
-                        style="@style/TextBody.Profile"
+                        android:id="@+id/inputLayoutPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:autofillHints="@string/phoneField"
-                        android:background="@android:color/transparent"
-                        android:drawablePadding="10dp"
-                        android:ems="10"
-                        android:inputType="phone"
-                        android:text="@{userInfo.phone}"
-                        android:textColor="@color/mainTextColorAlternative"
-                        tools:ignore="LabelFor" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/inputLayoutGender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/genderField"
-                    app:boxBackgroundColor="@color/boxInput"
-                    app:hintTextColor="@color/primaryColorAlternative"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutPhone"
-                    app:startIconDrawable="@drawable/ic_gender_24"
-                    app:startIconTint="@color/iconsInputBox">
+                        android:enabled="false"
+                        android:hint="@string/phoneField"
+                        app:boxBackgroundColor="@color/boxInput"
+                        app:hintTextColor="@color/primaryColorAlternative"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                        app:startIconDrawable="@drawable/ic_phone_24"
+                        app:startIconTint="@color/iconsInputBox">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/gender"
-                        style="@style/TextBody.Profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:drawablePadding="10dp"
-                        android:text="@{userInfo.gender}"
-                        android:textColor="@color/mainTextColorAlternative" />
+                            android:id="@+id/phone"
+                            style="@style/TextBody.Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:autofillHints="@string/phoneField"
+                            android:background="@android:color/transparent"
+                            android:drawablePadding="10dp"
+                            android:ems="10"
+                            android:inputType="phone"
+                            android:text="@{userInfo.phone}"
+                            android:textColor="@color/mainTextColorAlternative"
+                            tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/birthDateInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:hint="@string/BirthdateField"
-                    app:boxBackgroundColor="@color/boxInput"
-                    app:hintTextColor="@color/primaryColorAlternative"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inputLayoutGender"
-                    app:startIconDrawable="@drawable/ic_birthday_24"
-                    app:startIconTint="@color/iconsInputBox">
-
-                    <TextView
-                        android:id="@+id/birthDate"
-                        style="@style/TextBody.Profile"
+                        android:id="@+id/inputLayoutGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@android:color/transparent"
-                        android:drawablePadding="10dp"
-                        android:text="@{userInfo.birthdateString}"
-                        android:textColor="@color/mainTextColorAlternative" />
+                        android:enabled="false"
+                        android:hint="@string/genderField"
+                        app:boxBackgroundColor="@color/boxInput"
+                        app:hintTextColor="@color/primaryColorAlternative"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inputLayoutPhone"
+                        app:startIconDrawable="@drawable/ic_gender_24"
+                        app:startIconTint="@color/iconsInputBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/gender"
+                            style="@style/TextBody.Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawablePadding="10dp"
+                            android:text="@{userInfo.gender}"
+                            android:textColor="@color/mainTextColorAlternative" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/birthDateInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="@string/BirthdateField"
+                        app:boxBackgroundColor="@color/boxInput"
+                        app:hintTextColor="@color/primaryColorAlternative"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inputLayoutGender"
+                        app:startIconDrawable="@drawable/ic_birthday_24"
+                        app:startIconTint="@color/iconsInputBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/birthDate"
+                            style="@style/TextBody.Profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawablePadding="10dp"
+                            android:text="@{userInfo.birthdateString}"
+                            android:textColor="@color/mainTextColorAlternative" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <RelativeLayout
-                    android:id="@+id/relativeF"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/titlesBackground"
-                    android:padding="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/birthDateInputLayout">
+                        android:id="@+id/relativeF"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/titlesBackground"
+                        android:padding="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/birthDateInputLayout">
 
                     <TextView
-                        android:id="@+id/FavoriteRoutines"
-                        style="@style/Titles"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/FavoriteRoutines" />
+                            android:id="@+id/FavoriteRoutines"
+                            style="@style/Titles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="@string/FavoriteRoutines" />
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/favRecycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/relativeF" />
-
+                        android:id="@+id/favRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/relativeF" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
