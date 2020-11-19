@@ -16,7 +16,9 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.AlarmDialogBinding;
+import com.example.fitnesshub.model.RoutineData;
 import com.example.fitnesshub.util.AlarmReceiver;
+import com.example.fitnesshub.viewModel.RoutinesViewModel;
 
 import java.util.Calendar;
 
@@ -24,7 +26,15 @@ public class AlarmDialog extends AppCompatDialogFragment {
 
     private AlarmDialogBinding binding;
 
+    private TimePicker timePicker;
+
     private PendingIntent pendingIntent;
+
+    private RoutinesViewModel viewModel;
+
+    public AlarmDialog(RoutinesViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -33,15 +43,20 @@ public class AlarmDialog extends AppCompatDialogFragment {
         binding = AlarmDialogBinding.inflate(getActivity().getLayoutInflater());
         View view = binding.getRoot();
 
-        TimePicker timePicker = binding.timePicker;
+        RoutineData routineData = viewModel.getCurrentRoutine().getValue();
+
+        timePicker = binding.timePicker;
         timePicker.setIs24HourView(true);
 
         builder.setView(view).setNegativeButton(R.string.Close, (dialog, which) -> {
-
         });
 
         Intent alarmIntent = new Intent(getContext(), AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getContext(), 0, alarmIntent, 0);
+
+        alarmIntent.putExtra("routineId",routineData.getId());
+        alarmIntent.putExtra("routineTitle",routineData.getTitle());
+
+        pendingIntent = PendingIntent.getBroadcast(getContext(), routineData.getId(), alarmIntent, 0);
 
         binding.setAlarm.setOnClickListener(v -> {
             start();
@@ -58,17 +73,22 @@ public class AlarmDialog extends AppCompatDialogFragment {
 
     public void start() {
         AlarmManager manager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-        int interval = 1000 * 60 * 20;
+        int interval = 1000 * 60 * 60 * 24;
 
+        int hour = timePicker.getHour();
+        int minutes = timePicker.getMinute();
+
+
+        System.out.println("Setting alarm at " + hour + ":" + minutes);
         /* Set the alarm to start at 10:30 AM */
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 10);
-        calendar.set(Calendar.MINUTE, 30);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minutes);
 
         /* Repeating on every 20 minutes interval */
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                1000 * 60 * 20, pendingIntent);
+        manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+1000,
+                pendingIntent);
     }
 
     public void cancel() {

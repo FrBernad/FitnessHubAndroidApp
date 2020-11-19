@@ -1,16 +1,20 @@
 package com.example.fitnesshub.view.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         Intent appLinkIntent = getIntent();
 
+        System.out.println(appLinkIntent.getExtras());
+
         setUpBottomNavigation();
 
         setSupportActionBar(findViewById(R.id.main_toolbar));
@@ -51,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (id != null) {
             int idInt = verifyAndConvertId(id);
-
             if (idInt != -1) {
                 routinesViewModel = new ViewModelProvider(this).get(RoutinesViewModel.class);
                 routinesViewModel.getRoutineById(idInt);
@@ -115,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
     }
 
     public void showUpButton() {

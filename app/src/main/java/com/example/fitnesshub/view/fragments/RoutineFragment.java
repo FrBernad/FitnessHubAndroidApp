@@ -247,7 +247,7 @@ public class RoutineFragment extends Fragment {
     }
 
     public void openAlarmDialog() {
-        AlarmDialog alarmDialog = new AlarmDialog();
+        AlarmDialog alarmDialog = new AlarmDialog(routinesViewModel);
         alarmDialog.show(getParentFragmentManager(), "example dialog2");
     }
 

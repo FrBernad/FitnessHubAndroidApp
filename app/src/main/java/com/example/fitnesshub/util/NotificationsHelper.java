@@ -16,6 +16,8 @@ import androidx.core.app.NotificationManagerCompat;
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.view.activities.MainActivity;
 
+import java.util.Random;
+
 public class NotificationsHelper {
     private static final String CHANNEL_ID = "FitnessHub id";
     private static final int NOTIFICATION_ID = 420;
@@ -35,31 +37,25 @@ public class NotificationsHelper {
         return instance;
     }
 
-    private void createNotification() {
+    public void createNotification(int routineId, String routineTitle) {
         createNotificationChannel();
 
         Intent intent = new Intent(context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("RoutineId", String.valueOf(routineId));
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        Bitmap icon = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, new Random().nextInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification = new NotificationCompat.Builder(context,CHANNEL_ID)
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
-                .setLargeIcon(icon)
-                .setContentTitle("Routine retrieved")
-                .setContentText("Routines have been retrieved!")
-                .setStyle(
-                        new NotificationCompat.BigPictureStyle()
-                        .bigPicture(icon)
-                        .bigLargeIcon(null)
-                )
+                .setContentTitle("Time to exercise!")
+                .setContentText("Click here to execute your programmed routine: " + routineTitle)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
 
-        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID,notification);
+        NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification);
     }
 
     private void createNotificationChannel() {
