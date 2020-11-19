@@ -38,7 +38,7 @@ public class ExercisesViewModel extends AndroidViewModel {
     private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    private boolean started;
+    private boolean started = false;
     private int currentCycle;
     private String cycleTitle;
     private int currentExercise;

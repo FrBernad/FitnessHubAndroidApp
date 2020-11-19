@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int verifyAndConvertId(String id) {
-        Integer aux;
+        int aux;
         try {
             aux = Integer.parseInt(id);
         } catch (Exception e) {

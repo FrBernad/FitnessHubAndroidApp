@@ -133,7 +133,7 @@ public class RoutineExecutionListFragment extends Fragment {
         currentCycle = 0;
         currentExercise = 0;
         finished = false;
-        viewModel.getCountDownTimer().start(getNextExercise().getTime(), 1000);
+        viewModel.getCountDownTimer().start(getNextExercise().getTime()*1000, 1000);
         viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
             if (countDown.isFinished() && !finished) {
                 ExerciseData exercise;

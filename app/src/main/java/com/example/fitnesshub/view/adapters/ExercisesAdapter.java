@@ -54,21 +54,18 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
         ExerciseData exercise = exerciseList.get(position);
         holder.itemView.setExerciseData(exercise);
         if (exercise.isRunning()){
-            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionSelected));
-            holder.itemView.exerciseName.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
-            holder.itemView.repsExercise.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
-            holder.itemView.timeExercise.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
-            holder.itemView.infoButton.setColorFilter(parentContext.getColor(R.color.primaryColorAlternative));
-
-        }
-        else{
             holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionNotSelected));
             holder.itemView.exerciseName.setTextColor(parentContext.getColor(R.color.mainTextColorAlternative));
             holder.itemView.repsExercise.setTextColor(parentContext.getColor(R.color.mainTextColorAlternative));
             holder.itemView.timeExercise.setTextColor(parentContext.getColor(R.color.mainTextColorAlternative));
             holder.itemView.infoButton.setColorFilter(parentContext.getColor(R.color.mainTextColorAlternative));
-
-
+        }
+        else{
+            holder.itemView.exerciseContainer.setBackgroundColor(parentContext.getColor(R.color.executionSelected));
+            holder.itemView.exerciseName.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
+            holder.itemView.repsExercise.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
+            holder.itemView.timeExercise.setTextColor(parentContext.getColor(R.color.primaryColorAlternative));
+            holder.itemView.infoButton.setColorFilter(parentContext.getColor(R.color.primaryColorAlternative));
         }
 
         holder.itemView.infoButton.setOnClickListener(v -> openExerciseInfoDialog(exercise));

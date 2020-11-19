@@ -51,14 +51,14 @@ public class CountDownTimer {
 
     private void onTick(long millisUntilFinished) {
         remainingTime = millisUntilFinished;
-        countDownTimerStatus.setValue(new CountDownTimer.Status(remainingTime / 1000, false));
+        countDownTimerStatus.setValue(new Status(remainingTime / 1000, false));
     }
 
     private void onFinish() {
-        countDownTimerStatus.setValue(new CountDownTimer.Status(0, true));
+        countDownTimerStatus.setValue(new Status(0, true));
     }
 
-    public class Status {
+    public static class Status {
 
         private boolean isFinished;
         private long remainingTime;

@@ -68,6 +68,10 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.next.setOnClickListener(v -> nextExecution());
         binding.executionBar.previous.setOnClickListener(v -> previousExecution());
 
+        binding.executionBar.pause.setOnClickListener(v -> pauseExecution());
+        binding.executionBar.next.setOnClickListener(v -> nextExecution());
+        binding.executionBar.previous.setOnClickListener(v -> previousExecution());
+
         getActivity().findViewById(R.id.bottomNav).setVisibility(View.GONE);
 
         return view;
@@ -76,10 +80,11 @@ public class RoutineExecutionExerciseFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (getArguments() != null)
+        if (getArguments() != null) {
             title.setText(RoutineExecutionExerciseFragmentArgs.fromBundle(getArguments()).getTitle());
 
         viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
+
 
         if (viewModel.getStarted()) {
             currentExercise = viewModel.getCurrentExercise();
@@ -141,8 +146,10 @@ public class RoutineExecutionExerciseFragment extends Fragment {
                     if ((exercise = getNextExercise()) != null)
                         viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
                 } else {
+                    System.out.println(countDown.getRemainingTime());
                     timeExercise.setText(String.valueOf(Math.ceil(countDown.getRemainingTime())));
                 }
+
             }
         });
     }
