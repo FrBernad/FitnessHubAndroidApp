@@ -48,17 +48,18 @@
         <activity android:name=".view.activities.LoginActivity" />
         <activity android:name=".view.activities.MainActivity" />
 
-        <receiver android:name=".view.fragments.AlarmReceiver">
+        <receiver android:name=".util.AlarmReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".view.fragments.DeviceBootReceiver">
+        <receiver android:name=".util.DeviceBootReceiver">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

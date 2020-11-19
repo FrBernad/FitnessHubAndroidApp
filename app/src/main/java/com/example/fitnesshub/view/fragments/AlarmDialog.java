@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.databinding.AlarmDialogBinding;
+import com.example.fitnesshub.util.AlarmReceiver;
 
 import java.util.Calendar;
 
@@ -31,30 +32,21 @@ public class AlarmDialog extends AppCompatDialogFragment {
         binding = AlarmDialogBinding.inflate(getActivity().getLayoutInflater());
         View view = binding.getRoot();
 
-        builder.setView(view).setNegativeButton(R.string.Close, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setView(view).setNegativeButton(R.string.Close, (dialog, which) -> {
 
-            }
         });
 
         Intent alarmIntent = new Intent(getContext(), AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getContext(), 0, alarmIntent, 0);
 
-        binding.setAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                start();
-                Toast.makeText(getContext(), "START ALARM", Toast.LENGTH_SHORT).show();
-            }
+        binding.setAlarm.setOnClickListener(v -> {
+            start();
+            Toast.makeText(getContext(), "START ALARM", Toast.LENGTH_SHORT).show();
         });
 
-        binding.cancelAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancel();
-                Toast.makeText(getContext(), "CANCEL ALARM", Toast.LENGTH_SHORT).show();
-            }
+        binding.cancelAlarm.setOnClickListener(v -> {
+            cancel();
+            Toast.makeText(getContext(), "CANCEL ALARM", Toast.LENGTH_SHORT).show();
         });
 
         return builder.create();

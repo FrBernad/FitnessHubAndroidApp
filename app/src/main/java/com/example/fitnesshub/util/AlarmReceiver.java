@@ -1,4 +1,4 @@
-package com.example.fitnesshub.view.fragments;
+package com.example.fitnesshub.util;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
