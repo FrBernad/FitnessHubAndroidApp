@@ -150,9 +150,8 @@ public class RoutineExecutionExerciseFragment extends Fragment {
                     if((exercise = getNextExercise()) != null )
                         viewModel.getCountDownTimer().start((exercise.getTime()+1)*1000, 1000);
                 }
-                else{
                     timeExercise.setText(String.valueOf(Math.ceil(countDown.getRemainingTime())));
-                }
+
             }
         });
     }
