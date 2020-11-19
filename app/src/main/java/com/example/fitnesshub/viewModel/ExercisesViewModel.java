@@ -36,13 +36,19 @@ public class ExercisesViewModel extends AndroidViewModel {
     private RoutinesAPIService routinesService;
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    private boolean started = false;
+    private boolean started = false; //borrar
+    private boolean played; // borrar
+
+
     private int currentCycle;
     private String cycleTitle;
     private int currentExercise;
+    private boolean isFirstTime = true;
     private boolean finished;
-    private boolean played;
+    private int status;
     private ArrayList<ExerciseData> currCycle;
+    private boolean executed;
+
 
     public ExercisesViewModel(@androidx.annotation.NonNull Application application) {
         super(application);
@@ -133,6 +139,23 @@ public class ExercisesViewModel extends AndroidViewModel {
         disposable.clear();
     }
 
+    public boolean getExecuted() {
+        return executed;
+    }
+
+    public void setExecuted(boolean executed) {
+        this.executed = executed;
+    }
+
+    public int getStatus(){
+        return status;
+    }
+
+    public void setStatus(int status){
+        this.status = status;
+    }
+
+
     public MutableLiveData<List<ExerciseData>> getWarmupExercises() {
         return warmupExercises;
     }
@@ -153,6 +176,13 @@ public class ExercisesViewModel extends AndroidViewModel {
 
     public boolean getStarted() {
         return started;
+    }
+
+    public boolean getIsFirstTime(){
+        return isFirstTime;
+    }
+    public void setIsFirstTime(boolean state){
+        isFirstTime = state;
     }
 
     public int getCurrentCycle() {

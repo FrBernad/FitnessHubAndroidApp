@@ -243,6 +243,7 @@ public class RoutineFragment extends Fragment {
     }
 
     public void openPlayModeDialog() {
+        new ViewModelProvider(getActivity()).get(ExercisesViewModel.class).setIsFirstTime(true);
         playModeDialog.show(getParentFragmentManager(), "example dialog");
     }
 

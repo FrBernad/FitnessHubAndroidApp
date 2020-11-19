@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,16 +33,26 @@ public class RoutineExecutionListFragment extends Fragment {
     private ExercisesAdapter warmUpAdapter = new ExercisesAdapter(new ArrayList<>());
     private ExercisesAdapter mainAdapter = new ExercisesAdapter(new ArrayList<>());
     private ExercisesAdapter cooldownAdapter = new ExercisesAdapter(new ArrayList<>());
+    private ExercisesAdapter[] adapters = new ExercisesAdapter[3];
 
     private RecyclerView recyclerViewWarmUp;
     private RecyclerView recyclerViewMain;
     private RecyclerView recyclerViewCooldown;
 
+    private static final int WARMUP_CYCLE = 0;
+    private static final int MAIN_CYCLE = 1;
+    private static final int COOLDOWN_CYCLE = 2;
+    private static final int PLAYING = 0;
+    private static final int PAUSED = 1;
+    private static final int NOTRUNNING = 2;
+
+
     private int currentCycle;
     private int currentExercise;
     private ExercisesAdapter currentAdapter;
     private boolean finished;
-    private boolean played;
+    private int status; //la uso para ver si el ejercicio esta corriendo o pausado
+    private boolean executed; //me fijo para ver si presiono play alguna la primera vez
 
     private TextView title;
 
@@ -70,6 +81,11 @@ public class RoutineExecutionListFragment extends Fragment {
         binding.executionBar.pause.setOnClickListener(v -> pauseExecution());
         binding.executionBar.next.setOnClickListener(v -> nextExecution());
         binding.executionBar.previous.setOnClickListener(v -> previousExecution());
+        binding.executionBar.previous.setVisibility(View.GONE);
+        binding.executionBar.next.setVisibility(View.GONE);
+        adapters[0] = warmUpAdapter;
+        adapters[1] = mainAdapter;
+        adapters[2]= cooldownAdapter;
 
         View view = binding.getRoot();
 
@@ -96,17 +112,16 @@ public class RoutineExecutionListFragment extends Fragment {
 
         recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewCooldown.setAdapter(cooldownAdapter);
-
-        if (viewModel.getStarted()) {
+        if (!viewModel.getIsFirstTime()) { //me fijo si es necesario recuperar los datos
             currentExercise = viewModel.getCurrentExercise();
             currentCycle = viewModel.getCurrentCycle();
-            played = viewModel.getPlayed();
+            executed = viewModel.getExecuted(); //si fue ejecutada en el onresume tengo que fijarme en que estado esta el ejercicio.
+            status = viewModel.getStatus();
         } else {
-            viewModel.setCurrentExercise(0);
-            viewModel.setCurrentCycle(0);
             currentCycle = 0;
             currentExercise = 0;
-            viewModel.setStarted(true);
+            executed = false;
+            viewModel.setIsFirstTime(false);
         }
 
         observeExerciseViewModel();
@@ -137,23 +152,38 @@ public class RoutineExecutionListFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
+        if(executed){
+            binding.executionBar.previous.setVisibility(View.VISIBLE);
+            binding.executionBar.next.setVisibility(View.VISIBLE);
+
+            if(status == PLAYING){
+                binding.executionBar.play.setVisibility(View.INVISIBLE);
+                binding.executionBar.pause.setVisibility(View.VISIBLE);
+                viewModel.getCountDownTimer().resume();
+            }else if(status == PAUSED){
+                binding.executionBar.play.setVisibility(View.VISIBLE);
+                binding.executionBar.pause.setVisibility(View.INVISIBLE);
+            }
+        }
+
+
+
     }
 
     private void playExecution() {
         binding.executionBar.play.setVisibility(View.INVISIBLE);
         binding.executionBar.pause.setVisibility(View.VISIBLE);
+        status = PLAYING;
         finished = false;
-        if(played)
-            viewModel.getCountDownTimer().resume();
+        if(executed) {
+            viewModel.getCountDownTimer().resume(); //me fijo si fue ejecutada entonces corresponde reanudar el ejercicio
+        }
         else{
-            played = true;
+            binding.executionBar.previous.setVisibility(View.VISIBLE);
+            binding.executionBar.next.setVisibility(View.VISIBLE);
+            executed = true;
             viewModel.getCountDownTimer().start(getNextExercise().getTime() * 1000, 1000);
             viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
                 if (countDown.isFinished() && !finished) {
@@ -169,6 +199,30 @@ public class RoutineExecutionListFragment extends Fragment {
         }
     }
 
+    private void pauseExecution() {
+        binding.executionBar.play.setVisibility(View.VISIBLE);
+        binding.executionBar.pause.setVisibility(View.INVISIBLE);
+        viewModel.getCountDownTimer().pause();
+        status = PAUSED;
+    }
+
+    private void nextExecution() {
+        viewModel.getCountDownTimer().stop();
+        currentAdapter.getExercise(currentExercise).setRunning(false);
+        currentAdapter.notifyItemChanged(currentExercise);
+        currentExercise++;
+        ExerciseData exercise = getNextExercise();
+        if (exercise != null) {
+            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+            if(status == PAUSED)
+                viewModel.getCountDownTimer().pause();
+        }
+        else{
+            //terminaste la rutina!
+        }
+
+    }
+
     private ExerciseData getNextExercise() {
         ExerciseData exercise = null;
         currentAdapter = getCurrentAdapter();
@@ -181,49 +235,18 @@ public class RoutineExecutionListFragment extends Fragment {
     }
 
     public ExercisesAdapter getCurrentAdapter() {
-
-        if (currentCycle == 0) {
-            if (currentExercise < warmUpAdapter.getExerciseList().size())
-                return warmUpAdapter;
+        if (currentExercise >= adapters[currentCycle].getExerciseList().size()) {
+            if (currentCycle == COOLDOWN_CYCLE) {
+                finished = true;
+                return null;
+            }
             currentCycle++;
             currentExercise = 0;
         }
-
-        if (currentCycle == 1) {
-            if (currentExercise < mainAdapter.getExerciseList().size())
-                return mainAdapter;
-            currentCycle++;
-            currentExercise = 0;
-        }
-
-        if (currentCycle == 2) {
-            if (currentExercise < cooldownAdapter.getExerciseList().size())
-                return cooldownAdapter;
-        }
-
-        finished = true;
-        return null;
-    }
-
-
-    private void pauseExecution() {
-        binding.executionBar.play.setVisibility(View.VISIBLE);
-        binding.executionBar.pause.setVisibility(View.INVISIBLE);
-        viewModel.getCountDownTimer().pause();
-    }
-
-    private void nextExecution() {
-        viewModel.getCountDownTimer().stop();
-        currentAdapter.getExercise(currentExercise).setRunning(false);
-        currentAdapter.notifyItemChanged(currentExercise);
-
-        currentExercise++;
-        ExerciseData exercise = getNextExercise();
-        if (exercise != null) {
-            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
-        }
+        return adapters[currentCycle];
 
     }
+
 
     private void previousExecution() {
         viewModel.getCountDownTimer().stop();
@@ -233,46 +256,52 @@ public class RoutineExecutionListFragment extends Fragment {
         ExerciseData exercise = getPrevExercise();
         if (exercise != null) {
             viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+            if(status == PAUSED){
+                viewModel.getCountDownTimer().pause();
+            }
         }
     }
 
     private ExerciseData getPrevExercise() {
-        ExerciseData exercise = null;
+        ExerciseData exercise;
         currentAdapter = getPrevAdapter();
-        if (currentAdapter != null) {
-            exercise = currentAdapter.getExercise(currentExercise);
-            exercise.setRunning(true);
-            currentAdapter.notifyItemChanged(currentExercise);
+        if (currentAdapter == null) {
+           currentAdapter = warmUpAdapter;
+           currentExercise = 0;
         }
+        exercise = currentAdapter.getExercise(currentExercise);
+        exercise.setRunning(true);
+        currentAdapter.notifyItemChanged(currentExercise);
         return exercise;
+
     }
 
     private ExercisesAdapter getPrevAdapter(){
-        if (currentCycle == 0) {
-            if (currentExercise < warmUpAdapter.getExerciseList().size())
-                return warmUpAdapter;
-            currentCycle++;
-            currentExercise = 0;
+        if(currentExercise == -1){
+            if(currentCycle == WARMUP_CYCLE){
+                return null;
+            }
+            currentCycle--;
+            currentExercise = adapters[currentCycle].getExerciseList().size()-1;
+            return adapters[currentCycle];
         }
-
-        if (currentCycle == 1) {
-            if (currentExercise < mainAdapter.getExerciseList().size())
-                return mainAdapter;
-            currentCycle++;
-            currentExercise = 0;
-        }
-
-        if (currentCycle == 2) {
-            if (currentExercise < cooldownAdapter.getExerciseList().size())
-                return cooldownAdapter;
-        }
-
-        finished = true;
-        return null;
-
-
-
+        return adapters[currentCycle];
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewModel.setStatus(status);
+        viewModel.setCurrentExercise(currentExercise);
+        viewModel.setCurrentCycle(currentCycle);
+        viewModel.setExecuted(executed);
+        if(executed){
+            viewModel.getCountDownTimer().pause();
+        }
+    }
+
+
+
 }
 
 
