@@ -68,10 +68,6 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.next.setOnClickListener(v -> nextExecution());
         binding.executionBar.previous.setOnClickListener(v -> previousExecution());
 
-        binding.executionBar.pause.setOnClickListener(v -> pauseExecution());
-        binding.executionBar.next.setOnClickListener(v -> nextExecution());
-        binding.executionBar.previous.setOnClickListener(v -> previousExecution());
-
         mainActivity = (MainActivity) getActivity();
         mainActivity.setNavigationVisibility(false);
 

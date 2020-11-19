@@ -76,7 +76,6 @@ public class RoutineExecutionListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         if (getArguments() != null) {
             title.setText(RoutineExecutionListFragmentArgs.fromBundle(getArguments()).getRoutineTitle());
         }
@@ -124,7 +123,6 @@ public class RoutineExecutionListFragment extends Fragment {
         super.onDestroyView();
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -160,7 +158,6 @@ public class RoutineExecutionListFragment extends Fragment {
         return exercise;
     }
 
-
     public ExercisesAdapter getCurrentCycle() {
 
         if (currentCycle == 0) {
@@ -181,12 +178,11 @@ public class RoutineExecutionListFragment extends Fragment {
             if (currentExercise < cooldownAdapter.getExerciseList().size())
                 return cooldownAdapter;
         }
+
         finished = true;
-
         return null;
-
-
     }
+
 }
 
 
