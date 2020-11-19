@@ -1,5 +1,6 @@
 package com.example.fitnesshub.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -21,10 +22,13 @@ public class LoginActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        NavController aux = Navigation.findNavController(this,R.id.nav_host_login);
-        WelcomeFragmentDirections.ActionWelcomeToLoginFragment action = WelcomeFragmentDirections.actionWelcomeToLoginFragment();
-        aux.navigate(action.setRoutineId(getIntent().getStringExtra("RoutineId")));
+        Intent a = getIntent();
+        String id = a.getStringExtra("RoutineId");
+        if (id!=null){
+            NavController aux = Navigation.findNavController(this,R.id.nav_host_login);
+            WelcomeFragmentDirections.ActionWelcomeToLoginFragment action = WelcomeFragmentDirections.actionWelcomeToLoginFragment();
+            aux.navigate(action.setRoutineId(getIntent().getStringExtra("RoutineId")));
+        }
 
     }
 }
