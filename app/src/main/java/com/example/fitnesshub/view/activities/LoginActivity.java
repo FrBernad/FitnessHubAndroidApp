@@ -1,7 +1,10 @@
 package com.example.fitnesshub.view.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.navigation.NavController;
@@ -16,19 +19,23 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppPreferences preferences = new AppPreferences(this.getApplication());
-        if(preferences.loadNightModeState())
+        if (preferences.loadNightModeState())
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
         Intent a = getIntent();
         String id = a.getStringExtra("RoutineId");
-        if (id!=null){
-            NavController aux = Navigation.findNavController(this,R.id.nav_host_login);
+        if (id != null) {
+            NavController aux = Navigation.findNavController(this, R.id.nav_host_login);
             WelcomeFragmentDirections.ActionWelcomeToLoginFragment action = WelcomeFragmentDirections.actionWelcomeToLoginFragment();
             aux.navigate(action.setRoutineId(getIntent().getStringExtra("RoutineId")));
         }
-
     }
 }
