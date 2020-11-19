@@ -89,6 +89,12 @@
     <string name="HistoryRoutinesSlide">Observa tu historial y repite una rutina</string>
 
 
+    <string name="alarm">Alarma</string>
+    <string name="setAlarm">Iniciar alarma</string>
+    <string name="cancelAlarm">Cancelar alarma</string>
+
+
+
     <string name="subject">Prueba esta nueva rutina </string>
     <string name="email">Email</string>
     <string name="login">Login</string>

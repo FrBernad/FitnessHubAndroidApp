@@ -172,6 +172,7 @@ public class RoutineFragment extends Fragment {
         menu.findItem(R.id.app_bar_share).setVisible(true);
         menu.findItem(R.id.app_bar_rate).setVisible(true);
         menu.findItem(R.id.app_bar_favorite_outlined).setVisible(true);
+        menu.findItem(R.id.app_bar_alarm).setVisible(true);
 
         fav = menu.findItem(R.id.app_bar_favorite_filled);
         unfav = menu.findItem(R.id.app_bar_favorite_outlined);
@@ -207,7 +208,10 @@ public class RoutineFragment extends Fragment {
             favRoutine();
         } else if (id == R.id.app_bar_share) {
             share();
-        } else {
+        } else if(id == R.id.app_bar_alarm){
+            openAlarmDialog();
+        }else
+        {
             return super.onOptionsItemSelected(item);
         }
 
@@ -240,6 +244,11 @@ public class RoutineFragment extends Fragment {
 
     public void openPlayModeDialog() {
         playModeDialog.show(getParentFragmentManager(), "example dialog");
+    }
+
+    public void openAlarmDialog() {
+        AlarmDialog alarmDialog = new AlarmDialog();
+        alarmDialog.show(getParentFragmentManager(), "example dialog2");
     }
 
 
