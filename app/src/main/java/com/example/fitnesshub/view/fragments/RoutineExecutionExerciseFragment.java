@@ -179,22 +179,64 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     }
 
     private void previousExecution() {
-
-
+        viewModel.getCountDownTimer().stop();
+        currentExercise--;
+        ExerciseData exercise = getPrevExercise();
+        if (exercise != null) {
+            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+        }
     }
 
-    private ExerciseData getNextExercise() {
+    private ExerciseData getPrevExercise() {
         ExerciseData ex = null;
-        currCycle = getCurrentCycle();
-        if (currCycle != null) {
-            System.out.println(currentExercise);
+        currCycle = getPrevCycle();
+        if(currCycle != null){
             ex = currCycle.get(currentExercise);
             binding.exerciseTitleInExecutionList.setText(ex.getName());
             binding.routineCycleTitleInExecutionExercise.setText(cycleTitle);
             binding.timeExercise.setText(String.valueOf(ex.getTime()));
             binding.ExerciseDescription.setText(ex.getDetail());
         }
-        System.out.println(ex);
+        return ex;
+    }
+
+
+    private ArrayList<ExerciseData> getPrevCycle() {
+        if (currentCycle == COOLDOWN_CYCLE) {
+            if(currentExercise == -1){
+                cycleTitle = MAIN_TITLE;
+                currentCycle--;
+                currentExercise = main.size() - 1;
+                return main;
+            }
+            return cooldown;
+        }
+        else if (currentCycle == MAIN_CYCLE) {
+            if(currentExercise == -1){
+                cycleTitle = WARMUP_TITLE;
+                currentCycle--;
+                currentExercise = warmUp.size() - 1;
+                return warmUp;
+            }
+            return main;
+        }
+        else{
+            if(currentExercise == -1)
+                return null;
+            return warmUp;
+        }
+    }
+
+    private ExerciseData getNextExercise() {
+        ExerciseData ex = null;
+        currCycle = getCurrentCycle();
+        if (currCycle != null) {
+            ex = currCycle.get(currentExercise);
+            binding.exerciseTitleInExecutionList.setText(ex.getName());
+            binding.routineCycleTitleInExecutionExercise.setText(cycleTitle);
+            binding.timeExercise.setText(String.valueOf(ex.getTime()));
+            binding.ExerciseDescription.setText(ex.getDetail());
+        }
         return ex;
     }
 
@@ -224,6 +266,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         finished = true;
         return null;
     }
+
 
     private String getCycleTitle() {
         if (currentCycle == WARMUP_CYCLE) {
