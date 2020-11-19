@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+
     }
 
     private int verifyAndConvertId(String id) {
@@ -136,6 +137,14 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             isDarkMode = false;
         }
+    }
+
+    public void showUpButton() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void hideUpButton() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
 }
