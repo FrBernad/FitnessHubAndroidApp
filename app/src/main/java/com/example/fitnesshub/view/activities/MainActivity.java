@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                            System.out.println("LLEGO FRANO");
                            NavController aux = Navigation.findNavController(this,R.id.mainNavFragment);
                            HomeFragmentDirections.ActionHomeFragmentToRoutineFragment action = HomeFragmentDirections.actionHomeFragmentToRoutineFragment(externRoutine);
-                           aux.navigate(action.setRoutineId(idInt));
+                           aux.navigate(action);
                        }
 
 
