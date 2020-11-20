@@ -29,7 +29,7 @@ public class FinishRoutineDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.PopUp);
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.finish_routine_dialog, null);
@@ -45,6 +45,7 @@ public class FinishRoutineDialog extends AppCompatDialogFragment {
             }
         });
 
+        this.setCancelable(false);
         return builder.create();
     }
 }
