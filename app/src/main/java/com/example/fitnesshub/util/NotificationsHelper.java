@@ -44,7 +44,6 @@ public class NotificationsHelper {
         Bundle bundle = new Bundle();
         bundle.putInt("routineId", routineId);
         PendingIntent pendingIntent = new NavDeepLinkBuilder(context).setComponentName(MainActivity.class).setGraph(R.navigation.app_navigation).setDestination(R.id.routineFragment).setArguments(bundle).createPendingIntent();
-
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Time to exercise!")

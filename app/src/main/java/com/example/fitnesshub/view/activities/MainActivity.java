@@ -42,10 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        Intent appLinkIntent = getIntent();
-
-        System.out.println(appLinkIntent.getExtras());
-
         setUpBottomNavigation();
 
         setSupportActionBar(findViewById(R.id.main_toolbar));
@@ -53,38 +49,12 @@ public class MainActivity extends AppCompatActivity {
         userviewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userviewModel.setUserData();
 
-        String id = appLinkIntent.getStringExtra("RoutineId");
-
-        if (id != null) {
-            int idInt = verifyAndConvertId(id);
-            if (idInt != -1) {
-                routinesViewModel = new ViewModelProvider(this).get(RoutinesViewModel.class);
-                routinesViewModel.getRoutineById(idInt);
-                routinesViewModel.getCurrentRoutine().observe(this, externRoutine -> {
-                    if (externRoutine != null) {
-                        NavController aux = Navigation.findNavController(this, R.id.mainNavFragment);
-                        HomeFragmentDirections.ActionHomeFragmentToRoutineFragment action = HomeFragmentDirections.actionHomeFragmentToRoutineFragment();
-                        aux.navigate(action.setRoutineId(idInt));
-                    }
-                });
-            }
-        }
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.mainNavFragment);
         return navController.navigateUp();
-    }
-
-    private int verifyAndConvertId(String id) {
-        int aux;
-        try {
-            aux = Integer.parseInt(id);
-        } catch (Exception e) {
-            return -1;
-        }
-        return aux;
     }
 
     public void setUpBottomNavigation() {

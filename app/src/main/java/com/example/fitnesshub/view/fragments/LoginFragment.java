@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDeepLinkBuilder;
 import androidx.navigation.Navigation;
 
 import android.os.Handler;
@@ -102,18 +103,15 @@ public class LoginFragment extends Fragment {
 
         viewModel.getToken().observe(getViewLifecycleOwner(), authToken -> {
             if (authToken != null) {
-
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 Bundle aux = getArguments();
-                if(aux!=null){
-                    intent.putExtra("RoutineId",aux.getString("RoutineId"));
+                if (aux.get("RoutineId") != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("routineId", Integer.parseInt(aux.getString("RoutineId")));
+                    new NavDeepLinkBuilder(getActivity()).setComponentName(MainActivity.class).setGraph(R.navigation.app_navigation).setDestination(R.id.routineFragment).setArguments(bundle).createTaskStackBuilder().startActivities();
+                } else {
+                    startActivity(intent);
                 }
-                else{
-                    Bundle newBundle = new Bundle();
-                    newBundle.putString("RoutineId",null);
-                    intent.putExtra("RoutineId",newBundle);
-                }
-                startActivity(intent);
                 getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 getActivity().finish();
             }
