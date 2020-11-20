@@ -35,7 +35,12 @@ public class InitialActivity extends AppCompatActivity {
                 String routineId = appLinkData.getLastPathSegment();
                 newActivity(preferences, routineId);
             } else { //Cuando inicio la aplicacion normalmente
-                Intent intent = new Intent(InitialActivity.this, MainActivity.class);
+                Intent intent;
+                if (preferences.getAuthToken() != null) {
+                    intent = new Intent(InitialActivity.this, MainActivity.class);
+                } else {
+                    intent = new Intent(InitialActivity.this, LoginActivity.class);
+                }
                 startActivity(intent);
             }
         }, 3000);

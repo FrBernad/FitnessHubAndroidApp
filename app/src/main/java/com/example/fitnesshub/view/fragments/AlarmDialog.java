@@ -60,12 +60,10 @@ public class AlarmDialog extends AppCompatDialogFragment {
 
         binding.setAlarm.setOnClickListener(v -> {
             start();
-            Toast.makeText(getContext(), "START ALARM", Toast.LENGTH_SHORT).show();
         });
 
         binding.cancelAlarm.setOnClickListener(v -> {
             cancel();
-            Toast.makeText(getContext(), "CANCEL ALARM", Toast.LENGTH_SHORT).show();
         });
 
         this.setCancelable(false);

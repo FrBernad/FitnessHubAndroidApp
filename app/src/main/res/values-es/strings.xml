@@ -111,7 +111,7 @@
     <string name="ExecutionRoutineDialog">Elige el modo de ejecución</string>
     <string name="Close">Cerrar</string>
     <string name="Rate">Puntuar</string>
-    <string name="EnableDarkMode">Enable dark mode</string>
+    <string name="EnableDarkMode">Alternar modo oscuro</string>
     <string name="LogOut">Cerrar sesión</string>
     <string name="settings">Ajustes</string>
     <string name="DarkMode">Tema oscuro</string>
