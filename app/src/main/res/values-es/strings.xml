@@ -53,8 +53,6 @@
     <string name="verify_button">Verificar</string>
     <string name="resend_button">Reenviar</string>
 
-
-
     <string-array name="sort">
         <item>Fecha de creación</item>
         <item>Popularidad</item>
