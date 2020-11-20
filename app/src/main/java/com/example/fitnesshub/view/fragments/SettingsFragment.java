@@ -77,8 +77,8 @@ public class SettingsFragment extends Fragment{
 
     public void restartApp() {
         Intent i = new Intent(getActivity(), MainActivity.class);
-        startActivity(i);
         getActivity().finish();
+        startActivity(i);
     }
 
     private void logout() {
