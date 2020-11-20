@@ -270,13 +270,13 @@ public class RoutineExecutionExerciseFragment extends Fragment {
 
     private ArrayList<ExerciseData> getCurrentCycle() {
 
-        if(currentExerciseIndex >= cycles.get(0).size()){
+        if(currentExerciseIndex >= cycles.get(currentCycle).size()){
             if(currentCycle == COOLDOWN_CYCLE){
                 finished = true;
                 return null;
             }
 
-            currentCycle ++;
+            currentCycle++;
             cycleTitle = titles[currentCycle];
             currentExerciseIndex = 0;
         }
