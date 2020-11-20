@@ -54,6 +54,7 @@
     <string name="resend_button">Reenviar</string>
 
 
+
     <string-array name="sort">
         <item>Fecha de creación</item>
         <item>Popularidad</item>
@@ -69,7 +70,6 @@
 
     <string name="sort_title">ORDENAR POR</string>
     <string name="order_title">ORDERNAR POR</string>
-
 
 
     <string name="playButton">Play button</string>
@@ -94,8 +94,6 @@
     <string name="cancelAlarm">Cancelar alarma</string>
 
     <string name="FinishedRoutine">Rutina finalizada exitosamente</string>
-
-
 
 
     <string name="subject">Prueba esta nueva rutina </string>
