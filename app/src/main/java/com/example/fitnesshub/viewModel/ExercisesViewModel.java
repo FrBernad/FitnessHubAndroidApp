@@ -39,7 +39,6 @@ public class ExercisesViewModel extends AndroidViewModel {
     private boolean started = false; //borrar
     private boolean played; // borrar
 
-
     private int currentCycle;
     private String cycleTitle;
     private int currentExercise;
@@ -103,7 +102,6 @@ public class ExercisesViewModel extends AndroidViewModel {
                                     );
                                 }
                             }
-
                             @Override
                             public void onError(@NonNull Throwable e) {
                                 e.printStackTrace();

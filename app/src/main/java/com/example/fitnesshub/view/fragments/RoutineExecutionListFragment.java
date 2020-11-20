@@ -46,7 +46,6 @@ public class RoutineExecutionListFragment extends Fragment {
     private static final int NOTRUNNING = 2;
     private static final int REPS_TIME= 10;
 
-
     private int currentCycle;
     private int currentExercise;
     private ExercisesAdapter currentAdapter;
@@ -113,6 +112,7 @@ public class RoutineExecutionListFragment extends Fragment {
         recyclerViewCooldown.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewCooldown.setAdapter(cooldownAdapter);
         if (!viewModel.getIsFirstTime()) { //me fijo si es necesario recuperar los datos
+            System.out.println("is firts");
             currentExercise = viewModel.getCurrentExercise();
             currentCycle = viewModel.getCurrentCycle();
             executed = viewModel.getExecuted(); //si fue ejecutada en el onresume tengo que fijarme en que estado esta el ejercicio.
@@ -167,9 +167,6 @@ public class RoutineExecutionListFragment extends Fragment {
                 binding.executionBar.pause.setVisibility(View.INVISIBLE);
             }
         }
-
-
-
     }
 
     private void playExecution() {
@@ -241,31 +238,6 @@ public class RoutineExecutionListFragment extends Fragment {
         return exercise;
     }
 
-//    public ExercisesAdapter getCurrentAdapter() {
-//
-//        if (currentCycle == 0) {
-//            if (currentExercise < warmUpAdapter.getExerciseList().size())
-//                return warmUpAdapter;
-//            currentCycle++;
-//            currentExercise = 0;
-//        }
-//
-//        if (currentCycle == 1) {
-//            if (currentExercise < mainAdapter.getExerciseList().size())
-//                return mainAdapter;
-//            currentCycle++;
-//            currentExercise = 0;
-//        }
-//
-//        if (currentCycle == 2) {
-//            if (currentExercise < cooldownAdapter.getExerciseList().size())
-//                return cooldownAdapter;
-//        }
-//
-//        finished = true;
-//        return null;
-//    }
-
     public ExercisesAdapter getCurrentAdapter() {
         if (currentExercise >= adapters[currentCycle].getExerciseList().size()) {
             if (currentCycle == COOLDOWN_CYCLE) {
@@ -276,9 +248,7 @@ public class RoutineExecutionListFragment extends Fragment {
             currentExercise = 0;
         }
         return adapters[currentCycle];
-
     }
-
 
     private void previousExecution() {
         viewModel.getCountDownTimer().stop();
@@ -327,14 +297,12 @@ public class RoutineExecutionListFragment extends Fragment {
         viewModel.setStatus(status);
         viewModel.setCurrentExercise(currentExercise);
         viewModel.setCurrentCycle(currentCycle);
+
         viewModel.setExecuted(executed);
         if(executed){
             viewModel.getCountDownTimer().pause();
         }
     }
-
-
-
 }
 
 

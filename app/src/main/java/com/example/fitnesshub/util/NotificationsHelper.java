@@ -24,7 +24,6 @@ public class NotificationsHelper {
     private static final String CHANNEL_ID = "FitnessHub id";
     private static final int NOTIFICATION_ID = 420;
 
-
     private static NotificationsHelper instance;
     private Context context;
 
