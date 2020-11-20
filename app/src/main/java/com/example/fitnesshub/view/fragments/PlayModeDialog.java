@@ -52,6 +52,7 @@ public class PlayModeDialog extends AppCompatDialogFragment {
                 }
         );
 
+        this.setCancelable(false);
         return builder.create();
     }
 

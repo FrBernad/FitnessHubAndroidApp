@@ -38,7 +38,7 @@ public class AlarmDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.PopUp);
 
         binding = AlarmDialogBinding.inflate(getActivity().getLayoutInflater());
         View view = binding.getRoot();
@@ -68,6 +68,7 @@ public class AlarmDialog extends AppCompatDialogFragment {
             Toast.makeText(getContext(), "CANCEL ALARM", Toast.LENGTH_SHORT).show();
         });
 
+        this.setCancelable(false);
         return builder.create();
     }
 

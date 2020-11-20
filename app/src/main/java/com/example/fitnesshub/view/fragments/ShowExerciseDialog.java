@@ -37,6 +37,8 @@ public class ShowExerciseDialog extends AppCompatDialogFragment {
         builder.setView(view).setNegativeButton(getString(R.string.Close), (dialog, which) -> {
 
         });
+
+        this.setCancelable(false);
         return builder.create();
     }
 
