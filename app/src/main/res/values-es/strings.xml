@@ -93,6 +93,9 @@
     <string name="setAlarm">Iniciar alarma</string>
     <string name="cancelAlarm">Cancelar alarma</string>
 
+    <string name="FinishedRoutine">Rutina finalizada exitosamente</string>
+
+
 
 
     <string name="subject">Prueba esta nueva rutina </string>
