@@ -139,6 +139,7 @@ public class RoutinesViewModel extends AndroidViewModel {
 
                                 currentRoutine.setValue(routine);
                             }
+
                             @Override
                             public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
                                 e.printStackTrace();
@@ -361,6 +362,35 @@ public class RoutinesViewModel extends AndroidViewModel {
 
     public String getOrderBy() {
         return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public void setOrderById(int option) {
+        orderById = option;
+        switch (option) {
+            case 0:
+                orderBy = "dateCreated";
+                break;
+
+            case 1:
+                orderBy = "averageRating";
+                break;
+
+            case 2:
+                orderBy = "categoryId";
+                break;
+
+            case 3:
+                orderBy = "difficulty";
+                break;
+
+            case 4:
+                orderBy = "name";
+                break;
+        }
     }
 
     public int getOrderById() {
