@@ -33,18 +33,24 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private static final int WARMUP_CYCLE = 0;
     private static final int MAIN_CYCLE = 1;
     private static final int COOLDOWN_CYCLE = 2;
+    private static final int PLAYING = 0;
+    private static final int PAUSED = 1;
+    private static final int NOTRUNNING = 2;
+    private static final int REPS_TIME= 10;
     private static final String WARMUP_TITLE = "WARM UP";
     private static final String MAIN_TITLE = "MAIN EXERCISES";
     private static final String COOLDOWN_TITLE = "COOLDOWN";
+    private String[] titles = new String[3];
+    private ArrayList<ArrayList<ExerciseData>> cycles = new ArrayList<>();
 
-
-    private int currentCycle; //rescatado
-    private String cycleTitle; //rescatado
+    private int currentCycle;
+    private String cycleTitle;
     private ArrayList<ExerciseData> currCycleIndex;
-    private int currentExerciseIndex; //rescatado
-    private boolean finished; //rescatado
-    private boolean played = false;
+    private int currentExerciseIndex;
+    private boolean finished;
     private ExerciseData currentExercise;
+    private boolean executed;
+    private int status;
 
     private TextView title;
     private TextView timeExercise;
@@ -70,7 +76,11 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.pause.setOnClickListener(v -> pauseExecution());
         binding.executionBar.next.setOnClickListener(v -> nextExecution());
         binding.executionBar.previous.setOnClickListener(v -> previousExecution());
-
+        binding.executionBar.previous.setVisibility(View.GONE);
+        binding.executionBar.next.setVisibility(View.GONE);
+        titles[0]=WARMUP_TITLE;
+        titles[1]=MAIN_TITLE;
+        titles[2]=COOLDOWN_TITLE;
 
         progressBar = binding.progressBar;
 
@@ -87,16 +97,15 @@ public class RoutineExecutionExerciseFragment extends Fragment {
 
             viewModel = new ViewModelProvider(getActivity()).get(ExercisesViewModel.class);
 
-            if (viewModel.getStarted()) {
+            if (!viewModel.getIsFirstTime()) {
                 currentExerciseIndex = viewModel.getCurrentExercise();
                 currentCycle = viewModel.getCurrentCycle();
-                played = viewModel.getPlayed();
-                cycleTitle = getCycleTitle();
+                executed = viewModel.getExecuted();
+                cycleTitle = titles[currentCycle];
+                status = viewModel.getStatus();
             } else {
-                viewModel.setCurrentExercise(0);
-                viewModel.setCurrentCycle(0);
-                cycleTitle = WARMUP_TITLE;
                 currentCycle = 0;
+                cycleTitle = titles[currentCycle];
                 currentExerciseIndex = 0;
                 viewModel.setStarted(true);
             }
@@ -109,18 +118,25 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         viewModel.getWarmupExercises().observe(getViewLifecycleOwner(), warmupExercises -> {
             if (warmupExercises != null) {
                 warmUp = (ArrayList<ExerciseData>) warmupExercises;
+                cycles.add(WARMUP_CYCLE,warmUp);
+
             }
         });
 
         viewModel.getMainExercises().observe(getViewLifecycleOwner(), mainExercises -> {
             if (mainExercises != null) {
                 main = (ArrayList<ExerciseData>) mainExercises;
+                cycles.add(MAIN_CYCLE,main);
+
             }
+
         });
 
         viewModel.getCooldownExercises().observe(getViewLifecycleOwner(), cooldownExercises -> {
             if (cooldownExercises != null) {
                 cooldown = (ArrayList<ExerciseData>) cooldownExercises;
+                cycles.add(COOLDOWN_CYCLE,cooldown);
+
             }
         });
     }
@@ -134,20 +150,26 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.play.setVisibility(View.INVISIBLE);
         binding.executionBar.pause.setVisibility(View.VISIBLE);
         finished = false;
+        status = PLAYING;
 
-        if (played) {
+        if (executed) {
             viewModel.getCountDownTimer().resume();
         } else {
-            played = true;
+            binding.executionBar.previous.setVisibility(View.VISIBLE);
+            binding.executionBar.next.setVisibility(View.VISIBLE);
+            executed = true;
             currentExercise = getNextExercise();
-            progressBar.setMax(currentExercise.getTime());
-            viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
+            int r = currentExercise.getReps() > 0 ? currentExercise.getReps() * REPS_TIME : 0;
+            progressBar.setMax(currentExercise.getTime()+r);
+            viewModel.getCountDownTimer().start((currentExercise.getTime() + r + 1) * 1000, 1000);
             viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
                 if (!finished) {
                     if (countDown.isFinished()) {
                         currentExerciseIndex++;
                         if ((currentExercise = getNextExercise()) != null) {
-                            viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
+                            int a = currentExercise.getReps() > 0 ? currentExercise.getReps() * REPS_TIME : 0;
+
+                            viewModel.getCountDownTimer().start((currentExercise.getTime() + a + 1) * 1000, 1000);
                             progressBar.setProgress(0);
                             progressBar.setMax(currentExercise.getTime());
                         }
@@ -156,6 +178,8 @@ public class RoutineExecutionExerciseFragment extends Fragment {
                         progressBar.setProgress(progressBar.getMax() - (int) remainingTime);
                         timeExercise.setText(String.valueOf(remainingTime));
                     }
+                }else{
+                    //terminaste la rutina
                 }
             });
         }
@@ -166,6 +190,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding.executionBar.play.setVisibility(View.VISIBLE);
         binding.executionBar.pause.setVisibility(View.INVISIBLE);
         viewModel.getCountDownTimer().pause();
+        status = PAUSED;
     }
 
     private void nextExecution() {
@@ -174,8 +199,13 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         currentExercise = getNextExercise();
         if (currentExercise != null) {
             progressBar.setProgress(0);
-            progressBar.setMax(currentExercise.getTime());
-            viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
+            int a = currentExercise.getReps() > 0 ? currentExercise.getReps() * REPS_TIME : 0;
+            progressBar.setMax(currentExercise.getTime()+a);
+            viewModel.getCountDownTimer().start((currentExercise.getTime() + a + 1) * 1000, 1000);
+            if(status == PAUSED)
+                viewModel.getCountDownTimer().pause();
+        }else{
+            //terminaste la rutina
         }
     }
 
@@ -185,47 +215,44 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         currentExercise = getPrevExercise();
         if (currentExercise != null) {
             progressBar.setProgress(0);
-            progressBar.setMax(currentExercise.getTime());
-            viewModel.getCountDownTimer().start((currentExercise.getTime() + 1) * 1000, 1000);
+            int a = currentExercise.getReps() > 0 ? currentExercise.getReps() * REPS_TIME : 0;
+
+            progressBar.setMax(currentExercise.getTime()+a  );
+            viewModel.getCountDownTimer().start((currentExercise.getTime() + a + 1) * 1000, 1000);
+            if(status == PAUSED){
+                viewModel.getCountDownTimer().pause();
+            }
         }
     }
 
     private ExerciseData getPrevExercise() {
-        ExerciseData ex = null;
+        ExerciseData ex;
         currCycleIndex = getPrevCycle();
-        if (currCycleIndex != null) {
-            ex = currCycleIndex.get(currentExerciseIndex);
-            binding.exerciseTitleInExecutionList.setText(ex.getName());
-            binding.routineCycleTitleInExecutionExercise.setText(cycleTitle);
-            binding.timeExercise.setText(String.valueOf(ex.getTime()));
-            binding.ExerciseDescription.setText(ex.getDetail());
+        if (currCycleIndex == null) {
+            currentExerciseIndex = 0;
+            currCycleIndex = cycles.get(currentCycle);
         }
+        ex = currCycleIndex.get(currentExerciseIndex);
+        binding.exerciseTitleInExecutionList.setText(ex.getName());
+        binding.routineCycleTitleInExecutionExercise.setText(cycleTitle);
+        binding.timeExercise.setText(String.valueOf(ex.getTime()));
+        binding.ExerciseDescription.setText(ex.getDetail());
         return ex;
     }
 
 
     private ArrayList<ExerciseData> getPrevCycle() {
-        if (currentCycle == COOLDOWN_CYCLE) {
-            if (currentExerciseIndex == -1) {
-                cycleTitle = MAIN_TITLE;
-                currentCycle--;
-                currentExerciseIndex = main.size() - 1;
-                return main;
-            }
-            return cooldown;
-        } else if (currentCycle == MAIN_CYCLE) {
-            if (currentExerciseIndex == -1) {
-                cycleTitle = WARMUP_TITLE;
-                currentCycle--;
-                currentExerciseIndex = warmUp.size() - 1;
-                return warmUp;
-            }
-            return main;
-        } else {
-            if (currentExerciseIndex == -1)
+
+        if(currentExerciseIndex == -1){
+            if(currentCycle == WARMUP_CYCLE){
                 return null;
-            return warmUp;
+            }
+            currentCycle--;
+            cycleTitle = titles[currentCycle];
+            currentExerciseIndex = cycles.get(currentCycle).size()-1;
         }
+        return cycles.get(currentCycle);
+
     }
 
     private ExerciseData getNextExercise() {
@@ -242,46 +269,18 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     }
 
     private ArrayList<ExerciseData> getCurrentCycle() {
-        if (currentCycle == WARMUP_CYCLE) {
-            if (currentExerciseIndex < warmUp.size()) {
-                return warmUp;
+
+        if(currentExerciseIndex >= cycles.get(0).size()){
+            if(currentCycle == COOLDOWN_CYCLE){
+                finished = true;
+                return null;
             }
-            cycleTitle = MAIN_TITLE;
-            currentCycle++;
+
+            currentCycle ++;
+            cycleTitle = titles[currentCycle];
             currentExerciseIndex = 0;
         }
-
-        if (currentCycle == MAIN_CYCLE) {
-            if (currentExerciseIndex < main.size())
-                return main;
-            currentCycle++;
-            currentExerciseIndex = 0;
-            cycleTitle = COOLDOWN_TITLE;
-
-        }
-
-        if (currentCycle == COOLDOWN_CYCLE) {
-            if (currentExerciseIndex < cooldown.size())
-                return cooldown;
-        }
-        finished = true;
-        return null;
-    }
-
-
-    private String getCycleTitle() {
-        if (currentCycle == WARMUP_CYCLE) {
-            return WARMUP_TITLE;
-        } else if (currentCycle == MAIN_CYCLE) {
-            return MAIN_TITLE;
-        } else
-            return COOLDOWN_TITLE;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        viewModel.setStarted(false);
+        return cycles.get(currentCycle);
     }
 
     @Override
@@ -289,7 +288,11 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         super.onDestroyView();
         viewModel.setCurrentCycle(currentCycle);
         viewModel.setCurrentExercise(currentExerciseIndex);
-        viewModel.getCountDownTimer().stop();
+        viewModel.setStatus(status);
+        viewModel.setExecuted(executed);
+        if(executed){
+            viewModel.getCountDownTimer().pause();
+        }
     }
 
 }
