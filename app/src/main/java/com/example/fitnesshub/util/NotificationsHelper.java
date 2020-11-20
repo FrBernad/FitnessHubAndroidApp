@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Bundle;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.navigation.NavDeepLinkBuilder;
 
 import com.example.fitnesshub.R;
 import com.example.fitnesshub.view.activities.MainActivity;
@@ -45,7 +47,10 @@ public class NotificationsHelper {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, new Random().nextInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(context, new Random().nextInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Bundle bundle = new Bundle();
+        bundle.putInt("routineId", routineId);
+        PendingIntent pendingIntent = new NavDeepLinkBuilder(context).setComponentName(MainActivity.class).setGraph(R.navigation.app_navigation).setDestination(R.id.routineFragment).setArguments(bundle).createPendingIntent();
 
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.logo)

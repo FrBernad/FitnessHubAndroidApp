@@ -106,10 +106,15 @@ public class RoutineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
             routineId = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineId();
-        }
+//            if(routineId == -1) {
+                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                routineId = getArguments().getInt("routineId");
+            }
+
+//        }
 
         routinesViewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
-
+        routinesViewModel.getRoutineById(routineId);
         routinesViewModel.getCurrentRoutine().observe(getViewLifecycleOwner(), routineData -> {
             if (routineData != null) {
                 this.routineData = routineData;
