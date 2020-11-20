@@ -52,6 +52,8 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     private boolean executed;
     private int status;
 
+    private View view;
+
     private TextView title;
     private TextView timeExercise;
     private ProgressBar progressBar;
@@ -70,7 +72,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         binding = FragmentRoutineExecutionExerciseBinding.inflate(getLayoutInflater());
         title = binding.routineNameTitleInExecutionExercise;
         timeExercise = binding.timeExercise;
-        View view = binding.getRoot();
+        view = binding.getRoot();
 
         binding.executionBar.play.setOnClickListener(v -> playExecution());
         binding.executionBar.pause.setOnClickListener(v -> pauseExecution());
@@ -298,7 +300,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
     }
 
     public void openFinishedRoutineDialog() {
-        FinishRoutineDialog finishRoutineDialog = new FinishRoutineDialog();
+        FinishRoutineDialog finishRoutineDialog = new FinishRoutineDialog(view,FinishRoutineDialog.DETAIL_EXEC);
         finishRoutineDialog.show(getParentFragmentManager(), "example dialog");
     }
 
