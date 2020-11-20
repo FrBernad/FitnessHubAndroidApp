@@ -183,20 +183,23 @@ public class RoutineExecutionListFragment extends Fragment {
             executed = true;
             ExerciseData ex = getNextExercise();
             int reps = ex.getReps() > 0 ? ex.getReps() * REPS_TIME : 0;
-            System.out.println(reps);
             viewModel.getCountDownTimer().start((ex.getTime() + reps) * 1000, 1000);
             viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
-                if (countDown.isFinished() && !finished) {
-                    ExerciseData exercise;
-                    currentAdapter.getExercise(currentExercise).setRunning(false);
-                    currentAdapter.notifyItemChanged(currentExercise);
+                if (!finished) {
+                    if(countDown.isFinished()){
+                        ExerciseData exercise;
+                        currentAdapter.getExercise(currentExercise).setRunning(false);
+                        currentAdapter.notifyItemChanged(currentExercise);
 
-                    currentExercise++;
-                    if ((exercise = getNextExercise()) != null) {
-                        int a = exercise.getReps() > 0 ? exercise.getReps() * REPS_TIME : 0;
+                        currentExercise++;
+                        if ((exercise = getNextExercise()) != null) {
+                            int a = exercise.getReps() > 0 ? exercise.getReps() * REPS_TIME : 0;
 
-                        viewModel.getCountDownTimer().start((exercise.getTime()+a+1) * 1000, 1000);
+                            viewModel.getCountDownTimer().start((exercise.getTime()+a+1) * 1000, 1000);
+                        }
                     }
+                }else{
+                    //terminaste la rutina
                 }
             });
         }
@@ -237,6 +240,7 @@ public class RoutineExecutionListFragment extends Fragment {
         }
         return exercise;
     }
+
 
     public ExercisesAdapter getCurrentAdapter() {
         if (currentExercise >= adapters[currentCycle].getExerciseList().size()) {
