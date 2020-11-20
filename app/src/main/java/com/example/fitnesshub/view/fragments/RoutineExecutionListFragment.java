@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class RoutineExecutionListFragment extends Fragment {
 
     private FragmentRoutineExecutionListBinding binding;
-
     private ExercisesViewModel viewModel;
 
     private ExercisesAdapter warmUpAdapter = new ExercisesAdapter(new ArrayList<>());
@@ -55,14 +54,9 @@ public class RoutineExecutionListFragment extends Fragment {
     private int status; //la uso para ver si el ejercicio esta corriendo o pausado
     private boolean executed; //me fijo para ver si presiono play alguna la primera vez
 
-    private static final int WARMUP_CYCLE = 0;
-    private static final int MAIN_CYCLE = 1;
-    private static final int COOLDOWN_CYCLE = 2;
 
-    private ExercisesAdapter[] adapters = new ExercisesAdapter[3]; //NEWWW
 
     private TextView title;
-
     private MainActivity mainActivity;
 
 
