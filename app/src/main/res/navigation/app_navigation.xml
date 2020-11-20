@@ -155,6 +155,9 @@
         <argument
                 android:name="RoutineTitle"
                 app:argType="string" />
+        <action
+                android:id="@+id/action_routineExcecutionListFragment_to_routinesFragment"
+                app:destination="@id/routinesFragment" />
     </fragment>
     <fragment
         android:id="@+id/routineExecutionExercise"
@@ -164,6 +167,9 @@
         <argument
                 android:name="title"
                 app:argType="string" />
+        <action
+                android:id="@+id/action_routineExecutionExercise_to_routinesFragment"
+                app:destination="@id/routinesFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

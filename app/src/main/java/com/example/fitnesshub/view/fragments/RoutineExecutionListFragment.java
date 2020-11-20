@@ -46,6 +46,8 @@ public class RoutineExecutionListFragment extends Fragment {
     private static final int NOTRUNNING = 2;
     private static final int REPS_TIME= 10;
 
+    private View view;
+
     private int currentCycle;
     private int currentExercise;
     private ExercisesAdapter currentAdapter;
@@ -86,7 +88,7 @@ public class RoutineExecutionListFragment extends Fragment {
         adapters[1] = mainAdapter;
         adapters[2]= cooldownAdapter;
 
-        View view = binding.getRoot();
+        view = binding.getRoot();
 
         mainActivity = (MainActivity) getActivity();
         mainActivity.setNavigationVisibility(false);
@@ -310,7 +312,7 @@ public class RoutineExecutionListFragment extends Fragment {
     }
 
     public void openFinishedRoutineDialog() {
-        FinishRoutineDialog finishRoutineDialog = new FinishRoutineDialog();
+        FinishRoutineDialog finishRoutineDialog = new FinishRoutineDialog(view,FinishRoutineDialog.LIST_EXEC);
         finishRoutineDialog.show(getParentFragmentManager(), "example dialog");
     }
 }
