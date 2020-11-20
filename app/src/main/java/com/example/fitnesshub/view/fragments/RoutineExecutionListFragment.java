@@ -194,7 +194,6 @@ public class RoutineExecutionListFragment extends Fragment {
                         currentExercise++;
                         if ((exercise = getNextExercise()) != null) {
                             int a = exercise.getReps() > 0 ? exercise.getReps() * REPS_TIME : 0;
-
                             viewModel.getCountDownTimer().start((exercise.getTime()+a+1) * 1000, 1000);
                         }
                     }

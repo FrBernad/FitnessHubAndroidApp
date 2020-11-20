@@ -171,7 +171,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
 
                             viewModel.getCountDownTimer().start((currentExercise.getTime() + a + 1) * 1000, 1000);
                             progressBar.setProgress(0);
-                            progressBar.setMax(currentExercise.getTime());
+                            progressBar.setMax(currentExercise.getTime()+a);
                         }
                     } else {
                         long remainingTime = countDown.getRemainingTime();
