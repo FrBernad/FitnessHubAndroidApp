@@ -45,6 +45,7 @@ public class RoutineExecutionListFragment extends Fragment {
     private static final int PLAYING = 0;
     private static final int PAUSED = 1;
     private static final int NOTRUNNING = 2;
+    private static final int REPS_TIME= 10;
 
 
     private int currentCycle;
@@ -184,15 +185,21 @@ public class RoutineExecutionListFragment extends Fragment {
             binding.executionBar.previous.setVisibility(View.VISIBLE);
             binding.executionBar.next.setVisibility(View.VISIBLE);
             executed = true;
-            viewModel.getCountDownTimer().start(getNextExercise().getTime() * 1000, 1000);
+            ExerciseData ex = getNextExercise();
+            int reps = ex.getReps() > 0 ? ex.getReps() * REPS_TIME : 0;
+            System.out.println(reps);
+            viewModel.getCountDownTimer().start((ex.getTime() + reps) * 1000, 1000);
             viewModel.getCountDownTimer().getStatus().observe(getViewLifecycleOwner(), countDown -> {
                 if (countDown.isFinished() && !finished) {
                     ExerciseData exercise;
                     currentAdapter.getExercise(currentExercise).setRunning(false);
                     currentAdapter.notifyItemChanged(currentExercise);
+
                     currentExercise++;
                     if ((exercise = getNextExercise()) != null) {
-                        viewModel.getCountDownTimer().start(exercise.getTime() * 1000, 1000);
+                        int a = exercise.getReps() > 0 ? exercise.getReps() * REPS_TIME : 0;
+
+                        viewModel.getCountDownTimer().start((exercise.getTime()+a+1) * 1000, 1000);
                     }
                 }
             });
@@ -213,7 +220,8 @@ public class RoutineExecutionListFragment extends Fragment {
         currentExercise++;
         ExerciseData exercise = getNextExercise();
         if (exercise != null) {
-            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+            int a = exercise.getReps() > 0 ? exercise.getReps() * REPS_TIME : 0;
+            viewModel.getCountDownTimer().start((exercise.getTime() + a + 1) * 1000, 1000);
             if(status == PAUSED)
                 viewModel.getCountDownTimer().pause();
         }
@@ -255,7 +263,8 @@ public class RoutineExecutionListFragment extends Fragment {
         currentExercise--;
         ExerciseData exercise = getPrevExercise();
         if (exercise != null) {
-            viewModel.getCountDownTimer().start((exercise.getTime() + 1) * 1000, 1000);
+            int a = exercise.getReps() > 0 ? exercise.getReps() * REPS_TIME : 0;
+            viewModel.getCountDownTimer().start((exercise.getTime()+a + 1) * 1000, 1000);
             if(status == PAUSED){
                 viewModel.getCountDownTimer().pause();
             }
