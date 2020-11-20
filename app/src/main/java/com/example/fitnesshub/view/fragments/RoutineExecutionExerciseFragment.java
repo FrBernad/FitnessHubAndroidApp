@@ -180,6 +180,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
                     }
                 }else{
                     //terminaste la rutina
+                    openFinishedRoutineDialog();
                 }
             });
         }
@@ -206,6 +207,7 @@ public class RoutineExecutionExerciseFragment extends Fragment {
                 viewModel.getCountDownTimer().pause();
         }else{
             //terminaste la rutina
+            openFinishedRoutineDialog();
         }
     }
 
@@ -293,6 +295,11 @@ public class RoutineExecutionExerciseFragment extends Fragment {
         if(executed){
             viewModel.getCountDownTimer().pause();
         }
+    }
+
+    public void openFinishedRoutineDialog() {
+        FinishRoutineDialog finishRoutineDialog = new FinishRoutineDialog();
+        finishRoutineDialog.show(getParentFragmentManager(), "example dialog");
     }
 
 }
