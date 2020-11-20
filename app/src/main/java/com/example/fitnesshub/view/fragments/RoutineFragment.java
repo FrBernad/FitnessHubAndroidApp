@@ -105,16 +105,12 @@ public class RoutineFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
-            routineId = RoutineFragmentArgs.fromBundle(getArguments()).getRoutineId();
-//            if(routineId == -1) {
-                System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                routineId = getArguments().getInt("routineId");
-            }
-
-//        }
+            routineId = getArguments().getInt("routineId");
+        }
 
         routinesViewModel = new ViewModelProvider(getActivity()).get(RoutinesViewModel.class);
         routinesViewModel.getRoutineById(routineId);
+
         routinesViewModel.getCurrentRoutine().observe(getViewLifecycleOwner(), routineData -> {
             if (routineData != null) {
                 this.routineData = routineData;
@@ -213,10 +209,9 @@ public class RoutineFragment extends Fragment {
             favRoutine();
         } else if (id == R.id.app_bar_share) {
             share();
-        } else if(id == R.id.app_bar_alarm){
+        } else if (id == R.id.app_bar_alarm) {
             openAlarmDialog();
-        }else
-        {
+        } else {
             return super.onOptionsItemSelected(item);
         }
 

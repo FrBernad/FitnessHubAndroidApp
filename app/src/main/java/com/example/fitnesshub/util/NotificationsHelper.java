@@ -21,7 +21,7 @@ import com.example.fitnesshub.view.activities.MainActivity;
 import java.util.Random;
 
 public class NotificationsHelper {
-    private static final String CHANNEL_ID = "FitnessHub id";
+    private static final String CHANNEL_ID = "FitnessHub_channel";
     private static final int NOTIFICATION_ID = 420;
 
     private static NotificationsHelper instance;
@@ -41,12 +41,6 @@ public class NotificationsHelper {
     public void createNotification(int routineId, String routineTitle) {
         createNotificationChannel();
 
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra("RoutineId", String.valueOf(routineId));
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, new Random().nextInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Bundle bundle = new Bundle();
         bundle.putInt("routineId", routineId);
         PendingIntent pendingIntent = new NavDeepLinkBuilder(context).setComponentName(MainActivity.class).setGraph(R.navigation.app_navigation).setDestination(R.id.routineFragment).setArguments(bundle).createPendingIntent();

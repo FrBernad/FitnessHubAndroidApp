@@ -53,8 +53,8 @@ public class AlarmDialog extends AppCompatDialogFragment {
 
         Intent alarmIntent = new Intent(getContext(), AlarmReceiver.class);
 
-        alarmIntent.putExtra("routineId",routineData.getId());
-        alarmIntent.putExtra("routineTitle",routineData.getTitle());
+        alarmIntent.putExtra("routineId", routineData.getId());
+        alarmIntent.putExtra("routineTitle", routineData.getTitle());
 
         pendingIntent = PendingIntent.getBroadcast(getContext(), routineData.getId(), alarmIntent, 0);
 
@@ -78,17 +78,12 @@ public class AlarmDialog extends AppCompatDialogFragment {
         int hour = timePicker.getHour();
         int minutes = timePicker.getMinute();
 
-
-        System.out.println("Setting alarm at " + hour + ":" + minutes);
-        /* Set the alarm to start at 10:30 AM */
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minutes);
 
-        /* Repeating on every 20 minutes interval */
-        manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+1000,
-                pendingIntent);
+        manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),pendingIntent);
     }
 
     public void cancel() {

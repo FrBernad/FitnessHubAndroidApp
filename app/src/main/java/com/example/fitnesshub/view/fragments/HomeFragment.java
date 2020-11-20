@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment {
         slideModels.add(new SlideModel("https://images.unsplash.com/photo-1560233026-ad254fa8da38?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=610&q=80", getString(R.string.FavoriteRoutinesSlide)));
         slideModels.add(new SlideModel("https://images.unsplash.com/photo-1567740034541-1ff8b618a370?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80", getString(R.string.HistoryRoutinesSlide)));
 
-
         imageSlider.setImageList(slideModels, true);
         ((MainActivity) getActivity()).setNavigationVisibility(true);
 
